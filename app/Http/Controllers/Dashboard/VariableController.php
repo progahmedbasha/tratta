@@ -51,6 +51,9 @@ class VariableController extends Controller
         $category_illness_subs = IllnessCategory::whereHas('parent', function ($query) {
             $query->where('parent_id', !null);
              })->whereNotIn('id', $category_illness_existe)->get();
+        //drug data
+        $drug_existe = VariableDetail::where('variable_id', $id)->where('optionable_type', 'App\Models\Drug')->get()->pluck('optionable_id');
+        $drugs = Drug::whereNotIn('id', $drug_existe)->get();
         
         // for shows values
         $age_variables = VariableDetail::where('optionable_type', 'App\Models\Age')->where('variable_id', $id)->get();
@@ -62,10 +65,11 @@ class VariableController extends Controller
         $pregnancy_stage_variables = VariableDetail::where('optionable_type', 'App\Models\PregnancyStage')->where('variable_id', $id)->get();
         // illness_data 
         $illness_data_variables = VariableDetail::where('optionable_type', 'App\Models\IllnessCategory')->where('variable_id', $id)->get();
-        
+        //drug
+        $drug_variables = VariableDetail::where('optionable_type', 'App\Models\Drug')->where('variable_id', $id)->get();
         return view('dashboard.drugs.variable_details_add', compact('id','drug_code','effects','ages','age_variables',
         'weight_variables','gender_variables','pregnancy_stage_variables',
-        'illness_data_variables','genders','weights','pregnancy_stages','category_illness_subs'));
+        'illness_data_variables','genders','weights','pregnancy_stages','category_illness_subs','drugs','drug_variables'));
     }
 
     /**
@@ -75,9 +79,16 @@ class VariableController extends Controller
     {
         // return $request;
         if($request->option =="sub_id"){
-            $var = DrugIndication::where('id', $request->indication_id)->first();
-            $variable =   $var->variables()->create(['drug_id' => $request->drug_id]);
-            return redirect()->route('variable_details_create', $variable->id)->with('success','Sub Added Successfully');
+            $drug_exit = Variable::where('drug_id', $request->drug_id)->where('variableable_type', 'App\Models\DrugIndication')->first();
+            if ($drug_exit != null)
+                {
+                    return back();
+                    }
+            else {
+                $var = DrugIndication::where('id', $request->indication_id)->first();
+                $variable =   $var->variables()->create(['drug_id' => $request->drug_id]);
+                return redirect()->route('variable_details_create', $variable->id)->with('success','Sub Added Successfully');
+                }
         }else{
             $var = Drug::where('id', $request->drug_id)->first();
             $variable =   $var->variables()->create(['drug_id' => $request->drug_id]);
@@ -112,6 +123,9 @@ class VariableController extends Controller
         $category_illness_subs = IllnessCategory::whereHas('parent', function ($query) {
             $query->where('parent_id', !null);
              })->whereNotIn('id', $category_illness_existe)->get();
+             //drugs
+        $drug_existe = VariableDetail::where('variable_id', $variable)->where('optionable_type', 'App\Models\Drug')->get()->pluck('optionable_id');
+        $drugs = Drug::whereNotIn('id', $drug_existe)->get();
         
         // for shows values
         $age_variables = VariableDetail::where('optionable_type', 'App\Models\Age')->where('variable_id', $variable)->get();
@@ -123,9 +137,11 @@ class VariableController extends Controller
         $pregnancy_stage_variables = VariableDetail::where('optionable_type', 'App\Models\PregnancyStage')->where('variable_id', $variable)->get();
         // illness_data 
         $illness_data_variables = VariableDetail::where('optionable_type', 'App\Models\IllnessCategory')->where('variable_id', $variable)->get();
+        //drugs
+        $drug_variables = VariableDetail::where('optionable_type', 'App\Models\Drug')->where('variable_id', $variable)->get();
         return view('dashboard.drugs.variable_details_add', compact('id','drug_code','effects','ages','age_variables',
         'weight_variables','gender_variables','pregnancy_stage_variables',
-        'illness_data_variables','genders','weights','pregnancy_stages','category_illness_subs'));
+        'illness_data_variables','genders','weights','pregnancy_stages','category_illness_subs','drugs','drug_variables'));
     }
 
     /**
@@ -211,5 +227,16 @@ class VariableController extends Controller
         }
             return redirect()->back()->with('success','Variable Illness Category Added Successfully');
     }
-    
+    public function drugVariable(Request $request)
+    {
+         $countItems = count($request->drug_id);
+        for ($i = 0; $i < $countItems; $i++) {
+            $var = Drug::where('id', $request->drug_id[$i])->first();
+            $variable = $var->variableDetails()->create([
+                'variable_id' => $request->variable_id,
+                'effect_id' => $request->effect_id
+            ]);
+        }
+            return redirect()->back()->with('success','Variable Drug Added Successfully');
+    }
 }

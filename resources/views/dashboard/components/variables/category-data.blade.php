@@ -1,37 +1,52 @@
-{{-- <div class="row">
-    <div class="col-md-6">
-        <select class="form-control" name="illness_category_id">
-            <option value="">Category Data (sub sub)</option>
-            @foreach ($category_subs as $category_sub )
-            @foreach ($category_sub->subCategory as $category_sub_sub )
-            <option value="{{$category_sub_sub->id}}" {{(old($category_sub_sub->id)==$category_sub_sub->id)?
+<form action="{{route('drug_variable')}}" method="post" enctype="multipart/form-data">
+    @csrf
+    <input type="hidden" name="variable_id" value="{{ $id }}">
+    <div class="row">
+        <label>Drug Data</label>
+        <div class="col-md-6">
+            <select class="js-example-basic-multiple form-control" multiple="multiple" name="drug_id[]" required />
+            @foreach ($drugs as $drug)
+            <option value="{{$drug->id}}" {{(old($drug->id)==$drug->id)?
                 'selected':''}}>
-                {{$category_sub_sub->name}}
+                {{$drug->name}}
             </option>
             @endforeach
-            @endforeach
-        </select>
-        @error('age_id')
-        <div class="alert alert-danger">{{ $message }}</div>
-        @enderror
-    </div>
-    <div class="col-md-4">
-        <select class="form-control" name="effect_id">
+            </select>
+            @error('age_id')
+            <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
+        </div>
+        <div class="col-md-4">
+            <select class="form-control" name="effect_id" required />
             <option value="">Note</option>
             @foreach ($effects as $effect)
             <option value="{{$effect->id}}" {{(old($effect->id)==$effect->id)?
                 'selected':''}}>
-                {{$effect->color}}
+                {{$effect->effect_type}}
             </option>
             @endforeach
-        </select>
-        @error('effect_id')
-        <div class="alert alert-danger">{{ $message }}</div>
-        @enderror
-    </div>
-    <div class="col-1">
-        <div class="input-group-append">
-            <button class="btn bg-gradient-dark mb-0" type="submit"><i class="fas fa-save"></i></button>
+            </select>
+            @error('effect_id')
+            <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
+        </div>
+        <div class="col-1">
+            <div class="input-group-append">
+                <button class="btn bg-gradient-dark mb-0" type="submit"><i class="fas fa-save"></i></button>
+            </div>
         </div>
     </div>
-</div> --}}
+</form>
+<hr>
+@foreach ($drug_variables as $drug_variable)
+<div class="row">
+    <div class="col-md-6">
+        <input type="text" class="form-control" placeholder="" value="{{ $drug_variable->drug->name }}" name="name" required />
+    </div>
+    <div class="col-md-4">
+             <input type="text" class="form-control" placeholder="" style="background-color: {{ $drug_variable->effect->color }}; color: black; " value="{{ $drug_variable->effect->effect_type  }}" name="name" disapled />
+    </div>
+    <hr>
+</div>
+@endforeach
+<hr class="horizontal dark mt-0">

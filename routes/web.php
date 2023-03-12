@@ -92,6 +92,8 @@ Route::middleware('auth')->group(function () {
     Route::post('gender_variable', [VariableController::class, 'genderVariable'])->name('gender_variable');
     Route::post('pregnancy_stage_variable', [VariableController::class, 'pregnancy_stageVariable'])->name('pregnancy_stage_variable');
     Route::post('illness_data_variable', [VariableController::class, 'illness_dataVariable'])->name('illness_data_variable');
+    Route::post('drug_variable', [VariableController::class, 'drugVariable'])->name('drug_variable');
+    
     /********************** fixed doses *************************/
     Route::resource('fixed_doses', FixedDoseController::class);
     Route::get('fixed_doses_create/{id}', [FixedDoseController::class, 'create'])->name('fixed_doses_create');

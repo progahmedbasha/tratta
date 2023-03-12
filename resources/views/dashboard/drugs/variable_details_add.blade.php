@@ -32,9 +32,7 @@ toastr.success(" {{ Session::get('success') }} ");
                                         <div class="col-6 d-flex align-items-center">
                                             <h6 class="mb-0">1ry Variables ({{ $drug_code->code }})</h6>
                                         </div>
-                                        <div class="col-6 text-end">
-                                   <a class="btn bg-gradient-dark mb-0" href="{{ route('fixed_doses_create', $id) }}"><i class="fas fa-plus"></i>&nbsp;&nbsp;Add Fixed Dose</a>
-                                        </div>
+                                       
                                     </div>
                                 </div>
                                 <div class="card-body p-3">
@@ -54,7 +52,7 @@ toastr.success(" {{ Session::get('success') }} ");
                                         @include('dashboard.components.variables.illness-data')
                                         <br>
                                         {{-- drug -data sub sub --}}
-                                        {{-- @include('dashboard.components.variables.category-data') --}}
+                                        @include('dashboard.components.variables.category-data')
                                     <br>
                                 </div>
                             </div>

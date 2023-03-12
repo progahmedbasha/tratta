@@ -37,4 +37,8 @@ class VariableDetail extends Model
     {
         return $this->belongsTo(IllnessCategory::class,'optionable_id');
     }
+    public function drug()
+    {
+        return $this->belongsTo(Drug::class,'optionable_id');
+    }
 }

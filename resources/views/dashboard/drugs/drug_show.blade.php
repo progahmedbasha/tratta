@@ -210,7 +210,8 @@
                                                 <tr>
                                                     <th scope="col">Drug</th>
                                                     <th scope="col">code</th>
-                                                    <th scope="col"><i style="font-size:24px" class="fa">&#xf013;</i></th>
+                                                    <th scope="col"><i style="font-size:24px" class="fa">&#xf013;</i> Action
+                                                    </th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -227,6 +228,10 @@
                                                             <a class="btn bg-gradient-info mb-0"
                                                                 href="{{ route('variable_details_show', ["variable"=>$variable->id , "drug" => $drug->id]) }}"><i
                                                                     class="fas fa-edit"></i></a>
+                                                            <a class="btn bg-gradient-dark mb-0"
+                                                                href="{{ route('fixed_doses_create', $variable->id) }}"><i
+                                                                    class="fas fa-plus"></i>&nbsp;&nbsp;Add Fixed
+                                                                Dose</a>
                                                         </div>
                                                     </td>
                                                 </tr>
