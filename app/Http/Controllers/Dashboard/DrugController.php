@@ -79,7 +79,7 @@ class DrugController extends Controller
     {
         $drug= Drug::findOrFail($id);
         $drug->name  = $request->name ;
-        $drug->sub_cat_id  = $request->parent_id ;
+        // $drug->sub_cat_id  = $request->parent_id ;
         $drug->save();
         return redirect()->back()->with('success','Drug Updated Successfully'); 
     }

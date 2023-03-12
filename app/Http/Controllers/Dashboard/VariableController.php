@@ -54,13 +54,6 @@ class VariableController extends Controller
         
         // for shows values
         $age_variables = VariableDetail::where('optionable_type', 'App\Models\Age')->where('variable_id', $id)->get();
-        // $age_vars = 0;
-        // foreach($age_variables as $age_variable)
-        // {
-        //     $age_vars = Age::where('id', $age_variable->optionable_id)->get();
-        // }
-
-        
         // weights
         $weight_variables = VariableDetail::where('optionable_type', 'App\Models\Weight')->where('variable_id', $id)->get();
         // genders

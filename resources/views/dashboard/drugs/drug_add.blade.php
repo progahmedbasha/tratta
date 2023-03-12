@@ -24,18 +24,34 @@
                                         </div>
                                     </div>
                                 </div>
-                            <div class="card-body p-3">
-                                @foreach ($drugs as $drug )
-                                <div class="row">
-                                    <div class="col-5">
-                                        <h3>{{ $drug->name }} <span>({{ $drug->code }})</span></h3>
-                                    </div>
-                               
-                                    <div class="col-6">
-                                        <a class="btn bg-gradient-info mb-0" href="{{ route('drugs.show', $drug->id) }}"><i class="fas fa-edit"></i></a>
-                                    </div>
-                                </div>
-                                @endforeach
+                                <table id="datatable" class="table table-striped table-bordered p-0"
+                                    style="width: 80%;align-self:center">
+                                    <thead>
+                                        <tr>
+                                            <th style="width:21px;">#</th>
+                                            <th>name</th>
+                                            <th>code</th>
+                                            <th style="width:21px;"><i style="font-size:24px" class="fa">&#xf013;</i></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach($drugs as $index=>$drug)
+                                        <tr>
+                                            <td>{{ $index+1 }}</td>
+                                            <td>{{ $drug->name }}</td>
+                                            <td>{{ $drug->code }}</td>
+                                            <td>
+                                                <div class="btn-icon-list">
+                                                    <a class="btn bg-gradient-info mb-0"
+                                                        href="{{ route('drugs.show', $drug->id) }}"><i
+                                                            class="fas fa-edit"></i></a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                                {{-- </div> --}}
                             </div>
                         </div>
                     </div>
@@ -43,7 +59,6 @@
             </div>
         </div>
     </div>
-</div>
 </div>
 
 

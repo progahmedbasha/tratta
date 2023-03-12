@@ -45,7 +45,7 @@
     </div>
     <div class="col-md-4">
         <input type="text" class="form-control" placeholder=""
-            style="background-color: {{ $weight_variable->effect->color }}; color: azure; "
+            style="background-color: {{ $weight_variable->effect->color }}; color: black; "
             value="{{ $weight_variable->effect->effect_type  }}" name="name" disapled />
     </div>
     <hr>

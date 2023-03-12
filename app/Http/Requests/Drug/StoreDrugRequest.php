@@ -22,7 +22,7 @@ class StoreDrugRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'sub_sub_cat_id ' => 'required',
+            'name' => 'required',
         ];
     }
 }

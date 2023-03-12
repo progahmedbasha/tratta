@@ -14,7 +14,11 @@ class NursingSafetyCategorySeeder extends Seeder
     public function run(): void
     {
         DB::table('nursing_safety_categories')->insert([
-            'type' => 'type',
+            'type' => 'compatible',
+            'value' => 'value',
+        ]);
+        DB::table('nursing_safety_categories')->insert([
+            'type' => 'incompatible',
             'value' => 'value',
         ]);
     }

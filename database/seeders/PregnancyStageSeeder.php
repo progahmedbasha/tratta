@@ -14,7 +14,16 @@ class PregnancyStageSeeder extends Seeder
     public function run(): void
     {
         DB::table('pregnancy_stages')->insert([
-            'pregnancy_stage' => 'stage 1',
+            'pregnancy_stage' => '1st trimester',
+        ]);
+        DB::table('pregnancy_stages')->insert([
+            'pregnancy_stage' => '1nd trimester',
+        ]);
+        DB::table('pregnancy_stages')->insert([
+            'pregnancy_stage' => '1rd trimester',
+        ]);
+        DB::table('pregnancy_stages')->insert([
+            'pregnancy_stage' => 'nursing',
         ]);
     }
 }

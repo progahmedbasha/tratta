@@ -16,5 +16,11 @@ class FormulaSeeder extends Seeder
         DB::table('formulas')->insert([
             'name' => 'formula 1',
         ]);
+        DB::table('formulas')->insert([
+            'name' => 'formula 2',
+        ]);
+        DB::table('formulas')->insert([
+            'name' => 'po tablet',
+        ]);
     }
 }

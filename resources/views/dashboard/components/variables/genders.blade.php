@@ -45,7 +45,7 @@
     </div>
     <div class="col-md-4">
         <input type="text" class="form-control" placeholder=""
-            style="background-color: {{ $gender_variable->effect->color }}; color: azure; "
+            style="background-color: {{ $gender_variable->effect->color }}; color: black; "
             value="{{ $gender_variable->effect->effect_type  }}" name="name" disapled />
 
     </div>

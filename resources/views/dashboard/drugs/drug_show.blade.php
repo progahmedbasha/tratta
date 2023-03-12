@@ -204,37 +204,38 @@
                                     </form>
                                 </div>
                                 <div class="card-body p-3">
-                                    @foreach ($variables as $variable)
-                                    @if ($variable->variableable_type == "App\Models\Drug")
-                                    <div class="row">
-                                        <div class="col-md-3">
-                                            <h5>{{ $variable->drug->name }}</h5>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <h5>{{ $variable->drug->code }}</h5>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <a class="btn bg-gradient-info mb-0"
-                                                href="{{ route('variable_details_show', ["variable"=> $variable->id , "drug" => $drug->id]) }}"><i
-                                                    class="fas fa-edit"></i></a>
-                                        </div>
+                                    <div class="col-6">
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">Drug</th>
+                                                    <th scope="col">code</th>
+                                                    <th scope="col"><i style="font-size:24px" class="fa">&#xf013;</i></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($variables as $variable)
+                                                <tr>
+                                                    @if ($variable->variableable_type == "App\Models\Drug")
+                                                    <td>{{ $variable->drug->name }}</td>
+                                                    @else
+                                                    <td>{{ $variable->indication->indication_title }}</td>
+                                                    @endif
+                                                    <td>{{ $variable->drug->code }}</td>
+                                                    <td>
+                                                        <div class="btn-icon-list">
+                                                            <a class="btn bg-gradient-info mb-0"
+                                                                href="{{ route('variable_details_show', ["variable"=>$variable->id , "drug" => $drug->id]) }}"><i
+                                                                    class="fas fa-edit"></i></a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
                                     </div>
-                                    @else
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <h5>{{ $variable->indication->indication_title }}</h5>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <a class="btn bg-gradient-info mb-0"
-                                                href="{{ route('variable_details_show', ["variable"=> $variable->id , "drug" => $drug->id]) }}"><i
-                                                    class="fas fa-edit"></i></a>
-                                        </div>
-                                    </div>
-                                    @endif
-
-                                    <br>
-                                    @endforeach
                                 </div>
+
                             </div>
                         </div>
                     </div>

@@ -23,6 +23,7 @@ use App\Http\Controllers\Dashboard\DrugFormulaController;
 use App\Http\Controllers\Dashboard\DrugIndicationController;
 use App\Http\Controllers\Dashboard\InteractionSeverityController;
 use App\Http\Controllers\Dashboard\VariableController;
+use App\Http\Controllers\Dashboard\FixedDoseController;
 
 /*
 |--------------------------------------------------------------------------
@@ -91,5 +92,9 @@ Route::middleware('auth')->group(function () {
     Route::post('gender_variable', [VariableController::class, 'genderVariable'])->name('gender_variable');
     Route::post('pregnancy_stage_variable', [VariableController::class, 'pregnancy_stageVariable'])->name('pregnancy_stage_variable');
     Route::post('illness_data_variable', [VariableController::class, 'illness_dataVariable'])->name('illness_data_variable');
+    /********************** fixed doses *************************/
+    Route::resource('fixed_doses', FixedDoseController::class);
+    Route::get('fixed_doses_create/{id}', [FixedDoseController::class, 'create'])->name('fixed_doses_create');
+    
     });
 require __DIR__.'/auth.php';

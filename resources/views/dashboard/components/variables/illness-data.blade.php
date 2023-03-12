@@ -49,7 +49,7 @@
     </div>
     <div class="col-md-4">
         <input type="text" class="form-control" placeholder=""
-            style="background-color: {{ $illness_data_variable->effect->color }}; color: azure; "
+            style="background-color: {{ $illness_data_variable->effect->color }}; color: black; "
             value="{{ $illness_data_variable->effect->effect_type  }}" name="name" disapled />
     </div>
     <hr>

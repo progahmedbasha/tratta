@@ -19,7 +19,7 @@ class AgeSeeder extends Seeder
             'to' => 50,
         ]);
         DB::table('ages')->insert([
-            'name' => 'elder',
+            'name' => 'elderly',
             'from' => 20,
             'to' => 50,
         ]);

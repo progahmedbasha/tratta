@@ -14,7 +14,13 @@ class WeightSeeder extends Seeder
     public function run(): void
     {
         DB::table('weights')->insert([
-            'weight' => 'weight',
+            'weight' => 'average',
+        ]);
+        DB::table('weights')->insert([
+            'weight' => 'over weight',
+        ]);
+        DB::table('weights')->insert([
+            'weight' => 'under weight',
         ]);
     }
 }

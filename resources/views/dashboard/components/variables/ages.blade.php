@@ -44,7 +44,7 @@
         <input type="text" class="form-control" placeholder="" value="{{ $age_variable->age->name }}" name="name" required />
     </div>
     <div class="col-md-4">
-             <input type="text" class="form-control" placeholder="" style="background-color: {{ $age_variable->effect->color }}; color: azure; " value="{{ $age_variable->effect->effect_type  }}" name="name" disapled />
+             <input type="text" class="form-control" placeholder="" style="background-color: {{ $age_variable->effect->color }}; color: black; " value="{{ $age_variable->effect->effect_type  }}" name="name" disapled />
     </div>
     <hr>
 </div>

@@ -14,7 +14,15 @@ class PregnancySafetySeeder extends Seeder
     public function run(): void
     {
         DB::table('pregnancy_safeties')->insert([
-            'type' => 'type',
+            'type' => 'A',
+            'value' => 'value',
+        ]);
+        DB::table('pregnancy_safeties')->insert([
+            'type' => 'B',
+            'value' => 'value',
+        ]);
+        DB::table('pregnancy_safeties')->insert([
+            'type' => 'C',
             'value' => 'value',
         ]);
     }
