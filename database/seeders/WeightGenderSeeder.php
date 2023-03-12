@@ -1,0 +1,23 @@
+<?php
+
+namespace Database\Seeders;
+
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+
+class WeightGenderSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     */
+    public function run(): void
+    {
+        DB::table('weight_genders')->insert([
+            'weight_id' => 1,
+            'gender_id' => 1,
+            'range_from' => 50,
+            'range_to' => 90,
+        ]);
+    }
+}
