@@ -176,7 +176,7 @@
                                                 <input type="radio" name="option" value="main_id" id="flexRadioDefault1"
                                                     checked>
                                                 <label class="form-check-label" for="flexRadioDefault1">
-                                                    Main Id
+                                                    Main Id : ( {{ $drug->code }} )
                                                 </label>
                                             </div>
                                             <div class="col-md-3">
@@ -190,6 +190,7 @@
                                                         indication_id==$drug_indication->id)?
                                                         'selected':''}}>
                                                         {{$drug_indication->indication->indication_title}}
+                                                        ({{$drug_indication->code}})
                                                     </option>
                                                     @endforeach
                                                 </select>
@@ -210,7 +211,8 @@
                                                 <tr>
                                                     <th scope="col">Drug</th>
                                                     <th scope="col">code</th>
-                                                    <th scope="col"><i style="font-size:24px" class="fa">&#xf013;</i> Action
+                                                    <th scope="col"><i style="font-size:24px" class="fa">&#xf013;</i>
+                                                        Action
                                                     </th>
                                                 </tr>
                                             </thead>
@@ -219,14 +221,18 @@
                                                 <tr>
                                                     @if ($variable->variableable_type == "App\Models\Drug")
                                                     <td>{{ $variable->drug->name }}</td>
-                                                    @else
-                                                    <td>{{ $variable->indication->indication_title }}</td>
-                                                    @endif
                                                     <td>{{ $variable->drug->code }}</td>
+                                                    @else
+                                                    <td>{{ $variable->drugIndication->indication->indication_title }}
+                                                    </td>
+                                                    <td>{{ $variable->drugIndication->code }}</td>
+                                                    @endif
+
                                                     <td>
                                                         <div class="btn-icon-list">
                                                             <a class="btn bg-gradient-info mb-0"
-                                                                href="{{ route('variable_details_show', ["variable"=>$variable->id , "drug" => $drug->id]) }}"><i
+                                                                href="{{ route('variable_details_show', ["
+                                                                variable"=>$variable->id , "drug" => $drug->id]) }}"><i
                                                                     class="fas fa-edit"></i></a>
                                                             <a class="btn bg-gradient-dark mb-0"
                                                                 href="{{ route('fixed_doses_create', $variable->id) }}"><i

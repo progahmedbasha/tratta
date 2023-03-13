@@ -105,6 +105,7 @@ class VariableController extends Controller
         $id = $variable;
         $variable_code = Variable::where('id', $variable)->first();
         $drug_code = Drug::where('id', $variable_code->drug_id)->first();
+        $indication_code = DrugIndication::where('id', $variable_code->drug_id)->first();
         $effects = Effect::all();
         // ages
         $age_existe = VariableDetail::where('variable_id', $variable)->where('optionable_type', 'App\Models\Age')->get()->pluck('optionable_id');
@@ -139,7 +140,7 @@ class VariableController extends Controller
         $illness_data_variables = VariableDetail::where('optionable_type', 'App\Models\IllnessCategory')->where('variable_id', $variable)->get();
         //drugs
         $drug_variables = VariableDetail::where('optionable_type', 'App\Models\Drug')->where('variable_id', $variable)->get();
-        return view('dashboard.drugs.variable_details_add', compact('id','drug_code','effects','ages','age_variables',
+        return view('dashboard.drugs.variable_details_add', compact('id','drug_code','indication_code','variable_code','effects','ages','age_variables',
         'weight_variables','gender_variables','pregnancy_stage_variables',
         'illness_data_variables','genders','weights','pregnancy_stages','category_illness_subs','drugs','drug_variables'));
     }

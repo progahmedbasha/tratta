@@ -28,10 +28,10 @@ class DrugController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
     //   return  $category_subs = Category::where('parent_id', !null)->with('drug')->get();
-        $drugs = Drug::all();
+        $drugs = Drug::whenSearch($request->search)->paginate(10);
         return view('dashboard.drugs.drug_add', compact('drugs'));
     }
 

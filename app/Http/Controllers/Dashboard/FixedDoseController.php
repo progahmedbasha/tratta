@@ -4,8 +4,11 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Models\Age;
+use App\Models\Drug;
+use App\Models\DrugIndication;
 use App\Models\Effect;
 use App\Models\FixedDose;
+use App\Models\Variable;
 use Illuminate\Http\Request;
 
 class FixedDoseController extends Controller
@@ -23,9 +26,14 @@ class FixedDoseController extends Controller
      */
     public function create($id)
     {
-        $effects = Effect::all();
+        $variable_code = Variable::where('id', $id)->first();
+        $drug_code = Drug::where('id', $variable_code->drug_id)->first();
+        $indication_code = DrugIndication::where('id', $variable_code->drug_id)->first();
+        // $effects = Effect::all();
+        $effect_existe = FixedDose::where('variable_id', $id)->get()->pluck('effect_id');
+        $effects = Effect::whereNotIn('id', $effect_existe)->get();
         $fixed_doses = FixedDose::where('variable_id', $id)->get();
-          return view('dashboard.fixed-doses.fixed-doses', compact('id','effects','fixed_doses'));
+        return view('dashboard.fixed-doses.fixed-doses', compact('id','variable_code','drug_code','indication_code','effects','fixed_doses'));
     }
 
     /**

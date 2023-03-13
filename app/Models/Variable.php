@@ -17,8 +17,8 @@ class Variable extends Model
     {
         return $this->belongsTo(Drug::class,'variableable_id');
     }
-    public function indication()
+    public function drugIndication()
     {
-        return $this->belongsTo(Indication::class,'variableable_id');
+        return $this->belongsTo(DrugIndication::class,'variableable_id');
     }
 }

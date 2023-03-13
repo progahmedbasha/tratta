@@ -20,4 +20,10 @@ class Drug extends Model
     {
         return $this->morphMany(VariableDetail::class, 'optionable');
     }
+    public function scopeWhenSearch($query,$search){
+          return $query->when($search,function($q)use($search){
+              return $q->where(('name'),$search)
+                  ->orWhere('code','like',"%$search%");
+          });
+       }
 }

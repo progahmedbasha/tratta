@@ -9,12 +9,17 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="row">
+                <h1 style="text-align: center;font-family: cursive;color:black;">Fixed Dose</h1>
                 <div class="col-md-11 mb-lg-0 mb-4">
                     <div class="card">
                         <div class="card-header pb-0 p-3">
                             <div class="row">
                                 <div class="col-6 d-flex align-items-center">
-                                    <h6 class="mb-0">Fixed Dose </h6>
+                                      @if ($variable_code->variableable_type == "App\Models\Drug" )
+                                            <h6 class="mb-0">Main ID ({{ $drug_code->code }})</h6>
+                                            @else
+                                            <h6 class="mb-0">{{ $indication_code->Indication->indication_title }} ({{ $indication_code->code }})</h6>
+                                            @endif
                                 </div>
                                 <div class="col-6 text-end">
                                     <!--<a class="btn bg-gradient-dark mb-0" href="javascript:;"><i class="fas fa-plus"></i>&nbsp;&nbsp;Add New</a>-->
@@ -28,7 +33,7 @@
                                 <div class="row">
                                     <div class="col-md-4">
                                         <select class="form-control" name="effect_id" required />
-                                        <option value="">Note</option>
+                                        <option value="">Select Effect</option>
                                         @foreach ($effects as $effect)
                                         <option value="{{$effect->id}}" {{(old($effect->id)==$effect->id)?
                                             'selected':''}}>

@@ -19,7 +19,7 @@
         </div>
         <div class="col-md-4">
             <select class="form-control" name="effect_id" required />
-            <option value="">Note</option>
+            <option value="">Select Effect</option>
             @foreach ($effects as $effect)
             <option value="{{$effect->id}}" {{(old($effect->id)==$effect->id)?
                 'selected':''}}>

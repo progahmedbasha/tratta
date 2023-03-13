@@ -20,7 +20,7 @@ toastr.success(" {{ Session::get('success') }} ");
 @endif
 <div class="container-fluid py-4">
     <div class="row">
-        <h1 style="text-align: center;font-family: cursive;color:black;">New Variables</h1>
+        <h1 style="text-align: center;font-family: cursive;color:black;">1ry Variables</h1>
         <div class="col-lg-12">
             <div class="row">
                 <div class="col-lg-12">
@@ -30,7 +30,11 @@ toastr.success(" {{ Session::get('success') }} ");
                                 <div class="card-header pb-0 p-3">
                                     <div class="row">
                                         <div class="col-6 d-flex align-items-center">
-                                            <h6 class="mb-0">1ry Variables ({{ $drug_code->code }})</h6>
+                                            @if ($variable_code->variableable_type == "App\Models\Drug" )
+                                            <h6 class="mb-0">Main ID ({{ $drug_code->code }})</h6>
+                                            @else
+                                            <h6 class="mb-0">{{ $indication_code->Indication->indication_title }} ({{ $indication_code->code }})</h6>
+                                            @endif
                                         </div>
                                        
                                     </div>
