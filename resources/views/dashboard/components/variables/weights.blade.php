@@ -41,12 +41,19 @@
 @foreach ($weight_variables as $weight_variable)
 <div class="row">
     <div class="col-md-6">
-        <input type="text" class="form-control" placeholder="" value="{{ $weight_variable->weight->weight }}" name="name" required />
+        <input type="text" class="form-control" placeholder="" value="{{ $weight_variable->weight->weight }}" name="name" disabled />
     </div>
     <div class="col-md-4">
         <input type="text" class="form-control" placeholder=""
             style="background-color: {{ $weight_variable->effect->color }}; color: black; "
-            value="{{ $weight_variable->effect->effect_type  }}" name="name" disapled />
+            value="{{ $weight_variable->effect->effect_type  }}" name="name" disabled />
+    </div>
+    <div class="col-2">
+        <form action="{{route('variable_details.destroy',$weight_variable->id)}}" method="POST">
+            @csrf
+            @method('DELETE')
+            <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
+        </form>
     </div>
     <hr>
 </div>

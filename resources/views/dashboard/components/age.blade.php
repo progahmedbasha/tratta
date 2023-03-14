@@ -26,14 +26,14 @@
                                         @enderror
                                     </div>
                                     <div class="col">
-                                        <input type="text" class="form-control" placeholder="From" name="from"
+                                        <input type="number" step="any" class="form-control" placeholder="From" name="from"
                                             value="{{old('from')}}" required />
                                         @error('from')
                                         <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
                                     </div>
                                     <div class="col">
-                                        <input type="text" class="form-control" placeholder="To" name="to"
+                                        <input type="number" step="any" class="form-control" placeholder="To" name="to"
                                             value="{{old('to')}}" required />
                                         @error('to')
                                         <div class="alert alert-danger">{{ $message }}</div>
@@ -63,14 +63,14 @@
                                         @enderror
                                     </div>
                                     <div class="col">
-                                        <input type="text" class="form-control" placeholder="From"
+                                        <input type="number" step="any" class="form-control" placeholder="From"
                                             value="{{$age->from}}" name="from" required />
                                         @error('from')
                                         <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
                                     </div>
                                     <div class="col">
-                                        <input type="text" class="form-control" placeholder="To" value="{{$age->to}}"
+                                        <input type="number" step="any" class="form-control" placeholder="To" value="{{$age->to}}"
                                             name="to" required />
                                         @error('to')
                                         <div class="alert alert-danger">{{ $message }}</div>

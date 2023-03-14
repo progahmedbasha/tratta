@@ -26,7 +26,7 @@
                                         @enderror
                                     </div>
                                     <div class="col">
-                                        <input type="number" class="form-control" placeholder="Number" name="number"
+                                        <input type="number" step="any" class="form-control" placeholder="Number" name="number"
                                             value="{{old('number')}}" required />
                                         @error('number')
                                         <div class="alert alert-danger">{{ $message }}</div>
@@ -64,7 +64,7 @@
                                         @enderror
                                     </div>
                                     <div class="col">
-                                        <input type="text" class="form-control" placeholder="From"
+                                        <input type="number" step="any" class="form-control" placeholder="Number"
                                             value="{{$effect->number}}" name="number" required />
                                         @error('number')
                                         <div class="alert alert-danger">{{ $message }}</div>

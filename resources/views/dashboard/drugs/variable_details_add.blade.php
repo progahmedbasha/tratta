@@ -36,7 +36,6 @@ toastr.success(" {{ Session::get('success') }} ");
                                             <h6 class="mb-0">{{ $indication_code->Indication->indication_title }} ({{ $indication_code->code }})</h6>
                                             @endif
                                         </div>
-                                       
                                     </div>
                                 </div>
                                 <div class="card-body p-3">
@@ -58,6 +57,9 @@ toastr.success(" {{ Session::get('success') }} ");
                                         {{-- drug -data sub sub --}}
                                         @include('dashboard.components.variables.category-data')
                                     <br>
+                                        <a href="{{ route('drugs.show', $variable_code->drug_id) }}" class="btn btn-primary">
+                                        <span class="fas fa-backward"></span> Back
+                                        </a>
                                 </div>
                             </div>
                         </div>

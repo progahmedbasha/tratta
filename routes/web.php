@@ -24,6 +24,7 @@ use App\Http\Controllers\Dashboard\DrugIndicationController;
 use App\Http\Controllers\Dashboard\InteractionSeverityController;
 use App\Http\Controllers\Dashboard\VariableController;
 use App\Http\Controllers\Dashboard\FixedDoseController;
+use App\Http\Controllers\Dashboard\VariableDetailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -85,8 +86,8 @@ Route::middleware('auth')->group(function () {
     
     /********************** variables *************************/
     Route::resource('variables', VariableController::class);
-    Route::get('variable_details_create/{id}', [VariableController::class, 'create'])->name('variable_details_create');
-    Route::get('variable_details_show/{variable}/{drug}', [VariableController::class, 'show'])->name('variable_details_show');
+    /*Route::get('variable_details_create/{id}', [VariableController::class, 'create'])->name('variable_details_create');
+    Route::get('variable_details_show/{variable}/{drug}', [VariableController::class, 'show'])->name('variable_details_show');*/
     Route::post('age_variable', [VariableController::class, 'ageVariable'])->name('age_variable');
     Route::post('weight_variable', [VariableController::class, 'weightVariable'])->name('weight_variable');
     Route::post('gender_variable', [VariableController::class, 'genderVariable'])->name('gender_variable');
@@ -97,6 +98,7 @@ Route::middleware('auth')->group(function () {
     /********************** fixed doses *************************/
     Route::resource('fixed_doses', FixedDoseController::class);
     Route::get('fixed_doses_create/{id}', [FixedDoseController::class, 'create'])->name('fixed_doses_create');
-    
+    /********************** variable details for only delete *************************/
+    Route::resource('variable_details', VariableDetailController::class);
     });
 require __DIR__.'/auth.php';

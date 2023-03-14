@@ -54,7 +54,10 @@
                 @csrf
                 @method('patch')
                 <div class="row">
-                  <div class="col-md-11">
+                  <div class="col-3">
+                    <input type="text" class="form-control" value="{{ $category_sub->parent->name }}" disabled>
+                  </div>
+                  <div class="col-md-8">
                     <input type="hidden" name="parent_id" value="{{ $category_sub->parent_id }}">
                     <input type="text" class="form-control" placeholder="Key Name" value="{{$category_sub->name}}"
                       name="name" required />

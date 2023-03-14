@@ -14,7 +14,7 @@ class ScrSeeder extends Seeder
     public function run(): void
     {
         DB::table('scrs')->insert([
-            'illness_category_id' => 1,
+            'illness_category_id' => 3,
             'gender_id' => 1,
             'range_from' => 50,
             'range_to' => 80,

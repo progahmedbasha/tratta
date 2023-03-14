@@ -20,7 +20,7 @@
                                 @csrf
                                 <div class="row">
                                     <div class="col">
-                                        <select class="form-control" name="weight_id">
+                                        <select class="form-control" name="weight_id" required>
                                             <option value="">Select Weight</option>
                                             @foreach ($weights as $weight)
                                             <option value="{{$weight->id}}">
@@ -33,7 +33,7 @@
                                         @enderror
                                     </div>
                                     <div class="col">
-                                        <select class="form-control" name="gender_id">
+                                        <select class="form-control" name="gender_id" required>
                                             <option value="">Select Gender</option>
                                             @foreach ($genders as $gender)
                                             <option value="{{$gender->id}}">
@@ -46,14 +46,14 @@
                                         @enderror
                                     </div>
                                     <div class="col">
-                                        <input type="text" class="form-control" placeholder="From" name="range_from"
+                                        <input type="number" step="any" class="form-control" placeholder="From" name="range_from"
                                             value="{{old('range_from')}}" required />
                                         @error('range_from')
                                         <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
                                     </div>
                                     <div class="col">
-                                        <input type="text" class="form-control" placeholder="To" name="range_to"
+                                        <input type="number" step="any" class="form-control" placeholder="To" name="range_to"
                                             value="{{old('range_to')}}" required />
                                         @error('range_to')
                                         <div class="alert alert-danger">{{ $message }}</div>
@@ -76,7 +76,7 @@
                                 @method('patch')
                                 <div class="row">
                                     <div class="col">
-                                        <select class="form-control" name="weight_id">
+                                        <select class="form-control" name="weight_id" required>
                                             <option value="">Select Weight</option>
                                             @foreach ($weights as $weight)
                                             <option value="{{$weight->id}}" {{($weight_gender->
@@ -88,7 +88,7 @@
                                         </select>
                                     </div>
                                     <div class="col">
-                                        <select class="form-control" name="gender_id">
+                                        <select class="form-control" name="gender_id" required>
                                             <option value="">Select Gender</option>
                                             @foreach ($genders as $gender)
                                             <option value="{{$gender->id}}" {{($weight_gender->
@@ -103,14 +103,14 @@
                                         @enderror
                                     </div>
                                     <div class="col">
-                                        <input type="text" class="form-control" placeholder="From"
+                                        <input type="number" step="any" class="form-control" placeholder="From"
                                             value="{{$weight_gender->range_from}}" name="range_from" required />
                                         @error('range_from')
                                         <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
                                     </div>
                                     <div class="col">
-                                        <input type="text" class="form-control" placeholder="To"
+                                        <input type="number" step="any" class="form-control" placeholder="To"
                                             value="{{$weight_gender->range_to}}" name="range_to" required />
                                         @error('range_to')
                                         <div class="alert alert-danger">{{ $message }}</div>

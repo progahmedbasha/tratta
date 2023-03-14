@@ -24,21 +24,21 @@
                                 <div class="row">
                                     <div class="col">
                                         <input type="text" class="form-control" placeholder="Ages"
-                                            value="{{$age->name}}" name="name" required />
+                                            value="{{$age->name}}" name="name" disabled />
                                         @error('name')
                                         <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
                                     </div>
                                     <div class="col">
                                         <input type="text" class="form-control" placeholder="From"
-                                            value="{{$age->from}}" name="from" required />
+                                            value="{{$age->from}}" name="from" disabled />
                                         @error('from')
                                         <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
                                     </div>
                                     <div class="col">
                                         <input type="text" class="form-control" placeholder="To" value="{{$age->to}}"
-                                            name="to" required />
+                                            name="to" disabled />
                                         @error('to')
                                         <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
@@ -90,14 +90,14 @@
                                     </div>
                                     <div class="col">
                                         <input type="text" class="form-control" placeholder="From"
-                                            value="{{$weight_gender->range_from}}" name="range_from" required />
+                                            value="{{$weight_gender->range_from}}" name="range_from" disabled />
                                         @error('range_from')
                                         <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
                                     </div>
                                     <div class="col">
                                         <input type="text" class="form-control" placeholder="To"
-                                            value="{{$weight_gender->range_to}}" name="range_to" required />
+                                            value="{{$weight_gender->range_to}}" name="range_to" disabled />
                                         @error('range_to')
                                         <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
@@ -136,14 +136,14 @@
                                     </div>
                                     <div class="col">
                                         <input type="text" class="form-control" placeholder="From"
-                                            value="{{$crcl_range->range_from}}" name="range_from" required />
+                                            value="{{$crcl_range->range_from}}" name="range_from" disabled />
                                         @error('range_from')
                                         <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
                                     </div>
                                     <div class="col">
                                         <input type="text" class="form-control" placeholder="To"
-                                            value="{{$crcl_range->range_to}}" name="range_to" required />
+                                            value="{{$crcl_range->range_to}}" name="range_to" disabled />
                                         @error('range_to')
                                         <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror

@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('effects', function (Blueprint $table) {
             $table->increments('id');
             $table->string('effect_type', 100);
-            $table->tinyInteger('number');
+            $table->float('number');
             $table->string('color');
             $table->timestamp('created_at')->default(\DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(\DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));

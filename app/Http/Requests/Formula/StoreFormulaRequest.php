@@ -23,7 +23,7 @@ class StoreFormulaRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'=> 'required|min:2|max:100',
+            'name'=> 'required|max:100',
             'icon'=> 'max:100',
         ];
     }

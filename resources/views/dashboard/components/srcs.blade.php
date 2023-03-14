@@ -19,17 +19,19 @@
                                 @csrf
                                 <div class="row">
                                     <div class="col">
-                                        <select class="form-control" name="illness_category_id">
+                                        <select class="form-control" name="illness_category_id" required>
                                             <option value="">Select Illness Category</option>
-                                            @foreach ($illness_categories as $illness_category)
-                                            <option value="{{$illness_category->id}}">
-                                                {{$illness_category->name}}
+                                            @foreach ($category_illness_subs as $category_illness_sub)
+                                            @foreach ( $category_illness_sub->subCategory as $category_sub_sub)
+                                            <option value="{{$category_sub_sub->id}}">
+                                                {{$category_sub_sub->name}}
                                             </option>
+                                            @endforeach
                                             @endforeach
                                         </select>
                                     </div>
                                     <div class="col">
-                                        <select class="form-control" name="gender_id">
+                                        <select class="form-control" name="gender_id" required>
                                             <option value="">Select Gender</option>
                                             @foreach ($genders as $gender)
                                             <option value="{{$gender->id}}">
@@ -39,15 +41,15 @@
                                         </select>
                                     </div>
                                     <div class="col">
-                                        <input type="number" class="form-control" placeholder="From" name="range_from"
-                                            value="{{old('range_from')}}" required />
+                                        <input type="number" step="any" class="form-control" placeholder="From"
+                                            name="range_from" value="{{old('range_from')}}" required />
                                         @error('range_from')
                                         <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
                                     </div>
                                     <div class="col">
-                                        <input type="number" class="form-control" placeholder="To" name="range_to"
-                                            value="{{old('range_to')}}" required />
+                                        <input type="number" step="any" class="form-control" placeholder="To"
+                                            name="range_to" value="{{old('range_to')}}" required />
                                         @error('range_to')
                                         <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
@@ -69,14 +71,16 @@
                                 @method('patch')
                                 <div class="row">
                                     <div class="col">
-                                        <select class="form-control" name="illness_category_id">
+                                        <select class="form-control" name="illness_category_id" required>
                                             <option value="">Select Illness Category</option>
-                                            @foreach ($illness_categories as $illness_category)
-                                            <option value="{{$illness_category->id}}" {{($scr->
-                                                illness_category_id==$illness_category->id)?
+                                            @foreach ($category_illness_subs as $category_illness_sub)
+                                            @foreach ( $category_illness_sub->subCategory as $category_sub_sub)
+                                            <option value="{{$category_sub_sub->id}}" {{($scr->
+                                                illness_category_id==$category_sub_sub->id)?
                                                 'selected':''}}>
-                                                {{$illness_category->name}}
+                                                {{$category_sub_sub->name}}
                                             </option>
+                                            @endforeach
                                             @endforeach
                                         </select>
                                     </div>
@@ -92,15 +96,15 @@
                                         </select>
                                     </div>
                                     <div class="col">
-                                        <input type="number" class="form-control" placeholder="From" name="range_from"
-                                            value="{{$scr->range_from}}" required />
+                                        <input type="number" step="any" class="form-control" placeholder="From"
+                                            name="range_from" value="{{$scr->range_from}}" required />
                                         @error('range_from')
                                         <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
                                     </div>
                                     <div class="col">
-                                        <input type="number" class="form-control" placeholder="To" name="range_to"
-                                            value="{{$scr->range_to}}" required />
+                                        <input type="number" step="any" class="form-control" placeholder="To"
+                                            name="range_to" value="{{$scr->range_to}}" required />
                                         @error('range_to')
                                         <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror

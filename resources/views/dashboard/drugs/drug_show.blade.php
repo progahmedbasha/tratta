@@ -29,7 +29,8 @@
                                         @csrf
                                         <div class="row">
                                             <div class="col-md-11">
-                                                <input type="text" class="form-control" value="{{$drug->name}}">
+                                                <input type="text" class="form-control" value="{{$drug->name}}"
+                                                    disabled>
                                             </div>
                                         </div>
                                         <br>
@@ -56,7 +57,7 @@
                                         <input type="hidden" value="{{ $drug->id }}" name="drug_id">
                                         <div class="row">
                                             <div class="col-md-11">
-                                                <select class="form-control" name="formula_id">
+                                                <select class="form-control" name="formula_id" required>
                                                     <option value="">Generic Name w formula</option>
                                                     {{-- @if(isset($drug->to )) --}}
                                                     @foreach ($formulas as $formula )
@@ -85,7 +86,8 @@
                                     </form>
                                     @foreach ($drug_formulas as $drug_formula)
                                     <div class="col-md-9">
-                                        <input type="text" class="form-control" value="{{$drug_formula->drug->name}}">
+                                        <input type="text" class="form-control" value="{{$drug_formula->formula->name}}"
+                                            disabled>
                                     </div>
                                     <br>
                                     @endforeach
@@ -111,7 +113,7 @@
                                         <input type="hidden" value="{{ $drug->id }}" name="drug_id">
                                         <div class="row">
                                             <div class="col-md-11">
-                                                <select class="form-control" name="indication_id">
+                                                <select class="form-control" name="indication_id" required>
                                                     <option value="">Indication</option>
                                                     {{-- @if(isset($drug->to )) --}}
                                                     @foreach ($indications as $indication )
@@ -142,10 +144,11 @@
                                     <div class="row">
                                         <div class="col-md-5">
                                             <input type="text" class="form-control"
-                                                value="{{$drug_indication->indication->indication_title}}">
+                                                value="{{$drug_indication->indication->indication_title}}" disabled>
                                         </div>
                                         <div class="col-md-4">
-                                            <input type="text" class="form-control" value="{{$drug_indication->code}}">
+                                            <input type="text" class="form-control" value="{{$drug_indication->code}}"
+                                                disabled>
                                         </div>
 
                                     </div>
@@ -231,8 +234,7 @@
                                                     <td>
                                                         <div class="btn-icon-list">
                                                             <a class="btn bg-gradient-info mb-0"
-                                                                href="{{ route('variable_details_show', ["
-                                                                variable"=>$variable->id , "drug" => $drug->id]) }}"><i
+                                                                href="{{ route('variables.show', ['variable'=>$variable->id]) }}"><i
                                                                     class="fas fa-edit"></i></a>
                                                             <a class="btn bg-gradient-dark mb-0"
                                                                 href="{{ route('fixed_doses_create', $variable->id) }}"><i

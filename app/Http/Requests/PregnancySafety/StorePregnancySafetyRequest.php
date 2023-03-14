@@ -23,7 +23,7 @@ class StorePregnancySafetyRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'type'=> 'required|min:2|max:100',
+            'type'=> 'required|max:100',
             'value' => 'required|max:100',
         ];
     }

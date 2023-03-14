@@ -22,7 +22,7 @@ class StoreWeightRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'weight'=> 'required|min:2|max:100',
+            'weight'=> 'required|max:100',
         ];
     }
 

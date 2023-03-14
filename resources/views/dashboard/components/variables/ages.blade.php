@@ -41,10 +41,17 @@
 @foreach ($age_variables as $age_variable)
 <div class="row">
     <div class="col-md-6">
-        <input type="text" class="form-control" placeholder="" value="{{ $age_variable->age->name }}" name="name" required />
+        <input type="text" class="form-control" placeholder="" value="{{ $age_variable->age->name }}" name="name" disabled />
     </div>
     <div class="col-md-4">
-             <input type="text" class="form-control" placeholder="" style="background-color: {{ $age_variable->effect->color }}; color: black; " value="{{ $age_variable->effect->effect_type  }}" name="name" disapled />
+             <input type="text" class="form-control" placeholder="" style="background-color: {{ $age_variable->effect->color }}; color: black; " value="{{ $age_variable->effect->effect_type  }}" name="name" disabled />
+    </div>
+    <div class="col-2">
+        <form action="{{route('variable_details.destroy',$age_variable->id)}}" method="POST">
+            @csrf
+            @method('DELETE')
+            <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
+        </form>
     </div>
     <hr>
 </div>

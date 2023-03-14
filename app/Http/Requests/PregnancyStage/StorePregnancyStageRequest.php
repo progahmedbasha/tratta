@@ -22,7 +22,7 @@ class StorePregnancyStageRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'pregnancy_stage'=> 'required|min:2|max:100',
+            'pregnancy_stage'=> 'required|max:100',
         ];
     }
 }

@@ -26,7 +26,7 @@ class FixedDoseController extends Controller
      */
     public function create($id)
     {
-        $variable_code = Variable::where('id', $id)->first();
+        $variable_code = Variable::findOrFail($id);
         $drug_code = Drug::where('id', $variable_code->drug_id)->first();
         $indication_code = DrugIndication::where('id', $variable_code->drug_id)->first();
         // $effects = Effect::all();
@@ -61,5 +61,10 @@ public function update(Request $request, $id)
         $fixed_dose->save();
         return redirect()->back()->with('success','Fixed Dose Updated Successfully');
     }
-
+    public function destroy($id)
+    {
+        $dose = FixedDose::findOrFail($id);
+        $dose->delete();
+        return redirect()->back()->with('success','Fixed Dose Deleted Successfully');
+    }
 }

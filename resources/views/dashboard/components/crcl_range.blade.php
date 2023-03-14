@@ -19,7 +19,7 @@
                                 @csrf
                                 <div class="row">
                                     <div class="col">
-                                        <select class="form-control" name="illness_category_id">
+                                        <select class="form-control" name="illness_category_id" required>
                                             <option value="">Select Sub</option>
                                             @foreach ($category_illness_subs as $category_illness_sub)
                                             @foreach ( $category_illness_sub->subCategory as $category_sub_sub)
@@ -34,14 +34,14 @@
                                         @enderror
                                     </div>
                                     <div class="col">
-                                        <input type="text" class="form-control" placeholder="From"
+                                        <input type="number" step="any" class="form-control" placeholder="From"
                                             value="{{old('range_from')}}" name="range_from" required />
                                         @error('range_from')
                                         <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
                                     </div>
                                     <div class="col">
-                                        <input type="text" class="form-control" placeholder="To"
+                                        <input type="number" step="any" class="form-control" placeholder="To"
                                             value="{{old('range_to')}}" name="range_to" required />
                                         @error('range_to')
                                         <div class="alert alert-danger">{{ $message }}</div>
@@ -64,7 +64,7 @@
                                 @method('patch')
                                 <div class="row">
                                     <div class="col">
-                                        <select class="form-control" name="illness_category_id">
+                                        <select class="form-control" name="illness_category_id" required>
                                             <option value="">Select Sub</option>
                                             @foreach ($category_illness_subs as $category_illness_sub)
                                             @foreach ( $category_illness_sub->subCategory as $category_sub_sub)
@@ -78,14 +78,14 @@
                                         </select>
                                     </div>
                                     <div class="col">
-                                        <input type="text" class="form-control" placeholder="From"
+                                        <input type="number" step="any" class="form-control" placeholder="From"
                                             value="{{$crcl_range->range_from}}" name="range_from" required />
                                         @error('range_from')
                                         <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
                                     </div>
                                     <div class="col">
-                                        <input type="text" class="form-control" placeholder="To"
+                                        <input type="number" step="any" class="form-control" placeholder="To"
                                             value="{{$crcl_range->range_to}}" name="range_to" required />
                                         @error('range_to')
                                         <div class="alert alert-danger">{{ $message }}</div>

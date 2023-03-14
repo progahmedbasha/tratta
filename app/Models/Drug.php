@@ -22,7 +22,7 @@ class Drug extends Model
     }
     public function scopeWhenSearch($query,$search){
           return $query->when($search,function($q)use($search){
-              return $q->where(('name'),$search)
+              return $q->where('name','like',"%$search%")
                   ->orWhere('code','like',"%$search%");
           });
        }

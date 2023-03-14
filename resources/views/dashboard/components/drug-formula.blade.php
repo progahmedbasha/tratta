@@ -26,8 +26,7 @@
                                         @enderror
                                     </div>
                                     <div class="col">
-                                        <input type="text" class="form-control" placeholder="Icon" name="icon"
-                                            value="{{old('icon')}}" required />
+                                        <input type="file" class="form-control" id="customFile" name="icon" required />
                                         @error('icon')
                                         <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
@@ -48,20 +47,36 @@
                                 @csrf
                                 @method('patch')
                                 <div class="row">
-                                    <div class="col">
+                                    <div class="col-5">
                                         <input type="text" class="form-control" placeholder="Name"
                                             value="{{$formula->name}}" name="name" required />
                                         @error('type')
                                         <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
                                     </div>
-                                    <div class="col">
-                                        <input type="text" class="form-control" placeholder="Icon"
-                                            value="{{$formula->icon}}" name="icon" required />
+                                    {{-- <div class="col">
+                                        <div class="row"> --}}
+                                            <div class="col col-lg-1">
+                                                @if(!empty($formula->icon))
+                                                <img src="{{url('/data/drug_formulas')}}/{{$formula->icon }}"
+                                                    class="w3-round" width="50px" alt="Norway">
+                                                @else
+                                                <img src="{{url('/data/error.png')}}" class="w3-round" width="50px"
+                                                    alt="Norway">
+                                                @endif
+                                            </div>
+                                            <div class="col-5">
+                                                <input type="file" class="form-control" id="customFile" name="icon" />
+                                                @error('icon')
+                                                <div class="alert alert-danger">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+
+                                        {{-- </div> --}}
                                         @error('icon')
                                         <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
-                                    </div>
+                                    {{-- </div> --}}
                                     <div class="col-1">
                                         <div class="input-group-append">
                                             <button class="btn bg-gradient-info mb-0" type="submit"><i

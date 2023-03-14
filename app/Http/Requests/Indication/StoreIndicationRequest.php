@@ -21,7 +21,7 @@ class StoreIndicationRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'indication_title'=> 'required|min:2|max:100',
+            'indication_title'=> 'required|max:100',
         ];
     }
 }

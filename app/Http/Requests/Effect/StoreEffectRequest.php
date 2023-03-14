@@ -23,7 +23,7 @@ class StoreEffectRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'effect_type'=> 'required|min:2|max:100',
+            'effect_type'=> 'required|max:100',
             'number'=> 'required|max:100',
             'color' => 'required',
         ];

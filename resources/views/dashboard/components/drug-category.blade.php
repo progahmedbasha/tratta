@@ -35,8 +35,8 @@
                         </div>
                      </form>
                      <br>
-                     {{-- <hr class="horizontal dark mt-0"> --}}
-                     {{-- @foreach ($categories as $category )
+                     <hr class="horizontal dark mt-0">
+                     @foreach ($categories as $category )
                      <form action="{{route('categories.update',$category->id)}}" method="post"
                         enctype="multipart/form-data">
                         @csrf
@@ -58,7 +58,7 @@
                         </div>
                      </form>
                      <br>
-                     @endforeach --}}
+                     @endforeach
                   </div>
                </div>
             </div>

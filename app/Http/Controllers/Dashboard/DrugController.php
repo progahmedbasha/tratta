@@ -56,9 +56,15 @@ class DrugController extends Controller
     {
         $drug = Drug::find($id);
         $category_subs = Category::where('parent_id', !null)->with('drug')->get();
-        $formulas = Formula::all();
+
+        $formula_existe = DrugFormula::where('drug_id', $id)->get()->pluck('formula_id');
+        $formulas = Formula::whereNotIn('id', $formula_existe)->get();
+        
         $drug_formulas = DrugFormula::where('drug_id', $drug->id)->get();
-        $indications = Indication::all();
+        
+        $indication_existe = DrugIndication::where('drug_id', $id)->get()->pluck('indication_id');
+        $indications = Indication::whereNotIn('id', $indication_existe)->get();
+        // $indications = Indication::all();
         $drug_indications = DrugIndication::where('drug_id', $drug->id)->get();
         $variables = Variable::where('drug_id', $drug->id)->get();
         return view('dashboard.drugs.drug_show', compact('drug','category_subs','formulas','drug_formulas','indications','drug_indications','variables'));

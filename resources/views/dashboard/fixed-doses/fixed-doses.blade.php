@@ -15,11 +15,12 @@
                         <div class="card-header pb-0 p-3">
                             <div class="row">
                                 <div class="col-6 d-flex align-items-center">
-                                      @if ($variable_code->variableable_type == "App\Models\Drug" )
-                                            <h6 class="mb-0">Main ID ({{ $drug_code->code }})</h6>
-                                            @else
-                                            <h6 class="mb-0">{{ $indication_code->Indication->indication_title }} ({{ $indication_code->code }})</h6>
-                                            @endif
+                                    @if ($variable_code->variableable_type == "App\Models\Drug" )
+                                    <h6 class="mb-0">Main ID ({{ $drug_code->code }})</h6>
+                                    @else
+                                    <h6 class="mb-0">{{ $indication_code->Indication->indication_title }} ({{
+                                        $indication_code->code }})</h6>
+                                    @endif
                                 </div>
                                 <div class="col-6 text-end">
                                     <!--<a class="btn bg-gradient-dark mb-0" href="javascript:;"><i class="fas fa-plus"></i>&nbsp;&nbsp;Add New</a>-->
@@ -101,7 +102,8 @@
                                     <div class="col-md-4">
                                         <input type="text" class="form-control" placeholder=""
                                             style="background-color: {{ $fixed_dose->effect->color }}; color: black; "
-                                            value="{{ $fixed_dose->effect->effect_type  }}" name="{{ $fixed_dose->effect_id }}" disabled />
+                                            value="{{ $fixed_dose->effect->effect_type  }}"
+                                            name="{{ $fixed_dose->effect_id }}" disabled />
                                         @error('effect_id')
                                         <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
@@ -130,6 +132,12 @@
                                         @enderror
                                     </div>
                                     <div class="col-1">
+                                        <form action="{{route('fixed_doses.destroy',$fixed_dose->id)}}"
+                                            method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                                        </form>
                                     </div>
                                 </div>
                                 <br>
@@ -154,7 +162,11 @@
                             <br>
                             <hr class="horizontal dark mt-0">
                             @endforeach
+                            <a href="{{ route('drugs.show', $variable_code->drug_id) }}" class="btn btn-primary">
+                                <span class="fas fa-backward"></span> Back
+                            </a>
                         </div>
+
                     </div>
                 </div>
             </div>

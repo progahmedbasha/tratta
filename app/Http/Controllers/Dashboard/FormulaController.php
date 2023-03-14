@@ -34,7 +34,11 @@ class FormulaController extends Controller
     {
         $formula= new Formula;
         $formula->name = $request->name;
-        $formula->icon = $request->icon;
+        if (request()->icon){
+            $filename = time().'.'.request()->icon->getClientOriginalExtension();
+            request()->icon->move(public_path('data/drug_formulas'), $filename);
+            $formula->icon=$filename;
+        }
         $formula->save();
         return redirect()->route('basic_data')->with('success','Formula Added Successfully');
     }
@@ -62,7 +66,11 @@ class FormulaController extends Controller
     {
         $formula= Formula::findOrFail($id);
         $formula->name = $request->name;
-        $formula->icon = $request->icon;
+          if (request()->icon){
+            $filename = time().'.'.request()->icon->getClientOriginalExtension();
+            request()->icon->move(public_path('data/drug_formulas'), $filename);
+            $formula->icon=$filename;
+            }
         $formula->save();
         return redirect()->route('basic_data')->with('success','Formula Updated Successfully');
     }
