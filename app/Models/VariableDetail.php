@@ -33,9 +33,9 @@ class VariableDetail extends Model
     {
         return $this->belongsTo(PregnancyStage::class,'optionable_id');
     }
-    public function illnessCategory()
+    public function illnessSub()
     {
-        return $this->belongsTo(IllnessCategory::class,'optionable_id');
+        return $this->belongsTo(IllnessSub::class,'optionable_id');
     }
     public function drug()
     {

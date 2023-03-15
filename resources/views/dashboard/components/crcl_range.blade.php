@@ -19,14 +19,12 @@
                                 @csrf
                                 <div class="row">
                                     <div class="col">
-                                        <select class="form-control" name="illness_category_id" required>
+                                        <select class="form-control" name="illness_sub_id" required>
                                             <option value="">Select Sub</option>
-                                            @foreach ($category_illness_subs as $category_illness_sub)
-                                            @foreach ( $category_illness_sub->subCategory as $category_sub_sub)
-                                            <option value="{{$category_sub_sub->id}}">
-                                                {{$category_sub_sub->name}}
+                                            @foreach ($illness_subs as $illness_sub)
+                                            <option value="{{$illness_sub->id}}">
+                                                {{$illness_sub->name}}
                                             </option>
-                                            @endforeach
                                             @endforeach
                                         </select>
                                         @error('illness_category_id')
@@ -64,16 +62,14 @@
                                 @method('patch')
                                 <div class="row">
                                     <div class="col">
-                                        <select class="form-control" name="illness_category_id" required>
+                                        <select class="form-control" name="illness_sub_id" required>
                                             <option value="">Select Sub</option>
-                                            @foreach ($category_illness_subs as $category_illness_sub)
-                                            @foreach ( $category_illness_sub->subCategory as $category_sub_sub)
-                                            <option value="{{$category_sub_sub->id}}" {{($crcl_range->
-                                                illness_category_id==$category_sub_sub->id)?
+                                            @foreach ($illness_subs as $illness_sub)
+                                            <option value="{{$illness_sub->id}}" {{($crcl_range->
+                                                illness_sub_id==$illness_sub->id)?
                                                 'selected':''}}>
-                                                {{$category_sub_sub->name}}
+                                                {{$illness_sub->name}}
                                             </option>
-                                            @endforeach
                                             @endforeach
                                         </select>
                                     </div>

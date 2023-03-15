@@ -25,6 +25,7 @@ use App\Http\Controllers\Dashboard\InteractionSeverityController;
 use App\Http\Controllers\Dashboard\VariableController;
 use App\Http\Controllers\Dashboard\FixedDoseController;
 use App\Http\Controllers\Dashboard\VariableDetailController;
+use App\Http\Controllers\Dashboard\IllnessSubController;
 
 /*
 |--------------------------------------------------------------------------
@@ -66,6 +67,7 @@ Route::middleware('auth')->group(function () {
     Route::post('category_activation', [CategoryController::class, 'status'])->name('category_activation');
     Route::resource('illness_categories', IllnessCategoryController::class);
     Route::post('illness_category_activation', [IllnessCategoryController::class, 'status'])->name('illness_category_activation');
+    Route::resource('illness_subs', IllnessSubController::class);
     Route::resource('indications', IndicationController::class);
     Route::resource('ages', AgeController::class);
     Route::resource('genders', GenderController::class);

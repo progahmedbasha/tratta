@@ -14,7 +14,7 @@ class CrclRangeSeeder extends Seeder
     public function run(): void
     {
            DB::table('crcl_ranges')->insert([
-            'illness_category_id' => 3,
+            'illness_sub_id' => 1,
             'range_from' => 50,
             'range_to' => 80,
         ]);

@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('scrs', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('illness_category_id')->unsigned();
-            $table->foreign('illness_category_id')->references('id')->on('illness_categories')->onUpdate('cascade');
+            $table->unsignedInteger('illness_sub_id')->unsigned();
+            $table->foreign('illness_sub_id')->references('id')->on('illness_subs')->onUpdate('cascade');
             $table->unsignedTinyInteger('gender_id')->unsigned();
             $table->foreign('gender_id')->references('id')->on('genders')->onUpdate('cascade');
             $table->float('range_from');

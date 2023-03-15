@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\IllnessCategory\StoreIllnessCategoryRequest;
 use App\Models\IllnessCategory;
+use App\Models\IllnessSub;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -20,10 +21,13 @@ class IllnessCategoryController extends Controller
        $parent_illness_categories = IllnessCategory::where('parent_id', null)->get();
         $category_illness_subs = IllnessCategory::whereHas('parent', function ($query) {
             $query->where('parent_id', null);
-             })->with('subCategory')->get();
+             })->with('illnessSub')->get();
              
         $illness_categories = IllnessCategory::get();
-    return view('dashboard.basic-data.illness-categories', compact('parent_illness_categories','category_illness_subs','illness_categories'));
+        $illness_subs = IllnessSub::whereHas('illnessCategory', function ($query) {
+            $query->where('parent_id', null);
+             })->get();
+    return view('dashboard.basic-data.illness-categories', compact('parent_illness_categories','category_illness_subs','illness_categories','illness_subs'));
     }
 
     /**

@@ -20,9 +20,5 @@ class IllnessCategorySeeder extends Seeder
             'name' => 'ilness  category 2',
             'parent_id' => 1 ,
         ]);
-        DB::table('illness_categories')->insert([
-            'name' => 'sub sub',
-            'parent_id' => 2 ,
-        ]);
     }
 }

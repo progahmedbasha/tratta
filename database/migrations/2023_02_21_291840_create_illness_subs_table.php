@@ -11,15 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('fixed_doses', function (Blueprint $table) {
+        Schema::create('illness_subs', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('variable_id')->unsigned();
-            $table->foreign('variable_id')->references('id')->on('variables')->onUpdate('cascade');
-            $table->unsignedInteger('effect_id')->unsigned();
-            $table->foreign('effect_id')->references('id')->on('effects')->onUpdate('cascade');
-            $table->text('recommended_dosage');
-            $table->text('dosage_note');
-            $table->text('titration_note');
+            $table->string('name',100);
+            $table->unsignedInteger('illness_category_id')->unsigned()->nullable();
+            $table->foreign('illness_category_id')->references('id')->on('illness_categories')->onUpdate('cascade');
             $table->timestamp('created_at')->default(\DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(\DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
         });
@@ -30,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('fixed_doses');
+        Schema::dropIfExists('illness_subs');
     }
 };

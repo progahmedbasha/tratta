@@ -33,7 +33,7 @@ class ScrController extends Controller
     public function store(StoreScrRequest $request)
     {
         $scr= new Scr;
-        $scr->illness_category_id = $request->illness_category_id;
+        $scr->illness_sub_id = $request->illness_sub_id;
         $scr->gender_id = $request->gender_id;
         $scr->range_from = $request->range_from;
         $scr->range_to = $request->range_to;
@@ -63,7 +63,7 @@ class ScrController extends Controller
     public function update(StoreScrRequest $request, $id)
     {
         $scr= Scr::findOrFail($id);
-        $scr->illness_category_id = $request->illness_category_id;
+        $scr->illness_sub_id = $request->illness_sub_id;
         $scr->gender_id = $request->gender_id;
         $scr->range_from = $request->range_from;
         $scr->range_to = $request->range_to;

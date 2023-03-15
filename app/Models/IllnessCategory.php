@@ -18,12 +18,13 @@ class IllnessCategory extends Model
     {
         return $this->hasMany(IllnessCategory::class,'parent_id');
     }
-    public function subCategory()
+    // public function subCategory()
+    // {
+    //     return $this->child()->with('subCategory');
+    // }
+    public function illnessSub()
     {
-        return $this->child()->with('subCategory');
+        return $this->hasMany(IllnessSub::class, 'illness_category_id');
     }
-    public function variables()
-    {
-        return $this->morphMany(VariableDetail::class, 'optionable');
-    }
+    
 }

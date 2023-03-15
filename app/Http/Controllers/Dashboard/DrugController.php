@@ -66,8 +66,11 @@ class DrugController extends Controller
         $indications = Indication::whereNotIn('id', $indication_existe)->get();
         // $indications = Indication::all();
         $drug_indications = DrugIndication::where('drug_id', $drug->id)->get();
+        $indication_existe = Variable::where('variableable_type', 'App\Models\DrugIndication')->get()->pluck('variableable_id');
+        $variable_indications = DrugIndication::where('drug_id', $id)->whereNotIn('id', $indication_existe)->get();
+        
         $variables = Variable::where('drug_id', $drug->id)->get();
-        return view('dashboard.drugs.drug_show', compact('drug','category_subs','formulas','drug_formulas','indications','drug_indications','variables'));
+        return view('dashboard.drugs.drug_show', compact('drug','category_subs','formulas','drug_formulas','indications','drug_indications','variable_indications','variables'));
     }
 
     /**

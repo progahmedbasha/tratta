@@ -10,6 +10,7 @@ use App\Models\DrugIndication;
 use App\Models\Effect;
 use App\Models\Gender;
 use App\Models\IllnessCategory;
+use App\Models\IllnessSub;
 use App\Models\PregnancyStage;
 use App\Models\Variable;
 use App\Models\VariableDetail;
@@ -65,7 +66,7 @@ class VariableController extends Controller
         // pregnancy_stage
         $pregnancy_stage_variables = VariableDetail::where('optionable_type', 'App\Models\PregnancyStage')->where('variable_id', $id)->get();
         // illness_data 
-        $illness_data_variables = VariableDetail::where('optionable_type', 'App\Models\IllnessCategory')->where('variable_id', $id)->get();
+        $illness_data_variables = VariableDetail::where('optionable_type', 'App\Models\IllnessSub')->where('variable_id', $id)->get();
         //drug
         $drug_variables = VariableDetail::where('optionable_type', 'App\Models\Drug')->where('variable_id', $id)->get();
         return view('dashboard.drugs.variable_details_add', compact('id','variable_code','drug_code','indication_code','effects','ages','age_variables',
@@ -112,10 +113,8 @@ class VariableController extends Controller
         $pregnancy_stage_existe = VariableDetail::where('variable_id', $id)->where('optionable_type', 'App\Models\PregnancyStage')->get()->pluck('optionable_id');
         $pregnancy_stages = PregnancyStage::whereNotIn('id', $pregnancy_stage_existe)->get();
         //illness data
-        $category_illness_existe = VariableDetail::where('variable_id', $id)->where('optionable_type', 'App\Models\IllnessCategory')->get()->pluck('optionable_id');
-        $category_illness_subs = IllnessCategory::whereHas('parent', function ($query) {
-            $query->where('parent_id', !null);
-             })->whereNotIn('id', $category_illness_existe)->get();
+        $category_illness_existe = VariableDetail::where('variable_id', $id)->where('optionable_type', 'App\Models\IllnessSub')->get()->pluck('optionable_id');
+        $category_illness_subs = IllnessSub::whereNotIn('id', $category_illness_existe)->get();
              //drugs
         $drug_existe = VariableDetail::where('variable_id', $id)->where('optionable_type', 'App\Models\Drug')->get()->pluck('optionable_id');
         $drugs = Drug::whereNotIn('id', $drug_existe)->get();
@@ -129,7 +128,7 @@ class VariableController extends Controller
         // pregnancy_stage
         $pregnancy_stage_variables = VariableDetail::where('optionable_type', 'App\Models\PregnancyStage')->where('variable_id', $id)->get();
         // illness_data 
-        $illness_data_variables = VariableDetail::where('optionable_type', 'App\Models\IllnessCategory')->where('variable_id', $id)->get();
+        $illness_data_variables = VariableDetail::where('optionable_type', 'App\Models\IllnessSub')->where('variable_id', $id)->get();
         //drugs
         $drug_variables = VariableDetail::where('optionable_type', 'App\Models\Drug')->where('variable_id', $id)->get();
         return view('dashboard.drugs.variable_details_add', compact('id','drug_code','indication_code','variable_code','effects','ages','age_variables',
@@ -216,7 +215,7 @@ class VariableController extends Controller
     {
         $countItems = count($request->illness_category_id);
         for ($i = 0; $i < $countItems; $i++) {
-            $var = IllnessCategory::where('id', $request->illness_category_id[$i])->first();
+            $var = IllnessSub::where('id', $request->illness_category_id[$i])->first();
             $variable = $var->variables()->create([
                 'variable_id' => $request->variable_id,
                 'effect_id' => $request->effect_id

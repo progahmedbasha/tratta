@@ -198,12 +198,12 @@
                                                     style="width: 75%; display:inline;">
                                                     <option value="">Indication</option>
                                                     {{-- @if(isset($drug->to )) --}}
-                                                    @foreach ($drug_indications as $drug_indication)
-                                                    <option value="{{$drug_indication->id}}" {{($drug->
-                                                        indication_id==$drug_indication->id)?
+                                                    @foreach ($variable_indications as $variable_indication)
+                                                    <option value="{{$variable_indication->id}}" {{($drug->
+                                                        indication_id==$variable_indication->id)?
                                                         'selected':''}}>
-                                                        {{$drug_indication->indication->indication_title}}
-                                                        ({{$drug_indication->code}})
+                                                        {{$variable_indication->indication->indication_title}}
+                                                        ({{$variable_indication->code}})
                                                     </option>
                                                     @endforeach
                                                 </select>
@@ -258,7 +258,7 @@
                                                                     <button class="btn btn-danger"><i
                                                                             class="fa fa-trash"></i></button>
                                                                 </div>
-                                                                 <div class="col-5">
+                                                                <div class="col-5">
                                                                     <a class="btn bg-gradient-dark mb-0"
                                                                         href="{{ route('fixed_doses_create', $variable->id) }}"><i
                                                                             class="fas fa-plus"></i>&nbsp;&nbsp;Add

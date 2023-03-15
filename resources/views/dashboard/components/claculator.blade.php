@@ -121,12 +121,12 @@
                                 @method('patch')
                                 <div class="row">
                                     <div class="col">
-                                        <select class="form-control" name="illness_category_id" disabled/>
+                                        <select class="form-control" name="illness_sub_id" disabled/>
                                             <option value="">Select Sub</option>
                                             @foreach ($category_illness_subs as $category_illness_sub)
-                                            @foreach ( $category_illness_sub->subCategory as $category_sub_sub)
+                                            @foreach ( $category_illness_sub->illnessSub as $category_sub_sub)
                                             <option value="{{$category_sub_sub->id}}" {{($crcl_range->
-                                                illness_category_id==$category_sub_sub->id)?
+                                                illness_sub_id==$category_sub_sub->id)?
                                                 'selected':''}}>
                                                 {{$category_sub_sub->name}}
                                             </option>

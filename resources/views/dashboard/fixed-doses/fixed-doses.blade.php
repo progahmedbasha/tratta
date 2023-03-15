@@ -47,8 +47,8 @@
                                         @enderror
                                     </div>
                                     <div class="col">
-                                        <input type="text" class="form-control" placeholder="Recommended Dose"
-                                            name="recommended_dosage" value="{{old('recommended_dosage')}}" required />
+                                        <textarea class="form-control" placeholder="Recommended Dose"
+                                            name="recommended_dosage" required>{{old('recommended_dosage')}}</textarea>
                                         @error('recommended_dosage')
                                         <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
@@ -62,8 +62,8 @@
                                     <div class="col-md-4">
                                     </div>
                                     <div class="col">
-                                        <input type="text" class="form-control" placeholder="Dosage Note"
-                                            name="dosage_note" value="{{old('dosage_note')}}" required />
+                                        <textarea class="form-control" placeholder="Dosage Note" name="dosage_note"
+                                            required>{{old('dosage_note')}}</textarea>
                                         @error('dosage_note')
                                         <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
@@ -76,8 +76,8 @@
                                     <div class="col-md-4">
                                     </div>
                                     <div class="col">
-                                        <input type="text" class="form-control" placeholder="Titration Note"
-                                            name="titration_note" value="{{old('titration_note')}}" required />
+                                        <textarea class="form-control" placeholder="Titration Note"
+                                            name="titration_note" required>{{old('titration_note')}}</textarea>
                                         @error('titration_note')
                                         <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
@@ -109,9 +109,9 @@
                                         @enderror
                                     </div>
                                     <div class="col">
-                                        <input type="text" class="form-control" placeholder="Recommended Dose"
-                                            name="recommended_dosage" value="{{$fixed_dose->recommended_dosage}}"
-                                            required />
+                                        <textarea class="form-control" placeholder="Recommended Note"
+                                            name="recommended_dosage"
+                                            required>{{$fixed_dose->recommended_dosage}}</textarea>
                                         @error('recommended_dosage')
                                         <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
@@ -125,8 +125,8 @@
                                     <div class="col-md-4">
                                     </div>
                                     <div class="col-md-7">
-                                        <input type="text" class="form-control" placeholder="Dosage Note"
-                                            name="dosage_note" value="{{$fixed_dose->dosage_note}}" required />
+                                        <textarea class="form-control" placeholder="Dosage Note" name="dosage_note"
+                                            required>{{$fixed_dose->dosage_note}}</textarea>
                                         @error('dosage_note')
                                         <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
@@ -143,8 +143,8 @@
                                     <div class="col-md-4">
                                     </div>
                                     <div class="col">
-                                        <input type="text" class="form-control" placeholder="Titration Note"
-                                            name="titration_note" value="{{$fixed_dose->titration_note}}" required />
+                                        <textarea class="form-control" placeholder="Titration Note"
+                                            name="titration_note" required>{{$fixed_dose->titration_note}}</textarea>
                                         @error('titration_note')
                                         <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror

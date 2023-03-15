@@ -22,7 +22,7 @@ class StoreScrRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'illness_category_id' => 'required',
+            'illness_sub_id' => 'required',
             'gender_id' => 'required',
             'range_from'=> 'required|max:50',
             'range_to'=> 'required|max:50',

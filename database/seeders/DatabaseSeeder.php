@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
         WeightGenderSeeder::class,
         CategorySeeder::class,
         IllnessCategorySeeder::class,
+        IllnessSubSeeder::class,
         IndicationSeeder::class,
         PregnancyStageSeeder::class,
         PregnancySafetySeeder::class,

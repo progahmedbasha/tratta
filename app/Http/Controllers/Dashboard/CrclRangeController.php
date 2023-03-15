@@ -33,7 +33,7 @@ class CrclRangeController extends Controller
     public function store(StoreCrclRangeRequest $request)
     {
         $crcl_range= new CrclRange;
-        $crcl_range->illness_category_id = $request->illness_category_id;
+        $crcl_range->illness_sub_id = $request->illness_sub_id;
         $crcl_range->range_from = $request->range_from;
         $crcl_range->range_to = $request->range_to;
         $crcl_range->save();
@@ -62,7 +62,7 @@ class CrclRangeController extends Controller
     public function update(StoreCrclRangeRequest $request, $id)
     {
         $crcl_range= CrclRange::findOrFail($id);
-        $crcl_range->illness_category_id = $request->illness_category_id;
+        $crcl_range->illness_sub_id = $request->illness_sub_id;
         $crcl_range->range_from = $request->range_from;
         $crcl_range->range_to = $request->range_to;
         $crcl_range->save();

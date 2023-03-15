@@ -20,7 +20,7 @@
                 @csrf
                 <div class="row">
                   <div class="col">
-                    <select class="form-control" name="parent_id">
+                    <select class="form-control" name="parent_id" required>
                       <option value="">Select Category</option>
                       @foreach ($categories as $parent_category)
                       <option value="{{$parent_category->id}}">

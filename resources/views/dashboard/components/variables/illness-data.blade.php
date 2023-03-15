@@ -44,7 +44,7 @@
 @foreach ($illness_data_variables as $illness_data_variable)
 <div class="row">
     <div class="col-md-6">
-        <input type="text" class="form-control" placeholder="" value="{{ $illness_data_variable->illnessCategory->name }}" name="name"
+        <input type="text" class="form-control" placeholder="" value="{{ $illness_data_variable->illnessSub->name }}" name="name"
             disabled />
     </div>
     <div class="col-md-4">

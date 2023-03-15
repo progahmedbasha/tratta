@@ -20,7 +20,7 @@
                 @csrf
                 <div class="row">
                   <div class="col">
-                    <select class="form-control" name="parent_id">
+                    <select class="form-control" name="parent_id" required>
                       <option value="">Select Category</option>
                       @foreach ($parent_illness_categories as $parent_category)
                       <option value="{{$parent_category->id}}">
@@ -28,7 +28,7 @@
                       </option>
                       @endforeach
                     </select>
-                    @error('name')
+                    @error('parent_id')
                     <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
                   </div>
@@ -72,10 +72,10 @@
                   </div>
                 </div>
               </form>
-              <form action="{{route('illness_categories.store')}}" method="post" enctype="multipart/form-data">
+              <form action="{{route('illness_subs.store')}}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="row">
-                  <input type="hidden" name="parent_id" value="{{ $category_sub->id }}">
+                  <input type="hidden" name="illness_category_id" value="{{ $category_sub->id }}">
                   <div class="col">
                     <input type="text" class="form-control" placeholder="Add Sub" name="name" value="{{old('name')}}"
                       required />
@@ -94,8 +94,8 @@
               <div class="card col-6">
                 <div class="card-header bg-info text-white" style="padding: 0.1rem;"> <label>Sub Subs :</label></div>
                 <div class="card-body" style="padding: 0.5rem;">
-                  @foreach ($category_sub->subCategory as $category_sub_sub )
-                  <form action="{{route('illness_categories.update',$category_sub_sub->id)}}" method="post"
+                  @foreach ($category_sub->illnessSub as $category_sub_sub )
+                  <form action="{{route('illness_subs.update',$category_sub_sub->id)}}" method="post"
                     enctype="multipart/form-data">
                     @csrf
                     @method('patch')
@@ -107,7 +107,7 @@
                         <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
                       </div>
-                      <input type="hidden" name="parent_id" value="{{ $category_sub_sub->parent_id }}">
+                      <input type="hidden" name="illness_category_id" value="{{ $category_sub->id }}">
                       <div class="col-2">
                         <div class="input-group-append">
                           <button class="btn bg-gradient-info mb-0" type="submit"><i class="fas fa-edit"></i></button>
