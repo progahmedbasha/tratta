@@ -43,7 +43,7 @@
                                 @csrf
                                 @method('patch')
                                 <div class="row">
-                                    <div class="col-md-11">
+                                    <div class="col-md-10">
                                         <input type="text" class="form-control" placeholder="Drug Category"
                                             value="{{$illness_category->name}}" name="name" required />
                                         @error('name')
@@ -56,6 +56,22 @@
                                                     class="fas fa-edit"></i></button>
                                         </div>
                                     </div>
+                                    <div class="col-1">
+                                        @if($illness_category->active =='0')
+                                        <label class="switch">
+                                            <input type="checkbox" class="actives" checked value="1" name="active"
+                                                data-id="{{ $illness_category->id }}">
+                                            <span class="slider round"></span>
+                                        </label>
+                                        @endif
+                                        @if($illness_category->active =='1')
+                                        <label class="switch">
+                                            <input type="checkbox" class="actives" value="0" name="active"
+                                                data-id="{{ $illness_category->id }}">
+                                            <span class="slider round"></span>
+                                        </label>
+                                        @endif
+                                    </div>
                                 </div>
                             </form>
                             <br>
@@ -67,3 +83,5 @@
         </div>
     </div>
 </div>
+@include('dashboard.components.radio_button_status_style')
+@include('dashboard.components.illness_category_active_status')

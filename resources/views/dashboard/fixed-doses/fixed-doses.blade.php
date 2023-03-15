@@ -124,7 +124,7 @@
                                 <div class="row">
                                     <div class="col-md-4">
                                     </div>
-                                    <div class="col">
+                                    <div class="col-md-7">
                                         <input type="text" class="form-control" placeholder="Dosage Note"
                                             name="dosage_note" value="{{$fixed_dose->dosage_note}}" required />
                                         @error('dosage_note')
@@ -132,12 +132,10 @@
                                         @enderror
                                     </div>
                                     <div class="col-1">
-                                        <form action="{{route('fixed_doses.destroy',$fixed_dose->id)}}"
-                                            method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
-                                        </form>
+                                        <div class="input-group-append">
+                                            <button class="btn bg-gradient-info mb-0" type="submit"><i
+                                                    class="fas fa-edit"></i></button>
+                                        </div>
                                     </div>
                                 </div>
                                 <br>
@@ -151,26 +149,30 @@
                                         <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
                                     </div>
-                                    <div class="col-1">
-                                        <div class="input-group-append">
-                                            <button class="btn bg-gradient-info mb-0" type="submit"><i
-                                                    class="fas fa-edit"></i></button>
-                                        </div>
-                                    </div>
-                                </div>
                             </form>
-                            <br>
-                            <hr class="horizontal dark mt-0">
-                            @endforeach
-                            <a href="{{ route('drugs.show', $variable_code->drug_id) }}" class="btn btn-primary">
-                                <span class="fas fa-backward"></span> Back
-                            </a>
-                        </div>
 
+
+                            <div class="col-1">
+                                <form action="{{route('fixed_doses.destroy',$fixed_dose->id)}}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                                </form>
+                            </div>
+
+                        </div>
+                        <br>
+                        <hr class="horizontal dark mt-0">
+                        @endforeach
+                        <a href="{{ route('drugs.show', $variable_code->drug_id) }}" class="btn btn-primary">
+                            <span class="fas fa-backward"></span> Back
+                        </a>
                     </div>
+
                 </div>
             </div>
         </div>
     </div>
+</div>
 </div>
 @endsection

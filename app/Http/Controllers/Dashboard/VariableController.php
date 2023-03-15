@@ -96,8 +96,8 @@ class VariableController extends Controller
     public function show($id)
     {
         $variable_code = Variable::findOrFail($id);
-        $drug_code = Drug::where('id', $variable_code->drug_id)->first();
-        $indication_code = DrugIndication::where('id', $variable_code->drug_id)->first();
+        $drug_code = Drug::where('id', $variable_code->variableable_id)->first();
+        $indication_code = DrugIndication::where('id', $variable_code->variableable_id)->first();
         $effects = Effect::all();
         // ages
         $age_existe = VariableDetail::where('variable_id', $id)->where('optionable_type', 'App\Models\Age')->get()->pluck('optionable_id');
@@ -158,7 +158,11 @@ class VariableController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $variable = Variable::findOrFail($id);
+        $variable->fixedDose()->delete();
+        $variable->variableDetails()->delete();
+        $variable->delete();
+        return redirect()->back()->with('success','Deleted Successfully');
     }
     public function ageVariable(Request $request)
     {

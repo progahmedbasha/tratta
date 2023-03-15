@@ -63,7 +63,9 @@ Route::middleware('auth')->group(function () {
         })->name('dashboard');
     Route::get('basic_data', [BasicDataController::class, 'index'])->name('basic_data');
     Route::resource('categories', CategoryController::class);
+    Route::post('category_activation', [CategoryController::class, 'status'])->name('category_activation');
     Route::resource('illness_categories', IllnessCategoryController::class);
+    Route::post('illness_category_activation', [IllnessCategoryController::class, 'status'])->name('illness_category_activation');
     Route::resource('indications', IndicationController::class);
     Route::resource('ages', AgeController::class);
     Route::resource('genders', GenderController::class);

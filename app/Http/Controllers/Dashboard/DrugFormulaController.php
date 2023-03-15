@@ -31,5 +31,11 @@ class DrugFormulaController extends Controller
     {
         
     }
+    public function destroy($id)
+    {
+        $formula = DrugFormula::findOrFail($id);
+        $formula->delete();
+        return redirect()->back()->with('success','Drug Formula Deleted Successfully');
+    }
 
 }

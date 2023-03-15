@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class IllnessCategory extends Model
 {
     use HasFactory;
+    public $guarded = [];
     public function parent()
     {
         return $this->belongsTo(IllnessCategory::class,'parent_id');

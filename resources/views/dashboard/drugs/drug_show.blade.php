@@ -85,11 +85,21 @@
                                         </div>
                                     </form>
                                     @foreach ($drug_formulas as $drug_formula)
-                                    <div class="col-md-9">
-                                        <input type="text" class="form-control" value="{{$drug_formula->formula->name}}"
-                                            disabled>
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <input type="text" class="form-control"
+                                                value="{{$drug_formula->formula->name}}" disabled>
+                                        </div>
+                                        <div class="col-1">
+                                            <form action="{{route('drug_formulas.destroy',$drug_formula->id)}}"
+                                                method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                                            </form>
+                                        </div>
                                     </div>
-                                    <br>
+                                    {{-- <br> --}}
                                     @endforeach
                                 </div>
                             </div>
@@ -232,15 +242,32 @@
                                                     @endif
 
                                                     <td>
-                                                        <div class="btn-icon-list">
-                                                            <a class="btn bg-gradient-info mb-0"
-                                                                href="{{ route('variables.show', ['variable'=>$variable->id]) }}"><i
-                                                                    class="fas fa-edit"></i></a>
-                                                            <a class="btn bg-gradient-dark mb-0"
-                                                                href="{{ route('fixed_doses_create', $variable->id) }}"><i
-                                                                    class="fas fa-plus"></i>&nbsp;&nbsp;Add Fixed
-                                                                Dose</a>
-                                                        </div>
+                                                        {{-- <div class="btn-icon-list"> --}}
+
+                                                        <form action="{{route('variables.destroy',$variable->id)}}"
+                                                            method="POST">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <div class="row">
+                                                                <div class="col-2">
+                                                                    <a class="btn bg-gradient-info mb-0"
+                                                                        href="{{ route('variables.show', ['variable'=>$variable->id]) }}"><i
+                                                                            class="fas fa-edit"></i></a>
+                                                                </div>
+                                                                <div class="col-2">
+                                                                    <button class="btn btn-danger"><i
+                                                                            class="fa fa-trash"></i></button>
+                                                                </div>
+                                                                 <div class="col-5">
+                                                                    <a class="btn bg-gradient-dark mb-0"
+                                                                        href="{{ route('fixed_doses_create', $variable->id) }}"><i
+                                                                            class="fas fa-plus"></i>&nbsp;&nbsp;Add
+                                                                        Fixed
+                                                                        Dose</a>
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                        {{-- </div> --}}
                                                     </td>
                                                 </tr>
                                                 @endforeach

@@ -81,4 +81,20 @@ class IllnessCategoryController extends Controller
     {
         //
     }
+        public function status(Request $request)
+    {
+         $category = IllnessCategory::where('id', $request->new_id)->first();
+         if($request->has('active')){
+            if($category->active == 1)
+            {
+                $category->update(['active' => 0]);
+                return response()->json(['status' => true]);
+            }
+              if($category->status ==0)
+            {
+                $category->update(['active' =>1]);
+                return response()->json(['status' => true]);
+            }
+        }
+    }
 }

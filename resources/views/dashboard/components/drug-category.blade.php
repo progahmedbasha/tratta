@@ -1,3 +1,4 @@
+
 <div class="container-fluid py-4">
    <h1 style="text-align: center;font-family: cursive;color:black;">Drug Data</h1>
    <div class="row">
@@ -42,7 +43,7 @@
                         @csrf
                         @method('patch')
                         <div class="row">
-                           <div class="col-md-11">
+                           <div class="col-md-10">
                               <input type="text" class="form-control" placeholder="Drug Category"
                                  value="{{$category->name}}" name="name" required />
                               @error('name')
@@ -55,14 +56,33 @@
                                        class="fas fa-edit"></i></button>
                               </div>
                            </div>
-                        </div>
+                           <div class="col-1">
+                              @if($category->active =='0')
+                              <label class="switch">
+                                 <input type="checkbox" class="actives" checked value="1" name="active"
+                                    data-id="{{ $category->id }}">
+                                 <span class="slider round"></span>
+                              </label>
+                              @endif
+                              @if($category->active =='1')
+                              <label class="switch">
+                                 <input type="checkbox" class="actives" value="0" name="active"
+                                    data-id="{{ $category->id }}">
+                                 <span class="slider round"></span>
+                              </label>
+                              @endif
+                           </div>
                      </form>
-                     <br>
-                     @endforeach
                   </div>
+
+                  <br>
+                  @endforeach
                </div>
             </div>
          </div>
       </div>
    </div>
 </div>
+</div>
+@include('dashboard.components.radio_button_status_style')
+@include('dashboard.components.category_active_status')

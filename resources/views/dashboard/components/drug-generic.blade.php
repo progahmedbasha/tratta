@@ -96,38 +96,39 @@
                 <div class="card-header bg-info text-white" style="padding: 0.1rem;"> <label>Sub Subs :</label></div>
                 <div class="card-body" style="padding: 0.5rem;">
                   @foreach ($category_sub->drug as $drug )
-                           <form action="{{route('drugs.update',$drug->id)}}" method="post" enctype="multipart/form-data">
-                              @csrf
-                              @method('patch')
-                              <div class="row">
-                                 <div class="col-md-5">
-                                    <input type="text" class="form-control" placeholder="Drug Category" value="{{$drug->name}}"
-                                       name="name" required />
-                                    @error('name')
-                                    <div class="alert alert-danger">{{ $message }}</div>
-                                    @enderror
-                                 </div>
-                                 <div class="col-md-5">
-                                    <input type="text" class="form-control" value="{{$drug->code}}" disabled />
-                                 </div>
-                                 {{-- <input type="hidden" name="parent_id" value="{{ $drug->parent_id }}"> --}}
-                                 <div class="col-2">
-                                    <div class="input-group-append">
-                                       <button class="btn bg-gradient-info mb-0" type="submit"><i class="fas fa-edit"></i></button>
-                                    </div>
-                                 </div>
-                              </div>
-                           </form>
+                  <form action="{{route('drugs.update',$drug->id)}}" method="post" enctype="multipart/form-data">
+                    @csrf
+                    @method('patch')
+                    <div class="row">
+                      <div class="col-md-5">
+                        <input type="text" class="form-control" placeholder="Drug Category" value="{{$drug->name}}"
+                          name="name" required />
+                        @error('name')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                      </div>
+                      <div class="col-md-5">
+                        <input type="text" class="form-control" value="{{$drug->code}}" disabled />
+                      </div>
+                      {{-- <input type="hidden" name="parent_id" value="{{ $drug->parent_id }}"> --}}
+                      <div class="col-2">
+                        <div class="input-group-append">
+                          <button class="btn bg-gradient-info mb-0" type="submit"><i class="fas fa-edit"></i></button>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
                   {{--
                            </div>
                            --}}
                   <br>
                   @endforeach
-                  @endforeach
                 </div>
               </div>
               <br>
               @endforeach
+              @endforeach
+
               {{-- here to add sub sub  --}}
               <br>
             </div>

@@ -27,8 +27,8 @@ class FixedDoseController extends Controller
     public function create($id)
     {
         $variable_code = Variable::findOrFail($id);
-        $drug_code = Drug::where('id', $variable_code->drug_id)->first();
-        $indication_code = DrugIndication::where('id', $variable_code->drug_id)->first();
+        $drug_code = Drug::where('id', $variable_code->variableable_id)->first();
+        $indication_code = DrugIndication::where('id', $variable_code->variableable_id)->first();
         // $effects = Effect::all();
         $effect_existe = FixedDose::where('variable_id', $id)->get()->pluck('effect_id');
         $effects = Effect::whereNotIn('id', $effect_existe)->get();
