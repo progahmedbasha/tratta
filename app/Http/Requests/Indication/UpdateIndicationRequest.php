@@ -3,7 +3,7 @@
 namespace App\Http\Requests\Indication;
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreIndicationRequest extends FormRequest
+class UpdateIndicationRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

@@ -43,10 +43,29 @@ class IllnessCategoryController extends Controller
      */
     public function store(StoreIllnessCategoryRequest $request)
     {
-        $category= new IllnessCategory;
-        $category->name = $request->name;
-        $category->parent_id = $request->parent_id;
-        $category->save();
+        if($request->sub_name !=null){
+            $illness= new IllnessSub;
+            $illness->name = $request->sub_name;
+            $illness->illness_category_id = $request->parent_id;
+            $illness->save();
+        }
+        if($request->sub_name ==null){
+            if ($request->parent_id == null) {
+                $category = new IllnessCategory;
+                $category->name = $request->name;
+                $category->parent_id = $request->parent_id;
+                $category->save();
+                    $illness= new IllnessSub;
+                    $illness->name = $category->name;
+                    $illness->illness_category_id = $category->id;
+                    $illness->save();
+            }else{
+                $category = new IllnessCategory;
+                $category->name = $request->name;
+                $category->parent_id = $request->parent_id;
+                $category->save();
+            }
+        }
         return redirect()->route('illness_categories.index')->with('success','Illness Category Added Successfully');
     }
 

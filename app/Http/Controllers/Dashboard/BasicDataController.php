@@ -15,6 +15,7 @@ use App\Models\IllnessCategory;
 use App\Models\IllnessSub;
 use App\Models\Indication;
 use App\Models\InteractionSeverity;
+use App\Models\Kidney;
 use App\Models\NursingSafetyCategory;
 use App\Models\PregnancySafety;
 use App\Models\PregnancyStage;
@@ -53,9 +54,10 @@ class BasicDataController extends Controller
         $scrs = Scr::all();
         $crcl_ranges = CrclRange::all();
         $interaction_severities = InteractionSeverity::all();
+        $kidneys = Kidney::all();
         
         return view('dashboard.basic-data.basic-data', compact('categories','parent_categories','category_subs','illness_categories','category_illness_subs','illness_subs','genders','ages','weights','weight_genders','pregnancy_stages','pregnancy_safties','nursing_safties_categories',
-        'formulas','effects','scrs','crcl_ranges','interaction_severities'));
+        'formulas','effects','scrs','crcl_ranges','interaction_severities','kidneys'));
     }
 
 }

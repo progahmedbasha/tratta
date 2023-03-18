@@ -158,6 +158,39 @@
                             </form>
                             <br>
                             @endforeach
+                             <hr class="horizontal dark mt-0">
+                            <label>Kidneys</label>
+                             @foreach ($kidneys as $kidneys )
+                            <form action="{{route('crcl_ranges.update',$kidneys->id)}}" method="post"
+                                enctype="multipart/form-data">
+                                @csrf
+                                @method('patch')
+                                <div class="row">
+                                    <div class="col">
+                                        <select class="form-control" name="illness_sub_id" disabled>
+                                            <option value="">Select Sub</option>
+                                            @foreach ($illness_subs as $illness_sub)
+                                            <option value="{{$illness_sub->id}}" {{($kidneys->
+                                                illness_sub_id==$illness_sub->id)?
+                                                'selected':''}}>
+                                                {{$illness_sub->name}}
+                                            </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="col">
+                                        <input type="text" class="form-control" placeholder="From"
+                                            value="{{$kidneys->text}}" name="text" disabled />
+                                        @error('text')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="col-1">
+                                    </div>
+                                </div>
+                            </form>
+                            <br>
+                            @endforeach
                         </div>
                     </div>
                 </div>

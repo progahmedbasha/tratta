@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Indication\StoreIndicationRequest;
+use App\Http\Requests\Indication\UpdateIndicationRequest;
 use App\Models\Indication;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -60,7 +61,7 @@ class IndicationController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(StoreIndicationRequest $request, $id)
+    public function update(UpdateIndicationRequest $request, $id)
     {
         $indication= Indication::findOrFail($id);
         $indication->indication_title = $request->indication_title;

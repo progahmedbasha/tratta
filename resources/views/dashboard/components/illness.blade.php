@@ -33,11 +33,14 @@
                     @enderror
                   </div>
                   <div class="col">
-                    <input type="text" class="form-control" placeholder="Add Key" name="name" value="{{old('name')}}"
-                      required />
+                    <input type="text" class="form-control" placeholder="Add Key" name="name" value="{{old('name')}}" />
                     @error('name')
                     <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
+                  </div>
+                  <div class="col">
+                    <input type="text" class="form-control" placeholder="Add Sub Without Key" name="sub_name"
+                      value="{{old('name')}}" />
                   </div>
                   <div class="col-1">
                     <div class="input-group-append">
@@ -48,7 +51,8 @@
               </form>
               <br>
               <hr class="horizontal dark mt-0">
-              @foreach ($category_illness_subs as $category_sub )
+              @foreach ($parent_illness_categories as $parent_cat )
+              @foreach ($parent_cat->child as $category_sub )
               <form action="{{route('illness_categories.update',$category_sub->id)}}" method="post"
                 enctype="multipart/form-data">
                 @csrf
@@ -115,16 +119,52 @@
                       </div>
                     </div>
                   </form>
-                  {{--
-                           </div>
-                           --}}
                   <br>
                   @endforeach
                 </div>
               </div>
               <br>
               @endforeach
-              {{-- here to add sub sub  --}}
+              {{-- show subs without keys --}}
+              {{-- @foreach ($parent_cat->illnessSub as $illness_sub ) --}}
+              <div class="card col-6">
+                <div class="card-header bg-secondary text-white" style="padding: 0.1rem;"> <label>Sub Subs without
+                    key:</label></div>
+                <div class="card-body" style="padding: 0.5rem;">
+                @foreach ($parent_cat->illnessSub as $illness_sub )
+                  <form action="{{route('illness_subs.update',$illness_sub->id)}}" method="post"
+                    enctype="multipart/form-data">
+                    @csrf
+                    @method('patch')
+                    <input type="hidden" name="illness_category_id" value="{{ $illness_sub->illness_category_id }}">
+                    <div class="row">
+                      <div class="col-4">
+                        <input type="text" class="form-control" placeholder="Sub Sub name"
+                          value="{{$illness_sub->illnessCategory->name }}" disabled/>
+                      </div>
+                      <div class="col-6">
+                        <input type="text" class="form-control" placeholder="Sub Sub name"
+                          value="{{$illness_sub->name}}" name="name" required />
+                        @error('name')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                      </div>
+                      <div class="col">
+                        <div class="input-group-append">
+                          <button class="btn bg-gradient-info mb-0" type="submit"><i class="fas fa-edit"></i></button>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                  <br>
+                   @endforeach
+                  <br>
+                </div>
+              </div>
+             
+              <br>
+              @endforeach
+         
               <br>
             </div>
           </div>

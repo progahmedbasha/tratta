@@ -41,10 +41,22 @@ class CategoryController extends Controller
      */
     public function store(StoreCategoryRequest $request)
     {
-        $category= new Category;
-        $category->name = $request->name;
-        $category->parent_id = $request->parent_id;
-        $category->save();
+        if($request->parent_id ==null){
+            $category= new Category;
+            $category->name = $request->name;
+            $category->parent_id = $request->parent_id;
+            $category->save();
+                $drug= new Drug;
+                $drug->code = 0;
+                $drug->name  = $category->name;
+                $drug->sub_cat_id  = $category->id;
+                $drug->save();
+        }else{
+            $category= new Category;
+            $category->name = $request->name;
+            $category->parent_id = $request->parent_id;
+            $category->save();
+        }
         return redirect()->route('categories.index')->with('success','Category Added Successfully');
     }
 

@@ -26,6 +26,7 @@ use App\Http\Controllers\Dashboard\VariableController;
 use App\Http\Controllers\Dashboard\FixedDoseController;
 use App\Http\Controllers\Dashboard\VariableDetailController;
 use App\Http\Controllers\Dashboard\IllnessSubController;
+use App\Http\Controllers\Dashboard\KidneyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -81,6 +82,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('weight_genders', WeightGenderController::class);
     Route::resource('crcl_ranges', CrclRangeController::class);
     Route::resource('interaction_severities', InteractionSeverityController::class);
+    Route::resource('kidneys', KidneyController::class);
     /********************** Drugs Not complete *************************/
     Route::resource('drugs', DrugController::class);
     /********************** drug_formulas Not complete *************************/

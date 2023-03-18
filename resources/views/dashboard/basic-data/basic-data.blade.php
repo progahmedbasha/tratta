@@ -91,6 +91,8 @@
 @include('dashboard.components.weight_gender')
 {{-- /***************** Crcl range & Synonym Illness ***********/ --}}
 @include('dashboard.components.crcl_range')
+{{-- /***************** Kidneys ***********/ --}}
+@include('dashboard.components.kidneys')
 {{-- /***************** Calculator  ***********/ --}}
 @include('dashboard.components.claculator')
 {{-- /***************** S.cr & Synonym Illness ***********/ --}}

@@ -46,9 +46,6 @@
                                         <input type="text" class="form-control" placeholder="Drug Category"
                                             value="{{$indication->indication_title}}" name="indication_title"
                                             required />
-                                        @error('indication_title')
-                                        <div class="alert alert-danger">{{ $message }}</div>
-                                        @enderror
                                     </div>
                                     <div class="col-1">
                                         <div class="input-group-append">

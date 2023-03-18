@@ -88,7 +88,7 @@ class VariableController extends Controller
             $var = Drug::where('id', $request->drug_id)->first();
         }
             $variable =   $var->variables()->create(['drug_id' => $request->drug_id]);
-        return redirect()->route('variables.show', ['variable'=>$variable->id])->with('success','Added Successfully');
+        return redirect()->back()->with('success','Added Successfully');
     }
 
     /**
