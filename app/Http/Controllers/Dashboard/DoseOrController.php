@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Models\Age;
-use App\Models\DoseMessage;
 use App\Models\Drug;
 use App\Models\DrugIndication;
 use App\Models\Effect;
@@ -12,7 +11,7 @@ use App\Models\NoteDose;
 use App\Models\Variable;
 use Illuminate\Http\Request;
 
-class FixedDoseController extends Controller
+class DoseOrController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -33,8 +32,8 @@ class FixedDoseController extends Controller
         // $effects = Effect::all();
         $effect_existe = NoteDose::where('variable_id', $id)->get()->pluck('effect_id');
         $effects = Effect::whereNotIn('id', $effect_existe)->get();
-        $fixed_doses = NoteDose::where('variable_id', $id)->where('dose_type_id',1)->with('doseMessage')->get();
-        return view('dashboard.doses.fixed-doses', compact('id','variable_code','drug_code','indication_code','effects','fixed_doses'));
+        $fixed_doses = NoteDose::where('variable_id', $id)->where('dose_type_id',3)->get();
+        return view('dashboard.doses.dose-or', compact('id','variable_code','drug_code','indication_code','effects','fixed_doses'));
     }
 
     /**
@@ -45,19 +44,18 @@ class FixedDoseController extends Controller
         $fixed_dose = new NoteDose;
         $fixed_dose->variable_id = $request->variable_id;
         $fixed_dose->effect_id = $request->effect_id;
+        $fixed_dose->recommended_dosage = $request->recommended_dosage;
+        $fixed_dose->dosage_note = $request->dosage_note;
+        $fixed_dose->titration_note = $request->titration_note;
         $fixed_dose->dose_type_id = 1;
         $fixed_dose->save();
-            $dose_message = new DoseMessage;
-            $dose_message->note_dose_id = $fixed_dose->id;
-            $dose_message->recommended_dosage = $request->recommended_dosage;
-            $dose_message->dosage_note = $request->dosage_note;
-            $dose_message->titration_note = $request->titration_note;
-            $dose_message->save();
         return redirect()->back()->with('success','Fixed Dose Added Successfully');
     }
 public function update(Request $request, $id)
     {
-        $fixed_dose = DoseMessage::where('note_dose_id', $id)->first();
+        $fixed_dose = Dose::findOrFail($id);
+        $fixed_dose->variable_id = $request->variable_id;
+        // $fixed_dose->effect_id = $request->effect_id;
         $fixed_dose->recommended_dosage = $request->recommended_dosage;
         $fixed_dose->dosage_note = $request->dosage_note;
         $fixed_dose->titration_note = $request->titration_note;
@@ -66,8 +64,7 @@ public function update(Request $request, $id)
     }
     public function destroy($id)
     {
-        $dose = NoteDose::findOrFail($id);
-        $dose->doseMessage()->delete();
+        $dose = Dose::findOrFail($id);
         $dose->delete();
         return redirect()->back()->with('success','Fixed Dose Deleted Successfully');
     }

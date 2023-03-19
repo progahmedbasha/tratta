@@ -11,12 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('fixed_doses', function (Blueprint $table) {
+        Schema::create('dose_messages', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('variable_id')->unsigned();
-            $table->foreign('variable_id')->references('id')->on('variables')->onUpdate('cascade');
-            $table->unsignedInteger('effect_id')->unsigned();
-            $table->foreign('effect_id')->references('id')->on('effects')->onUpdate('cascade');
+            $table->unsignedInteger('note_dose_id')->unsigned();
+            $table->foreign('note_dose_id')->references('id')->on('note_doses')->onUpdate('cascade');
             $table->text('recommended_dosage');
             $table->text('dosage_note');
             $table->text('titration_note');
@@ -30,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('fixed_doses');
+        Schema::dropIfExists('dose_messages');
     }
 };

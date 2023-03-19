@@ -29,8 +29,7 @@
                               @csrf
                               <div class="row">
                                  <div class="col-md-11">
-                                    <input type="text" class="form-control" value="{{$drug->name}}"
-                                       disabled>
+                                    <input type="text" class="form-control" value="{{$drug->name}}" disabled>
                                  </div>
                               </div>
                               <br>
@@ -51,8 +50,7 @@
                            </div>
                         </div>
                         <div class="card-body p-3">
-                           <form action="{{route('drug_formulas.store')}}" method="post"
-                              enctype="multipart/form-data">
+                           <form action="{{route('drug_formulas.store')}}" method="post" enctype="multipart/form-data">
                               @csrf
                               <input type="hidden" value="{{ $drug->id }}" name="drug_id">
                               <div class="row">
@@ -62,9 +60,9 @@
                                        {{-- @if(isset($drug->to )) --}}
                                        @foreach ($formulas as $formula )
                                        <option value="{{$formula->id}}" {{($drug->
-                                       formula_id==$formula->id)?
-                                       'selected':''}}>
-                                       {{$formula->name}}
+                                          formula_id==$formula->id)?
+                                          'selected':''}}>
+                                          {{$formula->name}}
                                        </option>
                                        @endforeach
                                     </select>
@@ -78,7 +76,7 @@
                                  <div class="col-1" style="margin-left: 84%;">
                                     <div class="input-group-append">
                                        <button class="btn bg-gradient-dark mb-0" type="submit"><i
-                                          class="fas fa-save"></i></button>
+                                             class="fas fa-save"></i></button>
                                     </div>
                                  </div>
                               </div>
@@ -86,12 +84,11 @@
                            @foreach ($drug_formulas as $drug_formula)
                            <div class="row">
                               <div class="col-md-8">
-                                 <input type="text" class="form-control"
-                                    value="{{$drug_formula->formula->name}}" disabled>
+                                 <input type="text" class="form-control" value="{{$drug_formula->formula->name}}"
+                                    disabled>
                               </div>
                               <div class="col-1">
-                                 <form action="{{route('drug_formulas.destroy',$drug_formula->id)}}"
-                                    method="POST">
+                                 <form action="{{route('drug_formulas.destroy',$drug_formula->id)}}" method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
@@ -127,9 +124,9 @@
                                        {{-- @if(isset($drug->to )) --}}
                                        @foreach ($indications as $indication )
                                        <option value="{{$indication->id}}" {{($drug->
-                                       indication_id==$indication->id)?
-                                       'selected':''}}>
-                                       {{$indication->indication_title}}
+                                          indication_id==$indication->id)?
+                                          'selected':''}}>
+                                          {{$indication->indication_title}}
                                        </option>
                                        @endforeach
                                     </select>
@@ -143,7 +140,7 @@
                                  <div class="col-1" style="margin-left: 84%;">
                                     <div class="input-group-append">
                                        <button class="btn bg-gradient-dark mb-0" type="submit"><i
-                                          class="fas fa-save"></i></button>
+                                             class="fas fa-save"></i></button>
                                     </div>
                                  </div>
                               </div>
@@ -155,8 +152,7 @@
                                     value="{{$drug_indication->indication->indication_title}}" disabled>
                               </div>
                               <div class="col-md-4">
-                                 <input type="text" class="form-control" value="{{$drug_indication->code}}"
-                                    disabled>
+                                 <input type="text" class="form-control" value="{{$drug_indication->code}}" disabled>
                               </div>
                            </div>
                            <br>
@@ -177,16 +173,14 @@
                            </div>
                         </div>
                         <div class="card-body p-3">
-                           <form action="{{route('variables.store')}}" method="post"
-                              enctype="multipart/form-data">
+                           <form action="{{route('variables.store')}}" method="post" enctype="multipart/form-data">
                               @csrf
                               <input type="hidden" value="{{ $drug->id }}" name="drug_id">
                               <div class="row">
                                  <div class="col-md-3">
-                                    <input type="radio" name="option" value="main_id" id="flexRadioDefault1"
-                                       checked>
+                                    <input type="radio" name="option" value="main_id" id="flexRadioDefault1" checked>
                                     <label class="form-check-label" for="flexRadioDefault1">
-                                    Main Id : ( {{ $drug->code }} )
+                                       Main Id : ( {{ $drug->code }} )
                                     </label>
                                  </div>
                                  <div class="col-md-3">
@@ -197,10 +191,10 @@
                                        {{-- @if(isset($drug->to )) --}}
                                        @foreach ($variable_indications as $variable_indication)
                                        <option value="{{$variable_indication->id}}" {{($drug->
-                                       indication_id==$variable_indication->id)?
-                                       'selected':''}}>
-                                       {{$variable_indication->indication->indication_title}}
-                                       ({{$variable_indication->code}})
+                                          indication_id==$variable_indication->id)?
+                                          'selected':''}}>
+                                          {{$variable_indication->indication->indication_title}}
+                                          ({{$variable_indication->code}})
                                        </option>
                                        @endforeach
                                     </select>
@@ -208,7 +202,7 @@
                                  <div class="col-2">
                                     <div class="input-group-append">
                                        <button class="btn bg-gradient-dark mb-0" type="submit"><i
-                                          class="fas fa-save"></i></button>
+                                             class="fas fa-save"></i></button>
                                     </div>
                                  </div>
                               </div>
@@ -238,40 +232,24 @@
                                        <td>{{ $variable->drugIndication->code }}</td>
                                        @endif
                                        <td>
-                                          {{-- 
                                           <div class="btn-icon-list">
-                                             --}}
-                                             <form action="{{route('variables.destroy',$variable->id)}}"
-                                                method="POST">
+                                             <form action="{{route('variables.destroy',$variable->id)}}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
-                                                <div class="row">
-                                                   <div class="col-1">
-                                                      <a class="btn bg-gradient-info mb-0"
-                                                         href="{{ route('variables.show', ['variable'=>$variable->id]) }}"><i
-                                                         class="fas fa-edit"></i></a>
-                                                   </div>
-                                                   <div class="col-1">
-                                                      <button class="btn btn-danger"><i
-                                                         class="fa fa-trash"></i></button>
-                                                   </div>
-                                                   <div class="col-2">
-                                                      <a class="btn bg-gradient-dark mb-0"
-                                                         href="{{ route('fixed_doses_create', $variable->id) }}">Fixed Dose</a>
-                                                   </div>
-                                                   <div class="col-2">
-                                                      <a class="btn bg-gradient-dark mb-0"
-                                                         href="{{ route('fixed_doses_create', $variable->id) }}">Fixed Or</a>
-                                                   </div>
-                                                   <div class="col">
-                                                      <a class="btn bg-gradient-dark mb-0"
-                                                         href="{{ route('fixed_doses_create', $variable->id) }}">Fixed And</a>
-                                                   </div>
-                                                </div>
+                                                <a class="btn bg-gradient-info mb-0"
+                                                   href="{{ route('variables.show', ['variable'=>$variable->id]) }}"><i
+                                                      class="fas fa-edit"></i></a>
+                                                <button class="btn btn-danger" style="margin-bottom: 0rem;"><i
+                                                      class="fa fa-trash"></i></button>
+                                                <a class="btn bg-gradient-dark mb-0"
+                                                   href="{{ route('fixed_doses_create', $variable->id) }}">Fixed
+                                                   Dose</a>
+                                                <a class="btn bg-gradient-dark mb-0"
+                                                   href="{{ route('dose_or_create', $variable->id) }}">Fixed Or</a>
+                                                <a class="btn bg-gradient-dark mb-0"
+                                                   href="{{ route('fixed_doses_create', $variable->id) }}">Fixed And</a>
                                              </form>
-                                             {{-- 
                                           </div>
-                                          --}}
                                        </td>
                                     </tr>
                                     @endforeach

@@ -27,6 +27,8 @@ use App\Http\Controllers\Dashboard\FixedDoseController;
 use App\Http\Controllers\Dashboard\VariableDetailController;
 use App\Http\Controllers\Dashboard\IllnessSubController;
 use App\Http\Controllers\Dashboard\KidneyController;
+use App\Http\Controllers\Dashboard\DoseOrController;
+use App\Http\Controllers\Dashboard\NoteDoseController;
 
 /*
 |--------------------------------------------------------------------------
@@ -100,11 +102,22 @@ Route::middleware('auth')->group(function () {
     Route::post('pregnancy_stage_variable', [VariableController::class, 'pregnancy_stageVariable'])->name('pregnancy_stage_variable');
     Route::post('illness_data_variable', [VariableController::class, 'illness_dataVariable'])->name('illness_data_variable');
     Route::post('drug_variable', [VariableController::class, 'drugVariable'])->name('drug_variable');
+        /********************** variable details for only delete *************************/
+    Route::resource('variable_details', VariableDetailController::class);
     
     /********************** fixed doses *************************/
     Route::resource('fixed_doses', FixedDoseController::class);
     Route::get('fixed_doses_create/{id}', [FixedDoseController::class, 'create'])->name('fixed_doses_create');
-    /********************** variable details for only delete *************************/
-    Route::resource('variable_details', VariableDetailController::class);
+    /********************** dose_or *************************/
+    Route::resource('dose_or', DoseOrController::class);
+    Route::get('dose_or_create/{id}', [DoseOrController::class, 'create'])->name('dose_or_create');
+    /********************** fetch variables *************************/
+    Route::resource('note_doses', NoteDoseController::class);
+    Route::post('fetch_variables', [NoteDoseController::class, 'fetch'])->name('fetch_variables');
+    Route::get('add_row', [NoteDoseController::class, 'add_row'])->name('add_row');
+    
+
+    
+    
     });
 require __DIR__.'/auth.php';

@@ -1,3 +1,82 @@
+<style>
+  .sidebar .nav-item .nav-link {
+    padding: 12px 22px !important;
+  }
+
+  /* Fixed sidenav, full height */
+  .sidenav {
+
+    padding-top: 0px;
+  }
+
+  /* Style the sidenav links and the dropdown button */
+  .sidenav a,
+  .dropdown-btn {
+    padding: 6px 8px 6px 42px;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    color: #67748e;
+    display: block;
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    outline: none;
+  }
+
+  /* On mouse-over */
+  .sidenav a:hover,
+  .dropdown-btn:hover {
+    color: #67748e;
+  }
+
+  .dropdown-item:hover {
+    /* color:red; */
+    background-color: rgba(255, 255, 255, .2);
+  }
+
+  /* Main content */
+  /* .main {
+  margin-left: 200px; /* Same as the width of the sidenav */
+  font-size: 20px;
+  /* Increased text to enable scrolling */
+  padding: 0px 10px;
+  }
+
+  */
+
+  /* Add an active class to the active dropdown button */
+  .active {
+    /* background-color: green; */
+    color: #185be0;
+  }
+
+  /* Dropdown container (hidden by default). Optional: add a lighter background color and some left padding to change the design of the dropdown content */
+  .dropdown-container {
+    display: none;
+    /* background-color: #262626; */
+    padding-left: 8px;
+  }
+
+  /* Optional: Style the caret down icon */
+  .fa-caret-down {
+    float: right;
+    padding-right: 8px;
+  }
+
+  /* Some media queries for responsiveness */
+  @media screen and (max-height: 450px) {
+    .sidenav {
+      padding-top: 15px;
+    }
+
+    .sidenav a {
+      font-size: 18px;
+    }
+  }
+</style>
 <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 "
   id="sidenav-main">
   <div class="sidenav-header">
@@ -35,6 +114,44 @@
           </div>
           <span class="nav-link-text ms-1">Category</span>
         </a>
+      </li>
+
+      <li class="sidenav nav-item ">
+        <a class="dropdown-btn"><i class="fa fa-list-alt"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+            class="nav-link-text ms-1">Basic Data</span>
+          <i class="fa fa-caret-down"></i>
+        </a>
+        <div class="dropdown-container">
+          {{-- <a class="nav-link dropdown-item  active" href="#">
+                <span class="nav-link-text ms-1">Category</span>
+              </a> --}}
+          <a class="dropdown-item" style="margin-left: 31px;" href="{{ route('categories.index') }}">Drug Data</a>
+          <a class="dropdown-item" style="margin-left: 31px;" href="{{ route('illness_categories.index') }}">Illness Data</a>
+          <a class="dropdown-item" style="margin-left: 31px;" href="{{ route('indications.index') }}">Indication Data</a>
+          <a class=" dropdown-item  " style="margin-left: 31px;" href="{{ route('basic_data') }}#gender">Gender</a>
+          <a class="dropdown-item" style="margin-left: 31px;" href="{{ route('basic_data') }}#age">Age</a>
+          <a class="dropdown-item" style="margin-left: 31px;" href="{{ route('basic_data') }}#weight">Weight</a>
+          <a class="dropdown-item" style="margin-left: 31px;" href="{{ route('basic_data') }}#prgnancy_stage">Pregnancy
+            Stages</a>
+          <a class="dropdown-item" style="margin-left: 31px;" href="{{ route('basic_data') }}#prgnancy_safty">Pregnancy
+            Safty Category</a>
+          <a class="dropdown-item" style="margin-left: 31px;" href="{{ route('basic_data') }}#nursing_safty">Nusrsing
+            Safty Category</a>
+          <a class="dropdown-item" style="margin-left: 31px;" href="{{ route('basic_data') }}#drug_formula">Drug
+            Formula</a>
+          <a class="dropdown-item" style="margin-left: 31px;" href="{{ route('basic_data') }}#effect">Effect</a>
+          <a class="dropdown-item" style="margin-left: 31px;" href="{{ route('basic_data') }}#weight_gender">Weight
+            Gender Ranges</a>
+          <a class="dropdown-item" style="margin-left: 31px;" href="{{ route('basic_data') }}#crcl_range">Crcl range &
+            Synonym Illness</a>
+          <a class="dropdown-item" style="margin-left: 31px;" href="{{ route('basic_data') }}#kidney">Kidneys</a>
+          <a class="dropdown-item" style="margin-left: 31px;" href="{{ route('basic_data') }}#crcl_calculator">Crcl
+            Calculator</a>
+          <a class="dropdown-item" style="margin-left: 31px;" href="{{ route('basic_data') }}#s.cr_synnonym">S.cr &
+            Synonym Illness</a>
+          <a class="dropdown-item" style="margin-left: 31px;" href="{{ route('basic_data') }}#reckeck_drug">Recheck Drug
+            Hx (Interaction Severity)</a>
+        </div>
       </li>
       <li class="nav-item">
         <a class="nav-link   @if (Route::is('basic_data') )  active @endif" href="{{ route('basic_data') }}">
@@ -183,3 +300,20 @@
   </div>
 
 </aside>
+<script>
+  /* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
+var dropdown = document.getElementsByClassName("dropdown-btn");
+var i;
+
+for (i = 0; i < dropdown.length; i++) {
+  dropdown[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var dropdownContent = this.nextElementSibling;
+    if (dropdownContent.style.display === "block") {
+      dropdownContent.style.display = "none";
+    } else {
+      dropdownContent.style.display = "block";
+    }
+  });
+}
+</script>

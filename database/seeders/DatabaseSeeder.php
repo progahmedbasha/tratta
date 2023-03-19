@@ -37,6 +37,7 @@ class DatabaseSeeder extends Seeder
         DrugFormulaSeeder::class,
         InteractionSeveritySeeder::class,
         KidneySeeder::class,
+        DoseTypeSeeder::class,
         ]);
     }
 }
