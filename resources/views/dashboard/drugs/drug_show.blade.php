@@ -245,9 +245,15 @@
                                                    href="{{ route('fixed_doses_create', $variable->id) }}">Fixed
                                                    Dose</a>
                                                 <a class="btn bg-gradient-dark mb-0"
-                                                   href="{{ route('dose_or_create', $variable->id) }}">Fixed Or</a>
+                                                   href="{{ route('dose_or_create', $variable->id) }}">Dose Or</a>
                                                 <a class="btn bg-gradient-dark mb-0"
-                                                   href="{{ route('fixed_doses_create', $variable->id) }}">Fixed And</a>
+                                                   href="{{ route('dose_and_create', $variable->id) }}">Dose And</a>
+                                                <a class="btn bg-gradient-dark mb-0"
+                                                   href="{{ route('notes_or_create', $variable->id) }}">Notes Or</a>
+                                                <a class="btn bg-gradient-dark mb-0"
+                                                   href="{{ route('notes_and_create', $variable->id) }}">Notes And</a>
+                                                   <a class="btn bg-gradient-dark mb-0"
+                                                   href="{{ route('drug_pregnancy_create', $variable->id) }}">Pregnancy</a>
                                              </form>
                                           </div>
                                        </td>
@@ -258,6 +264,8 @@
                            </div>
                         </div>
                      </div>
+                     <br>
+                     @include('dashboard.drugs.component.pregnancy')
                   </div>
                </div>
             </div>

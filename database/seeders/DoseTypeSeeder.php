@@ -22,5 +22,11 @@ class DoseTypeSeeder extends Seeder
         DB::table('dose_types')->insert([
             'type' => 'Dose or',
         ]);
+        DB::table('dose_types')->insert([
+            'type' => 'Notes or',
+        ]);
+        DB::table('dose_types')->insert([
+            'type' => 'Notes And',
+        ]);
     }
 }

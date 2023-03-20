@@ -15,21 +15,21 @@
         @enderror
     </div>
     <div class="col-md-3">
-        <select class="form-control " id="variable" name="variable" required />
+        <select class="form-control variable"  name="variable[]" required />
         <option value="">Select Varirables</option>
-        <option value="Ages">Ages</option>
-        <option value="Weights">Weights</option>
-        <option value="Genders">Genders</option>
+        <option value="ages">Ages</option>
+        <option value="weights">Weights</option>
+        <option value="genders">Genders</option>
         <option value="pregnancy_stages">Pregnancy Stages</option>
-        <option value="Illness">Illness Data</option>
-        <option value="drug">Drug Data</option>
+        <option value="illness">Illness Data</option>
+        <option value="drugs">Drug Data</option>
         </select>
         @error('effect_id')
         <div class="alert alert-danger">{{ $message }}</div>
         @enderror
     </div>
     <div class="col-md-3">
-        <select class="form-control" id="variable_data" name="object_id" required />
+        <select class="form-control variable_data"  name="object_id[]" required />
         <option value="">Select object</option>
         </select>
     </div>
@@ -39,14 +39,46 @@
         </div>
     </div>
 </div>
-<br>
 <div id="duplicate"></div>
 <br><br>
-<div class="row">
-    <div class="col-9"></div>
-    <div class="col-1">
-        <div class="input-group-append">
-            <button class="btn bg-gradient-info mb-0" type="submit"><i class="fas fa-save"></i></button>
-        </div>
-    </div>
-</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    ////////////////////for fetch variables////////////
+	   $(document).ready(function () {
+          $('.variable').on('change', function () {
+              var variable = $('.variable').val();
+              $.ajax({
+                  url: "{{route('fetch_variables')}}",
+                  type: "POST",
+                  data: {
+                      variable: variable,
+                      _token: '{{csrf_token()}}'
+                  },
+                 success:function(response){
+					      $('.variable_data').html(response.result);
+                  },
+              });
+          });  	
+      });
+    ////////////////////for fetch variables////////////
+
+    ////////////////////add row////////////
+	   $(document).ready(function () {
+          $('#button_add_row').on('click', function () {
+            var number = 0;
+              $.ajax({
+                  url: "{{route('add_row')}}",
+                  type: "post",
+                  data: {
+                    number:number,
+                         _token: '{{csrf_token()}}'
+                     },
+                 success:function(response){
+					      $('#duplicate').append(response.result);
+                  },
+              });
+          });  	
+      });
+    ////////////////////for fetch branch////////////
+</script>

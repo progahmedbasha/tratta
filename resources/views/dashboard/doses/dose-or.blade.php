@@ -35,11 +35,12 @@
                                 @csrf
                                 <input type="hidden" name="dose_type_id" value="3" />
                                 @include('dashboard.doses.dose-content')
-                                
+                                {{-- here messages --}}
+                                @include('dashboard.doses.dos-or-message-component')
                             </form>
                             <br>
                             <hr class="horizontal dark mt-0">
-                            {{-- here foreach deleted --}}
+                            @include('dashboard.doses.dose-messages-edit')
                             <a href="{{ route('drugs.show', $variable_code->drug_id) }}" class="btn btn-primary">
                                 <span class="fas fa-backward"></span> Back
                             </a>

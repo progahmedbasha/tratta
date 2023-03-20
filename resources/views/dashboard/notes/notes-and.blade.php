@@ -13,7 +13,7 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="row">
-                <h1 style="text-align: center;font-family: cursive;color:black;">Dose And</h1>
+                <h1 style="text-align: center;font-family: cursive;color:black;">Notes And</h1>
                 <div class="col-md-11 mb-lg-0 mb-4">
                     <div class="card">
                         <div class="card-header pb-0 p-3">
@@ -31,16 +31,16 @@
                             </div>
                         </div>
                         <div class="card-body p-3">
-                            <form action="{{route('note_doses.store')}}" method="post" enctype="multipart/form-data">
+                            <form action="{{route('notes.store')}}" method="post" enctype="multipart/form-data">
                                 @csrf
-                                <input type="hidden" name="dose_type_id" value="2" />
+                                <input type="hidden" name="dose_type_id" value="5" />
                                 @include('dashboard.doses.dose-content')
                                 {{-- here messages --}}
-                                @include('dashboard.doses.dos-or-message-component')
+                                @include('dashboard.notes.component.notes-add-message-component')
                             </form>
                             <br>
                             <hr class="horizontal dark mt-0">
-                            @include('dashboard.doses.dose-messages-edit')
+                            @include('dashboard.notes.component.notes-edit-message-component')
                             <a href="{{ route('drugs.show', $variable_code->drug_id) }}" class="btn btn-primary">
                                 <span class="fas fa-backward"></span> Back
                             </a>

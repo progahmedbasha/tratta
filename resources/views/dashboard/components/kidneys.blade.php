@@ -49,7 +49,7 @@
                             <br>
                             <hr class="horizontal dark mt-0"> --}}
                             @foreach ($kidneys as $kidneys )
-                            <form action="{{route('crcl_ranges.update',$kidneys->id)}}" method="post"
+                            <form action="{{route('kidneys.update',$kidneys->id)}}" method="post"
                                 enctype="multipart/form-data">
                                 @csrf
                                 @method('patch')

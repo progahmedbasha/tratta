@@ -13,4 +13,8 @@ class Age extends Model
     {
         return $this->morphMany(VariableDetail::class, 'optionable');
     }
+    public function variableDoses()
+    {
+        return $this->morphMany(NoteDoseVariable::class, 'variableable');
+    }
 }

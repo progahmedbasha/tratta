@@ -4,62 +4,57 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Models\Age;
-use App\Models\DoseMessage;
 use App\Models\Drug;
 use App\Models\DrugIndication;
 use App\Models\Effect;
 use App\Models\Gender;
 use App\Models\IllnessSub;
 use App\Models\NoteDose;
+use App\Models\NoteMessage;
 use App\Models\PregnancyStage;
 use App\Models\Variable;
 use App\Models\Weight;
 use Illuminate\Http\Request;
 
-class NoteDoseController extends Controller
+class NotesOrController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function fetch(Request $request)
+    public function index()
     {
-        $var_name = $request->variable;
-        $variables = null;
-        if($request->variable == "ages"){
-           $variables = Age::get();
-        }
-        if($request->variable == "weights"){
-            $variables = Weight::get();
-        }
-        if($request->variable == "genders"){
-            $variables = Gender::get();
-        }
-        if($request->variable == "pregnancy_stages"){
-            $variables = PregnancyStage::get();
-        }
-        if($request->variable == "illness"){
-            $variables = IllnessSub::get();
-        }
-        if($request->variable == "drugs"){
-            $variables = Drug::get();
-        }
-        $html = view('dashboard.doses.variable-component.variables', compact('variables','var_name'))->render();
-        return response()->json(['status' => true, 'result' => $html]);
+
     }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create($id)
+    {
+        $variable_code = Variable::findOrFail($id);
+        $drug_code = Drug::where('id', $variable_code->variableable_id)->first();
+        $indication_code = DrugIndication::where('id', $variable_code->variableable_id)->first();
+        // $effects = Effect::all();
+        // $effect_existe = NoteDose::where('variable_id', $id)->get()->pluck('effect_id');
+        $effects = Effect::get();
+        $fixed_doses = NoteDose::where('variable_id', $id)->where('dose_type_id',4)->with('noteDoseVariables')->get();
+        return view('dashboard.notes.notes-or', compact('id','variable_code','drug_code','indication_code','effects','fixed_doses'));
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
     public function store(Request $request)
     {
-        // return $request;
         $note_dose = new NoteDose;
         $note_dose->variable_id = $request->variable_id;
         $note_dose->effect_id = $request->effect_id;
         $note_dose->dose_type_id = $request->dose_type_id;
         $note_dose->save();
         // save dos messages
-        $dos_message = new DoseMessage;
+        $dos_message = new NoteMessage;
         $dos_message->note_dose_id = $note_dose->id;
-        $dos_message->recommended_dosage = $request->recommended_dosage;
-        $dos_message->dosage_note = $request->dosage_note;
-        $dos_message->titration_note = $request->titration_note;
+        $dos_message->note = $request->note;
         $dos_message->save();
         $countItems = count($request->object_id);
             for ($i = 0; $i < $countItems; $i++) {
@@ -109,21 +104,19 @@ class NoteDoseController extends Controller
             return redirect()->back()->with('success',' Added Successfully');
     }
 
-    public function add_row(Request $request)
+public function update(Request $request, $id)
     {
-        // return $request;
-        $number = $request->number+1;
-         $effects = Effect::get();
-        $html = view('dashboard.doses.variable-component.row', compact('effects','number'))->render();
-        return response()->json(['status' => true, 'result' => $html]);
+        $fixed_dose = NoteMessage::where('note_dose_id', $id)->first();
+        $fixed_dose->note = $request->note;
+        $fixed_dose->save();
+        return redirect()->back()->with('success','Fixed Dose Updated Successfully');
     }
     public function destroy($id)
     {
         $dose = NoteDose::findOrFail($id);
-        $dose->doseMessage()->delete();
+        $dose->noteMessage()->delete();
         $dose->noteDoseVariables()->delete();
         $dose->delete();
         return redirect()->back()->with('success','Fixed Dose Deleted Successfully');
     }
-
 }

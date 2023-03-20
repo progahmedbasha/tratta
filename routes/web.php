@@ -28,8 +28,11 @@ use App\Http\Controllers\Dashboard\VariableDetailController;
 use App\Http\Controllers\Dashboard\IllnessSubController;
 use App\Http\Controllers\Dashboard\KidneyController;
 use App\Http\Controllers\Dashboard\DoseOrController;
+use App\Http\Controllers\Dashboard\DoseAndController;
+use App\Http\Controllers\Dashboard\NotesOrController;
+use App\Http\Controllers\Dashboard\NotesAndController;
 use App\Http\Controllers\Dashboard\NoteDoseController;
-
+use App\Http\Controllers\Dashboard\DrugPregnancyController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -108,15 +111,23 @@ Route::middleware('auth')->group(function () {
     /********************** fixed doses *************************/
     Route::resource('fixed_doses', FixedDoseController::class);
     Route::get('fixed_doses_create/{id}', [FixedDoseController::class, 'create'])->name('fixed_doses_create');
-    /********************** dose_or *************************/
+    /********************** dose base *************************/
     Route::resource('dose_or', DoseOrController::class);
+    /********************** dose or & dose and *************************/
     Route::get('dose_or_create/{id}', [DoseOrController::class, 'create'])->name('dose_or_create');
+    Route::get('dose_and_create/{id}', [DoseAndController::class, 'create'])->name('dose_and_create');
+    /********************** notes or & notes and *************************/
+    Route::resource('notes', NotesOrController::class);
+    Route::get('notes_or_create/{id}', [NotesOrController::class, 'create'])->name('notes_or_create');
+    Route::get('notes_and_create/{id}', [NotesAndController::class, 'create'])->name('notes_and_create');
     /********************** fetch variables *************************/
     Route::resource('note_doses', NoteDoseController::class);
     Route::post('fetch_variables', [NoteDoseController::class, 'fetch'])->name('fetch_variables');
-    Route::get('add_row', [NoteDoseController::class, 'add_row'])->name('add_row');
+    Route::post('add_row', [NoteDoseController::class, 'add_row'])->name('add_row');
     
-
+    /********************** variable pregnancy *************************/
+    Route::resource('drug_pregnancy', DrugPregnancyController::class);
+    Route::get('drug_pregnancy_create/{id}', [DrugPregnancyController::class, 'create'])->name('drug_pregnancy_create');
     
     
     });

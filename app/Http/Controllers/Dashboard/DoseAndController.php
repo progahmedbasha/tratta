@@ -11,7 +11,7 @@ use App\Models\NoteDose;
 use App\Models\Variable;
 use Illuminate\Http\Request;
 
-class DoseOrController extends Controller
+class DoseAndController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -32,8 +32,8 @@ class DoseOrController extends Controller
         // $effects = Effect::all();
         // $effect_existe = NoteDose::where('variable_id', $id)->get()->pluck('effect_id');
         $effects = Effect::get();
-        $fixed_doses = NoteDose::where('variable_id', $id)->where('dose_type_id',3)->with('noteDoseVariables')->get();
-        return view('dashboard.doses.dose-or', compact('id','variable_code','drug_code','indication_code','effects','fixed_doses'));
+        $fixed_doses = NoteDose::where('variable_id', $id)->where('dose_type_id',2)->with('noteDoseVariables')->get();
+        return view('dashboard.doses.dose-and', compact('id','variable_code','drug_code','indication_code','effects','fixed_doses'));
     }
 
     /**

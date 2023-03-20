@@ -70,7 +70,7 @@
                         <br>
                         <div class="row">
                             <div class="col mb-3">
-                                <form method="get" class="form-inline" action="{{url('admin/drugs/create')}}">
+                                <form method="get" class="form-inline" action="{{route('drugs.index')}}">
                                     <div class="row">
                                         <div class="col-4">
                                             <input class=" form-control form-control-solid w-250px ps-15" name="search"
@@ -81,7 +81,7 @@
                                                     class="fa fa-search"></i></button>
                                         </div>
                                         <div class="col-2">
-                                            <a href="{{url('admin/drugs/create')}}" class="btn btn-light-primary me-3"
+                                            <a href="{{route('drugs.index')}}" class="btn btn-light-primary me-3"
                                                 style="margin-top:0px;"><i class="fa fa-times"></i></a>
                                         </div>
                                     </div>

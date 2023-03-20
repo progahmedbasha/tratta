@@ -8,8 +8,11 @@ use App\Models\Category;
 use App\Models\Drug;
 use App\Models\DrugFormula;
 use App\Models\DrugIndication;
+use App\Models\Effect;
 use App\Models\Formula;
 use App\Models\Indication;
+use App\Models\NursingSafetyCategory;
+use App\Models\PregnancyStage;
 use App\Models\Variable;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -20,9 +23,11 @@ class DrugController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         //
+        $drugs = Drug::where('code','!=',0)->whenSearch($request->search)->paginate(10);
+        return view('dashboard.drugs.drugs', compact('drugs'));
     }
 
     /**
@@ -31,8 +36,7 @@ class DrugController extends Controller
     public function create(Request $request)
     {
     //   return  $category_subs = Category::where('parent_id', !null)->with('drug')->get();
-        $drugs = Drug::whenSearch($request->search)->paginate(10);
-        return view('dashboard.drugs.drug_add', compact('drugs'));
+        
     }
 
     /**
@@ -70,7 +74,10 @@ class DrugController extends Controller
         $variable_indications = DrugIndication::where('drug_id', $id)->whereNotIn('id', $indication_existe)->get();
         
         $variables = Variable::where('drug_id', $drug->id)->get();
-        return view('dashboard.drugs.drug_show', compact('drug','category_subs','formulas','drug_formulas','indications','drug_indications','variable_indications','variables'));
+        $effects = Effect::get();
+        $pregnancy_stages = PregnancyStage::get();
+        $prganancy_safties = NursingSafetyCategory::get();
+        return view('dashboard.drugs.drug_show', compact('drug','category_subs','formulas','drug_formulas','indications','drug_indications','variable_indications','variables','effects','pregnancy_stages','prganancy_safties'));
     }
 
     /**
