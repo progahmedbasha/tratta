@@ -33,6 +33,9 @@ use App\Http\Controllers\Dashboard\NotesOrController;
 use App\Http\Controllers\Dashboard\NotesAndController;
 use App\Http\Controllers\Dashboard\NoteDoseController;
 use App\Http\Controllers\Dashboard\DrugPregnancyController;
+use App\Http\Controllers\Dashboard\DrugTradeController;
+use App\Http\Controllers\Dashboard\DrugMoaController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -105,7 +108,7 @@ Route::middleware('auth')->group(function () {
     Route::post('pregnancy_stage_variable', [VariableController::class, 'pregnancy_stageVariable'])->name('pregnancy_stage_variable');
     Route::post('illness_data_variable', [VariableController::class, 'illness_dataVariable'])->name('illness_data_variable');
     Route::post('drug_variable', [VariableController::class, 'drugVariable'])->name('drug_variable');
-        /********************** variable details for only delete *************************/
+        /********************** variable details *************************/
     Route::resource('variable_details', VariableDetailController::class);
     
     /********************** fixed doses *************************/
@@ -127,7 +130,10 @@ Route::middleware('auth')->group(function () {
     
     /********************** variable pregnancy *************************/
     Route::resource('drug_pregnancy', DrugPregnancyController::class);
-    Route::get('drug_pregnancy_create/{id}', [DrugPregnancyController::class, 'create'])->name('drug_pregnancy_create');
+    /********************** Treadename *************************/
+    Route::resource('trades', DrugTradeController::class);
+    /********************** drug MOA *************************/
+    Route::resource('moa_drugs', DrugMoaController::class);
     
     
     });

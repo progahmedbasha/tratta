@@ -1,6 +1,6 @@
 @foreach ($fixed_doses as $fixed_dose )
 @foreach ($fixed_dose->doseMessage as $dose_message )
-<form action="{{route('fixed_doses.update',$fixed_dose->id)}}" method="post" enctype="multipart/form-data">
+<form action="{{route('note_doses.update',$fixed_dose->id)}}" method="post" enctype="multipart/form-data">
     @csrf
     @method('patch')
     <input type="hidden" value="{{ $id }}" name="variable_id">
@@ -85,6 +85,12 @@
             <textarea class="form-control" placeholder="Recommended Note" name="recommended_dosage"
                 required>{{$dose_message->recommended_dosage}}</textarea>
             @error('recommended_dosage')
+            <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
+        </div>
+        <div class="col-2">
+            <input type="number" step="any" class="form-control" placeholder="Priority" value="{{$fixed_dose->priority}}" name="priority" required>
+            @error('priority')
             <div class="alert alert-danger">{{ $message }}</div>
             @enderror
         </div>

@@ -5,14 +5,18 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Drug\StoreDrugRequest;
 use App\Models\Category;
+use App\Models\Country;
 use App\Models\Drug;
 use App\Models\DrugFormula;
 use App\Models\DrugIndication;
+use App\Models\DrugMoa;
+use App\Models\DrugPregnancy;
 use App\Models\Effect;
 use App\Models\Formula;
 use App\Models\Indication;
 use App\Models\NursingSafetyCategory;
 use App\Models\PregnancyStage;
+use App\Models\DrugTrade;
 use App\Models\Variable;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -75,9 +79,14 @@ class DrugController extends Controller
         
         $variables = Variable::where('drug_id', $drug->id)->get();
         $effects = Effect::get();
+        $prgnancies = DrugPregnancy::where('drug_id', $drug->id)->get();
         $pregnancy_stages = PregnancyStage::get();
         $prganancy_safties = NursingSafetyCategory::get();
-        return view('dashboard.drugs.drug_show', compact('drug','category_subs','formulas','drug_formulas','indications','drug_indications','variable_indications','variables','effects','pregnancy_stages','prganancy_safties'));
+        $countries = Country::get();
+        $trades = DrugTrade::where('drug_id', $drug->id)->get();
+        $moa_drugs = DrugMoa::where('drug_id', $drug->id)->get();
+        return view('dashboard.drugs.drug_show', compact('drug','category_subs','formulas','drug_formulas','indications','drug_indications',
+        'variable_indications','variables','effects','prgnancies','pregnancy_stages','prganancy_safties','countries','trades','moa_drugs'));
     }
 
     /**

@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('note_messages', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('note_dose_id')->unsigned();
-            $table->foreign('note_dose_id')->references('id')->on('note_doses')->onUpdate('cascade');
+            $table->foreign('note_dose_id')->references('id')->on('note_doses')->onUpdate('cascade')->onDelete('cascade');
             $table->text('note');
             $table->timestamp('created_at')->default(\DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(\DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));

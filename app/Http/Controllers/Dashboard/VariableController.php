@@ -158,8 +158,6 @@ class VariableController extends Controller
     public function destroy(string $id)
     {
         $variable = Variable::findOrFail($id);
-        $variable->fixedDose()->delete();
-        $variable->variableDetails()->delete();
         $variable->delete();
         return redirect()->back()->with('success','Deleted Successfully');
     }

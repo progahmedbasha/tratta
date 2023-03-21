@@ -21,12 +21,13 @@ class Variable extends Model
     {
         return $this->belongsTo(DrugIndication::class,'variableable_id');
     }
-    public function fixedDose()
-    {
-        return $this->hasMany(FixedDose::class);
-    }
+
     public function variableDetails()
     {
         return $this->hasMany(VariableDetail::class);
+    }
+    public function noteDose()
+    {
+        return $this->hasMany(NoteDose::class);
     }
 }

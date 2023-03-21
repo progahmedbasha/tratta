@@ -53,6 +53,7 @@ class NoteDoseController extends Controller
         $note_dose->variable_id = $request->variable_id;
         $note_dose->effect_id = $request->effect_id;
         $note_dose->dose_type_id = $request->dose_type_id;
+        $note_dose->priority = $request->priority;
         $note_dose->save();
         // save dos messages
         $dos_message = new DoseMessage;
@@ -107,6 +108,18 @@ class NoteDoseController extends Controller
                 }
             }
             return redirect()->back()->with('success',' Added Successfully');
+    }
+    public function update(Request $request, $id)
+    {
+        $dose = NoteDose::find($id);
+        $dose->priority = $request->priority;
+        $dose->save();
+        $fixed_dose = DoseMessage::where('note_dose_id', $id)->first();
+        $fixed_dose->recommended_dosage = $request->recommended_dosage;
+        $fixed_dose->dosage_note = $request->dosage_note;
+        $fixed_dose->titration_note = $request->titration_note;
+        $fixed_dose->save();
+        return redirect()->back()->with('success','Updated Successfully');
     }
 
     public function add_row(Request $request)

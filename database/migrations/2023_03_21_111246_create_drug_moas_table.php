@@ -11,13 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('variable_details', function (Blueprint $table) {
+        Schema::create('drug_moas', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('variable_id')->unsigned();
-            $table->foreign('variable_id')->references('id')->on('variables')->onUpdate('cascade')->onDelete('cascade');
-            $table->morphs('optionable');
-            $table->unsignedInteger('effect_id')->unsigned();
-            $table->foreign('effect_id')->references('id')->on('effects')->onUpdate('cascade');
+            $table->unsignedInteger('drug_id')->unsigned();
+            $table->foreign('drug_id')->references('id')->on('drugs')->onUpdate('cascade');
+            $table->text('text');
             $table->timestamp('created_at')->default(\DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(\DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
         });
@@ -28,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('variable_details');
+        Schema::dropIfExists('drug_moas');
     }
 };

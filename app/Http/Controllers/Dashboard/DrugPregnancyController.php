@@ -26,14 +26,7 @@ class DrugPregnancyController extends Controller
      */
     public function create($id)
     {
-        $variable_code = Variable::findOrFail($id);
-        $drug_code = Drug::where('id', $variable_code->variableable_id)->first();
-        $indication_code = DrugIndication::where('id', $variable_code->variableable_id)->first();
-        $effects = Effect::get();
-        $prgnancies = DrugPregnancy::where('variable_id', $id)->get();
-        $pregnancy_stages = PregnancyStage::get();
-        $prganancy_safties = NursingSafetyCategory::get();
-        return view('dashboard.drug-prgnancy.drug-prgnancy', compact('id','variable_code','drug_code','indication_code','effects','prgnancies','pregnancy_stages','prganancy_safties'));
+        //
     }
 
     /**
@@ -87,6 +80,8 @@ class DrugPregnancyController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $drug_pregnancy = DrugPregnancy::findOrFail($id);
+        $drug_pregnancy->delete();
+        return redirect()->back()->with('success','Pregnancy Deleted Successfully');
     }
 }

@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('dose_messages', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('note_dose_id')->unsigned();
-            $table->foreign('note_dose_id')->references('id')->on('note_doses')->onUpdate('cascade');
+            $table->foreign('note_dose_id')->references('id')->on('note_doses')->onUpdate('cascade')->onDelete('cascade');
             $table->text('recommended_dosage');
             $table->text('dosage_note');
             $table->text('titration_note');
