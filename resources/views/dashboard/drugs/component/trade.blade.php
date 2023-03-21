@@ -108,14 +108,14 @@
                         <button class="btn bg-gradient-info mb-0" type="submit"><i class="fas fa-edit"></i></button>
                     </div>
                 </div>
+        </form>
+        <div class="col">
+            <form action="{{route('trades.destroy',$trade->id)}}" method="POST">
+                @csrf
+                @method('DELETE')
+                <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
             </form>
-            <div class="col">
-                <form action="{{route('trades.destroy',$trade->id)}}" method="POST">
-                    @csrf
-                    @method('DELETE')
-                    <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
-                </form>
-            </div>
+        </div>
     </div>
     <br>
     @endforeach

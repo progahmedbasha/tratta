@@ -16,7 +16,7 @@ class NoteDoseVariable extends Model
     
     public function age()
     {
-        return $this->belongsTo(age::class,'variableable_id');
+        return $this->belongsTo(Age::class,'variableable_id');
     }
     public function weight()
     {

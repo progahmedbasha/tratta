@@ -125,7 +125,7 @@ class NoteDoseController extends Controller
     public function add_row(Request $request)
     {
         // return $request;
-        $number = $request->number+1;
+        $number = $request->number;
          $effects = Effect::get();
         $html = view('dashboard.doses.variable-component.row', compact('effects','number'))->render();
         return response()->json(['status' => true, 'result' => $html]);

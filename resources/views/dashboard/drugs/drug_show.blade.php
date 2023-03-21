@@ -49,7 +49,7 @@
                      {{-- treade name card --}}
                      @include('dashboard.drugs.component.trade')
                      {{-- Moa card --}}
-                     @include('dashboard.drugs.component.drug-moa')
+                     {{-- @include('dashboard.drugs.component.drug-moa') --}}
                   </div>
                </div>
             </div>

@@ -74,7 +74,7 @@
             <div class="col-2">
                 <input type="text" class="form-control" value="{{ $var->drug->name }}" disabled />
             </div>
-        </div>
+        </div><br><br>
         @endif
 
         @endforeach

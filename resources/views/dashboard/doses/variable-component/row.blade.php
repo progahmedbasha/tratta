@@ -1,10 +1,11 @@
 @if($effects->count() > 0 )
 <br>
-<div class="row">
+<div class="row" id="row{{ $number }}">
     <div class="col-md-3">
     </div>
     <div class="col-md-3">
-        <select class="form-control variable_row{{ $number }}" name="variable[]" required />
+        <select class="form-control" id="variables{{ $number }}" onchange="selectVariable({{ $number }})"
+            name="variable[]" required />
         <option value="">Select Varirables</option>
         <option value="ages">Ages</option>
         <option value="weights">Weights</option>
@@ -18,50 +19,28 @@
         @enderror
     </div>
     <div class="col-md-3">
-        <select class="form-control variable_data_row{{ $number }}" name="object_id[]" required />
+        <select class="form-control" id="variable_data{{ $number }}" name="object_id[]" required />
         <option value="">Select object</option>
         </select>
     </div>
     <div class="col-1">
-        <div class="input-group-append">
-            <button class="btn bg-gradient-dark mb-0 " id="button_add_row" onclick="commentFunction({{ $number }})"
-                type="button"><i class="fas fa-plus"></i></button>
+        <div class="input-group-append input_test{{ $number }}">
+            <div id="block_show{{ $number }}" style="display: block;">
+                <button class="btn bg-gradient-danger mb-0 " id="button_add_row{{ $number }}"
+                    onclick="deleteFunction({{ $number }})" type="button"><i class="fas fa-trash"></i></button>
+            </div>
         </div>
     </div>
+
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-    ////////////////////for fetch variables////////////
-    $(document).ready(function () {
-          $('.variable_row'+{{ $number }}).on('change', function () {
-              var variable = $('.variable_row'+{{ $number }} ).val();
-              $.ajax({
-                  url: "{{route('fetch_variables')}}",
-                  type: "POST",
-                  data: {
-                      variable: variable,
-                      _token: '{{csrf_token()}}'
-                  },
-                 success:function(response){
-					      $('.variable_data_row'+{{ $number }} ).html(response.result);
-                  },
-              });
-          });
-      });
-      ////////////////////for fetch variables////////////
-      ////////////////////for add row////////////
-         function commentFunction(number) {
-                 $.ajax({
-                     url: "{{route('add_row')}}",
-                     type: "POST",
-                     data: {
-                         number:number,
-                         _token: '{{csrf_token()}}'
-                     },
-                  success:function(response){
-					      $('#duplicate').append(response.result);
-                  },
-                 });
-        }
-        ////////////////////for add row////////////
+    ////////////////////delete row////////////
+         function deleteFunction(number) {
+                var x = document.getElementById('row'+number);
+                console.log(x);
+                x.remove();
+            }
+    ////////////////////delete row////////////
+</script>
 @endif
