@@ -35,6 +35,7 @@ use App\Http\Controllers\Dashboard\NoteDoseController;
 use App\Http\Controllers\Dashboard\DrugPregnancyController;
 use App\Http\Controllers\Dashboard\DrugTradeController;
 use App\Http\Controllers\Dashboard\DrugMoaController;
+use App\Http\Controllers\Dashboard\HxDrugController;
 
 /*
 |--------------------------------------------------------------------------
@@ -135,6 +136,9 @@ Route::middleware('auth')->group(function () {
     Route::resource('trades', DrugTradeController::class);
     /********************** drug MOA *************************/
     Route::resource('moa_drugs', DrugMoaController::class);
+    /********************** drug MOA *************************/
+    Route::resource('hx_drugs', HxDrugController::class);
+    
     
     
     });
