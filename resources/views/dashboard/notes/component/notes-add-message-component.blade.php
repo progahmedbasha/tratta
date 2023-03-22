@@ -7,7 +7,7 @@
         @enderror
     </div>
     <div class="col-2">
-        <input type="number" step="any" class="form-control" placeholder="Priority" value="{{old('priority')}}" name="priority" required>
+        <input type="number" min="1" step="any" class="form-control" placeholder="Priority" value="{{old('priority')}}" name="priority" required>
         @error('priority')
         <div class="alert alert-danger">{{ $message }}</div>
         @enderror

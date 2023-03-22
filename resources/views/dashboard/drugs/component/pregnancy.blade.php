@@ -1,4 +1,16 @@
-{{-- formula card  --}}
+{{-- pregnancy card  --}}
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+    $('.js-example-basic-multiple').select2();
+});
+</script>
+
 <div class="card">
     <div class="card-header pb-0 p-3">
         <div class="row">
@@ -30,7 +42,8 @@
                     @enderror
                 </div>
                 <div class="col-md-4">
-                    <select class="form-control" name="pregnancy_stage_id" required />
+                    <select class="js-example-basic-multiple form-control" multiple="multiple"
+                        name="pregnancy_stage_id[]" required />
                     <option value="">Select Stage</option>
                     @foreach ($pregnancy_stages as $pregnancy_stage)
                     <option value="{{$pregnancy_stage->id}}" {{(old($pregnancy_stage->
@@ -101,21 +114,6 @@
                     <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
                 </div>
-                <div class="col-md-4">
-                    <select class="form-control" name="pregnancy_stage_id" required />
-                    <option value="">Select Stage</option>
-                    @foreach ($pregnancy_stages as $pregnancy_stage)
-                    <option value="{{$pregnancy_stage->id}}" {{($prgnancy->
-                        pregnancy_stage_id==$pregnancy_stage->id)?
-                        'selected':''}}>
-                        {{$pregnancy_stage->pregnancy_stage}}
-                    </option>
-                    @endforeach
-                    </select>
-                    @error('effect_id')
-                    <div class="alert alert-danger">{{ $message }}</div>
-                    @enderror
-                </div>
                 <div class="col-md-3">
                     <select class="form-control" name="pregnancy_safety_id" required />
                     <option value="">Select Category</option>
@@ -133,6 +131,16 @@
                 </div>
 
             </div>
+            <br>
+            <label>Stages :</label>
+            @foreach ($prgnancy->drugPregnancyStage as $stage)
+            <div class="row">
+                <div class="col-md-4">
+                    <input type="text" class="form-control" value="{{ $stage->pregnancyStage->pregnancy_stage }}"
+                        disabled />
+                </div>
+            </div><br>
+            @endforeach
             <br>
             <div class="row">
                 <div class="col-md-8">

@@ -1,5 +1,5 @@
 @if($effects->count() > 0 )
-<br>
+<br id="br{{ $number }}">
 <div class="row" id="row{{ $number }}">
     <div class="col-md-3">
     </div>
@@ -19,7 +19,7 @@
         @enderror
     </div>
     <div class="col-md-3">
-        <select class="form-control" id="variable_data{{ $number }}" name="object_id[]" required />
+        <select class="js-example-basic-multiple form-control" multiple="multiple" id="variable_data{{ $number }}" required />
         <option value="">Select object</option>
         </select>
     </div>
@@ -33,14 +33,18 @@
     </div>
 
 </div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
     ////////////////////delete row////////////
          function deleteFunction(number) {
-                var x = document.getElementById('row'+number);
-                console.log(x);
-                x.remove();
+                var row = document.getElementById('row'+number);
+                var br = document.getElementById('br'+number);
+                row.remove();
+                br.remove();
             }
     ////////////////////delete row////////////
+    $(document).ready(function() {
+    $('.js-example-basic-multiple').select2();
+});
+
 </script>
 @endif

@@ -1,7 +1,3 @@
-{{-- <form>
-    <input type="hidden" name="dose_type_id" value="1"/>
-    @include('dashboard.doses.dose-content')
-</form> --}}
 @extends('dashboard.layouts.master')
 @section('content')
 @if(Session::has('success'))

@@ -12,4 +12,8 @@ class DrugPregnancy extends Model
     {
         return $this->belongsTo(Effect::class);
     }
+    public function drugPregnancyStage()
+    {
+        return $this->hasMany(DrugPregnancyStage::class);
+    }
 }

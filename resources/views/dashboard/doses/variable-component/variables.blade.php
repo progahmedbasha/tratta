@@ -1,24 +1,19 @@
-8 lines (8 sloc)  242 Bytes
-
 @if($variables->count() > 0 )
-<select  class="form-control" name="{{ $var_name }}">
-<option value="" >Select {{ $var_name }}</option>
-@foreach ($variables  as $variable)
+@foreach ($variables as $variable)
 <option value="{{ $variable->id }}">
-@if ($var_name == "ages")
+    @if ($var_name == "ages")
     {{ $variable->name}}
-@elseif ($var_name == "weights")
-{{ $variable->weight}}
-@elseif ($var_name == "genders")
-{{ $variable->name}}
-@elseif ($var_name == "pregnancy_stages")
-{{ $variable->pregnancy_stage}}
-@elseif ($var_name == "illness")
-{{ $variable->name}}
-@elseif ($var_name == "drugs")
-{{ $variable->name}}
-@endif
+    @elseif ($var_name == "weights")
+    {{ $variable->weight}}
+    @elseif ($var_name == "genders")
+    {{ $variable->name}}
+    @elseif ($var_name == "pregnancy_stages")
+    {{ $variable->pregnancy_stage}}
+    @elseif ($var_name == "illness")
+    {{ $variable->name}}
+    @elseif ($var_name == "drugs")
+    {{ $variable->name}}
+    @endif
 </option>
 @endforeach
-</select>	
 @endif

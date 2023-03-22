@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Drug;
 use App\Models\DrugIndication;
 use App\Models\DrugPregnancy;
+use App\Models\DrugPregnancyStage;
 use App\Models\Effect;
 use App\Models\NursingSafetyCategory;
 use App\Models\PregnancyStage;
@@ -34,13 +35,21 @@ class DrugPregnancyController extends Controller
      */
     public function store(Request $request)
     {
+        // return $request;
         $drug_pregnancy = new DrugPregnancy;
         $drug_pregnancy->drug_id = $request->drug_id;
         $drug_pregnancy->effect_id = $request->effect_id;
-        $drug_pregnancy->pregnancy_stage_id = $request->pregnancy_stage_id;
+        // $drug_pregnancy->pregnancy_stage_id = $request->pregnancy_stage_id;
         $drug_pregnancy->pregnancy_safety_id = $request->pregnancy_safety_id;
         $drug_pregnancy->note = $request->note;
         $drug_pregnancy->save();
+        $countItems = count($request->pregnancy_stage_id);
+        for ($i = 0; $i < $countItems; $i++) {
+                $stage = new DrugPregnancyStage;
+                $stage->drug_pregnancy_id = $drug_pregnancy->id;
+                $stage->pregnancy_stage_id = $request->pregnancy_stage_id[$i];
+                $stage->save();
+             }
         return redirect()->back()->with('success','Pregnancy Added Successfully');
     }
 
@@ -68,7 +77,6 @@ class DrugPregnancyController extends Controller
         $drug_pregnancy = DrugPregnancy::findOrFail($id);
         $drug_pregnancy->drug_id = $request->drug_id;
         $drug_pregnancy->effect_id = $request->effect_id;
-        $drug_pregnancy->pregnancy_stage_id = $request->pregnancy_stage_id;
         $drug_pregnancy->pregnancy_safety_id = $request->pregnancy_safety_id;
         $drug_pregnancy->note = $request->note;
         $drug_pregnancy->save();

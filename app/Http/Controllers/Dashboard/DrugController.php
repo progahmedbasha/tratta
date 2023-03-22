@@ -79,7 +79,7 @@ class DrugController extends Controller
         
         $variables = Variable::where('drug_id', $drug->id)->get();
         $effects = Effect::get();
-        $prgnancies = DrugPregnancy::where('drug_id', $drug->id)->get();
+        $prgnancies = DrugPregnancy::where('drug_id', $drug->id)->with('drugPregnancyStage')->get();
         $pregnancy_stages = PregnancyStage::get();
         $prganancy_safties = NursingSafetyCategory::get();
         $countries = Country::get();

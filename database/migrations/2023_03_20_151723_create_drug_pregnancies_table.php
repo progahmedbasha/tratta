@@ -17,8 +17,6 @@ return new class extends Migration
             $table->foreign('drug_id')->references('id')->on('drugs')->onUpdate('cascade');
             $table->unsignedInteger('effect_id')->unsigned();
             $table->foreign('effect_id')->references('id')->on('effects')->onUpdate('cascade');
-            $table->unsignedInteger('pregnancy_stage_id')->unsigned();
-            $table->foreign('pregnancy_stage_id')->references('id')->on('pregnancy_stages')->onUpdate('cascade');
             $table->unsignedInteger('pregnancy_safety_id')->unsigned();
             $table->foreign('pregnancy_safety_id')->references('id')->on('pregnancy_safeties')->onUpdate('cascade');
             $table->text('note');

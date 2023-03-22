@@ -125,6 +125,7 @@ Route::middleware('auth')->group(function () {
     Route::get('notes_and_create/{id}', [NotesAndController::class, 'create'])->name('notes_and_create');
     /********************** fetch variables *************************/
     Route::resource('note_doses', NoteDoseController::class);
+    Route::post('variable_dose_delete/{id}', [NoteDoseController::class, 'varDelete'])->name('variable_dose_delete');
     Route::post('fetch_variables', [NoteDoseController::class, 'fetch'])->name('fetch_variables');
     Route::post('add_row', [NoteDoseController::class, 'add_row'])->name('add_row');
     

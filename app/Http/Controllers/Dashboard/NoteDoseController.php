@@ -11,6 +11,7 @@ use App\Models\Effect;
 use App\Models\Gender;
 use App\Models\IllnessSub;
 use App\Models\NoteDose;
+use App\Models\NoteDoseVariable;
 use App\Models\PregnancyStage;
 use App\Models\Variable;
 use App\Models\Weight;
@@ -48,7 +49,7 @@ class NoteDoseController extends Controller
     }
     public function store(Request $request)
     {
-        // return $request;
+        //  return $request;
         $note_dose = new NoteDose;
         $note_dose->variable_id = $request->variable_id;
         $note_dose->effect_id = $request->effect_id;
@@ -62,47 +63,24 @@ class NoteDoseController extends Controller
         $dos_message->dosage_note = $request->dosage_note;
         $dos_message->titration_note = $request->titration_note;
         $dos_message->save();
-        $countItems = count($request->object_id);
+        $countItems = count($request->variable);
             for ($i = 0; $i < $countItems; $i++) {
-                // save age
+            $var = '';
                 if($request->variable[$i] =="ages"){
-                    $var = Age::where('id', $request->object_id[$i])->first();
-                    $variable = $var->variableDoses()->create([
-                        'note_dose_id' => $note_dose->id,
-                    ]);
+                    $var = Age::whereIn('id', $request->object_id[$request->variable[$i]])->get();
+                }else if($request->variable[$i] =="weights"){
+                    $var = Weight::whereIn('id', $request->object_id[$request->variable[$i]])->get();
+                }else if($request->variable[$i] =="genders"){
+                    $var = Gender::whereIn('id', $request->object_id[$request->variable[$i]])->get();
+                }else if($request->variable[$i] =="pregnancy_stages"){
+                    $var = PregnancyStage::whereIn('id', $request->object_id[$request->variable[$i]])->get();
+                }else if($request->variable[$i] =="illness"){
+                    $var = IllnessSub::whereIn('id', $request->object_id[$request->variable[$i]])->get();
+                }else if($request->variable[$i] =="drugs"){
+                    $var = Drug::whereIn('id', $request->object_id[$request->variable[$i]])->get();
                 }
-                // save weight
-                if($request->variable[$i] =="weights"){
-                    $var = Weight::where('id', $request->object_id[$i])->first();
-                    $variable = $var->variableDoses()->create([
-                        'note_dose_id' => $note_dose->id,
-                    ]);
-                }
-                // save gender
-                if($request->variable[$i] =="genders"){
-                    $var = Gender::where('id', $request->object_id[$i])->first();
-                    $variable = $var->variableDoses()->create([
-                        'note_dose_id' => $note_dose->id,
-                    ]);
-                }
-                // save pregnancy stage
-                if($request->variable[$i] =="pregnancy_stages"){
-                    $var = PregnancyStage::where('id', $request->object_id[$i])->first();
-                    $variable = $var->variableDoses()->create([
-                        'note_dose_id' => $note_dose->id,
-                    ]);
-                }
-                // save illnes subs
-                if($request->variable[$i] =="illness"){
-                    $var = IllnessSub::where('id', $request->object_id[$i])->first();
-                    $variable = $var->variableDoses()->create([
-                        'note_dose_id' => $note_dose->id,
-                    ]);
-                }
-                // save drug
-                if($request->variable[$i] =="drugs"){
-                    $var = Drug::where('id', $request->object_id[$i])->first();
-                    $variable = $var->variableDoses()->create([
+                foreach($var as $variable ){
+                 $variable->variableDoses()->create([
                         'note_dose_id' => $note_dose->id,
                     ]);
                 }
@@ -136,7 +114,12 @@ class NoteDoseController extends Controller
         $dose->doseMessage()->delete();
         $dose->noteDoseVariables()->delete();
         $dose->delete();
-        return redirect()->back()->with('success','Fixed Dose Deleted Successfully');
+        return redirect()->back()->with('success','Deleted Successfully');
     }
-
+    public function varDelete($id)
+    {
+        $var_dose = NoteDoseVariable::findOrFail($id);
+        $var_dose->delete();
+        return redirect()->back()->with('success','Deleted Successfully');
+    }
 }
