@@ -8,8 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class InteractionSeverity extends Model
 {
     use HasFactory;
-    public function Color()
-    {
-        return $this->belongsTo(Color::class);
-    }
+    // public function Color()
+    // {
+    //     return $this->belongsTo(Color::class);
+    // }
 }
