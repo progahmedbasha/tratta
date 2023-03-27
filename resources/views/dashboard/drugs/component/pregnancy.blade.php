@@ -44,7 +44,7 @@
                 <div class="col-md-4">
                     <select class="js-example-basic-multiple form-control" multiple="multiple"
                         name="pregnancy_stage_id[]" required />
-                    <option value="">Select Stage</option>
+                    <option value="" disabled>Select Stage</option>
                     @foreach ($pregnancy_stages as $pregnancy_stage)
                     <option value="{{$pregnancy_stage->id}}" {{(old($pregnancy_stage->
                         id)==$pregnancy_stage->id)?

@@ -1,7 +1,7 @@
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.slim.min.js"></script>
 
 <div class="col-md-3">
-    <select class="form-control" id="variables0" onchange="selectVariable(0)" name="variable[]" required />
+    <select class="form-control" id="variables20" onchange="selectVariable2(0)" name="variable2[]" required />
     <option value="">Select Varirables</option>
     <option value="ages">Ages</option>
     <option value="weights">Weights</option>
@@ -15,23 +15,23 @@
     @enderror
 </div>
 <div class="col-md-3">
-    <select class="js-example-basic-multiple form-control" multiple="multiple" id="variable_data0" required />
+    <select class="js-example-basic-test form-control" multiple="multiple" id="variable_data20" required />
     </select>
 </div>
 <div class="col-1">
     <div class="input-group-append">
-        <button class="btn bg-gradient-dark mb-0 " onclick="addRow()" type="button"><i class="fas fa-plus"></i></button>
+        <button class="btn bg-gradient-dark mb-0 " onclick="addRow2()" type="button"><i class="fas fa-plus"></i></button>
     </div>
 </div>
-</div>
-<div id="duplicate"></div>
+{{-- </div> --}}
+<div id="duplicate2"></div>
 <br><br>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
     ////////////////////for fetch variables////////////
-	   function selectVariable(number) {
-              var variable = document.getElementById('variables'+number).value;
+	   function selectVariable2(number) {
+              var variable = document.getElementById('variables2'+number).value;
               console.log(variable);
               $.ajax({
                   url: "{{route('fetch_variables')}}",
@@ -41,9 +41,9 @@
                       _token: '{{csrf_token()}}'
                   },
                  success:function(response){
-					     document.getElementById('variable_data'+number).innerHTML = (response.result);
-                         var name = 'object_id['+variable+'][]'
-                         document.getElementById('variable_data'+number).name = name;
+					     document.getElementById('variable_data2'+number).innerHTML = (response.result);
+                         var name = 'object_id2['+variable+'][]'
+                         document.getElementById('variable_data2'+number).name = name;
                   },
               });
       }
@@ -51,17 +51,17 @@
 
     ////////////////////add row////////////
     var currentRow = 0;
-	   function addRow() {
+	   function addRow2() {
         currentRow++;
                  $.ajax({
-                     url: "{{route('add_row')}}",
+                     url: "{{route('add_row_value2')}}",
                      type: "POST",
                      data: {
                          number:currentRow,
                          _token: '{{csrf_token()}}'
                      },
                   success:function(response){
-					      $('#duplicate').append(response.result);
+					      $('#duplicate2').append(response.result);
                   },
                  });
         }
@@ -74,6 +74,6 @@
 
 <script>
     $(document).ready(function() {
-    $('.js-example-basic-multiple').select2();
+   $('.js-example-basic-test').select2();
 });
 </script>

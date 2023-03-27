@@ -11,12 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('hx_drug_values', function (Blueprint $table) {
+        Schema::create('forbidden_case_values', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('drug_id')->unsigned();
-            $table->foreign('drug_id')->references('id')->on('drugs')->onUpdate('cascade');
-            $table->unsignedInteger('hx_drug_id')->unsigned();
-            $table->foreign('hx_drug_id')->references('id')->on('hx_drugs')->onUpdate('cascade')->onDelete('cascade');
+              $table->unsignedInteger('forbidden_case_id')->unsigned();
+            $table->foreign('forbidden_case_id')->references('id')->on('forbidden_cases')->onUpdate('cascade')->onDelete('cascade');
+            $table->morphs('variableable');
             $table->string('value',50);
             $table->timestamp('created_at')->default(\DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(\DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
@@ -28,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('hx_drug_values');
+        Schema::dropIfExists('forbidden_case_values');
     }
 };

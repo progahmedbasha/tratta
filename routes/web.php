@@ -36,6 +36,7 @@ use App\Http\Controllers\Dashboard\DrugPregnancyController;
 use App\Http\Controllers\Dashboard\DrugTradeController;
 use App\Http\Controllers\Dashboard\DrugMoaController;
 use App\Http\Controllers\Dashboard\HxDrugController;
+use App\Http\Controllers\Dashboard\ForbiddenCaseController;
 
 /*
 |--------------------------------------------------------------------------
@@ -136,9 +137,11 @@ Route::middleware('auth')->group(function () {
     Route::resource('trades', DrugTradeController::class);
     /********************** drug MOA *************************/
     Route::resource('moa_drugs', DrugMoaController::class);
-    /********************** drug MOA *************************/
+    /********************** hx drugs *************************/
     Route::resource('hx_drugs', HxDrugController::class);
-    
+    /********************** hx drugs *************************/
+    Route::resource('forbidden_cases', ForbiddenCaseController::class);
+    Route::post('add_row_value2', [ForbiddenCaseController::class, 'add_row_value2'])->name('add_row_value2');
     
     
     });
