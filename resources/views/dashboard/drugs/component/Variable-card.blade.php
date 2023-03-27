@@ -37,7 +37,7 @@
                 </div>
                 <div class="col-2">
                     <div class="input-group-append">
-                        <button class="btn bg-gradient-dark mb-0" type="submit"><i class="fas fa-save"></i></button>
+                        <x-dashboard.add-button type="submit"></x-dashboard.add-button>
                     </div>
                 </div>
             </div>
@@ -46,15 +46,6 @@
     <div class="card-body p-3">
         <div class="col">
             <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th scope="col">Drug</th>
-                        <th scope="col">code</th>
-                        <th scope="col"><i style="font-size:24px" class="fa">&#xf013;</i>
-                            Action
-                        </th>
-                    </tr>
-                </thead>
                 <tbody>
                     @foreach ($variables as $variable)
                     <tr>
@@ -71,22 +62,29 @@
                                 <form action="{{route('variables.destroy',$variable->id)}}" method="POST">
                                     @csrf
                                     @method('DELETE')
-                                    <a class="btn bg-gradient-info mb-0"
-                                        href="{{ route('variables.show', ['variable'=>$variable->id]) }}"><i
-                                            class="fas fa-edit"></i></a>
-                                    <button class="btn btn-danger" style="margin-bottom: 0rem;"><i
-                                            class="fa fa-trash"></i></button>
-                                    <a class="btn bg-gradient-dark mb-0"
-                                        href="{{ route('fixed_doses_create', $variable->id) }}">Fixed
-                                        Dose</a>
-                                    <a class="btn bg-gradient-dark mb-0"
-                                        href="{{ route('dose_or_create', $variable->id) }}">Dose Or</a>
-                                    <a class="btn bg-gradient-dark mb-0"
-                                        href="{{ route('dose_and_create', $variable->id) }}">Dose And</a>
-                                    <a class="btn bg-gradient-dark mb-0"
-                                        href="{{ route('notes_or_create', $variable->id) }}">Notes Or</a>
-                                    <a class="btn bg-gradient-dark mb-0"
-                                        href="{{ route('notes_and_create', $variable->id) }}">Notes And</a>
+                                    <a class="btn btn-link"
+                                        href="{{ route('variables.show', ['variable'=>$variable->id]) }}"><img src='{{ url('data/edit.svg') }}'/></a>
+                                    <x-dashboard.delete-button></x-dashboard.delete-button>
+
+                                    <a href="{{ route('fixed_doses_create', $variable->id) }}" class="btn bg-gradient-info mb-0" style="box-sizing: border-box;width: 91px;height: 51px;background: #FFFFFF;font-family: 'Ink Free';font-style: normal;color:#5E5E5E;
+                                        font-weight: 400;display:inline;font-size: 16px;border:aliceblue;box-shadow: 0px 100px 80px rgba(0, 0, 0, 0.02), 0px 64.8148px 46.8519px rgba(0, 0, 0, 0.0151852), 0px 38.5185px 25.4815px rgba(0, 0, 0, 0.0121481), 0px 20px 13px rgba(0, 0, 0, 0.01), 0px 8.14815px 6.51852px rgba(0, 0, 0, 0.00785185), 0px 1.85185px 3.14815px rgba(0, 0, 0, 0.00481481);
+                                        border-radius: 28px;">Fixed Dose</a>
+
+                                    <a href="{{ route('dose_or_create', $variable->id) }}" class="btn bg-gradient-info mb-0" style="box-sizing: border-box;width: 91px;height: 51px;background: #FFFFFF;font-family: 'Ink Free';font-style: normal;color:#5E5E5E;
+                                        font-weight: 400;display:inline;font-size: 16px;border:aliceblue;box-shadow: 0px 100px 80px rgba(0, 0, 0, 0.02), 0px 64.8148px 46.8519px rgba(0, 0, 0, 0.0151852), 0px 38.5185px 25.4815px rgba(0, 0, 0, 0.0121481), 0px 20px 13px rgba(0, 0, 0, 0.01), 0px 8.14815px 6.51852px rgba(0, 0, 0, 0.00785185), 0px 1.85185px 3.14815px rgba(0, 0, 0, 0.00481481);
+                                        border-radius: 28px;">Dose Or</a>
+
+                                    <a href="{{ route('dose_and_create', $variable->id) }}" class="btn bg-gradient-info mb-0" style="box-sizing: border-box;width: 91px;height: 51px;background: #FFFFFF;font-family: 'Ink Free';font-style: normal;color:#5E5E5E;
+                                        font-weight: 400;display:inline;font-size: 16px;border:aliceblue;box-shadow: 0px 100px 80px rgba(0, 0, 0, 0.02), 0px 64.8148px 46.8519px rgba(0, 0, 0, 0.0151852), 0px 38.5185px 25.4815px rgba(0, 0, 0, 0.0121481), 0px 20px 13px rgba(0, 0, 0, 0.01), 0px 8.14815px 6.51852px rgba(0, 0, 0, 0.00785185), 0px 1.85185px 3.14815px rgba(0, 0, 0, 0.00481481);
+                                        border-radius: 28px;">Dose And</a>
+                               
+                                    <a href="{{ route('notes_or_create', $variable->id) }}" class="btn bg-gradient-info mb-0" style="box-sizing: border-box;width: 91px;height: 51px;background: #FFFFFF;font-family: 'Ink Free';font-style: normal;color:#5E5E5E;
+                                        font-weight: 400;display:inline;font-size: 16px;border:aliceblue;box-shadow: 0px 100px 80px rgba(0, 0, 0, 0.02), 0px 64.8148px 46.8519px rgba(0, 0, 0, 0.0151852), 0px 38.5185px 25.4815px rgba(0, 0, 0, 0.0121481), 0px 20px 13px rgba(0, 0, 0, 0.01), 0px 8.14815px 6.51852px rgba(0, 0, 0, 0.00785185), 0px 1.85185px 3.14815px rgba(0, 0, 0, 0.00481481);
+                                        border-radius: 28px;">Notes Or</a>
+                                    
+                                    <a href="{{ route('notes_and_create', $variable->id) }}" class="btn bg-gradient-info mb-0" style="box-sizing: border-box;width: 91px;height: 51px;background: #FFFFFF;font-family: 'Ink Free';font-style: normal;color:#5E5E5E;
+                                        font-weight: 400;display:inline;font-size: 16px;border:aliceblue;box-shadow: 0px 100px 80px rgba(0, 0, 0, 0.02), 0px 64.8148px 46.8519px rgba(0, 0, 0, 0.0151852), 0px 38.5185px 25.4815px rgba(0, 0, 0, 0.0121481), 0px 20px 13px rgba(0, 0, 0, 0.01), 0px 8.14815px 6.51852px rgba(0, 0, 0, 0.00785185), 0px 1.85185px 3.14815px rgba(0, 0, 0, 0.00481481);
+                                        border-radius: 28px;">Notes And</a>
                                 </form>
                             </div>
                         </td>

@@ -26,8 +26,10 @@
     <div class="col-1">
         <div class="input-group-append input_test{{ $number }}">
             <div id="block_show{{ $number }}" style="display: block;">
-                <button class="btn bg-gradient-danger mb-0 " id="button_add_row{{ $number }}"
-                    onclick="deleteFunction({{ $number }})" type="button"><i class="fas fa-trash"></i></button>
+                {{-- <button class="btn bg-gradient-danger mb-0 " id="button_add_row{{ $number }}"
+                    onclick="deleteFunction({{ $number }})" type="button"><i class="fas fa-trash"></i></button> --}}
+                    <x-dashboard.delete-ajax id="button_add_row{{ $number }}"
+                    onclick="deleteFunction({{ $number }})"></x-dashboard.delete-ajax>
             </div>
         </div>
     </div>

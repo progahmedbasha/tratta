@@ -50,10 +50,10 @@
                     <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
                 </div>
-                <div class="col-md-2"></div>
+                <div class="col-md-1"></div>
                 <div class="col-1">
                     <div class="input-group-append">
-                        <button class="btn bg-gradient-dark mb-0" type="submit"><i class="fas fa-save"></i></button>
+                        <x-dashboard.save-button></x-dashboard.save-button>
                     </div>
                 </div>
             </div>
@@ -105,7 +105,7 @@
                 <div class="col-1"></div>
                 <div class="col-md-1">
                     <div class="input-group-append">
-                        <button class="btn bg-gradient-info mb-0" type="submit"><i class="fas fa-edit"></i></button>
+                        <x-dashboard.edit-button></x-dashboard.edit-button>
                     </div>
                 </div>
         </form>
@@ -113,7 +113,7 @@
             <form action="{{route('trades.destroy',$trade->id)}}" method="POST">
                 @csrf
                 @method('DELETE')
-                <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                <x-dashboard.delete-button></x-dashboard.delete-button>
             </form>
         </div>
     </div>

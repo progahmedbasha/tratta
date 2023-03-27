@@ -20,7 +20,8 @@
 </div>
 <div class="col-1">
     <div class="input-group-append">
-        <button class="btn bg-gradient-dark mb-0 " onclick="addRow2()" type="button"><i class="fas fa-plus"></i></button>
+        {{-- <button class="btn bg-gradient-dark mb-0 " onclick="addRow2()" type="button"><i class="fas fa-plus"></i></button> --}}
+        <x-dashboard.add-button onclick="addRow2()"></x-dashboard.add-button>
     </div>
 </div>
 {{-- </div> --}}

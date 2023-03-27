@@ -61,8 +61,7 @@
                                     </div>
                                     <div class="col-1">
                                         <div class="input-group-append">
-                                            <button class="btn bg-gradient-dark mb-0" type="submit"><i
-                                                    class="fas fa-plus"></i></button>
+                                            <x-dashboard.add-button type="submit"></x-dashboard.add-button>
                                         </div>
                                     </div>
                                 </div>
@@ -118,8 +117,7 @@
                                     </div>
                                     <div class="col-1">
                                         <div class="input-group-append">
-                                            <button class="btn bg-gradient-info mb-0" type="submit"><i
-                                                    class="fas fa-edit"></i></button>
+                                            <x-dashboard.edit-button></x-dashboard.edit-button>
                                         </div>
                                     </div>
                                 </div>

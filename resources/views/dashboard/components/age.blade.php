@@ -26,8 +26,8 @@
                                         @enderror
                                     </div>
                                     <div class="col">
-                                        <input type="number" step="any" class="form-control" placeholder="From" name="from"
-                                            value="{{old('from')}}" required />
+                                        <input type="number" step="any" class="form-control" placeholder="From"
+                                            name="from" value="{{old('from')}}" required />
                                         @error('from')
                                         <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
@@ -41,8 +41,7 @@
                                     </div>
                                     <div class="col-1">
                                         <div class="input-group-append">
-                                            <button class="btn bg-gradient-dark mb-0" type="submit"><i
-                                                    class="fas fa-plus"></i></button>
+                                            <x-dashboard.add-button type="submit"></x-dashboard.add-button>
                                         </div>
                                     </div>
                                 </div>
@@ -70,16 +69,15 @@
                                         @enderror
                                     </div>
                                     <div class="col">
-                                        <input type="number" step="any" class="form-control" placeholder="To" value="{{$age->to}}"
-                                            name="to" required />
+                                        <input type="number" step="any" class="form-control" placeholder="To"
+                                            value="{{$age->to}}" name="to" required />
                                         @error('to')
                                         <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
                                     </div>
                                     <div class="col-1">
                                         <div class="input-group-append">
-                                            <button class="btn bg-gradient-info mb-0" type="submit"><i
-                                                    class="fas fa-edit"></i></button>
+                                            <x-dashboard.edit-button></x-dashboard.edit-button>
                                         </div>
                                     </div>
                                 </div>

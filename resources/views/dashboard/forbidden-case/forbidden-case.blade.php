@@ -40,7 +40,8 @@
                     </div>
                     <div class="col-1">
                         <div class="input-group-append">
-                            <button class="btn bg-gradient-dark mb-0" type="submit"><i class="fas fa-save"></i></button>
+                            {{-- <button class="btn bg-gradient-dark mb-0" type="submit"><i class="fas fa-save"></i></button> --}}
+                            <x-dashboard.save-button></x-dashboard.save-button>
                         </div>
                     </div>
                 </div>
@@ -50,7 +51,8 @@
     <hr class="horizontal dark mt-0">
     @foreach ($forbidden_cases as $forbidden_case )
     <div class="card-body p-3">
-        <form action="{{route('forbidden_cases.update', $forbidden_case->id)}}" method="post" enctype="multipart/form-data">
+        <form action="{{route('forbidden_cases.update', $forbidden_case->id)}}" method="post"
+            enctype="multipart/form-data">
             @csrf
             @method('patch')
             <div class="row">
@@ -75,13 +77,14 @@
                             <input type="text" class="form-control" value="{{ $values->gender->name }}" disabled /><br>
                         </div>
                     </div>
-                     @elseif ($values->value == "1" && $values->variableable_type == 'App\Models\Weight')
+                    @elseif ($values->value == "1" && $values->variableable_type == 'App\Models\Weight')
                     <div class="row">
                         <div class="col">
                             <input type="text" class="form-control" value="Weight" disabled /><br>
                         </div>
                         <div class="col">
-                            <input type="text" class="form-control" value="{{ $values->weight->weight }}" disabled /><br>
+                            <input type="text" class="form-control" value="{{ $values->weight->weight }}"
+                                disabled /><br>
                         </div>
                     </div>
                     @elseif ($values->value == "1" && $values->variableable_type == 'App\Models\PregnancyStage')
@@ -90,7 +93,8 @@
                             <input type="text" class="form-control" value="Pregnancy Stage" disabled /><br>
                         </div>
                         <div class="col">
-                            <input type="text" class="form-control" value="{{ $values->pregnancyStage->pregnancy_stage }}" disabled /><br>
+                            <input type="text" class="form-control"
+                                value="{{ $values->pregnancyStage->pregnancy_stage }}" disabled /><br>
                         </div>
                     </div>
                     @elseif ($values->value == "1" && $values->variableable_type == 'App\Models\IllnessSub')
@@ -99,7 +103,8 @@
                             <input type="text" class="form-control" value="Illness Data" disabled /><br>
                         </div>
                         <div class="col">
-                            <input type="text" class="form-control" value="{{ $values->illnessSub->name }}" disabled /><br>
+                            <input type="text" class="form-control" value="{{ $values->illnessSub->name }}"
+                                disabled /><br>
                         </div>
                     </div>
                     @elseif ($values->value == "1" && $values->variableable_type == 'App\Models\Drug')
@@ -138,13 +143,14 @@
                             <input type="text" class="form-control" value="{{ $values->gender->name }}" disabled /><br>
                         </div>
                     </div>
-                     @elseif ($values->value == "2" && $values->variableable_type == 'App\Models\Weight')
+                    @elseif ($values->value == "2" && $values->variableable_type == 'App\Models\Weight')
                     <div class="row">
                         <div class="col">
                             <input type="text" class="form-control" value="Weight" disabled /><br>
                         </div>
                         <div class="col">
-                            <input type="text" class="form-control" value="{{ $values->weight->weight }}" disabled /><br>
+                            <input type="text" class="form-control" value="{{ $values->weight->weight }}"
+                                disabled /><br>
                         </div>
                     </div>
                     @elseif ($values->value == "2" && $values->variableable_type == 'App\Models\PregnancyStage')
@@ -153,7 +159,8 @@
                             <input type="text" class="form-control" value="Pregnancy Stage" disabled /><br>
                         </div>
                         <div class="col">
-                            <input type="text" class="form-control" value="{{ $values->pregnancyStage->pregnancy_stage }}" disabled /><br>
+                            <input type="text" class="form-control"
+                                value="{{ $values->pregnancyStage->pregnancy_stage }}" disabled /><br>
                         </div>
                     </div>
                     @elseif ($values->value == "2" && $values->variableable_type == 'App\Models\IllnessSub')
@@ -162,7 +169,8 @@
                             <input type="text" class="form-control" value="Illness Data" disabled /><br>
                         </div>
                         <div class="col">
-                            <input type="text" class="form-control" value="{{ $values->illnessSub->name }}" disabled /><br>
+                            <input type="text" class="form-control" value="{{ $values->illnessSub->name }}"
+                                disabled /><br>
                         </div>
                     </div>
                     @elseif ($values->value == "2" && $values->variableable_type == 'App\Models\Drug')
@@ -186,7 +194,7 @@
 
                 <div class="col-1">
                     <div class="input-group-append">
-                        <button class="btn bg-gradient-info mb-0" type="submit"><i class="fas fa-edit"></i></button>
+                        <x-dashboard.edit-button></x-dashboard.edit-button>
                     </div>
                 </div>
         </form>
@@ -195,7 +203,7 @@
             <form action="{{route('forbidden_cases.destroy',$forbidden_case->id)}}" method="POST">
                 @csrf
                 @method('DELETE')
-                <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                <x-dashboard.delete-button></x-dashboard.delete-button>
             </form>
         </div>
     </div>

@@ -1,0 +1,1 @@
+<x-dashboard.button {{ $attributes->merge() }} class="btn btn-link"><img src='{{ url('data/Delete.svg') }}'/></x-dashboard.button>
