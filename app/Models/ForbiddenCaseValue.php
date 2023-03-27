@@ -41,4 +41,8 @@ class ForbiddenCaseValue extends Model
     {
         return $this->belongsTo(Drug::class,'variableable_id');
     }
+    public function indication()
+    {
+        return $this->belongsTo(Indication::class,'variableable_id');
+    }
 }

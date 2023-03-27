@@ -141,6 +141,9 @@ Route::middleware('auth')->group(function () {
     Route::resource('hx_drugs', HxDrugController::class);
     /********************** hx drugs *************************/
     Route::resource('forbidden_cases', ForbiddenCaseController::class);
+    Route::post('forbidden_fetch_variables', [ForbiddenCaseController::class, 'fetch'])->name('forbidden_fetch_variables');
+    Route::post('forbidden_add_row', [ForbiddenCaseController::class, 'add_row'])->name('forbidden_add_row');
+    
     Route::post('add_row_value2', [ForbiddenCaseController::class, 'add_row_value2'])->name('add_row_value2');
     
     

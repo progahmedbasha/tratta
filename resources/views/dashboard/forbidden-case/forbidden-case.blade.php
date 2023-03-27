@@ -24,7 +24,7 @@
                 <div class="col-md-3">
                     <label>Value 1 :</label>
                 </div>
-                @include('dashboard.components.div_ajax_component.fetch-select-and-add-rows')
+                @include('dashboard.forbidden-case.div_ajax_component.fetch-select-and-add-rows')
                 {{-- </div> --}}
                 <br>
                 <div class="row">
@@ -116,6 +116,15 @@
                             <input type="text" class="form-control" value="{{ $values->drug->name }}" disabled /><br>
                         </div>
                     </div>
+                     @elseif ($values->value == "1" && $values->variableable_type == 'App\Models\Indication')
+                    <div class="row">
+                        <div class="col">
+                            <input type="text" class="form-control" value="Indication" disabled /><br>
+                        </div>
+                        <div class="col">
+                            <input type="text" class="form-control" value="{{ $values->indication->indication_title }}" disabled /><br>
+                        </div>
+                    </div>
                     @endif
                     @endforeach
                 </div>
@@ -180,6 +189,15 @@
                         </div>
                         <div class="col">
                             <input type="text" class="form-control" value="{{ $values->drug->name }}" disabled /><br>
+                        </div>
+                    </div>
+                    @elseif ($values->value == "2" && $values->variableable_type == 'App\Models\Indication')
+                    <div class="row">
+                        <div class="col">
+                            <input type="text" class="form-control" value="Indication" disabled /><br>
+                        </div>
+                        <div class="col">
+                            <input type="text" class="form-control" value="{{ $values->indication->indication_title }}" disabled /><br>
                         </div>
                     </div>
                     @endif

@@ -4,8 +4,8 @@
     <div class="col-md-3">
     </div>
     <div class="col-md-3">
-        <select class="form-control" id="variables2{{ $number }}" onchange="selectVariable2({{ $number }})"
-            name="variable2[]" required />
+        <select class="form-control" id="variables{{ $number }}" onchange="selectVariable({{ $number }})"
+            name="variable[]" required />
         <option value="">Select Varirables</option>
         <option value="ages">Ages</option>
         <option value="weights">Weights</option>
@@ -20,7 +20,7 @@
         @enderror
     </div>
     <div class="col-md-3">
-        <select class="js-example-basic-multiple form-control" multiple="multiple" id="variable_data2{{ $number }}" required />
+        <select class="js-example-basic-multiple form-control" multiple="multiple" id="variable_data{{ $number }}" required />
         <option value="">Select object</option>
         </select>
     </div>

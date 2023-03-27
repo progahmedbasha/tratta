@@ -28,20 +28,6 @@
             <input type="hidden" value="{{ $drug->id }}" name="drug_id">
             <div class="row">
                 <div class="col-md-4">
-                    <select class="form-control" name="effect_id" required />
-                    <option value="">Select Effect</option>
-                    @foreach ($effects as $effect)
-                    <option value="{{$effect->id}}" {{(old($effect->id)==$effect->id)?
-                        'selected':''}}>
-                        {{$effect->effect_type}}
-                    </option>
-                    @endforeach
-                    </select>
-                    @error('effect_id')
-                    <div class="alert alert-danger">{{ $message }}</div>
-                    @enderror
-                </div>
-                <div class="col-md-4">
                     <select class="js-example-basic-multiple form-control" multiple="multiple"
                         name="pregnancy_stage_id[]" required />
                     <option value="" disabled>Select Stage</option>
@@ -57,7 +43,7 @@
                     <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <select class="form-control" name="pregnancy_safety_id" required />
                     <option value="">Select Category</option>
                     @foreach ($prganancy_safties as $prganancy_safty)
@@ -68,7 +54,7 @@
                     </option>
                     @endforeach
                     </select>
-                    @error('effect_id')
+                    @error('pregnancy_safety_id')
                     <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
                 </div>
@@ -99,23 +85,8 @@
             @method('patch')
             <input type="hidden" value="{{ $drug->id }}" name="drug_id">
             <div class="row">
-                <div class="col-md-4">
-                    <select class="form-control" name="effect_id"
-                        style="background-color: {{ $prgnancy->effect->color }}" required />
-                    <option value="">Select Effect</option>
-                    @foreach ($effects as $effect)
-                    <option value="{{$effect->id}}" {{($prgnancy->effect_id==$effect->id)?
-                        'selected':''}}>
-                        {{$effect->effect_type}}
-                    </option>
-                    @endforeach
-                    </select>
-                    @error('effect_id')
-                    <div class="alert alert-danger">{{ $message }}</div>
-                    @enderror
-                </div>
-                <div class="col-md-3">
-                    <select class="form-control" name="pregnancy_safety_id" required />
+                <div class="col-md-2">
+                    <select class="form-control" name="pregnancy_safety_id" disabled />
                     <option value="">Select Category</option>
                     @foreach ($prganancy_safties as $prganancy_safty)
                     <option value="{{$prganancy_safty->id}}" {{($prgnancy->
@@ -129,7 +100,21 @@
                     <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
                 </div>
-
+                <div class="col-md-2">
+                    <select class="form-control" name="pregnancy_safety_id" disabled />
+                    <option value="">Select Category</option>
+                    @foreach ($prganancy_safties as $prganancy_safty)
+                    <option value="{{$prganancy_safty->id}}" {{($prgnancy->
+                        pregnancy_safety_id==$prganancy_safty->id)?
+                        'selected':''}}>
+                        {{$prganancy_safty->value}}
+                    </option>
+                    @endforeach
+                    </select>
+                    @error('effect_id')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+                </div>
             </div>
             <br>
             <label>Stages :</label>

@@ -82,7 +82,7 @@
 {{-- /***************** Pregnancy Safty Category  ***********/ --}}
 @include('dashboard.components.pregnancy_safties')
 {{-- /***************** Pregnancy Nursing Safty Category  ***********/ --}}
-@include('dashboard.components.nursing_safties_categories')
+{{-- @include('dashboard.components.nursing_safties_categories') --}}
 {{-- /***************** Drug formula  ***********/ --}}
 @include('dashboard.components.drug-formula')
 {{-- /***************** Effects  ***********/ --}}

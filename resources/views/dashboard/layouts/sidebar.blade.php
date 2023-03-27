@@ -137,8 +137,6 @@
             Stages</a>
           <a class="dropdown-item" style="margin-left: 31px;" href="{{ route('basic_data') }}#prgnancy_safty">Pregnancy
             Safty Category</a>
-          <a class="dropdown-item" style="margin-left: 31px;" href="{{ route('basic_data') }}#nursing_safty">Nusrsing
-            Safty Category</a>
           <a class="dropdown-item" style="margin-left: 31px;" href="{{ route('basic_data') }}#drug_formula">Drug
             Formula</a>
           <a class="dropdown-item" style="margin-left: 31px;" href="{{ route('basic_data') }}#effect">Effect</a>

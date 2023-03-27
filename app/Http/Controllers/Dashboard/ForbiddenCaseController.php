@@ -10,6 +10,7 @@ use App\Models\ForbiddenCase;
 use App\Models\ForbiddenCaseValue;
 use App\Models\Gender;
 use App\Models\IllnessSub;
+use App\Models\Indication;
 use App\Models\PregnancyStage;
 use App\Models\Weight;
 use Illuminate\Http\Request;
@@ -31,6 +32,42 @@ class ForbiddenCaseController extends Controller
     public function create()
     {
         //
+    }
+        public function fetch(Request $request)
+    {
+        $var_name = $request->variable;
+        $variables = null;
+        if($request->variable == "ages"){
+           $variables = Age::get();
+        }
+        if($request->variable == "weights"){
+            $variables = Weight::get();
+        }
+        if($request->variable == "genders"){
+            $variables = Gender::get();
+        }
+        if($request->variable == "pregnancy_stages"){
+            $variables = PregnancyStage::get();
+        }
+        if($request->variable == "illness"){
+            $variables = IllnessSub::get();
+        }
+        if($request->variable == "drugs"){
+            $variables = Drug::get();
+        }
+        if($request->variable == "indications"){
+            $variables = Indication::get();
+        }
+        $html = view('dashboard.doses.variable-component.forbidden-variables', compact('variables','var_name'))->render();
+        return response()->json(['status' => true, 'result' => $html]);
+    }
+    public function add_row(Request $request)
+    {
+        // return $request;
+        $number = $request->number;
+         $effects = Effect::get();
+        $html = view('dashboard.doses.variable-component.forbidden-row', compact('effects','number'))->render();
+        return response()->json(['status' => true, 'result' => $html]);
     }
     public function add_row_value2(Request $request)
     {
@@ -65,6 +102,8 @@ class ForbiddenCaseController extends Controller
                     $var = IllnessSub::whereIn('id', $request->object_id[$request->variable[$i]])->get();
                 }else if($request->variable[$i] =="drugs"){
                     $var = Drug::whereIn('id', $request->object_id[$request->variable[$i]])->get();
+                }else if($request->variable[$i] =="indications"){
+                    $var = Indication::whereIn('id', $request->object_id[$request->variable[$i]])->get();
                 }
                 foreach($var as $variable ){
                  $variable->variableForbidden()->create([
@@ -89,6 +128,8 @@ class ForbiddenCaseController extends Controller
                     $var_v2 = IllnessSub::whereIn('id', $request->object_id2[$request->variable2[$e]])->get();
                 }else if($request->variable2[$e] =="drugs"){
                     $var_v2 = Drug::whereIn('id', $request->object_id2[$request->variable2[$e]])->get();
+                }else if($request->variable2[$e] =="indications"){
+                    $var_v2 = Indication::whereIn('id', $request->object_id2[$request->variable2[$e]])->get();
                 }
                 foreach($var_v2 as $variable_v2 ){
                  $variable_v2->variableForbidden()->create([
