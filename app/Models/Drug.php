@@ -28,6 +28,10 @@ class Drug extends Model
     {
         return $this->morphMany(ForbiddenCaseValue::class, 'variableable');
     }
+    public function variablePredose()
+    {
+        return $this->morphMany(PredoseVariable::class, 'variableable');
+    }
     public function scopeWhenSearch($query,$search){
           return $query->when($search,function($q)use($search){
               return $q->where('name','like',"%$search%")

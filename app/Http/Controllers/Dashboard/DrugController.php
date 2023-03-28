@@ -17,6 +17,7 @@ use App\Models\HxDrug;
 use App\Models\Indication;
 use App\Models\InteractionSeverity;
 use App\Models\NursingSafetyCategory;
+use App\Models\Predose;
 use App\Models\PregnancySafety;
 use App\Models\PregnancyStage;
 use App\Models\DrugTrade;
@@ -91,8 +92,9 @@ class DrugController extends Controller
         $hx_drugs = HxDrug::get();
         $drugs = Drug::get();
         $interaction_severities = InteractionSeverity::get();
+        $predoses = Predose::get();
         return view('dashboard.drugs.drug_show', compact('drug','category_subs','formulas','drug_formulas','indications','drug_indications',
-        'variable_indications','variables','effects','prgnancies','pregnancy_stages','prganancy_safties','countries','trades','moa_drugs','hx_drugs','drugs','interaction_severities'));
+        'variable_indications','variables','effects','prgnancies','pregnancy_stages','prganancy_safties','countries','trades','moa_drugs','hx_drugs','drugs','interaction_severities','predoses'));
     }
 
     /**

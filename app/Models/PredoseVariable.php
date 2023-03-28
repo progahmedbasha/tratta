@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ForbiddenCaseValue extends Model
+class PredoseVariable extends Model
 {
     use HasFactory;
     public $guarded = [];
@@ -13,9 +13,9 @@ class ForbiddenCaseValue extends Model
     {
         return $this->morphTo();
     }
-    public function forbiddenCase()
+       public function predose()
     {
-        return $this->belongsTo(ForbiddenCase::class);
+        return $this->belongsTo(Predose::class);
     }
     public function age()
     {
@@ -40,9 +40,5 @@ class ForbiddenCaseValue extends Model
     public function drug()
     {
         return $this->belongsTo(Drug::class,'variableable_id');
-    }
-    public function indication()
-    {
-        return $this->belongsTo(Indication::class,'variableable_id');
     }
 }

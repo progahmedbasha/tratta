@@ -37,6 +37,9 @@ use App\Http\Controllers\Dashboard\DrugTradeController;
 use App\Http\Controllers\Dashboard\DrugMoaController;
 use App\Http\Controllers\Dashboard\HxDrugController;
 use App\Http\Controllers\Dashboard\ForbiddenCaseController;
+use App\Http\Controllers\Dashboard\PredoseController;
+use App\Http\Controllers\Dashboard\PredoseFirstQuestionController;
+use App\Http\Controllers\Dashboard\PredoseSecondQuestionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -145,6 +148,15 @@ Route::middleware('auth')->group(function () {
     Route::post('forbidden_add_row', [ForbiddenCaseController::class, 'add_row'])->name('forbidden_add_row');
     
     Route::post('add_row_value2', [ForbiddenCaseController::class, 'add_row_value2'])->name('add_row_value2');
+    /********************** Predose Q *************************/
+    Route::resource('predoses', PredoseController::class);
+    Route::post('predose_variable_delete/{id}', [PredoseController::class, 'delete_variable'])->name('predose_variable_delete');
+    Route::resource('first_questions', PredoseFirstQuestionController::class);
+    Route::get('first_question/{id}', [PredoseFirstQuestionController::class, 'create'])->name('first_question');
+        Route::resource('second_questions', PredoseSecondQuestionController::class);
+    Route::get('second_question/{id}', [PredoseSecondQuestionController::class, 'create'])->name('second_question');
+    
+    
     
     
     });
