@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Indication extends Model
 {
     use HasFactory;
+    public function variableForbidden()
+    {
+        return $this->morphMany(ForbiddenCaseValue::class, 'variableable');
+    }
 }

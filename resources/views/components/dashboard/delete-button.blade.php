@@ -1,0 +1,1 @@
+<x-dashboard.button type="submit" class="btn btn-link"><img src='{{ url('data/Delete.svg') }}'/></x-dashboard.button>

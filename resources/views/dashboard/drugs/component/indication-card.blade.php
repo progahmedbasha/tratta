@@ -33,9 +33,9 @@
             </div>
             <br>
             <div class="row">
-                <div class="col-1" style="margin-left: 84%;">
+                <div class="col-1" style="margin-left: 76%;">
                     <div class="input-group-append">
-                        <button class="btn bg-gradient-dark mb-0" type="submit"><i class="fas fa-save"></i></button>
+                        <x-dashboard.save-button></x-dashboard.save-button>
                     </div>
                 </div>
             </div>

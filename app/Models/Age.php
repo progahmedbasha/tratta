@@ -17,4 +17,13 @@ class Age extends Model
     {
         return $this->morphMany(NoteDoseVariable::class, 'variableable');
     }
+    public function variableForbidden()
+    {
+        return $this->morphMany(ForbiddenCaseValue::class, 'variableable');
+    }
+    public function variablePredose()
+    {
+        return $this->morphMany(PredoseVariable::class, 'variableable');
+    }
+    
 }

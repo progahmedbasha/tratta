@@ -1,0 +1,1 @@
+<x-dashboard.button type="submit" class="btn btn-link"><img src='{{ url('data/edit.svg') }}'/></x-dashboard.button>

@@ -5,7 +5,7 @@
     toastr.success(" {{ Session::get('success') }} ");
 </script>
 @endif
-{{-- formula card  --}}
+{{-- Recheck card  --}}
 <div class="card">
     <div class="card-header pb-0 p-3">
         <div class="row">
@@ -25,7 +25,7 @@
                     <label>Drug Value 1</label>
                     <select class="js-example-basic-multiple form-control" multiple="multiple" name="value1[]"
                         required />
-                    <option value="">Select Drugs</option>
+                    <option value="" disabled>Select Drugs</option>
                     @foreach ($drugs as $drug)
                     <option value="{{$drug->id}}" {{(old($drug->id)==$drug->id)?
                         'selected':''}}>
@@ -44,7 +44,7 @@
                     <label>Drug Value 2</label>
                     <select class="js-example-basic-multiple form-control" multiple="multiple" name="value2[]"
                         required />
-                    <option value="">Select Drugs</option>
+                    <option value="" disabled>Select Drugs</option>
                     @foreach ($drugs as $drug)
                     <option value="{{$drug->id}}" {{(old($drug->id)==$drug->id)?
                         'selected':''}}>
@@ -152,7 +152,6 @@
     <hr class="horizontal dark mt-0">
     @endforeach
 </div>
-{{-- </div> --}}
 <br>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />

@@ -10,7 +10,7 @@
     <option value="illness">Illness Data</option>
     <option value="drugs">Drug Data</option>
     </select>
-    @error('effect_id')
+    @error('variable')
     <div class="alert alert-danger">{{ $message }}</div>
     @enderror
 </div>
@@ -20,7 +20,7 @@
 </div>
 <div class="col-1">
     <div class="input-group-append">
-        <button class="btn bg-gradient-dark mb-0 " onclick="addRow()" type="button"><i class="fas fa-plus"></i></button>
+        <x-dashboard.add-button onclick="addRow()"></x-dashboard.add-button>
     </div>
 </div>
 </div>
@@ -65,7 +65,7 @@
                   },
                  });
         }
-    ////////////////////for fetch branch////////////
+    ////////////////////end add row////////////
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>

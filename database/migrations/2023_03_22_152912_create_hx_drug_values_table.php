@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreign('drug_id')->references('id')->on('drugs')->onUpdate('cascade');
             $table->unsignedInteger('hx_drug_id')->unsigned();
             $table->foreign('hx_drug_id')->references('id')->on('hx_drugs')->onUpdate('cascade')->onDelete('cascade');
-            $table->string('value',100);
+            $table->string('value',50);
             $table->timestamp('created_at')->default(\DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(\DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
         });

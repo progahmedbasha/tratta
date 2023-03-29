@@ -38,8 +38,6 @@ class DrugPregnancyController extends Controller
         // return $request;
         $drug_pregnancy = new DrugPregnancy;
         $drug_pregnancy->drug_id = $request->drug_id;
-        $drug_pregnancy->effect_id = $request->effect_id;
-        // $drug_pregnancy->pregnancy_stage_id = $request->pregnancy_stage_id;
         $drug_pregnancy->pregnancy_safety_id = $request->pregnancy_safety_id;
         $drug_pregnancy->note = $request->note;
         $drug_pregnancy->save();
@@ -76,8 +74,6 @@ class DrugPregnancyController extends Controller
     {
         $drug_pregnancy = DrugPregnancy::findOrFail($id);
         $drug_pregnancy->drug_id = $request->drug_id;
-        $drug_pregnancy->effect_id = $request->effect_id;
-        $drug_pregnancy->pregnancy_safety_id = $request->pregnancy_safety_id;
         $drug_pregnancy->note = $request->note;
         $drug_pregnancy->save();
         return redirect()->back()->with('success','Pregnancy Updated Successfully');

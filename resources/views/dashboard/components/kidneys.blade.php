@@ -75,8 +75,7 @@
                                     </div>
                                     <div class="col-1">
                                         <div class="input-group-append">
-                                            <button class="btn bg-gradient-info mb-0" type="submit"><i
-                                                    class="fas fa-edit"></i></button>
+                                            <x-dashboard.edit-button></x-dashboard.edit-button>
                                         </div>
                                     </div>
                                 </div>
