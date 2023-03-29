@@ -62,7 +62,7 @@ class ScrController extends Controller
      */
     public function update(StoreScrRequest $request, $id)
     {
-        $scr= Scr::findOrFail($id);
+        $scr = Scr::findOrFail($id);
         $scr->illness_sub_id = $request->illness_sub_id;
         $scr->gender_id = $request->gender_id;
         $scr->range_from = $request->range_from;
@@ -74,8 +74,10 @@ class ScrController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id): RedirectResponse
+    public function destroy(string $id)
     {
-        //
+        $scr = Scr::findOrFail($id);
+        $scr->delete();
+        return redirect()->back()->with('success','Scr Deleted Successfully');
     }
 }

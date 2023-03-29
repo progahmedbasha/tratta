@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name', 100);
             $table->string('code', 100);
             $table->unsignedInteger('sub_cat_id')->unsigned();
-            $table->foreign('sub_cat_id')->references('id')->on('categories')->onUpdate('cascade');
+            $table->foreign('sub_cat_id')->references('id')->on('categories')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamp('created_at')->default(\DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(\DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
         });

@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('drug_formulas', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('drug_id')->unsigned();
-            $table->foreign('drug_id')->references('id')->on('drugs')->onUpdate('cascade');
+            $table->foreign('drug_id')->references('id')->on('drugs')->onUpdate('cascade')->onDelete('cascade');
             $table->unsignedInteger('formula_id')->unsigned();
-            $table->foreign('formula_id')->references('id')->on('formulas')->onUpdate('cascade');
+            $table->foreign('formula_id')->references('id')->on('formulas')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamp('created_at')->default(\DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(\DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
         });

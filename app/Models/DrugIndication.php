@@ -17,4 +17,8 @@ class DrugIndication extends Model
     {
         return $this->morphMany(Variable::class, 'variableable');
     }
+    public function variablePredose()
+    {
+        return $this->morphMany(PredoseVariable::class, 'variableable');
+    }
 }

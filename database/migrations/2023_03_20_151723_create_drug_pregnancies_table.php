@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('drug_pregnancies', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('drug_id')->unsigned();
-            $table->foreign('drug_id')->references('id')->on('drugs')->onUpdate('cascade');
+            $table->foreign('drug_id')->references('id')->on('drugs')->onUpdate('cascade')->onDelete('cascade');
             $table->unsignedInteger('pregnancy_safety_id')->unsigned();
             $table->foreign('pregnancy_safety_id')->references('id')->on('pregnancy_safeties')->onUpdate('cascade')->onDelete('cascade');
             $table->text('note');

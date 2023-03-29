@@ -57,7 +57,7 @@ class KidneyController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $kidney= Kidney::findOrFail($id);
+        $kidney = Kidney::findOrFail($id);
         $kidney->text = $request->text;
         $kidney->illness_sub_id = $request->illness_sub_id;
         $kidney->save();
@@ -69,6 +69,8 @@ class KidneyController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $kidney = Kidney::findOrFail($id);
+        $kidney->delete();
+        return redirect()->back()->with('success','Kidney Deleted Successfully');
     }
 }

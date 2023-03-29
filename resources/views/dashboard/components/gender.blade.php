@@ -40,7 +40,7 @@
                                 @csrf
                                 @method('patch')
                                 <div class="row">
-                                    <div class="col-md-11">
+                                    <div class="col-md-10">
                                         <input type="text" class="form-control" placeholder="Gender"
                                             value="{{$gender->name}}" name="name" required />
                                         @error('name')
@@ -52,8 +52,16 @@
                                             <x-dashboard.edit-button></x-dashboard.edit-button>
                                         </div>
                                     </div>
-                                </div>
                             </form>
+                                    <div class="col-1">
+                                        <form action="{{route('genders.destroy',$gender->id)}}"
+                                            method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <x-dashboard.delete-button></x-dashboard.delete-button>
+                                        </form>
+                                    </div>
+                                </div>
                             <br>
                             @endforeach
                         </div>

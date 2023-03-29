@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreign('variable_id')->references('id')->on('variables')->onUpdate('cascade')->onDelete('cascade');
             $table->morphs('optionable');
             $table->unsignedInteger('effect_id')->unsigned();
-            $table->foreign('effect_id')->references('id')->on('effects')->onUpdate('cascade');
+            $table->foreign('effect_id')->references('id')->on('effects')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamp('created_at')->default(\DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(\DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
         });

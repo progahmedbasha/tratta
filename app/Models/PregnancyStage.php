@@ -24,4 +24,8 @@ class PregnancyStage extends Model
     {
         return $this->morphMany(PredoseVariable::class, 'variableable');
     }
+    public function variablePredoseThirdQuestion()
+    {
+        return $this->morphMany(PredoseThirdQuestion::class, 'variableable');
+    }
 }

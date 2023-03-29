@@ -40,6 +40,7 @@ use App\Http\Controllers\Dashboard\ForbiddenCaseController;
 use App\Http\Controllers\Dashboard\PredoseController;
 use App\Http\Controllers\Dashboard\PredoseFirstQuestionController;
 use App\Http\Controllers\Dashboard\PredoseSecondQuestionController;
+use App\Http\Controllers\Dashboard\PredoseThirdQuestionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -153,8 +154,10 @@ Route::middleware('auth')->group(function () {
     Route::post('predose_variable_delete/{id}', [PredoseController::class, 'delete_variable'])->name('predose_variable_delete');
     Route::resource('first_questions', PredoseFirstQuestionController::class);
     Route::get('first_question/{id}', [PredoseFirstQuestionController::class, 'create'])->name('first_question');
-        Route::resource('second_questions', PredoseSecondQuestionController::class);
+    Route::resource('second_questions', PredoseSecondQuestionController::class);
     Route::get('second_question/{id}', [PredoseSecondQuestionController::class, 'create'])->name('second_question');
+    Route::resource('third_questions', PredoseThirdQuestionController::class);
+    Route::get('third_question/{id}', [PredoseThirdQuestionController::class, 'create'])->name('third_question');
     
     
     

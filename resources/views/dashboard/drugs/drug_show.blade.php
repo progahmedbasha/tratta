@@ -36,18 +36,18 @@
                      </div>
                      <br>
                      {{-- formula card  --}}
-                     {{-- @include('dashboard.drugs.component.formula-card') --}}
+                     @include('dashboard.drugs.component.formula-card')
                      <br>
                      {{-- indication card --}}
-                     {{-- @include('dashboard.drugs.component.indication-card') --}}
+                     @include('dashboard.drugs.component.indication-card')
                      <br>
                      {{-- Variable card --}}
-                     {{-- @include('dashboard.drugs.component.Variable-card') --}}
+                     @include('dashboard.drugs.component.Variable-card')
                      <br>
                      {{-- pregnancy card --}}
-                     {{-- @include('dashboard.drugs.component.pregnancy') --}}
+                     @include('dashboard.drugs.component.pregnancy')
                      {{-- treade name card --}}
-                     {{-- @include('dashboard.drugs.component.trade') --}}
+                     @include('dashboard.drugs.component.trade')
                      {{-- Moa card --}}
                      {{-- @include('dashboard.drugs.component.drug-moa') --}}
                      {{-- pre-dose q card --}}

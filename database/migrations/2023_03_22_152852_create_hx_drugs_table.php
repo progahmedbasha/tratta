@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('hx_drugs', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('interaction_severity_id')->unsigned();
-            $table->foreign('interaction_severity_id')->references('id')->on('interaction_severities')->onUpdate('cascade');
+            $table->foreign('interaction_severity_id')->references('id')->on('interaction_severities')->onUpdate('cascade')->onDelete('cascade');
             $table->text('note');
             $table->timestamp('created_at')->default(\DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(\DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));

@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class PredoseVariable extends Model
+class PredoseThirdQuestion extends Model
 {
     use HasFactory;
     public $guarded = [];
@@ -40,9 +40,5 @@ class PredoseVariable extends Model
     public function drug()
     {
         return $this->belongsTo(Drug::class,'variableable_id');
-    }
-    public function drugIndication()
-    {
-        return $this->belongsTo(DrugIndication::class,'variableable_id');
     }
 }

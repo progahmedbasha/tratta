@@ -60,7 +60,7 @@ class InteractionSeverityController extends Controller
      */
     public function update(StoreInteractionSeverityRequest $request, $id)
     {
-        $serverity= InteractionSeverity::findOrFail($id);
+        $serverity = InteractionSeverity::findOrFail($id);
         $serverity->type = $request->type;
         $serverity->color  = $request->color;
         $serverity->save();
@@ -70,8 +70,10 @@ class InteractionSeverityController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id): RedirectResponse
+    public function destroy(string $id)
     {
-        //
+        $serverity = InteractionSeverity::findOrFail($id);
+        $serverity->delete();
+        return redirect()->back()->with('success','Interaction Severity Deleted Successfully'); 
     }
 }

@@ -5,12 +5,12 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use App\Models\Age;
 use App\Models\Drug;
+use App\Models\DrugIndication;
 use App\Models\Effect;
 use App\Models\ForbiddenCase;
 use App\Models\ForbiddenCaseValue;
 use App\Models\Gender;
 use App\Models\IllnessSub;
-use App\Models\Indication;
 use App\Models\PregnancyStage;
 use App\Models\Weight;
 use Illuminate\Http\Request;
@@ -56,7 +56,7 @@ class ForbiddenCaseController extends Controller
             $variables = Drug::get();
         }
         if($request->variable == "indications"){
-            $variables = Indication::get();
+            $variables = DrugIndication::get();
         }
         $html = view('dashboard.doses.variable-component.forbidden-variables', compact('variables','var_name'))->render();
         return response()->json(['status' => true, 'result' => $html]);

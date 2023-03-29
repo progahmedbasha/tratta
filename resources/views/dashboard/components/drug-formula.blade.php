@@ -64,7 +64,7 @@
                                                     alt="Norway">
                                                 @endif
                                             </div>
-                                            <div class="col-5">
+                                            <div class="col-4">
                                                 <input type="file" class="form-control" id="customFile" name="icon" />
                                                 @error('icon')
                                                 <div class="alert alert-danger">{{ $message }}</div>
@@ -81,8 +81,16 @@
                                             <x-dashboard.edit-button></x-dashboard.edit-button>
                                         </div>
                                     </div>
-                                </div>
                             </form>
+                                    <div class="col-1">
+                                        <form action="{{route('formulas.destroy',$formula->id)}}"
+                                            method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <x-dashboard.delete-button></x-dashboard.delete-button>
+                                        </form>
+                                    </div>
+                                </div>
                             <br>
                             @endforeach
                         </div>

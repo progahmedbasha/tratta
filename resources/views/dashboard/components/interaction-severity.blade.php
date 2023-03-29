@@ -19,7 +19,7 @@
                                 enctype="multipart/form-data">
                                 @csrf
                                 <div class="row">
-                                    <div class="col">
+                                    <div class="col-5">
                                         <input type="text" class="form-control" placeholder="Type" name="type"
                                             value="{{old('type')}}" required />
                                         @error('type')
@@ -49,14 +49,14 @@
                                 @csrf
                                 @method('patch')
                                 <div class="row">
-                                    <div class="col">
+                                    <div class="col-5">
                                         <input type="text" class="form-control" placeholder="Type"
                                             value="{{$interaction_severity->type}}" name="type" required />
                                         @error('type')
                                         <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
                                     </div>
-                                    <div class="col">
+                                    <div class="col-5">
                                         <input type="color" class="form-control form-control-color"
                                             style="height: 40px;" id="exampleColorInput"
                                             value="{{$interaction_severity->color}}" name="color"
@@ -70,8 +70,16 @@
                                             <x-dashboard.edit-button></x-dashboard.edit-button>
                                         </div>
                                     </div>
-                                </div>
                             </form>
+                                    <div class="col-1">
+                                        <form action="{{route('interaction_severities.destroy',$interaction_severity->id)}}"
+                                            method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <x-dashboard.delete-button></x-dashboard.delete-button>
+                                        </form>
+                                    </div>
+                                </div>
                             <br>
                             @endforeach
                         </div>

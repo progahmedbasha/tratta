@@ -18,14 +18,14 @@
                             <form action="{{route('effects.store')}}" method="post" enctype="multipart/form-data">
                                 @csrf
                                 <div class="row">
-                                    <div class="col">
+                                    <div class="col-4">
                                         <input type="text" class="form-control" placeholder="Effect Type"
                                             name="effect_type" value="{{old('effect_type')}}" required />
                                         @error('effect_type')
                                         <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
                                     </div>
-                                    <div class="col">
+                                    <div class="col-4">
                                         <input type="number" step="any" class="form-control" placeholder="Number" name="number"
                                             value="{{old('number')}}" required />
                                         @error('number')
@@ -55,14 +55,14 @@
                                 @csrf
                                 @method('patch')
                                 <div class="row">
-                                    <div class="col">
+                                    <div class="col-4">
                                         <input type="text" class="form-control" placeholder="Ages"
                                             value="{{$effect->effect_type}}" name="effect_type" required />
                                         @error('effect_type')
                                         <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
                                     </div>
-                                    <div class="col">
+                                    <div class="col-4">
                                         <input type="number" step="any" class="form-control" placeholder="Number"
                                             value="{{$effect->number}}" name="number" required />
                                         @error('number')
@@ -83,8 +83,16 @@
                                             <x-dashboard.edit-button></x-dashboard.edit-button>
                                         </div>
                                     </div>
-                                </div>
                             </form>
+                                    <div class="col-1">
+                                        <form action="{{route('effects.destroy',$effect->id)}}"
+                                            method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <x-dashboard.delete-button></x-dashboard.delete-button>
+                                        </form>
+                                    </div>
+                                </div>
                             <br>
                             @endforeach
                         </div>

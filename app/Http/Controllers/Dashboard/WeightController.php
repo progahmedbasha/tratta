@@ -71,8 +71,10 @@ class WeightController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id): RedirectResponse
+    public function destroy(string $id)
     {
-        //
+        $weight= Weight::findOrFail($id);
+        $weight->delete();
+        return redirect()->back()->with('success','Weight Deleted Successfully');
     }
 }

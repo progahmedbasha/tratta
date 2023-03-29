@@ -15,7 +15,7 @@ return new class extends Migration
             $table->increments('id');
             $table->string('name',100);
             $table->unsignedInteger('illness_category_id')->unsigned()->nullable();
-            $table->foreign('illness_category_id')->references('id')->on('illness_categories')->onUpdate('cascade');
+            $table->foreign('illness_category_id')->references('id')->on('illness_categories')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamp('created_at')->default(\DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(\DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
         });

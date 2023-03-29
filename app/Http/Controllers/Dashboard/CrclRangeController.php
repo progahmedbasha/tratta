@@ -61,7 +61,7 @@ class CrclRangeController extends Controller
      */
     public function update(StoreCrclRangeRequest $request, $id)
     {
-        $crcl_range= CrclRange::findOrFail($id);
+        $crcl_range = CrclRange::findOrFail($id);
         $crcl_range->illness_sub_id = $request->illness_sub_id;
         $crcl_range->range_from = $request->range_from;
         $crcl_range->range_to = $request->range_to;
@@ -72,8 +72,10 @@ class CrclRangeController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id): RedirectResponse
+    public function destroy(string $id)
     {
-        //
+        $crcl_range = CrclRange::findOrFail($id);
+        $crcl_range->delete();
+        return redirect()->back()->with('success','Crcl Range Deleted Successfully');
     }
 }

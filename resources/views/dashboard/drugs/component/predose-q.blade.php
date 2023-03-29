@@ -148,6 +148,23 @@
                 </form>
             </div>
         </div>
+        @elseif ($values->variableable_type == 'App\Models\DrugIndication')
+        <div class="row">
+            <div class="col-3">
+                <input type="text" class="form-control" value="DrugIndication" disabled /><br>
+            </div>
+            <div class="col-3">
+                <input type="text" class="form-control" value="{{ $values->drugIndication->indication->indication_title }}"
+                    disabled /><br>
+            </div>
+            <div class="col">
+                <form action="{{route('predose_variable_delete',$predose->id)}}" method="POST">
+                    @csrf
+                    <x-dashboard.delete-button></x-dashboard.delete-button>
+
+                </form>
+            </div>
+        </div>
         @endif
         @endforeach
 
@@ -159,7 +176,7 @@
                 <a href="{{ route('second_question', $predose->id) }}" class="btn bg-gradient-primary mb-0">Q 2</a>
             </div>
             <div class="col-2">
-                <button type="input" class="form-control">Q3</button>
+                <a href="{{ route('third_question', $predose->id) }}" class="btn bg-gradient-primary mb-0">Q 3</a>
             </div>
             <div class="col-2">
                 <button type="input" class="form-control">Q4</button>

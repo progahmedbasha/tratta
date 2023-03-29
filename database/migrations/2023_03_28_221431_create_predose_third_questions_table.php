@@ -11,13 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('hx_drug_values', function (Blueprint $table) {
+        Schema::create('predose_third_questions', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('drug_id')->unsigned();
-            $table->foreign('drug_id')->references('id')->on('drugs')->onUpdate('cascade')->onDelete('cascade');
-            $table->unsignedInteger('hx_drug_id')->unsigned();
-            $table->foreign('hx_drug_id')->references('id')->on('hx_drugs')->onUpdate('cascade')->onDelete('cascade');
-            $table->string('value',50);
+            $table->unsignedInteger('predose_id')->unsigned();
+            $table->foreign('predose_id')->references('id')->on('predoses')->onUpdate('cascade')->onDelete('cascade');
+            $table->string('text',100);
+            $table->morphs('variableable');
             $table->timestamp('created_at')->default(\DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(\DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
         });
@@ -28,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('hx_drug_values');
+        Schema::dropIfExists('predose_third_questions');
     }
 };

@@ -91,8 +91,16 @@
                                             <x-dashboard.edit-button></x-dashboard.edit-button>
                                         </div>
                                     </div>
-                                </div>
                             </form>
+                                    <div class="col-1">
+                                        <form action="{{route('crcl_ranges.destroy',$crcl_range->id)}}"
+                                            method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <x-dashboard.delete-button></x-dashboard.delete-button>
+                                        </form>
+                                    </div>
+                                </div>
                             <br>
                             @endforeach
                         </div>

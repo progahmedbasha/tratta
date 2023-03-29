@@ -72,8 +72,10 @@ class EffectController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id): RedirectResponse
+    public function destroy(string $id)
     {
-        //
+        $effect= Effect::findOrFail($id);
+        $effect->delete();
+        return redirect()->back()->with('success','Effect Deleted Successfully'); 
     }
 }

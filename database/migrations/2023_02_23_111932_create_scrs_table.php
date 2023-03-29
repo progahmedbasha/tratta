@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('scrs', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('illness_sub_id')->unsigned();
-            $table->foreign('illness_sub_id')->references('id')->on('illness_subs')->onUpdate('cascade');
+            $table->foreign('illness_sub_id')->references('id')->on('illness_subs')->onUpdate('cascade')->onDelete('cascade');
             $table->unsignedTinyInteger('gender_id')->unsigned();
-            $table->foreign('gender_id')->references('id')->on('genders')->onUpdate('cascade');
+            $table->foreign('gender_id')->references('id')->on('genders')->onUpdate('cascade')->onDelete('cascade');
             $table->float('range_from');
             $table->float('range_to');
             $table->timestamp('created_at')->default(\DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));

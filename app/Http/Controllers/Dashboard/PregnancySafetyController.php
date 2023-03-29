@@ -70,8 +70,10 @@ class PregnancySafetyController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id): RedirectResponse
+    public function destroy(string $id)
     {
-        //
+        $safety= PregnancySafety::findOrFail($id);
+        $safety->delete();
+        return redirect()->back()->with('success','Pregnancy Safety Deleted Successfully');
     }
 }
