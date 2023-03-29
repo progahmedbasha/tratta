@@ -74,8 +74,10 @@ class WeightGenderController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id): RedirectResponse
+    public function destroy(string $id)
     {
-        //
+        $weight_gender= WeightGender::findOrFail($id);
+        $weight_gender->delete();
+        return redirect()->back()->with('success','Weight Gender Deleted Successfully');
     }
 }

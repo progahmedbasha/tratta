@@ -74,6 +74,8 @@ class AgeController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $age= Age::findOrFail($id);
+        $age->delete();
+        return redirect()->back()->with('success','Age Deleted Successfully');
     }
 }

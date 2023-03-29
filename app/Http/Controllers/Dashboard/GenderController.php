@@ -71,8 +71,10 @@ class GenderController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id): RedirectResponse
+    public function destroy(string $id)
     {
-        //
+        $gender= Gender::findOrFail($id);
+        $gender->delete();
+        return redirect()->back()->with('success','Gender Deleted Successfully');
     }
 }

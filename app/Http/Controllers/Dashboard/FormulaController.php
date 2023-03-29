@@ -78,8 +78,10 @@ class FormulaController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id): RedirectResponse
+    public function destroy(string $id)
     {
-        //
+        $formula = Formula::findOrFail($id);
+        $formula->delete();
+        return redirect()->back()->with('success','Formula Deleted Successfully');
     }
 }

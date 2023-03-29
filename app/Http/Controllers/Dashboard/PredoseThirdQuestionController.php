@@ -5,16 +5,15 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use App\Models\Age;
 use App\Models\Drug;
-use App\Models\DrugIndication;
 use App\Models\Gender;
 use App\Models\IllnessSub;
 use App\Models\Predose;
-use App\Models\PredoseVariable;
+use App\Models\PredoseThirdQuestion;
 use App\Models\PregnancyStage;
 use App\Models\Weight;
 use Illuminate\Http\Request;
 
-class PredoseController extends Controller
+class PredoseThirdQuestionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -27,9 +26,11 @@ class PredoseController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create($id)
     {
-        //
+        $questions = PredoseThirdQuestion::where('predose_id', $id)->get();
+        $predose_drug_id = Predose::find($id);
+        return view('dashboard.predose-questions.third-question', compact('id','questions','predose_drug_id'));
     }
 
     /**
@@ -38,11 +39,6 @@ class PredoseController extends Controller
     public function store(Request $request)
     {
         // return $request;
-        $number = Predose::where('drug_id', $request->drug_id)->count();
-        $predose= new Predose;
-        $predose->drug_id = $request->drug_id;
-        $predose->question_number = $number+1;
-        $predose->save();
         $countItems = count($request->object_id);
             for ($i = 0; $i < $countItems; $i++) {
             $var = '';
@@ -58,16 +54,15 @@ class PredoseController extends Controller
                     $var = IllnessSub::whereIn('id', $request->object_id[$request->variable[$i]])->get();
                 }else if($request->variable[$i] =="drugs"){
                     $var = Drug::whereIn('id', $request->object_id[$request->variable[$i]])->get();
-                }else if($request->variable[$i] =="indications"){
-                    $var = DrugIndication::whereIn('id', $request->object_id[$request->variable[$i]])->get();
                 }
                 foreach($var as $variable ){
-                 $variable->variablePredose()->create([
-                        'predose_id' => $predose->id,
+                 $variable->variablePredoseThirdQuestion()->create([
+                        'predose_id' => $request->predose_id,
+                        'text' => $request->text
                     ]);
                 }
             }
-            return redirect()->back()->with('success','Forbidden Added Successfully');
+        return redirect()->back()->with('success','First Question Added Successfully');
     }
 
     /**
@@ -91,7 +86,10 @@ class PredoseController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
+        $predose= PredoseThirdQuestion::findOrFail($id);
+        $predose->text = $request->text;
+        $predose->save();
+        return redirect()->back()->with('success','First Question Updated Successfully');
     }
 
     /**
@@ -99,15 +97,8 @@ class PredoseController extends Controller
      */
     public function destroy(string $id)
     {
-        $predose = Predose::findOrFail($id);
+        $predose = PredoseThirdQuestion::findOrFail($id);
         $predose->delete();
         return redirect()->back()->with('success','Pre-dose Q Deleted Successfully');
     }
-    public function delete_variable(string $id)
-    {
-        $predose = PredoseVariable::where('predose_id',$id)->first();
-        $predose->delete();
-        return redirect()->back()->with('success','Variable Deleted Successfully');
-    }
-    
 }
