@@ -51,6 +51,7 @@
                                     </div>
                                 </div>
                             </form>
+                            <br>
                             @endforeach
                             <br>
                             <hr class="horizontal dark mt-0">
