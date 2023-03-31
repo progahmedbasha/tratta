@@ -123,9 +123,11 @@ class PredoseFourthQuestionController extends Controller
         $question = FourthQuestionScore::find($id);
         $question->score_label = $request->label_score;
         $question->save();
-        $point = ScorePoint::where('fourth_question_score_id', $question->id)->first();
-        $point->point = $request->point;
-        $point->save();
+        if (request()->point) {
+            $point = ScorePoint::where('fourth_question_score_id', $question->id)->first();
+            $point->point = $request->point;
+            $point->save();
+        }
         return redirect()->back()->with('success','Updated Successfully');
     }
 

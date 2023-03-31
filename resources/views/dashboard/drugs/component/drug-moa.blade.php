@@ -16,8 +16,7 @@
             <input type="hidden" value="{{ $drug->id }}" name="drug_id">
             <div class="row">
                 <div class="col-md-8">
-                    <textarea class="form-control" placeholder="Text"  name="text"
-                        required>{{old('text')}}</textarea>
+                    <textarea class="form-control" placeholder="Text" name="text" required>{{old('text')}}</textarea>
                     @error('text')
                     <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
@@ -25,10 +24,10 @@
                     <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
                 </div>
-                <div class="col-md-2"></div>
+                <div class="col-md-1"></div>
                 <div class="col-1">
                     <div class="input-group-append">
-                        <button class="btn bg-gradient-dark mb-0" type="submit"><i class="fas fa-save"></i></button>
+                        <x-dashboard.save-button></x-dashboard.save-button>
                     </div>
                 </div>
             </div>
@@ -43,7 +42,7 @@
             <input type="hidden" value="{{ $drug->id }}" name="drug_id">
             <div class="row">
                 <div class="col-md-8">
-                    <textarea class="form-control" placeholder="Text"  name="text"
+                    <textarea class="form-control" placeholder="Text" name="text"
                         required>{{$moa_drug->text}}</textarea>
                     @error('text')
                     <div class="alert alert-danger">{{ $message }}</div>
@@ -55,19 +54,17 @@
                 <div class="col-1"></div>
                 <div class="col-md-1">
                     <div class="input-group-append">
-                        <button class="btn bg-gradient-info mb-0" type="submit"><i class="fas fa-edit"></i></button>
+                        <x-dashboard.edit-button></x-dashboard.edit-button>
                     </div>
                 </div>
+        </form>
+        <div class="col">
+            <form action="{{route('moa_drugs.destroy',$moa_drug->id)}}" method="POST">
+                @csrf
+                @method('DELETE')
+                <x-dashboard.delete-button></x-dashboard.delete-button>
             </form>
-            <div class="col">
-                <form action="{{route('moa_drugs.destroy',$moa_drug->id)}}" method="POST">
-                    @csrf
-                    @method('DELETE')
-                    <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
-                </form>
-            </div>
-            </div>
-
+        </div>
     </div>
     <br>
     @endforeach
