@@ -26,7 +26,7 @@
                                         @enderror
                                     </div>
                                     <div class="col">
-                                        <input type="file" class="form-control" id="customFile" name="icon" required />
+                                        <input type="file" class="form-control" id="customFile" name="icon"  />
                                         @error('icon')
                                         <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror

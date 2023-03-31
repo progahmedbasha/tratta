@@ -42,7 +42,7 @@
                         </script>
                         @endif
                         <div class="table-responsive" style="text-align:center;">
-                            <table id="datatable" class="table table-striped table-bordered p-0">
+                            <table id="datatable" class="table table-bordered p-0">
                                 <tbody>
                                     @foreach($drugs as $index=>$drug)
                                     <tr>
@@ -51,9 +51,8 @@
                                         <td>{{ $drug->code }}</td>
                                         <td>
                                             <div class="btn-icon-list">
-                                                <a class="btn bg-gradient-info mb-0"
-                                                    href="{{ route('drugs.show', $drug->id) }}"><i
-                                                        class="fas fa-edit"></i></a>
+                                                <a class="btn btn-link" href="{{ route('drugs.show', $drug->id) }}"><img
+                                                        src='{{ url(' data/VarIconsax.svg') }}' /></a>
                                             </div>
                                         </td>
                                     </tr>

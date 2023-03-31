@@ -39,7 +39,7 @@
                             </form>
                             @foreach ($question->predoseQuestionRange as $range)
                             @if ($range->variableable_type == 'App\Models\PredoseFourthQuestion')
-                                
+
                             <form action="{{route('second_question_range_update',$range->id)}}" method="post"
                                 enctype="multipart/form-data">
                                 @csrf
@@ -84,7 +84,7 @@
                             </div>
                         </div>
                         <br>
-                            @endif
+                        @endif
                         @endforeach
                         <hr class="horizontal dark mt-0">
                         <form action="{{route('save_q4_score')}}" method="post" enctype="multipart/form-data">
@@ -161,85 +161,95 @@
                         @endphp
                         @if ($score->is_sub == 0)
                         <label>label</label>
-                        <div class="row">
-                            <div class="col">
-                                <input type="text" class="form-control" placeholder="Label"
-                                    value="{{ $score->score_label }}" name="label_score" requierd />
-                            </div>
-                                       <div class="col-1">
+                        <form action="{{route('fourth_questions.update',$score->id)}}" method="post"
+                            enctype="multipart/form-data">
+                            @csrf
+                            @method('patch')
+                            <div class="row">
+                                <div class="col">
+                                    <input type="text" class="form-control" placeholder="Label"
+                                        value="{{ $score->score_label }}" name="label_score" requierd />
+                                </div>
+                                <div class="col-1">
+                                    <div class="input-group-append">
+                                        <x-dashboard.edit-button></x-dashboard.edit-button>
+                                    </div>
+                                </div>
+                        </form>
+                        <div class="col-1">
                             <form action="{{route('delete_score',$score->id)}}" method="POST">
                                 @csrf
                                 <x-dashboard.delete-button></x-dashboard.delete-button>
                             </form>
                         </div>
+                    </div>
+                    <form action="{{route('save_q4_score')}}" method="post" enctype="multipart/form-data">
+                        @csrf
+                        <input type="hidden" name="type" value="sub">
+                        <input type="hidden" name="parent_id" value="{{ $score->id }}">
+                        <input type="hidden" value="{{ $id }}" name="predose_id">
+                        <br>
+                        <div class="row">
+                            <div class="col">
+                                <select class="form-control" id="variables{{ $score->id }}"
+                                    onchange="selectVariable2({{ $score->id }})" name="variable" required />
+                                <option value="">Select Varirables</option>
+                                <option value="ages">Ages</option>
+                                <option value="weights">Weights</option>
+                                <option value="genders">Genders</option>
+                                <option value="pregnancy_stages">Pregnancy Stages</option>
+                                <option value="illness">Illness Data</option>
+                                <option value="drugs">Drug Data</option>
+                                </select>
+                            </div>
+                            <div class="col">
+                                <select class="form-control" style="width: 100%;" id="variable_data{{ $score->id }}"
+                                    required />
+                                </select>
+                            </div>
+                            <div class="col">
+                                <input type="text" class="form-control" placeholder="Label"
+                                    value="{{ old('label_sub') }}" name="label_sub" required />
+                            </div>
+                            <div class="col">
+                                <input type="text" class="form-control" placeholder="Point" value="{{ old('point') }}"
+                                    name="point" required />
+                            </div>
                         </div>
-                        <form action="{{route('save_q4_score')}}" method="post" enctype="multipart/form-data">
-                            @csrf
-                            <input type="hidden" name="type" value="sub">
-                            <input type="hidden" name="parent_id" value="{{ $score->id }}">
-                            <input type="hidden" value="{{ $id }}" name="predose_id">
-                            <br>
-                            <div class="row">
-                                <div class="col">
-                                    <select class="form-control" id="variables{{ $score->id }}"
-                                        onchange="selectVariable2({{ $score->id }})" name="variable" />
-                                    <option value="">Select Varirables</option>
-                                    <option value="ages">Ages</option>
-                                    <option value="weights">Weights</option>
-                                    <option value="genders">Genders</option>
-                                    <option value="pregnancy_stages">Pregnancy Stages</option>
-                                    <option value="illness">Illness Data</option>
-                                    <option value="drugs">Drug Data</option>
-                                    </select>
-                                </div>
-                                <div class="col">
-                                    <select class="form-control" style="width: 100%;"
-                                        id="variable_data{{ $score->id }}" />
-                                    </select>
-                                </div>
-                                <div class="col">
-                                    <input type="text" class="form-control" placeholder="Label"
-                                        value="{{ old('label_sub') }}" name="label_sub" requierd />
-                                </div>
-                                <div class="col">
-                                    <input type="text" class="form-control" placeholder="Point"
-                                        value="{{ old('point') }}" name="point" requierd />
+                        <br>
+                        <div class="row">
+                            <div class="col-10"></div>
+                            <div class="col-1">
+                                <div class="input-group-append">
+                                    <x-dashboard.save-button></x-dashboard.save-button>
                                 </div>
                             </div>
-                            <br>
-                            <div class="row">
-                                <div class="col-10"></div>
-                                <div class="col-1">
-                                    <div class="input-group-append">
-                                        <x-dashboard.save-button></x-dashboard.save-button>
-                                    </div>
-                                </div>
-                        </form>
-             
-                    </div>
+                    </form>
 
-                    @foreach ($score->child as $point)
-                    @include('dashboard.predose-questions.component.show-variables')
-                    @endforeach
-                    @endif
-                    @if ($score->is_sub == 1)
-                    @php
-                    $point = $score;
-                    @endphp
-                    <label>sub</label>
-                    @include('dashboard.predose-questions.component.show-variables')
-                    @endif
-                    <br>
-                    <hr class="horizontal dark mt-0">
-                    @endforeach
-                    <br>
-                    <a href="{{ route('drugs.show', $predose_drug_id->drug_id) }}" class="btn btn-primary">
-                        <span class="fas fa-backward"></span> Back
-                    </a>
                 </div>
+
+                @foreach ($score->child as $point)
+                @include('dashboard.predose-questions.component.show-variables')
+                @endforeach
+                @endif
+                @if ($score->is_sub == 1)
+                @php
+                $point = $score;
+                @endphp
+                <label>sub</label>
+                @include('dashboard.predose-questions.component.show-variables')
+                @endif
+                <br>
+                <hr class="horizontal dark mt-0">
+                @endforeach
+                <br>
+                <a href="{{ route('drugs.show', $predose_drug_id->drug_id) }}" class="btn btn-primary">
+                    <span class="fas fa-backward"></span> Back
+                </a>
             </div>
         </div>
     </div>
+</div>
 </div>
 </div>
 </div>
