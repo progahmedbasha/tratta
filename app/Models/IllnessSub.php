@@ -33,4 +33,8 @@ class IllnessSub extends Model
     {
         return $this->morphMany(PredoseThirdQuestion::class, 'variableable');
     }
+    public function variableScorePoint()
+    {
+        return $this->morphMany(ScorePoint::class, 'variableable');
+    }
 }

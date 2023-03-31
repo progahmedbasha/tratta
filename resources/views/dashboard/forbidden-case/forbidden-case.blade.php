@@ -36,7 +36,7 @@
                 <hr class="horizontal dark mt-0">
                 <div class="row">
                     <div class="col-md-8">
-                        <textarea class="form-control" placeholder="Note" name="note">{{ old('note') }}</textarea>
+                        <textarea class="form-control" placeholder="Note" name="note" required>{{ old('note') }}</textarea>
                     </div>
                     <div class="col-1">
                         <div class="input-group-append">

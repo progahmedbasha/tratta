@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Drug;
 use App\Models\IllnessSub;
 use App\Models\Predose;
+use App\Models\PredoseQuestionRange;
 use App\Models\PredoseSecondQuestion;
 use Illuminate\Http\Request;
 
@@ -29,6 +30,14 @@ class PredoseSecondQuestionController extends Controller
         $illness_subs = IllnessSub::all();
         return view('dashboard.predose-questions.second-question', compact('id','questions','predose_drug_id','illness_subs'));
     }
+    public function add_row(Request $request)
+    {
+        // return $request;
+        $number = $request->number;
+        $illness_subs = IllnessSub::all();
+        $html = view('dashboard.doses.variable-component.second-question-row', compact('number','illness_subs'))->render();
+        return response()->json(['status' => true, 'result' => $html]);
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -40,10 +49,18 @@ class PredoseSecondQuestionController extends Controller
         $predose->predose_id = $request->predose_id;
         $predose->label = $request->label;
         $predose->unit = $request->unit;
-        $predose->from = $request->from;
-        $predose->to = $request->to;
-        $predose->illness_sub_id = $request->illness_sub_id;
         $predose->save();
+        $countItems = count($request->illness_sub_id);
+        for ($i = 0; $i < $countItems; $i++) {
+            $var = PredoseSecondQuestion::get();
+                foreach($var as $variable ){
+                 $variable->variablePredoseQuestionRange()->create([
+                        'from' => $request->from[$i],
+                        'to' => $request->to[$i],
+                        'illness_sub_id' => $request->illness_sub_id[$i],
+                    ]);
+                }
+        }
         return redirect()->back()->with('success','First Question Added Successfully');
     }
 
@@ -68,14 +85,27 @@ class PredoseSecondQuestionController extends Controller
      */
     public function update(Request $request, $id)
     {
+        return $request;
         $predose= PredoseSecondQuestion::findOrFail($id);
         $predose->label = $request->label;
         $predose->unit = $request->unit;
-        $predose->from = $request->from;
-        $predose->to = $request->to;
-        $predose->illness_sub_id = $request->illness_sub_id;
         $predose->save();
-        return redirect()->back()->with('success','First Question Updated Successfully');
+        return redirect()->back()->with('success','Second Question Updated Successfully');
+    }
+    public function second_question_range_update(Request $request, $id)
+    {
+        $range = PredoseQuestionRange::findOrFail($id);
+        $range->from = $request->from;
+        $range->to = $request->to;
+        $range->illness_sub_id = $request->illness_sub_id;
+        $range->save();
+        return redirect()->back()->with('success','Second Question Updated Successfully');
+    }
+    public function second_question_range_delete(Request $request, $id)
+    {
+        $range = PredoseQuestionRange::findOrFail($id);
+        $range->delete();
+        return redirect()->back()->with('success','Deleted Successfully');
     }
 
     /**

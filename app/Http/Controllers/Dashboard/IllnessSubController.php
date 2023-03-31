@@ -59,7 +59,7 @@ class IllnessSubController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $illness= IllnessSub::findOrFail($id);
+        $illness = IllnessSub::findOrFail($id);
         $illness->name = $request->name;
         $illness->illness_category_id = $request->illness_category_id;
         $illness->save();
@@ -71,6 +71,8 @@ class IllnessSubController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $illness = IllnessSub::findOrFail($id);
+        $illness->delete();
+        return redirect()->back()->with('success','Illness Updated Successfully');
     }
 }

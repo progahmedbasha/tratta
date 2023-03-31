@@ -36,6 +36,10 @@ class Drug extends Model
     {
         return $this->morphMany(PredoseThirdQuestion::class, 'variableable');
     }
+    public function variableScorePoint()
+    {
+        return $this->morphMany(ScorePoint::class, 'variableable');
+    }
     public function scopeWhenSearch($query,$search){
           return $query->when($search,function($q)use($search){
               return $q->where('name','like',"%$search%")

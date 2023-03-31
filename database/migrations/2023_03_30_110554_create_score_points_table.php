@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('predose_second_questions', function (Blueprint $table) {
+        Schema::create('score_points', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('predose_id')->unsigned();
-            $table->foreign('predose_id')->references('id')->on('predoses')->onUpdate('cascade')->onDelete('cascade');
-            $table->string('label',100);
-            $table->string('unit',100);
+            $table->unsignedInteger('fourth_question_score_id')->unsigned();
+            $table->foreign('fourth_question_score_id')->references('id')->on('fourth_question_scores')->onUpdate('cascade')->onDelete('cascade');
+            $table->integer('point');
+            $table->morphs('variableable');
             $table->timestamp('created_at')->default(\DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(\DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
         });
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('predose_second_questions');
+        Schema::dropIfExists('score_points');
     }
 };
