@@ -48,10 +48,11 @@
                      @include('dashboard.drugs.component.pregnancy')
                      {{-- treade name card --}}
                      @include('dashboard.drugs.component.trade')
-                     {{-- Moa card --}}
-                     {{-- @include('dashboard.drugs.component.drug-moa') --}}
+                 
                      {{-- pre-dose q card --}}
                      @include('dashboard.drugs.component.predose-q')
+                         {{-- Moa card --}}
+                     @include('dashboard.drugs.component.drug-moa')
                   </div>
                </div>
             </div>

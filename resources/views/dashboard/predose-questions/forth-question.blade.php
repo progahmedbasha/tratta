@@ -26,6 +26,7 @@
                                 enctype="multipart/form-data">
                                 @csrf
                                 <input type="hidden" value="{{ $id }}" name="predose_id">
+                                <label>Result :</label>
                                 @include('dashboard.predose-questions.component.renge-row')
                                 <div class="row">
                                     <div class="col-10"></div>

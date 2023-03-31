@@ -160,7 +160,8 @@
                             <br>
                             @endforeach
                              <hr class="horizontal dark mt-0">
-                            <label>Kidneys</label>
+                            <label>Kidneys                                        <label class="rounded-circle" style="box-sizing: border-box; position: absolute;width: 28px;height: 25px;text-align: center;background-color: #333333;"> <img src="{{ url('data/kidney.svg') }}" alt='' /> </label>
+</label>
                              @foreach ($kidneys as $kidneys )
                             <form action="{{route('crcl_ranges.update',$kidneys->id)}}" method="post"
                                 enctype="multipart/form-data">

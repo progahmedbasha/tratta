@@ -19,6 +19,8 @@
       background-image: url("{{ asset('dashboard/assets/icons/sidetop.svg') }}");
       background-repeat: no-repeat;
       background-size: 270px;
+      font-family: cursive !important;
+
     }
   </style>
   @include('dashboard.layouts.header')
