@@ -81,7 +81,7 @@ class CategoryController extends Controller
      */
     public function update(StoreCategoryRequest $request,$id)
     {
-        $category= Category::findOrFail($id);
+        $category = Category::findOrFail($id);
         $category->name = $request->name;
         $category->parent_id = $request->parent_id;
         $category->save();
@@ -91,9 +91,11 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id): RedirectResponse
+    public function destroy(string $id)
     {
-        //
+        $category = Category::findOrFail($id);
+        $category->delete();
+        return redirect()->route('categories.index')->with('success','Category Updated Successfully');
     }
     public function status(Request $request)
     {

@@ -29,13 +29,11 @@
                                     </div>
                                     <div class="col-1">
                                         <div class="input-group-append">
-                                            <button class="btn bg-gradient-dark mb-0" type="submit"><i
-                                                    class="fas fa-plus"></i></button>
+                                            <x-dashboard.add-button type="submit"></x-dashboard.add-button>
                                         </div>
                                     </div>
                                 </div>
                             </form>
-                            <br>
                             <hr class="horizontal dark mt-0">
                             @foreach ($parent_illness_categories as $illness_category )
                             <form action="{{route('illness_categories.update',$illness_category->id)}}" method="post"
@@ -43,7 +41,7 @@
                                 @csrf
                                 @method('patch')
                                 <div class="row">
-                                    <div class="col-md-10">
+                                    <div class="col-md-9">
                                         <input type="text" class="form-control" placeholder="Drug Category"
                                             value="{{$illness_category->name}}" name="name" required />
                                         @error('name')
@@ -52,9 +50,17 @@
                                     </div>
                                     <div class="col-1">
                                         <div class="input-group-append">
-                                            <button class="btn bg-gradient-info mb-0" type="submit"><i
-                                                    class="fas fa-edit"></i></button>
+                                            <x-dashboard.edit-button></x-dashboard.edit-button>
                                         </div>
+                                    </div>
+                            </form>
+                                     <div class="col-1">
+                                        <form action="{{route('illness_categories.destroy',$illness_category->id)}}"
+                                            method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <x-dashboard.delete-button></x-dashboard.delete-button>
+                                        </form>
                                     </div>
                                     <div class="col-1">
                                         @if($illness_category->active =='0')
@@ -73,7 +79,6 @@
                                         @endif
                                     </div>
                                 </div>
-                            </form>
                             <br>
                             @endforeach
                         </div>

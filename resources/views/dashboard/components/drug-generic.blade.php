@@ -41,7 +41,7 @@
                   </div>
                   <div class="col-1">
                     <div class="input-group-append">
-                      <button class="btn bg-gradient-dark mb-0" type="submit"><i class="fas fa-plus"></i></button>
+                      <x-dashboard.add-button type="submit"></x-dashboard.add-button>
                     </div>
                   </div>
                 </div>
@@ -58,7 +58,7 @@
                   <div class="col-3">
                     <input type="text" class="form-control" value="{{ $category_sub->parent->name }}" disabled>
                   </div>
-                  <div class="col-md-8">
+                  <div class="col-md-7">
                     <input type="hidden" name="parent_id" value="{{ $category_sub->parent_id }}">
                     <input type="text" class="form-control" placeholder="Key Name" value="{{$category_sub->name}}"
                       name="name" required />
@@ -68,73 +68,87 @@
                   </div>
                   <div class="col-1">
                     <div class="input-group-append">
-                      <button class="btn bg-gradient-info mb-0" type="submit"><i class="fas fa-edit"></i></button>
+                      <x-dashboard.edit-button></x-dashboard.edit-button>
                     </div>
                   </div>
-                </div>
               </form>
-              <form action="{{route('drugs.store')}}" method="post" enctype="multipart/form-data">
-                @csrf
-                <div class="row">
-                  <input type="hidden" name="parent_id" value="{{ $category_sub->id }}">
-                  <div class="col">
-                    <input type="text" class="form-control" placeholder="Add Sub" name="name" value="{{old('name')}}"
-                      required />
-                    @error('name')
-                    <div class="alert alert-danger">{{ $message }}</div>
-                    @enderror
-                  </div>
-                  <div class="col-1">
-                    <div class="input-group-append">
-                      <button class="btn bg-gradient-dark mb-0" type="submit"><i class="fas fa-plus"></i></button>
-                    </div>
-                  </div>
+              <div class="col-1">
+                <form action="{{route('categories.destroy',$category_sub->id)}}" method="POST">
+                  @csrf
+                  @method('DELETE')
+                  <x-dashboard.delete-button></x-dashboard.delete-button>
+                </form>
+              </div>
+            </div>
+            <form action="{{route('drugs.store')}}" method="post" enctype="multipart/form-data">
+              @csrf
+              <div class="row">
+                <input type="hidden" name="parent_id" value="{{ $category_sub->id }}">
+                <div class="col">
+                  <input type="text" class="form-control" placeholder="Add Sub" name="name" value="{{old('name')}}"
+                    required />
+                  @error('name')
+                  <div class="alert alert-danger">{{ $message }}</div>
+                  @enderror
                 </div>
-              </form>
-              <br>
-              <div class="card col-6">
-                <div class="card-header bg-info text-white" style="padding: 0.1rem;"> <label>Sub Subs :</label></div>
-                <div class="card-body" style="padding: 0.5rem;">
-                  @foreach ($category_sub->drug as $drug )
-                  <form action="{{route('drugs.update',$drug->id)}}" method="post" enctype="multipart/form-data">
-                    @csrf
-                    @method('patch')
-                    <div class="row">
-                      <div class="col-md-5">
-                        <input type="text" class="form-control" placeholder="Drug Category" value="{{$drug->name}}"
-                          name="name" required />
-                        @error('name')
-                        <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
-                      </div>
-                      <div class="col-md-5">
-                        <input type="text" class="form-control" value="{{$drug->code}}" disabled />
-                      </div>
-                      {{-- <input type="hidden" name="parent_id" value="{{ $drug->parent_id }}"> --}}
-                      <div class="col-2">
-                        <div class="input-group-append">
-                          <button class="btn bg-gradient-info mb-0" type="submit"><i class="fas fa-edit"></i></button>
-                        </div>
-                      </div>
-                    </div>
-                  </form>
-                  {{--
-                           </div>
-                           --}}
-                  <br>
-                  @endforeach
+                <div class="col-1">
+                  <div class="input-group-append">
+                    <x-dashboard.add-button type="submit"></x-dashboard.add-button>
+                  </div>
                 </div>
               </div>
-              <br>
-              @endforeach
-              @endforeach
-
-              {{-- here to add sub sub  --}}
-              <br>
+            </form>
+            <br>
+            <div class="card col-6">
+              <div class="card-header bg-info text-white" style="padding: 0.1rem;"> <label>Sub Subs :</label></div>
+              <div class="card-body" style="padding: 0.5rem;">
+                @foreach ($category_sub->drug as $drug )
+                <form action="{{route('drugs.update',$drug->id)}}" method="post" enctype="multipart/form-data">
+                  @csrf
+                  @method('patch')
+                  <div class="row">
+                    <div class="col-md-5">
+                      <input type="text" class="form-control" placeholder="Drug Category" value="{{$drug->name}}"
+                        name="name" required />
+                      @error('name')
+                      <div class="alert alert-danger">{{ $message }}</div>
+                      @enderror
+                    </div>
+                    <div class="col-md-4">
+                      <input type="text" class="form-control" value="{{$drug->code}}" disabled />
+                    </div>
+                    {{-- <input type="hidden" name="parent_id" value="{{ $drug->parent_id }}"> --}}
+                    <div class="col-1">
+                      <div class="input-group-append">
+                        <x-dashboard.edit-button></x-dashboard.edit-button>
+                      </div>
+                      </div>
+                </form>
+                      <div class="col-1">
+                        <form action="{{route('drugs.destroy',$drug->id)}}" method="POST">
+                          @csrf
+                          @method('DELETE')
+                          <x-dashboard.delete-button></x-dashboard.delete-button>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                {{--
+                           </div>
+                           --}}
+                @endforeach
+              </div>
             </div>
+            <br>
+            @endforeach
+            @endforeach
+
+            {{-- here to add sub sub  --}}
+            <br>
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>
 </div>

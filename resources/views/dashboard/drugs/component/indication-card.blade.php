@@ -49,6 +49,13 @@
             <div class="col-md-4">
                 <input type="text" class="form-control" value="{{$drug_indication->code}}" disabled>
             </div>
+            <div class="col-1">
+                <form action="{{route('drug_indications.destroy',$drug_indication->id)}}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <x-dashboard.delete-button></x-dashboard.delete-button>
+                </form>
+            </div>
         </div>
         <br>
         @endforeach

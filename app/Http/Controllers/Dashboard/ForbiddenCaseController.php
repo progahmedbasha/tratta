@@ -11,6 +11,7 @@ use App\Models\ForbiddenCase;
 use App\Models\ForbiddenCaseValue;
 use App\Models\Gender;
 use App\Models\IllnessSub;
+use App\Models\Indication;
 use App\Models\PregnancyStage;
 use App\Models\Weight;
 use Illuminate\Http\Request;

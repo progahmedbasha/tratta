@@ -90,7 +90,7 @@ class IllnessCategoryController extends Controller
      */
     public function update(StoreIllnessCategoryRequest $request,$id)
     {
-        $category= IllnessCategory::findOrFail($id);
+        $category = IllnessCategory::findOrFail($id);
         $category->name = $request->name;
         $category->parent_id = $request->parent_id;
         $category->save();
@@ -100,9 +100,11 @@ class IllnessCategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id): RedirectResponse
+    public function destroy(string $id)
     {
-        //
+        $category = IllnessCategory::findOrFail($id);
+        $category->delete();
+        return redirect()->route('illness_categories.index')->with('success','Illness Category Updated Successfully');
     }
         public function status(Request $request)
     {

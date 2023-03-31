@@ -14,7 +14,7 @@
     </div>
        <div class="col-1">
         <div class="input-group-append">
-            <button class="btn bg-gradient-info mb-0" type="submit"><i class="fas fa-save"></i></button>
+            <x-dashboard.save-button></x-dashboard.save-button>
         </div>
     </div>
 </div>

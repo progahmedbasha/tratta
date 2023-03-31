@@ -110,7 +110,7 @@ class DrugController extends Controller
      */
     public function update(StoreDrugRequest $request, $id)
     {
-        $drug= Drug::findOrFail($id);
+        $drug = Drug::findOrFail($id);
         $drug->name  = $request->name ;
         // $drug->sub_cat_id  = $request->parent_id ;
         $drug->save();
@@ -120,8 +120,10 @@ class DrugController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id): RedirectResponse
+    public function destroy(string $id)
     {
-        //
+        $drug = Drug::findOrFail($id);
+        $drug->delete();
+        return redirect()->back()->with('success','Drug Deleted Successfully'); 
     }
 }

@@ -179,7 +179,7 @@
                 <a href="{{ route('third_question', $predose->id) }}" class="btn bg-gradient-primary mb-0">Q 3</a>
             </div>
             <div class="col-2">
-                <button type="input" class="form-control">Q4</button>
+                <a href="{{ route('fourth_question', $predose->id) }}" class="btn bg-gradient-primary mb-0">Q 4</a>
             </div>
 
 

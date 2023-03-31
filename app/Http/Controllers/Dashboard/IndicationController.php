@@ -72,8 +72,10 @@ class IndicationController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id): RedirectResponse
+    public function destroy(string $id)
     {
-        //
+        $indication = Indication::findOrFail($id);
+        $indication->delete();
+        return redirect()->route('indications.index')->with('success','Indication Deleted Successfully');
     }
 }

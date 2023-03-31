@@ -41,6 +41,7 @@ use App\Http\Controllers\Dashboard\PredoseController;
 use App\Http\Controllers\Dashboard\PredoseFirstQuestionController;
 use App\Http\Controllers\Dashboard\PredoseSecondQuestionController;
 use App\Http\Controllers\Dashboard\PredoseThirdQuestionController;
+use App\Http\Controllers\Dashboard\PredoseFourthQuestionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -156,10 +157,17 @@ Route::middleware('auth')->group(function () {
     Route::get('first_question/{id}', [PredoseFirstQuestionController::class, 'create'])->name('first_question');
     Route::resource('second_questions', PredoseSecondQuestionController::class);
     Route::get('second_question/{id}', [PredoseSecondQuestionController::class, 'create'])->name('second_question');
+    Route::post('second_question_add_row', [PredoseSecondQuestionController::class, 'add_row'])->name('second_question_add_row');
+    Route::post('second_question_range_update/{id}', [PredoseSecondQuestionController::class, 'second_question_range_update'])->name('second_question_range_update');
+    Route::post('second_question_range_delete/{id}', [PredoseSecondQuestionController::class, 'second_question_range_delete'])->name('second_question_range_delete');
+
     Route::resource('third_questions', PredoseThirdQuestionController::class);
     Route::get('third_question/{id}', [PredoseThirdQuestionController::class, 'create'])->name('third_question');
     
-    
+    Route::resource('fourth_questions', PredoseFourthQuestionController::class);
+    Route::get('fourth_question/{id}', [PredoseFourthQuestionController::class, 'create'])->name('fourth_question');
+    Route::post('save_q4_score', [PredoseFourthQuestionController::class, 'save_q4_score'])->name('save_q4_score');
+    Route::post('delete_score/{id}', [PredoseFourthQuestionController::class, 'delete_score'])->name('delete_score');
     
     
     });

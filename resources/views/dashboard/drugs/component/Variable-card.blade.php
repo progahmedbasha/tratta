@@ -63,7 +63,7 @@
                                     @csrf
                                     @method('DELETE')
                                     <a class="btn btn-link"
-                                        href="{{ route('variables.show', ['variable'=>$variable->id]) }}"><img src='{{ url('data/edit.svg') }}'/></a>
+                                        href="{{ route('variables.show', ['variable'=>$variable->id]) }}"><img src='{{ url('data/VarIconsax.svg') }}'/></a>
                                     <x-dashboard.delete-button></x-dashboard.delete-button>
 
                                     <a href="{{ route('fixed_doses_create', $variable->id) }}" class="btn bg-gradient-info mb-0" style="box-sizing: border-box;width: 91px;height: 51px;background: #FFFFFF;font-family: 'Ink Free';font-style: normal;color:#5E5E5E;

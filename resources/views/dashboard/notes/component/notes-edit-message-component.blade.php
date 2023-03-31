@@ -32,7 +32,7 @@
         <div class="col">
             <form action="{{route('variable_dose_delete',$var->id)}}" method="POST">
                 @csrf
-                <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                <x-dashboard.delete-button></x-dashboard.delete-button>
             </form>
         </div>
     </div><br><br>
@@ -47,7 +47,7 @@
         <div class="col">
             <form action="{{route('variable_dose_delete',$var->id)}}" method="POST">
                 @csrf
-                <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                <x-dashboard.delete-button></x-dashboard.delete-button>
             </form>
         </div>
     </div><br><br>
@@ -62,7 +62,7 @@
         <div class="col">
             <form action="{{route('variable_dose_delete',$var->id)}}" method="POST">
                 @csrf
-                <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                <x-dashboard.delete-button></x-dashboard.delete-button>
             </form>
         </div>
     </div><br><br>
@@ -77,7 +77,7 @@
         <div class="col">
             <form action="{{route('variable_dose_delete',$var->id)}}" method="POST">
                 @csrf
-                <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                <x-dashboard.delete-button></x-dashboard.delete-button>
             </form>
         </div>
     </div><br><br>
@@ -92,7 +92,7 @@
         <div class="col">
             <form action="{{route('variable_dose_delete',$var->id)}}" method="POST">
                 @csrf
-                <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                <x-dashboard.delete-button></x-dashboard.delete-button>
             </form>
         </div>
     </div><br><br>
@@ -107,7 +107,7 @@
         <div class="col">
             <form action="{{route('variable_dose_delete',$var->id)}}" method="POST">
                 @csrf
-                <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                <x-dashboard.delete-button></x-dashboard.delete-button>
             </form>
         </div>
     </div>
@@ -135,7 +135,7 @@
         </div>
         <div class="col-1">
             <div class="input-group-append">
-                <button class="btn bg-gradient-info mb-0" type="submit"><i class="fas fa-edit"></i></button>
+                <x-dashboard.edit-button></x-dashboard.edit-button>
             </div>
         </div>
 </form>
@@ -143,7 +143,7 @@
     <form action="{{route('notes.destroy',$fixed_dose->id)}}" method="POST">
         @csrf
         @method('DELETE')
-        <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
+        <x-dashboard.delete-button></x-dashboard.delete-button>
     </form>
 </div>
 <br>

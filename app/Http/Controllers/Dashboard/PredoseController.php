@@ -12,6 +12,7 @@ use App\Models\Predose;
 use App\Models\PredoseVariable;
 use App\Models\PregnancyStage;
 use App\Models\Weight;
+use App\Models\PredoseFourthQuestion;
 use Illuminate\Http\Request;
 
 class PredoseController extends Controller
@@ -67,6 +68,10 @@ class PredoseController extends Controller
                     ]);
                 }
             }
+
+        $q4 = new PredoseFourthQuestion();
+        $q4->predose_id = $predose->id;
+        $q4->save();
             return redirect()->back()->with('success','Forbidden Added Successfully');
     }
 

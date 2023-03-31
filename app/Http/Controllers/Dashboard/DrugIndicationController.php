@@ -67,8 +67,10 @@ class DrugIndicationController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id): RedirectResponse
+    public function destroy(string $id)
     {
-        //
+        $drug_indication = DrugIndication::findOrFail($id);
+        $drug_indication->delete();
+        return redirect()->back()->with('success','Drug Indication Deleted Successfully');
     }
 }
