@@ -21,7 +21,7 @@
                 <div class="col-3"></div>
                 @include('dashboard.forbidden-case.div_ajax_component.fetch-select-and-add-rows')
                 <div class="row">
-                    <div class="col-md-8"></div>
+                    <div class="col-md-9"></div>
                     <div class="col-1">
                         <div class="input-group-append">
                             <x-dashboard.save-button></x-dashboard.save-button>

@@ -79,14 +79,14 @@
                                         </div>
                                     </div>
                             </form>
-                                    <div class="col-1">
+                                    {{-- <div class="col-1">
                                         <form action="{{route('kidneys.destroy',$kidneys->id)}}"
                                             method="POST">
                                             @csrf
                                             @method('DELETE')
                                             <x-dashboard.delete-button></x-dashboard.delete-button>
                                         </form>
-                                    </div>
+                                    </div> --}}
                                 </div>
                             <br>
                             @endforeach

@@ -99,7 +99,7 @@ class PredoseSecondQuestionController extends Controller
         $range->to = $request->to;
         $range->illness_sub_id = $request->illness_sub_id;
         $range->save();
-        return redirect()->back()->with('success','Second Question Updated Successfully');
+        return redirect()->back()->with('success',' Updated Successfully');
     }
     public function second_question_range_delete(Request $request, $id)
     {
