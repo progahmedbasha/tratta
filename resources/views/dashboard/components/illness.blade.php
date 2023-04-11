@@ -51,19 +51,20 @@
               </form>
               <hr class="horizontal dark mt-0">
               @foreach ($parent_illness_categories as $parent_cat )
+              <div class="col-md-6 mb-3">
+                <input type="text" class="form-control" value="{{ $parent_cat->name }}"
+                  style="background-color: #FFE976;" disabled>
+              </div>
               @foreach ($parent_cat->child as $category_sub )
               <form action="{{route('illness_categories.update',$category_sub->id)}}" method="post"
                 enctype="multipart/form-data">
                 @csrf
                 @method('patch')
                 <div class="row">
-                  <div class="col-3">
-                    <input type="text" class="form-control" value="{{ $category_sub->parent->name }}" disabled>
-                  </div>
-                  <div class="col-md-7">
+                  <div class="col-md-6">
                     <input type="hidden" name="parent_id" value="{{ $category_sub->parent_id }}">
                     <input type="text" class="form-control" placeholder="Key Name" value="{{$category_sub->name}}"
-                      name="name" required />
+                      style="background-color: #F5F5F5;" name="name" required />
                     @error('name')
                     <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
@@ -86,7 +87,7 @@
               @csrf
               <div class="row">
                 <input type="hidden" name="illness_category_id" value="{{ $category_sub->id }}">
-                <div class="col">
+                <div class="col-md-6">
                   <input type="text" class="form-control" placeholder="Add Sub" name="name" value="{{old('name')}}"
                     required />
                   @error('name')
@@ -100,95 +101,76 @@
                 </div>
               </div>
             </form>
-            <br>
-            <div class="card col-6">
-              <div class="card-header bg-info text-white" style="padding: 0.1rem;"> <label>Sub Subs :</label></div>
-              <div class="card-body" style="padding: 0.5rem;">
-                @foreach ($category_sub->illnessSub as $category_sub_sub )
-                <form action="{{route('illness_subs.update',$category_sub_sub->id)}}" method="post"
-                  enctype="multipart/form-data">
-                  @csrf
-                  @method('patch')
-                  <div class="row">
-                    <div class="col-md-9">
-                      <input type="text" class="form-control" placeholder="Drug Category"
-                        value="{{$category_sub_sub->name}}" name="name" required />
-                      @error('name')
-                      <div class="alert alert-danger">{{ $message }}</div>
-                      @enderror
-                    </div>
-                    <input type="hidden" name="illness_category_id" value="{{ $category_sub->id }}">
-                    <div class="col-1">
-                      <div class="input-group-append">
-                        <x-dashboard.edit-button></x-dashboard.edit-button>
-                      </div>
-                    </div>
-                </form>
-                    <div class="col-1">
-                      <form action="{{route('illness_subs.destroy',$category_sub->id)}}" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <x-dashboard.delete-button></x-dashboard.delete-button>
-                      </form>
-                    </div>
+            @foreach ($category_sub->illnessSub as $category_sub_sub )
+            <form action="{{route('illness_subs.update',$category_sub_sub->id)}}" method="post"
+              enctype="multipart/form-data">
+              @csrf
+              @method('patch')
+              <div class="row">
+                <div class="col-md-6">
+                  <input type="text" class="form-control" placeholder="Drug Category"
+                    value="{{$category_sub_sub->name}}" name="name" required />
+                  @error('name')
+                  <div class="alert alert-danger">{{ $message }}</div>
+                  @enderror
+                </div>
+                <input type="hidden" name="illness_category_id" value="{{ $category_sub->id }}">
+                <div class="col-1">
+                  <div class="input-group-append">
+                    <x-dashboard.edit-button></x-dashboard.edit-button>
                   </div>
-                @endforeach
-              </div>
+                </div>
+            </form>
+            <div class="col-1">
+              <form action="{{route('illness_subs.destroy',$category_sub_sub->id)}}" method="POST">
+                @csrf
+                @method('DELETE')
+                <x-dashboard.delete-button></x-dashboard.delete-button>
+              </form>
             </div>
-            <br>
-            @endforeach
-            {{-- show subs without keys --}}
-            {{-- @foreach ($parent_cat->illnessSub as $illness_sub ) --}}
-            <div class="card col-6">
-              <div class="card-header bg-secondary text-white" style="padding: 0.1rem;"> <label>Sub Subs without
-                  key:</label></div>
-              <div class="card-body" style="padding: 0.5rem;">
-                @foreach ($parent_cat->illnessSub as $illness_sub )
-                <form action="{{route('illness_subs.update',$illness_sub->id)}}" method="post"
-                  enctype="multipart/form-data">
-                  @csrf
-                  @method('patch')
-                  <input type="hidden" name="illness_category_id" value="{{ $illness_sub->illness_category_id }}">
-                  <div class="row">
-                    <div class="col-4">
-                      <input type="text" class="form-control" placeholder="Sub Sub name"
-                        value="{{$illness_sub->illnessCategory->name }}" disabled />
-                    </div>
-                    <div class="col-5">
-                      <input type="text" class="form-control" placeholder="Sub Sub name" value="{{$illness_sub->name}}"
-                        name="name" required />
-                      @error('name')
-                      <div class="alert alert-danger">{{ $message }}</div>
-                      @enderror
-                    </div>
-                    <div class="col-1">
-                      <div class="input-group-append">
-                        <x-dashboard.edit-button></x-dashboard.edit-button>
-                      </div>
-                    </div>
-                </form>
-                    <div class="col-1">
-                      <form action="{{route('illness_subs.destroy',$illness_sub->id)}}" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <x-dashboard.delete-button></x-dashboard.delete-button>
-                      </form>
-                    </div>
-                  </div>
-                <br>
-                @endforeach
-                <br>
-              </div>
-            </div>
-
-            <br>
-            @endforeach
-
-            <br>
           </div>
+
+          @endforeach
+          @endforeach
+          <hr class="horizontal dark mt-0">
+          @foreach ($parent_cat->illnessSub as $illness_sub )
+          <form action="{{route('illness_subs.update',$illness_sub->id)}}" method="post" enctype="multipart/form-data">
+            @csrf
+            @method('patch')
+            <input type="hidden" name="illness_category_id" value="{{ $illness_sub->illness_category_id }}">
+            <div class="row">
+              <div class="col-6">
+                <input type="text" class="form-control" placeholder="Sub Sub name" value="{{$illness_sub->name}}"
+                  name="name" required />
+                @error('name')
+                <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
+              </div>
+              <div class="col-1">
+                {{-- <div class="input-group-append">
+                  <x-dashboard.edit-button></x-dashboard.edit-button>
+                </div> --}}
+              </div>
+          </form>
+          {{-- <div class="col-1">
+            <form action="{{route('illness_subs.destroy',$illness_sub->id)}}" method="POST">
+              @csrf
+              @method('DELETE')
+              <x-dashboard.delete-button></x-dashboard.delete-button>
+            </form>
+          </div> --}}
         </div>
+        @endforeach
+
+
+        <br>
+        @endforeach
+
+        <br>
       </div>
     </div>
   </div>
+</div>
+</div>
 </div>
 </div>

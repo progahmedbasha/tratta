@@ -17,7 +17,6 @@
             <div class="row">
                 <div class="col-md-4">
                     <select class="form-control" name="country_id" required />
-                    <option value="">Select Countries</option>
                     @foreach ($countries as $country)
                     <option value="{{$country->id}}" {{(old($country->id)==$country->id)?
                         'selected':''}}>
@@ -30,7 +29,7 @@
                     @enderror
                 </div>
                 <div class="col-md-4">
-                    <input class="form-control" value="{{old('name_sub')}}" name="name_sub"
+                    <input class="form-control" placeholder="Name Sub" value="{{old('name_sub')}}" name="name_sub"
                         required />
                     @error('name_sub')
                     <div class="alert alert-danger">{{ $message }}</div>
@@ -44,7 +43,7 @@
             <div class="row">
                 <div class="col-4"></div>
                 <div class="col-4">
-                    <input class="form-control"  value="{{old('name_key')}}" name="name_key"
+                    <input class="form-control" placeholder="Name Key"  value="{{old('name_key')}}" name="name_key"
                         required />
                     @error('name_key')
                     <div class="alert alert-danger">{{ $message }}</div>
@@ -69,7 +68,7 @@
             <div class="row">
                 <div class="col-md-4">
                     <select class="form-control" name="country_id" required />
-                    <option value="">Select Countries</option>
+                    <option value="">Countries</option>
                     @foreach ($countries as $country)
                     <option value="{{$country->id}}" {{($trade->country_id==$country->id)?
                         'selected':''}}>
@@ -82,7 +81,7 @@
                     @enderror
                 </div>
                 <div class="col-md-4">
-                    <input class="form-control" placeholder="Name Sub" value="{{$trade->name_sub}}" name="name_sub"
+                    <input class="form-control" placeholder="Name Sub" value="{{$trade->name_sub}}" name="name_sub" style="background-color: #9EA5F9;"
                         required />
                     @error('name_sub')
                     <div class="alert alert-danger">{{ $message }}</div>
@@ -96,7 +95,7 @@
             <div class="row">
                 <div class="col-4"></div>
                 <div class="col-4">
-                    <input class="form-control" placeholder="Name Key" value="{{$trade->name_key}}" name="name_key"
+                    <input class="form-control" placeholder="Name Key" value="{{$trade->name_key}}" name="name_key" style="background-color: #9EA5F9;"
                         required />
                     @error('name_key')
                     <div class="alert alert-danger">{{ $message }}</div>

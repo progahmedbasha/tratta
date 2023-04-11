@@ -29,7 +29,7 @@
                                     <div class="col">
                                         <select class="form-control" id="variables0" onchange="selectVariable(0)"
                                             name="variable[]" required />
-                                        <option value="">Select Varirables</option>
+                                        <option value="">Varirables</option>
                                         <option value="ages">Ages</option>
                                         <option value="weights">Weights</option>
                                         <option value="genders">Genders</option>

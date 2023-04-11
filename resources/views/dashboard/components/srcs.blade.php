@@ -20,7 +20,7 @@
                                 <div class="row">
                                     <div class="col">
                                         <select class="form-control" name="illness_sub_id" required>
-                                            <option value="">Select Illness Category</option>
+                                            <option value="">Illness Category</option>
                                             @foreach ($illness_subs as $illness_sub)
                                             <option value="{{$illness_sub->id}}">
                                                 {{$illness_sub->name}}
@@ -30,7 +30,7 @@
                                     </div>
                                     <div class="col">
                                         <select class="form-control" name="gender_id" required>
-                                            <option value="">Select Gender</option>
+                                            <option value="">Gender</option>
                                             @foreach ($genders as $gender)
                                             <option value="{{$gender->id}}">
                                                 {{$gender->name}}
@@ -69,7 +69,7 @@
                                 <div class="row">
                                     <div class="col">
                                         <select class="form-control" name="illness_sub_id" required>
-                                            <option value="">Select Illness Category</option>
+                                            <option value="">Illness Category</option>
                                             @foreach ($illness_subs as $illness_sub)
                                             <option value="{{$illness_sub->id}}" {{($scr->
                                                 illness_sub_id==$illness_sub->id)?
@@ -81,7 +81,7 @@
                                     </div>
                                     <div class="col">
                                         <select class="form-control" name="gender_id">
-                                            <option value="">Select Gender</option>
+                                            <option value="">Gender</option>
                                             @foreach ($genders as $gender)
                                             <option value="{{$gender->id}}" {{($scr->gender_id==$gender->id)?
                                                 'selected':''}}>

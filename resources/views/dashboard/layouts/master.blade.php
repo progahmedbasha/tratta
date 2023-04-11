@@ -15,12 +15,46 @@
 <!DOCTYPE html>
 <html lang="en">
   <style>
+    @font-face {
+      font-family: Inkfree;
+      src: url("{{url('dashboard/assets/css/Inkfree.ttf')}}");
+    }
+
     body {
       background-image: url("{{ asset('dashboard/assets/icons/sidetop.svg') }}");
       background-repeat: no-repeat;
       background-size: 270px;
-      font-family: cursive !important;
+      font-family: Inkfree !important;
+    }
 
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    input,
+    p,
+    select,
+    ul,
+    li,
+    a,
+    b,
+    span,
+    tr,
+    td,
+    option,
+    label,
+    button {
+      font-family: Inkfree !important;
+    }
+
+    input[type=text],
+    input[type=number],
+    select:disabled,
+    input[type=file],
+    textarea {
+      font-family: Inkfree !important;
     }
   </style>
   @include('dashboard.layouts.header')

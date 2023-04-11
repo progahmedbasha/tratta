@@ -7,7 +7,7 @@
                         <div class="card-header pb-0 p-3">
                             <div class="row">
                                 <div class="col-6 d-flex align-items-center">
-                                    <h6 class="mb-0">Weight Gender Ranges</h6>
+                                    <h6 class="mb-0">Weight-Gender Ranges</h6>
                                 </div>
                                 <div class="col-6 text-end">
                                     <!--<a class="btn bg-gradient-dark mb-0" href="javascript:;"><i class="fas fa-plus"></i>&nbsp;&nbsp;Add New</a>-->
@@ -21,7 +21,7 @@
                                 <div class="row">
                                     <div class="col">
                                         <select class="form-control" name="weight_id" required>
-                                            <option value="">Select Weight</option>
+                                            <option value="">Weight</option>
                                             @foreach ($weights as $weight)
                                             <option value="{{$weight->id}}">
                                                 {{$weight->weight}}
@@ -34,7 +34,7 @@
                                     </div>
                                     <div class="col">
                                         <select class="form-control" name="gender_id" required>
-                                            <option value="">Select Gender</option>
+                                            <option value="">Gender</option>
                                             @foreach ($genders as $gender)
                                             <option value="{{$gender->id}}">
                                                 {{$gender->name}}

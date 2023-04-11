@@ -1,5 +1,4 @@
 {{-- pregnancy card  --}}
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.slim.min.js"></script>
@@ -30,7 +29,7 @@
                 <div class="col-md-4">
                     <select class="js-example-basic-multiple form-control" multiple="multiple"
                         name="pregnancy_stage_id[]" required />
-                    <option value="" disabled>Select Stage</option>
+                    <option value="" disabled>Stage</option>
                     @foreach ($pregnancy_stages as $pregnancy_stage)
                     <option value="{{$pregnancy_stage->id}}" {{(old($pregnancy_stage->
                         id)==$pregnancy_stage->id)?
@@ -44,8 +43,9 @@
                     @enderror
                 </div>
                 <div class="col-md-4">
-                    <select class="form-control" name="pregnancy_safety_id" required />
-                    <option value="">Select Category</option>
+                    <select class="form-control" name="pregnancy_safety_id"
+                        style="background-color: #5E556A;color:#EFEFEF;" required />
+                    <option value="">Category</option>
                     @foreach ($prganancy_safties as $prganancy_safty)
                     <option value="{{$prganancy_safty->id}}" {{(old($prganancy_safty->
                         id)==$prganancy_safty->id)?
@@ -86,8 +86,9 @@
             <input type="hidden" value="{{ $drug->id }}" name="drug_id">
             <div class="row">
                 <div class="col-md-2">
-                    <select class="form-control" name="pregnancy_safety_id" disabled />
-                    <option value="">Select Category</option>
+                    <select class="form-control" name="pregnancy_safety_id"
+                        style="background-color: #5E556A;color:#EFEFEF;" disabled />
+                    <option value="">Category</option>
                     @foreach ($prganancy_safties as $prganancy_safty)
                     <option value="{{$prganancy_safty->id}}" {{($prgnancy->
                         pregnancy_safety_id==$prganancy_safty->id)?
@@ -101,8 +102,9 @@
                     @enderror
                 </div>
                 <div class="col-md-2">
-                    <select class="form-control" name="pregnancy_safety_id" disabled />
-                    <option value="">Select Category</option>
+                    <select class="form-control" name="pregnancy_safety_id"
+                        style="background-color: #5E556A;color:#EFEFEF;" disabled />
+                    <option value="">Category</option>
                     @foreach ($prganancy_safties as $prganancy_safty)
                     <option value="{{$prganancy_safty->id}}" {{($prgnancy->
                         pregnancy_safety_id==$prganancy_safty->id)?

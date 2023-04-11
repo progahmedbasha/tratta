@@ -29,7 +29,7 @@
                                         <label>Drug Value 1</label>
                                         <select class="js-example-basic-multiple form-control" multiple="multiple"
                                             name="value1[]" required />
-                                        <option value="" disabled>Select Drugs</option>
+                                        <option value="" disabled>Drugs</option>
                                         @foreach ($drugs as $drug)
                                         <option value="{{$drug->id}}" {{(old($drug->id)==$drug->id)?
                                             'selected':''}}>
@@ -48,7 +48,7 @@
                                         <label>Drug Value 2</label>
                                         <select class="js-example-basic-multiple form-control" multiple="multiple"
                                             name="value2[]" required />
-                                        <option value="" disabled>Select Drugs</option>
+                                        <option value="" disabled>Drugs</option>
                                         @foreach ($drugs as $drug)
                                         <option value="{{$drug->id}}" {{(old($drug->id)==$drug->id)?
                                             'selected':''}}>
@@ -64,7 +64,7 @@
                                 <hr class="horizontal dark mt-0">
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <textarea class="form-control" placeholder="Note" name="note"
+                                        <textarea class="form-control" placeholder="Interaction Note" name="note"
                                             required />{{ old('note') }}</textarea>
                                     </div>
                                     <div class="col-3">
@@ -125,7 +125,8 @@
                                         <div class="col-md-6">
                                             <textarea class="form-control"
                                                 style="background-color: {{ $hx_drug->interactionSeverity->color }}; color:azure; "
-                                                placeholder="Note" name="note">{{ $hx_drug->note }}</textarea>
+                                                placeholder="Interaction Note"
+                                                name="note">{{ $hx_drug->note }}</textarea>
                                         </div>
                                         <div class="col-3">
                                             <select class="form-control" name="interaction_severity_id" required />
@@ -167,7 +168,7 @@
     </div>
 </div>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>

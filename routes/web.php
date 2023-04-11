@@ -169,6 +169,10 @@ Route::middleware('auth')->group(function () {
     Route::post('save_q4_score', [PredoseFourthQuestionController::class, 'save_q4_score'])->name('save_q4_score');
     Route::post('delete_score/{id}', [PredoseFourthQuestionController::class, 'delete_score'])->name('delete_score');
     
-    
     });
+    
+    /********************** test *************************/
+    Route::resource('tests', App\Http\Controllers\test\TestController::class);
+    Route::post('drug_fetch_indication', [App\Http\Controllers\test\TestController::class, 'fetch'])->name('drug_fetch_indication');
+
 require __DIR__.'/auth.php';

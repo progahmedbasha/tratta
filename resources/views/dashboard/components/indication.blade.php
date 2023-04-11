@@ -20,7 +20,7 @@
                                 @csrf
                                 <div class="row">
                                     <div class="col-md-11">
-                                        <input type="text" class="form-control" placeholder="Illness Category"
+                                        <input type="text" class="form-control" placeholder="Indication"
                                             name="indication_title" value="{{old('indication_title')}}" required />
                                         @error('indication_title')
                                         <div class="alert alert-danger">{{ $message }}</div>
@@ -42,7 +42,7 @@
                                 @method('patch')
                                 <div class="row">
                                     <div class="col-md-10">
-                                        <input type="text" class="form-control" placeholder="Drug Category"
+                                        <input type="text" class="form-control" placeholder="Indication"
                                             value="{{$indication->indication_title}}" name="indication_title"
                                             required />
                                     </div>
