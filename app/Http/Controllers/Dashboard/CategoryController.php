@@ -22,11 +22,11 @@ class CategoryController extends Controller
         $parent_categories = Category::where('parent_id', null)->get();
         $category_subs = Category::whereNotNull('parent_id')->with('drug')->get();
      $categories = Category::with('child')->where('parent_id', null)->get();
-    //   return  $category_subs = Category::whereHas('parent', function ($query) {
-    //         $query->where('parent_id', null);
-    //          })->with('drug')->get();
-        return view('dashboard.basic-data.drug-data', compact('categories','parent_categories','category_subs'));
-    }
+  $category_child = Category::with('child')->whereHas('child')->where('parent_id', null)->get();
+        $category_child->load('child.drug');
+
+        return view('dashboard.basic-data.drug-data', compact('categories','parent_categories','category_subs','category_child'));
+          }
 
     /**
      * Show the form for creating a new resource.

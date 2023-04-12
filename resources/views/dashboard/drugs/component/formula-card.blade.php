@@ -16,7 +16,7 @@
             <div class="row">
                 <div class="col-md-11">
                     <select class="form-control" name="formula_id" required>
-                        <option value="">Generic Name w formula</option>
+                        <option value="">formula</option>
                         {{-- @if(isset($drug->to )) --}}
                         @foreach ($formulas as $formula )
                         <option value="{{$formula->id}}" {{($drug->

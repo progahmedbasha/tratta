@@ -16,7 +16,7 @@
     </div>
     <div class="col">
         <select class="form-control" name="illness_sub_id[]" required>
-            <option value="">Select Illness Category</option>
+            <option value="">Illness Category</option>
             @foreach ($illness_subs as $illness_sub)
             <option value="{{$illness_sub->id}}">
                 {{$illness_sub->name}}

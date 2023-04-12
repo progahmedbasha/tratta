@@ -19,7 +19,7 @@
         </div>
         <div class="col-md-4">
             <select class="form-control" name="effect_id" required />
-            <option value="">Select Effect</option>
+            <option value="">Effect</option>
             @foreach ($effects as $effect)
             <option value="{{$effect->id}}" {{(old($effect->id)==$effect->id)?
                 'selected':''}}>
@@ -33,7 +33,7 @@
         </div>
         <div class="col-1">
             <div class="input-group-append">
-                <button class="btn bg-gradient-dark mb-0" type="submit"><i class="fas fa-save"></i></button>
+                <x-dashboard.add-button type="submit"></x-dashboard.add-button>
             </div>
         </div>
     </div>
@@ -54,7 +54,7 @@
         <form action="{{route('variable_details.destroy',$pregnancy_stage_variable->id)}}" method="POST">
             @csrf
             @method('DELETE')
-            <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
+            <x-dashboard.delete-button></x-dashboard.delete-button>
         </form>
     </div>
     <hr>

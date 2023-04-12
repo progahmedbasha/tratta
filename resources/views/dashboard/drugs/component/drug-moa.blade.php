@@ -42,7 +42,7 @@
             <input type="hidden" value="{{ $drug->id }}" name="drug_id">
             <div class="row">
                 <div class="col-md-8">
-                    <textarea class="form-control" placeholder="Text" name="text"
+                    <textarea class="form-control" placeholder="Text" name="text" style="background-color: #848382;color:#F5F5F5;"
                         required>{{$moa_drug->text}}</textarea>
                     @error('text')
                     <div class="alert alert-danger">{{ $message }}</div>

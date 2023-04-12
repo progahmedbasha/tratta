@@ -34,7 +34,7 @@
                                 <div class="row">
                                     <div class="col-md-4">
                                         <select class="form-control" name="effect_id" required />
-                                        <option value="">Select Effect</option>
+                                        <option value="">Effect</option>
                                         @foreach ($effects as $effect)
                                         <option value="{{$effect->id}}" {{(old($effect->id)==$effect->id)?
                                             'selected':''}}>

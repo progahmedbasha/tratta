@@ -94,6 +94,9 @@ class IllnessCategoryController extends Controller
         $category->name = $request->name;
         $category->parent_id = $request->parent_id;
         $category->save();
+        $illness_shy_sub = IllnessSub::where('illness_category_id', $category->id)->first();
+        $illness_shy_sub->name = $category->name;
+        $illness_shy_sub->save();
         return redirect()->route('illness_categories.index')->with('success','Illness Category Updated Successfully');
     }
 

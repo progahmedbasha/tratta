@@ -46,8 +46,9 @@
                 <input type="text" class="form-control" value="{{$drug_indication->indication->indication_title}}"
                     disabled>
             </div>
-            <div class="col-md-4">
-                <input type="text" class="form-control" value="{{$drug_indication->code}}" disabled>
+            <div class="col-md-3">
+                <input style="background-color:#FFE976;" type="text" class="form-control"
+                    value="{{$drug_indication->code}}" disabled>
             </div>
             <div class="col-1">
                 <form action="{{route('drug_indications.destroy',$drug_indication->id)}}" method="POST">

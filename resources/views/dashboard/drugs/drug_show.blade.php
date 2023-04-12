@@ -25,13 +25,13 @@
                            </div>
                         </div>
                         <div class="card-body p-3">
-                    
-                              <div class="row">
-                                 <div class="col-md-11">
-                                    <input type="text" class="form-control" value="{{$drug->name}}" disabled>
-                                 </div>
+
+                           <div class="row">
+                              <div class="col-md-11">
+                                 <input type="text" class="form-control" value="{{$drug->name}}" disabled>
                               </div>
-                              <br>
+                           </div>
+                           <br>
                         </div>
                      </div>
                      <br>
@@ -48,10 +48,10 @@
                      @include('dashboard.drugs.component.pregnancy')
                      {{-- treade name card --}}
                      @include('dashboard.drugs.component.trade')
-                 
+
                      {{-- pre-dose q card --}}
                      @include('dashboard.drugs.component.predose-q')
-                         {{-- Moa card --}}
+                     {{-- Moa card --}}
                      @include('dashboard.drugs.component.drug-moa')
                   </div>
                </div>

@@ -61,7 +61,7 @@ class IndicationController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateIndicationRequest $request, $id)
+    public function update(Request $request, $id)
     {
         $indication= Indication::findOrFail($id);
         $indication->indication_title = $request->indication_title;

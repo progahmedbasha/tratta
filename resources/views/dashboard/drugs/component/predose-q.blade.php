@@ -36,10 +36,10 @@
         @foreach ($predose->predoseVariable as $values)
         @if ($values->variableable_type == 'App\Models\Age')
         <div class="row">
-            <div class="col-3">
+            <div class="col-4">
                 <input type="text" class="form-control" value="Age" disabled /><br>
             </div>
-            <div class="col-3">
+            <div class="col-4">
                 <input type="text" class="form-control" value="{{ $values->age->name }}" disabled /><br>
             </div>
             <div class="col">
@@ -52,10 +52,10 @@
         </div>
         @elseif ($values->variableable_type == 'App\Models\Gender')
         <div class="row">
-            <div class="col-3">
+            <div class="col-4">
                 <input type="text" class="form-control" value="Gender" disabled /><br>
             </div>
-            <div class="col-3">
+            <div class="col-4">
                 <input type="text" class="form-control" value="{{ $values->gender->name }}" disabled /><br>
             </div>
             <div class="col">
@@ -68,10 +68,10 @@
         </div>
         @elseif ($values->variableable_type == 'App\Models\Weight')
         <div class="row">
-            <div class="col-3">
+            <div class="col-4">
                 <input type="text" class="form-control" value="Weight" disabled /><br>
             </div>
-            <div class="col-3">
+            <div class="col-4">
                 <input type="text" class="form-control" value="{{ $values->weight->weight }}" disabled /><br>
             </div>
             <div class="col">
@@ -84,10 +84,10 @@
         </div>
         @elseif ($values->variableable_type == 'App\Models\PregnancyStage')
         <div class="row">
-            <div class="col-3">
+            <div class="col-4">
                 <input type="text" class="form-control" value="Pregnancy Stage" disabled /><br>
             </div>
-            <div class="col-3">
+            <div class="col-4">
                 <input type="text" class="form-control" value="{{ $values->pregnancyStage->pregnancy_stage }}"
                     disabled /><br>
             </div>
@@ -101,10 +101,10 @@
         </div>
         @elseif ($values->variableable_type == 'App\Models\IllnessSub')
         <div class="row">
-            <div class="col-3">
+            <div class="col-4">
                 <input type="text" class="form-control" value="Illness Data" disabled /><br>
             </div>
-            <div class="col-3">
+            <div class="col-4">
                 <input type="text" class="form-control" value="{{ $values->illnessSub->name }}" disabled /><br>
             </div>
             <div class="col">
@@ -117,10 +117,10 @@
         </div>
         @elseif ($values->variableable_type == 'App\Models\Drug')
         <div class="row">
-            <div class="col-3">
+            <div class="col-4">
                 <input type="text" class="form-control" value="Drug" disabled /><br>
             </div>
-            <div class="col-3">
+            <div class="col-4">
                 <input type="text" class="form-control" value="{{ $values->drug->name }}" disabled /><br>
             </div>
             <div class="col">
@@ -133,10 +133,10 @@
         </div>
         @elseif ($values->variableable_type == 'App\Models\Indication')
         <div class="row">
-            <div class="col-3">
+            <div class="col-4">
                 <input type="text" class="form-control" value="Indication" disabled /><br>
             </div>
-            <div class="col-3">
+            <div class="col-4">
                 <input type="text" class="form-control" value="{{ $values->indication->indication_title }}"
                     disabled /><br>
             </div>
@@ -150,10 +150,10 @@
         </div>
         @elseif ($values->variableable_type == 'App\Models\DrugIndication')
         <div class="row">
-            <div class="col-3">
+            <div class="col-4">
                 <input type="text" class="form-control" value="DrugIndication" disabled /><br>
             </div>
-            <div class="col-3">
+            <div class="col-4">
                 <input type="text" class="form-control"
                     value="{{ $values->drugIndication->indication->indication_title }}" disabled /><br>
             </div>
@@ -167,24 +167,24 @@
         </div>
         @endif
         @endforeach
-
         <div class="row">
-            <div class="col-1">
-                <a href="{{ route('first_question', $predose->id) }}"
-                    style="box-sizing: border-box; position: absolute; width: 87px; height: 49px; color: #5E5E5E;font-family: cursive; font-size: 15px;background: #FFFFFF; border: 2px solid #FFE976; box-shadow: 0px 100px 80px rgba(0, 0, 0, 0.02), 0px 64.8148px 46.8519px rgba(0, 0, 0, 0.0151852), 0px 38.5185px 25.4815px rgba(0, 0, 0, 0.0121481), 0px 20px 13px rgba(0, 0, 0, 0.01), 0px 8.14815px 6.51852px rgba(0, 0, 0, 0.00785185), 0px 1.85185px 3.14815px rgba(0, 0, 0, 0.00481481); border-radius: 28px;"
+            <div class="col-2">
+                <a   href="{{ route('first_question', $predose->id) }}"
+                    style="box-sizing: border-box; position: absolute;width: 87px;height: 49px; color: #5E5E5E; font-size: 15px;background: #FFFFFF; border: 2px solid #FFE976; box-shadow: 0px 100px 80px rgba(0, 0, 0, 0.02), 0px 64.8148px 46.8519px rgba(0, 0, 0, 0.0151852), 0px 38.5185px 25.4815px rgba(0, 0, 0, 0.0121481), 0px 20px 13px rgba(0, 0, 0, 0.01), 0px 8.14815px 6.51852px rgba(0, 0, 0, 0.00785185), 0px 1.85185px 3.14815px rgba(0, 0, 0, 0.00481481); border-radius: 28px;"
                     class="btn bg-gradient-primary mb-0">Q 1</a>
-            </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <div class="col-1">
+                    
+            </div>
+            <div class="col-2">
                 <a href="{{ route('second_question', $predose->id) }}"
-                    style="box-sizing: border-box; position: absolute; width: 87px; height: 49px; color: #5E5E5E;font-family: cursive; font-size: 15px;background: #FFFFFF; border: 2px solid #FFE976; box-shadow: 0px 100px 80px rgba(0, 0, 0, 0.02), 0px 64.8148px 46.8519px rgba(0, 0, 0, 0.0151852), 0px 38.5185px 25.4815px rgba(0, 0, 0, 0.0121481), 0px 20px 13px rgba(0, 0, 0, 0.01), 0px 8.14815px 6.51852px rgba(0, 0, 0, 0.00785185), 0px 1.85185px 3.14815px rgba(0, 0, 0, 0.00481481); border-radius: 28px;"
+                    style="box-sizing: border-box; position: absolute; width: 87px; height: 49px; color: #5E5E5E;font-size: 15px;background: #FFFFFF; border: 2px solid #FFE976; box-shadow: 0px 100px 80px rgba(0, 0, 0, 0.02), 0px 64.8148px 46.8519px rgba(0, 0, 0, 0.0151852), 0px 38.5185px 25.4815px rgba(0, 0, 0, 0.0121481), 0px 20px 13px rgba(0, 0, 0, 0.01), 0px 8.14815px 6.51852px rgba(0, 0, 0, 0.00785185), 0px 1.85185px 3.14815px rgba(0, 0, 0, 0.00481481); border-radius: 28px;"
                     class="btn bg-gradient-primary mb-0">Q 2</a>
-            </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <div class="col-1">
+            </div>
+            <div class="col-2">
                 <a href="{{ route('third_question', $predose->id) }}"
                     style="box-sizing: border-box; position: absolute; width: 87px; height: 49px; color: #5E5E5E;font-family: cursive; font-size: 15px;background: #FFFFFF; border: 2px solid #FFE976; box-shadow: 0px 100px 80px rgba(0, 0, 0, 0.02), 0px 64.8148px 46.8519px rgba(0, 0, 0, 0.0151852), 0px 38.5185px 25.4815px rgba(0, 0, 0, 0.0121481), 0px 20px 13px rgba(0, 0, 0, 0.01), 0px 8.14815px 6.51852px rgba(0, 0, 0, 0.00785185), 0px 1.85185px 3.14815px rgba(0, 0, 0, 0.00481481); border-radius: 28px;"
                     class="btn bg-gradient-primary mb-0">Q 3</a>
-            </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <div class="col-5">
+            </div>
+            <div class="col-2">
                 <a href="{{ route('fourth_question', $predose->id) }}"
                     style="box-sizing: border-box; position: absolute; width: 87px; height: 49px; color: #5E5E5E;font-family: cursive; font-size: 15px;background: #FFFFFF; border: 2px solid #FFE976; box-shadow: 0px 100px 80px rgba(0, 0, 0, 0.02), 0px 64.8148px 46.8519px rgba(0, 0, 0, 0.0151852), 0px 38.5185px 25.4815px rgba(0, 0, 0, 0.0121481), 0px 20px 13px rgba(0, 0, 0, 0.01), 0px 8.14815px 6.51852px rgba(0, 0, 0, 0.00785185), 0px 1.85185px 3.14815px rgba(0, 0, 0, 0.00481481); border-radius: 28px;"
                     class="btn bg-gradient-primary mb-0">Q 4</a>

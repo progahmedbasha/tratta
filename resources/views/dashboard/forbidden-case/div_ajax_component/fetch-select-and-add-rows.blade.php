@@ -1,8 +1,9 @@
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.slim.min.js"></script>
 
 <div class="col-md-3">
-    <select class="form-control" id="variables0" onchange="selectVariable(0)" name="variable[]" required />
-    <option value="">Select Varirables</option>
+    <select class="form-control" id="variables0" onchange="selectVariable(0)" name="variable[]"
+        style="background-color: #333333;color:#3F7090;" required />
+    <option value="">Varirables</option>
     <option value="ages">Ages</option>
     <option value="weights">Weights</option>
     <option value="genders">Genders</option>
@@ -69,7 +70,6 @@
     ////////////////////for fetch branch////////////
 </script>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 

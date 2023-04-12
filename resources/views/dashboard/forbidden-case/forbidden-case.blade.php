@@ -14,7 +14,7 @@
                   <div class="card-header pb-0 p-3">
                      <div class="row">
                         <div class="col-6 d-flex align-items-center">
-                           <h6 class="mb-0">Logically Forbidden case (You can't Tratta)</h6>
+                           <h6 class="mb-0">Logically Forbidden case (You can't Kid Tratta)</h6>
                         </div>
                         <div class="col-6 text-end">
                            <!--<a class="btn bg-gradient-dark mb-0" href="javascript:;"><i class="fas fa-plus"></i>&nbsp;&nbsp;Add New</a>-->
@@ -29,9 +29,6 @@
                               <label>Value 1 :</label>
                            </div>
                            @include('dashboard.forbidden-case.div_ajax_component.fetch-select-and-add-rows')
-                           {{--
-         </div>
-         --}}
                            <br>
                            <div class="row">
                               <div class="col-md-3">
@@ -42,7 +39,7 @@
                            <hr class="horizontal dark mt-0">
                            <div class="row">
                               <div class="col-md-9">
-                                 <textarea class="form-control" placeholder="Note" name="note"
+                                 <textarea class="form-control" placeholder="Forbidden Message" name="note"
                                     required>{{ old('note') }}</textarea>
                               </div>
                               <div class="col-1">
@@ -224,7 +221,8 @@
                         <hr class="horizontal dark mt-0">
                         <div class="row">
                            <div class="col-md-9">
-                              <textarea class="form-control" placeholder="Note"
+                              <textarea class="form-control" placeholder="Forbidden Message"
+                                 style="background-color: #E54E6D; color:#3F7090;"
                                  name="note">{{ $forbidden_case->note }}</textarea>
                            </div>
                            <div class="col-1">

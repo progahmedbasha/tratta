@@ -5,7 +5,7 @@
     </div>
     <div class="col-md-3">
         <select class="form-control" id="variables{{ $number }}" onchange="selectVariable({{ $number }})"
-            name="variable[]" required />
+            name="variable[]" style="background-color: #333333;color:#3F7090;" required />
         <option value="">Select Varirables</option>
         <option value="ages">Ages</option>
         <option value="weights">Weights</option>
