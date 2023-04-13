@@ -103,7 +103,8 @@
                                                 </div>
                                                 <div class="col-3">
                                                     <label>Indications</label>
-                                                    <select class="form-control" id="indication" name="indication_id" required />
+                                                    <select class="form-control" id="indication" name="indication_id">
+                                                    <option selected="true" disabled="disabled">Select Indication</option>
                                                     @foreach ($indications as $indication)
                                                     <option value="{{$indication->id}}" {{(old($indication->
                                                         id)==$indication->id)?
@@ -119,7 +120,8 @@
                                             <div class="row">
                                                 <div class="col">
                                                     <label>Genders</label>
-                                                    <select class="form-control" name="gender_id" id="gender" onchange="selectGender()" required />
+                                                    <select class="form-control" name="gender_id" id="gender" onchange="selectGender()">
+                                                    <option selected="true" disabled="disabled">Select Gender</option>
                                                     @foreach ($genders as $genders)
                                                     <option value="{{$genders->id}}" {{(old($genders->
                                                         id)==$genders->id)?
@@ -131,7 +133,8 @@
                                                 </div>
                                                 <div class="col">
                                                     <label>Weights</label>
-                                                    <select class="form-control" name="weight_id" required />
+                                                    <select class="form-control" name="weight_id">
+                                                    <option selected="true" disabled="disabled">Select Weight</option>
                                                     @foreach ($weights as $weight)
                                                     <option value="{{$weight->id}}" {{(old($weight->id)==$weight->id)?
                                                         'selected':''}}>
@@ -142,7 +145,8 @@
                                                 </div>
                                                 <div class="col">
                                                     <label>Ages</label>
-                                                    <select class="form-control" name="age_id" required />
+                                                    <select class="form-control" name="age_id">
+                                                    <option selected="true" disabled="disabled">Select Age</option>
                                                     @foreach ($ages as $age)
                                                     <option value="{{$age->id}}" {{(old($age->id)==$age->id)?
                                                         'selected':''}}>
@@ -153,7 +157,8 @@
                                                 </div>
                                                 <div class="col" id="block" style="display: none;">
                                                     <label>Pregnancies</label>
-                                                    <select class="form-control" name="pregnancy_stage_id" required />
+                                                    <select class="form-control" name="pregnancy_stage_id">
+                                                    <option selected="true" disabled="disabled">Select Pregnanacy Stage</option>
                                                     @foreach ($pregnancy_stages as $pregnancy_stage)
                                                     <option value="{{$pregnancy_stage->id}}" {{(old($pregnancy_stage->
                                                         id)==$pregnancy_stage->id)?
@@ -165,7 +170,8 @@
                                                 </div>
                                                 <div class="col">
                                                     <label>Illness Data</label>
-                                                    <select class="form-control" name="illness_category_id" required />
+                                                    <select class="form-control" name="illness_category_id">
+                                                    <option selected="true" disabled="disabled">Select Illness</option>
                                                     @foreach ($illness_subs as $illness_sub)
                                                     <option value="{{$illness_sub->id}}" {{(old($illness_sub->
                                                         id)==$illness_sub->id)?
@@ -177,7 +183,8 @@
                                                 </div>
                                                 <div class="col">
                                                     <label>Drug Data</label>
-                                                    <select class="form-control" name="drug_id" required />
+                                                    <select class="form-control" name="drug_drug_id">
+                                                    <option selected="true" disabled="disabled">Select Drug</option>
                                                     @foreach ($drugs as $drug)
                                                     <option value="{{$drug->id}}" {{(old($drug->id)==$drug->id)?
                                                         'selected':''}}>
