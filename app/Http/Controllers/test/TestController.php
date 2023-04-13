@@ -11,6 +11,10 @@ use App\Models\IllnessSub;
 use App\Models\Indication;
 use App\Models\PregnancyStage;
 use App\Models\Weight;
+use App\Models\Variable;
+use App\Models\VariableDetail;
+use App\Models\Effect;
+use App\Models\NoteDose;
 use Illuminate\Http\Request;
 
 class TestController extends Controller
@@ -50,7 +54,49 @@ class TestController extends Controller
      */
     public function store(Request $request)
     {
-        return view('front.test.test-store');
+        $var = null;
+        if(isset($request->indication_id))
+        $var = Variable::whereHasMorph(
+            'variableable',DrugIndication::class,
+            function ($query) use ($request){
+                $query->where('variableable_id',$request->indication_id);
+            }
+        )->first();
+        else
+        $var = Variable::whereHasMorph(
+            'variableable',Drug::class,
+            function ($query) use ($request){
+                $query->where('variableable_id',$request->drug_id);
+            }
+        )->first();
+
+        $detail = VariableDetail::where('variable_id',$var->id)->whereHasMorph(
+            'optionable',
+            [Age::class,Gender::class,Weight::class,PregnancyStage::class,IllnessSub::class,Drug::class],
+            function ($query,$type) use ($request){
+                if($type === Age::class)
+                $query->where('optionable_id',$request->age_id);
+                if($type === Gender::class)
+                $query->where('optionable_id',$request->gender_id);
+                if($type === Weight::class)
+                $query->where('optionable_id',$request->weight_id);
+                if($type === PregnancyStage::class)
+                $query->where('optionable_id',$request->age_id);
+                if($type === IllnessSub::class)
+                $query->where('optionable_id',$request->pregnancy_stage_id);
+                if($type === Drug::class)
+                $query->where('optionable_id',$request->drug_drug_id);
+            })->get()->pluck('effect_id')->unique();
+
+           
+            $effect = null;
+            if($detail->count() > 0)
+                $effect = Effect::whereIn('id',$detail)->orderBy('number')->first();
+            else
+                $effect = Effect::find(1);
+            $fixed_dose = NoteDose::with('doseMessage')->where('variable_id',$var->id)->where('effect_id',$effect->id)->where('dose_type_id',1)->first();
+
+        return view('front.test.test-store',compact('fixed_dose'));
     }
 
     /**
