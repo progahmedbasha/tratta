@@ -1,5 +1,4 @@
 @foreach ($fixed_doses as $fixed_dose )
-@foreach ($fixed_dose->doseMessage as $dose_message )
 {{-- <form action="{{route('note_doses.update',$fixed_dose->id)}}" method="post" enctype="multipart/form-data">
 @csrf --}}
 {{-- @method('patch') --}}
@@ -122,7 +121,7 @@
     <div class="row">
         <div class="col-7">
             <textarea class="form-control" placeholder="Recommended Note" name="recommended_dosage"
-                required>{{$dose_message->recommended_dosage}}</textarea>
+                required>{{$fixed_dose->doseMessage->recommended_dosage}}</textarea>
             @error('recommended_dosage')
             <div class="alert alert-danger">{{ $message }}</div>
             @enderror
@@ -139,7 +138,7 @@
     <div class="row">
         <div class="col-7">
             <textarea class="form-control" placeholder="Dosage Note" name="dosage_note"
-                required>{{$dose_message->dosage_note}}</textarea>
+                required>{{$fixed_dose->doseMessage->dosage_note}}</textarea>
             @error('dosage_note')
             <div class="alert alert-danger">{{ $message }}</div>
             @enderror
@@ -154,7 +153,7 @@
     <div class="row">
         <div class="col-7">
             <textarea class="form-control" placeholder="Titration Note" name="titration_note"
-                required>{{$dose_message->titration_note}}</textarea>
+                required>{{$fixed_dose->doseMessage->titration_note}}</textarea>
             @error('titration_note')
             <div class="alert alert-danger">{{ $message }}</div>
             @enderror
@@ -173,5 +172,4 @@
 </div>
 <br>
 <hr class="horizontal dark mt-0">
-@endforeach
 @endforeach

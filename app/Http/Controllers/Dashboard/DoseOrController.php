@@ -32,7 +32,7 @@ class DoseOrController extends Controller
         // $effects = Effect::all();
         // $effect_existe = NoteDose::where('variable_id', $id)->get()->pluck('effect_id');
         $effects = Effect::get();
-        $fixed_doses = NoteDose::where('variable_id', $id)->where('dose_type_id',3)->with('noteDoseVariables')->get();
+        $fixed_doses = NoteDose::where('variable_id', $id)->where('dose_type_id',3)->with('doseMessage')->with('noteDoseVariables')->get();
         return view('dashboard.doses.dose-or', compact('id','variable_code','drug_code','indication_code','effects','fixed_doses'));
     }
 
