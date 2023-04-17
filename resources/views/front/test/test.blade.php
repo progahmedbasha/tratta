@@ -185,7 +185,7 @@
                                                     <label>Drug Data</label>
                                                     <select class="form-control" name="drug_drug_id">
                                                     <option selected="true" disabled="disabled">Select Drug</option>
-                                                    @foreach ($drugs as $drug)
+                                                    @foreach ($drugs_data as $drug)
                                                     <option value="{{$drug->id}}" {{(old($drug->id)==$drug->id)?
                                                         'selected':''}}>
                                                         {{$drug->name}}

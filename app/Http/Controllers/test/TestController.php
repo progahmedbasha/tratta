@@ -30,8 +30,9 @@ class TestController extends Controller
         $pregnancy_stages = PregnancyStage::all();
         $illness_subs = IllnessSub::all();
         $drugs = Drug::whereHas('variables')->get();
+        $drugs_data = Drug::all();
         $indications = Indication::all();
-         return view('front.test.test', compact('genders', 'ages', 'weights', 'pregnancy_stages', 'illness_subs','drugs','indications'));
+         return view('front.test.test', compact('genders', 'ages', 'weights', 'pregnancy_stages', 'illness_subs','drugs','indications','drugs_data'));
     }
       public function fetch(Request $request)
     {
@@ -81,9 +82,9 @@ class TestController extends Controller
                 if($type === Weight::class)
                 $query->where('optionable_id',$request->weight_id);
                 if($type === PregnancyStage::class)
-                $query->where('optionable_id',$request->age_id);
-                if($type === IllnessSub::class)
                 $query->where('optionable_id',$request->pregnancy_stage_id);
+                if($type === IllnessSub::class)
+                $query->where('optionable_id',$request->illness_category_id);
                 if($type === Drug::class)
                 $query->where('optionable_id',$request->drug_drug_id);
             })->get()->pluck('effect_id')->unique();
