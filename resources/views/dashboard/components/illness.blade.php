@@ -133,7 +133,7 @@
           @endforeach
           @endforeach
           <hr class="horizontal dark mt-0">
-          @foreach ($parent_cat->illnessSub as $illness_sub )
+          @foreach ($parent_cat->illnessSub as $index=>$illness_sub )
           <form action="{{route('illness_subs.update',$illness_sub->id)}}" method="post" enctype="multipart/form-data">
             @csrf
             @method('patch')
@@ -147,18 +147,22 @@
                 @enderror
               </div>
               <div class="col-1">
-                {{-- <div class="input-group-append">
+                @if($index !== 0)
+                <div class="input-group-append">
                   <x-dashboard.edit-button></x-dashboard.edit-button>
-                </div> --}}
+                </div>
+                @endif
               </div>
           </form>
-          {{-- <div class="col-1">
+          <div class="col-1">
+          @if($index !== 0)
             <form action="{{route('illness_subs.destroy',$illness_sub->id)}}" method="POST">
               @csrf
               @method('DELETE')
               <x-dashboard.delete-button></x-dashboard.delete-button>
             </form>
-          </div> --}}
+          @endif
+          </div>
         </div>
         @endforeach
 
