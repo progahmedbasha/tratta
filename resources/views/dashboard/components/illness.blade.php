@@ -140,8 +140,13 @@
             <input type="hidden" name="illness_category_id" value="{{ $illness_sub->illness_category_id }}">
             <div class="row">
               <div class="col-6">
+                @if($index == 0)
+              <input type="text" class="form-control" placeholder="Sub Sub name" style="background-color: #F2CC8F;" value="{{$illness_sub->name}}"
+                  name="name" required />
+                @else
                 <input type="text" class="form-control" placeholder="Sub Sub name" value="{{$illness_sub->name}}"
                   name="name" required />
+                @endif
                 @error('name')
                 <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
@@ -151,17 +156,19 @@
                 <div class="input-group-append">
                   <x-dashboard.edit-button></x-dashboard.edit-button>
                 </div>
+                @else
+                <br><br>
                 @endif
               </div>
           </form>
           <div class="col-1">
-          @if($index !== 0)
+            @if($index !== 0)
             <form action="{{route('illness_subs.destroy',$illness_sub->id)}}" method="POST">
               @csrf
               @method('DELETE')
               <x-dashboard.delete-button></x-dashboard.delete-button>
             </form>
-          @endif
+            @endif
           </div>
         </div>
         @endforeach

@@ -1,5 +1,4 @@
 @foreach ($fixed_doses as $fixed_dose )
-@foreach ($fixed_dose->noteMessage as $dose_message )
 {{-- <form action="{{route('notes.update',$fixed_dose->id)}}" method="post" enctype="multipart/form-data">
 @csrf --}}
 {{-- @method('patch') --}}
@@ -121,7 +120,7 @@
     @method('patch')
     <div class="row">
         <div class="col-7">
-            <textarea class="form-control" placeholder="Note" name="note" required>{{$dose_message->note}}</textarea>
+            <textarea class="form-control" placeholder="Note" name="note" required>{{$fixed_dose->noteMessage->note}}</textarea>
             @error('note')
             <div class="alert alert-danger">{{ $message }}</div>
             @enderror
@@ -159,5 +158,4 @@
 </div>
 <br>
 <hr class="horizontal dark mt-0">
-@endforeach
 @endforeach
