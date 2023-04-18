@@ -18,7 +18,7 @@ class NoteDose extends Model
     }
     public function noteMessage()
     {
-        return $this->hasMany(NoteMessage::class);
+        return $this->hasOne(NoteMessage::class);
     }
     public function noteDoseVariables()
     {
