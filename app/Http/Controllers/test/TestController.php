@@ -55,6 +55,33 @@ class TestController extends Controller
      */
     public function store(Request $request)
     {
+        $var = $this->getVariable($request);
+        $detail = $this->getVariableDetail($var->id,$request);
+        
+            $effect = null;
+            $dose_result = null;
+            $note_result = null;
+            if($detail->count() > 0)
+                $effect = Effect::whereIn('id',$detail)->orderBy('number')->first();
+            else
+                $effect = Effect::find(1);
+            
+            $dose_result = $this->getDoseAnd($var->id,$effect->id,$request);
+            if($dose_result == null)
+                $dose_result = $this->getDoseOr($var->id,$effect->id,$request);
+            if($dose_result == null)
+                $dose_result = $this->getFixedDose($var->id,$effect->id);
+
+            $note_result = $this->getNoteAnd($var->id,$effect->id,$request);
+            if($note_result == null)
+                $note_result = $this->getNoteOr($var->id,$effect->id,$request);
+
+        //return $note_result;
+        return view('front.test.test-store',compact('dose_result','note_result'));
+    }
+
+    public function getVariable($request)
+    {
         $var = null;
         if(isset($request->indication_id))
         $var = Variable::whereHasMorph(
@@ -71,7 +98,12 @@ class TestController extends Controller
             }
         )->first();
 
-        $detail = VariableDetail::where('variable_id',$var->id)->whereHasMorph(
+        return $var;
+    }
+
+    public function getVariableDetail($variableId,$request)
+    {
+        $detail = VariableDetail::where('variable_id',$variableId)->whereHasMorph(
             'optionable',
             [Age::class,Gender::class,Weight::class,PregnancyStage::class,IllnessSub::class,Drug::class],
             function ($query,$type) use ($request){
@@ -88,16 +120,117 @@ class TestController extends Controller
                 if($type === Drug::class)
                 $query->where('optionable_id',$request->drug_drug_id);
             })->get()->pluck('effect_id')->unique();
+            return $detail;
+    }
 
-           
-            $effect = null;
-            if($detail->count() > 0)
-                $effect = Effect::whereIn('id',$detail)->orderBy('number')->first();
-            else
-                $effect = Effect::find(1);
-            $fixed_dose = NoteDose::with('doseMessage')->where('variable_id',$var->id)->where('effect_id',$effect->id)->where('dose_type_id',1)->first();
+    public function getDoseAnd($variableId,$effectId,$request)
+    {
+        $dose =null; /* NoteDose::with('doseMessage')->where('variable_id',$variableId)->where('effect_id',$effectId)->where('dose_type_id',2)
+        ->whereHas('noteDoseVariables', function($query) use ($request)
+        {
+            $query->whereHasMorph(
+                'variableable',
+                [Age::class,Gender::class,Weight::class,PregnancyStage::class,IllnessSub::class,Drug::class],
+                function ($query,$type) use ($request){
+                    if($type === Age::class)
+                    $query->where('variableable_id',$request->age_id);
+                    else if($type === Gender::class)
+                    $query->where('variableable_id',$request->gender_id);
+                    else if($type === Weight::class)
+                    $query->where('variableable_id',$request->weight_id);
+                    else if($type === PregnancyStage::class)
+                    $query->where('variableable_id',$request->pregnancy_stage_id);
+                    else if($type === IllnessSub::class)
+                    $query->where('variableable_id',$request->illness_category_id);
+                    else if($type === Drug::class)
+                    $query->where('variableable_id',$request->drug_drug_id);
+                });
+        })->orderBy('priority')->first();*/
+        return $dose;
+    }
 
-        return view('front.test.test-store',compact('fixed_dose'));
+    public function getDoseOr($variableId,$effectId,$request)
+    {
+        $dose = NoteDose::with('doseMessage')->where('variable_id',$variableId)->where('effect_id',$effectId)->where('dose_type_id',3)
+        ->whereHas('noteDoseVariables', function($query) use ($request)
+        {
+            $query->whereHasMorph(
+                'variableable',
+                [Age::class,Gender::class,Weight::class,PregnancyStage::class,IllnessSub::class,Drug::class],
+                function ($query,$type) use ($request){
+                    if($type === Age::class)
+                    $query->where('variableable_id',$request->age_id);
+                    if($type === Gender::class)
+                    $query->where('variableable_id',$request->gender_id);
+                    if($type === Weight::class)
+                    $query->where('variableable_id',$request->weight_id);
+                    if($type === PregnancyStage::class)
+                    $query->where('variableable_id',$request->pregnancy_stage_id);
+                    if($type === IllnessSub::class)
+                    $query->where('variableable_id',$request->illness_category_id);
+                    if($type === Drug::class)
+                    $query->where('variableable_id',$request->drug_drug_id);
+                });
+        })->orderBy('priority')->first();
+        return $dose;
+    }
+
+    public function getFixedDose($variableId,$effectId)
+    {
+        $dose = NoteDose::with('doseMessage')->where('variable_id',$variableId)->where('effect_id',$effectId)->where('dose_type_id',1)->first();
+        return $dose;
+    }
+
+    public function getNoteAnd($variableId,$effectId,$request)
+    {
+        $dose =null; /* NoteDose::with('noteMessage')->where('variable_id',$variableId)->where('effect_id',$effectId)->where('dose_type_id',5)
+        ->whereHas('noteDoseVariables', function($query) use ($request)
+        {
+            $query->whereHasMorph(
+                'variableable',
+                [Age::class,Gender::class,Weight::class,PregnancyStage::class,IllnessSub::class,Drug::class],
+                function ($query,$type) use ($request){
+                    if($type === Age::class)
+                    $query->where('variableable_id',$request->age_id);
+                    else if($type === Gender::class)
+                    $query->where('variableable_id',$request->gender_id);
+                    else if($type === Weight::class)
+                    $query->where('variableable_id',$request->weight_id);
+                    else if($type === PregnancyStage::class)
+                    $query->where('variableable_id',$request->pregnancy_stage_id);
+                    else if($type === IllnessSub::class)
+                    $query->where('variableable_id',$request->illness_category_id);
+                    else if($type === Drug::class)
+                    $query->where('variableable_id',$request->drug_drug_id);
+                });
+        })->orderBy('priority')->get();*/
+        return $dose;
+    }
+
+    public function getNoteOr($variableId,$effectId,$request)
+    {
+        $dose = NoteDose::with('noteMessage')->where('variable_id',$variableId)->where('effect_id',$effectId)->where('dose_type_id',4)
+        ->whereHas('noteDoseVariables', function($query) use ($request)
+        {
+            $query->whereHasMorph(
+                'variableable',
+                [Age::class,Gender::class,Weight::class,PregnancyStage::class,IllnessSub::class,Drug::class],
+                function ($query,$type) use ($request){
+                    if($type === Age::class)
+                    $query->where('variableable_id',$request->age_id);
+                    if($type === Gender::class)
+                    $query->where('variableable_id',$request->gender_id);
+                    if($type === Weight::class)
+                    $query->where('variableable_id',$request->weight_id);
+                    if($type === PregnancyStage::class)
+                    $query->where('variableable_id',$request->pregnancy_stage_id);
+                    if($type === IllnessSub::class)
+                    $query->where('variableable_id',$request->illness_category_id);
+                    if($type === Drug::class)
+                    $query->where('variableable_id',$request->drug_drug_id);
+                });
+        })->orderBy('priority')->get();
+        return $dose;
     }
 
     /**
