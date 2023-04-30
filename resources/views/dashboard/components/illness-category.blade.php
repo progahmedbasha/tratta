@@ -41,7 +41,7 @@
                                 @csrf
                                 @method('patch')
                                 <div class="row">
-                                    <div class="col-md-9">
+                                    <div class="col-md-8">
                                         <input type="text" class="form-control" placeholder="Drug Category"
                                             value="{{$illness_category->name}}" name="name" required />
                                         @error('name')
@@ -54,39 +54,44 @@
                                         </div>
                                     </div>
                             </form>
-                                     <div class="col-1">
-                                        <form action="{{route('illness_categories.destroy',$illness_category->id)}}"
-                                            method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            <x-dashboard.delete-button></x-dashboard.delete-button>
-                                        </form>
-                                    </div>
-                                    <div class="col-1">
-                                        @if($illness_category->active =='0')
-                                        <label class="switch">
-                                            <input type="checkbox" class="actives" checked value="1" name="active"
-                                                data-id="{{ $illness_category->id }}">
-                                            <span class="slider round"></span>
-                                        </label>
-                                        @endif
-                                        @if($illness_category->active =='1')
-                                        <label class="switch">
-                                            <input type="checkbox" class="actives" value="0" name="active"
-                                                data-id="{{ $illness_category->id }}">
-                                            <span class="slider round"></span>
-                                        </label>
-                                        @endif
-                                    </div>
-                                </div>
-                            <br>
-                            @endforeach
+                            <div class="col-1">
+                                <form action="{{route('illness_categories.destroy',$illness_category->id)}}"
+                                    method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <x-dashboard.delete-button></x-dashboard.delete-button>
+                                </form>
+                            </div>
+                            <div class="col-1">
+                                @if($illness_category->active =='0')
+                                <label class="switch">
+                                    <input type="checkbox" class="actives" checked value="1" name="active"
+                                        data-id="{{ $illness_category->id }}">
+                                    <span class="slider round"></span>
+                                </label>
+                                @endif
+                                @if($illness_category->active =='1')
+                                <label class="switch">
+                                    <input type="checkbox" class="actives" value="0" name="active"
+                                        data-id="{{ $illness_category->id }}">
+                                    <span class="slider round"></span>
+                                </label>
+                                @endif
+                            </div>
+                            <div class="col">
+                                <a href="{{ route('illness_categories.show', $illness_category->id) }}">
+                                    <i class="fa fa-eye"></i>
+                                </a>
+                            </div>
                         </div>
+                        <br>
+                        @endforeach
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 </div>
 @include('dashboard.components.radio_button_status_style')
 @include('dashboard.components.illness_category_active_status')

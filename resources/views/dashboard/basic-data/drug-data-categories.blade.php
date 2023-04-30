@@ -6,7 +6,7 @@
 </script>
 @endif
 {{-- /***************** Drug category ***********/ --}}
-@include('dashboard.components.drug-category')
-{{-- @include('dashboard.components.drug-generic') --}}
+{{-- @include('dashboard.components.drug-category') --}}
+@include('dashboard.components.drug-generic')
 
 @endsection
