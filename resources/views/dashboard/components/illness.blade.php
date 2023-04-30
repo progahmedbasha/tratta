@@ -23,7 +23,8 @@
                     <select class="form-control" name="parent_id" required>
                       <option value="">Select Category</option>
                       @foreach ($parent_illness_categories as $parent_category)
-                      <option value="{{$parent_category->id}}">
+                      <option value="{{$parent_category->id}}" {{($id==$parent_category->id)?
+                        'selected':''}}>
                         {{$parent_category->name}}
                       </option>
                       @endforeach

@@ -57,15 +57,18 @@ class CategoryController extends Controller
             $category->parent_id = $request->parent_id;
             $category->save();
         }
-        return redirect()->route('categories.index')->with('success','Category Added Successfully');
+        return redirect()->back()->with('success','Category Added Successfully');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id): Response
+    public function show($id)
     {
-        //
+        $categories = Category::with('child')->where('id', $id)->where('parent_id', null)->get();
+        $category_child = Category::with('child')->whereHas('child')->where('id', $id)->where('parent_id', null)->get();
+        return view('dashboard.basic-data.drug-data-categories', compact('categories','category_child','id'));
+
     }
 
     /**
@@ -85,7 +88,7 @@ class CategoryController extends Controller
         $category->name = $request->name;
         $category->parent_id = $request->parent_id;
         $category->save();
-        return redirect()->route('categories.index')->with('success','Category Updated Successfully');
+        return redirect()->back()->with('success','Category Updated Successfully');
     }
 
     /**
@@ -95,7 +98,7 @@ class CategoryController extends Controller
     {
         $category = Category::findOrFail($id);
         $category->delete();
-        return redirect()->route('categories.index')->with('success','Category Updated Successfully');
+        return redirect()->back()->with('success','Category Updated Successfully');
     }
     public function status(Request $request)
     {

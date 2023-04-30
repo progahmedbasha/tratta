@@ -66,15 +66,16 @@ class IllnessCategoryController extends Controller
                 $category->save();
             }
         }
-        return redirect()->route('illness_categories.index')->with('success','Illness Category Added Successfully');
+        return redirect()->back()->with('success','Illness Category Added Successfully');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id): Response
+    public function show($id)
     {
-        //
+        $parent_illness_categories = IllnessCategory::where('id', $id)->where('parent_id', null)->get();
+        return view('dashboard.basic-data.illness-category-categories', compact('id','parent_illness_categories'));
     }
 
     /**
@@ -94,10 +95,10 @@ class IllnessCategoryController extends Controller
         $category->name = $request->name;
         $category->parent_id = $request->parent_id;
         $category->save();
-        $illness_shy_sub = IllnessSub::where('illness_category_id', $category->id)->first();
-        $illness_shy_sub->name = $category->name;
-        $illness_shy_sub->save();
-        return redirect()->route('illness_categories.index')->with('success','Illness Category Updated Successfully');
+        // $illness_shy_sub = IllnessSub::where('illness_category_id', $category->id)->first();
+        // $illness_shy_sub->name = $category->name;
+        // $illness_shy_sub->save();
+        return redirect()->back()->with('success','Illness Category Updated Successfully');
     }
 
     /**
@@ -107,7 +108,7 @@ class IllnessCategoryController extends Controller
     {
         $category = IllnessCategory::findOrFail($id);
         $category->delete();
-        return redirect()->route('illness_categories.index')->with('success','Illness Category Updated Successfully');
+        return redirect()->back()->with('success','Illness Category Updated Successfully');
     }
         public function status(Request $request)
     {
