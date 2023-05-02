@@ -48,20 +48,28 @@
                               <div class="alert alert-danger">{{ $message }}</div>
                               @enderror
                            </div>
-                           <div class="col">
+                           <div class="col-1">
+                              <div class="input-group-append">
+                                 <a href="{{ route('categories.show', $category->id) }}">
+                                    <img src="{{ url('dashboard/assets/icons/play.svg') }}"
+                                       style="margin-top:10px;" />
+                                 </a>
+                              </div>
+                           </div>
+                           <div class="col-1">
                               <div class="input-group-append">
                                  <x-dashboard.edit-button></x-dashboard.edit-button>
                               </div>
                            </div>
                      </form>
-                     <div class="col">
+                     <div class="col-1">
                         <form action="{{route('categories.destroy',$category->id)}}" method="POST">
                            @csrf
                            @method('DELETE')
                            <x-dashboard.delete-button></x-dashboard.delete-button>
                         </form>
                      </div>
-                     <div class="col">
+                     <div class="col-1">
                         @if($category->active =='0')
                         <label class="switch">
                            <input type="checkbox" class="actives" checked value="1" name="active"
@@ -75,11 +83,6 @@
                            <span class="slider round"></span>
                         </label>
                         @endif
-                     </div>
-                     <div class="col">
-                        <a href="{{ route('categories.show', $category->id) }}">
-                           <i class="fa fa-eye"></i>
-                        </a>
                      </div>
                   </div>
 

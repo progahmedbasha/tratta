@@ -142,8 +142,8 @@
             <div class="row">
               <div class="col-6">
                 @if($index == 0)
-              <input type="text" class="form-control" placeholder="Sub Sub name" style="background-color: #F2CC8F;" value="{{$illness_sub->name}}"
-                  name="name" required />
+                <input type="text" class="form-control" placeholder="Sub Sub name" style="background-color: #F2CC8F;"
+                  value="{{$illness_sub->name}}" name="name" required />
                 @else
                 <input type="text" class="form-control" placeholder="Sub Sub name" value="{{$illness_sub->name}}"
                   name="name" required />
@@ -179,6 +179,9 @@
         @endforeach
 
         <br>
+        <a href="{{ route('illness_categories.index') }}" class="btn btn-primary">
+          <span class="fas fa-backward"></span> Back
+        </a>
       </div>
     </div>
   </div>
