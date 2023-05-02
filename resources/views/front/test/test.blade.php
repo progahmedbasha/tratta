@@ -12,6 +12,8 @@
 
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 -->
+
+
 <!DOCTYPE html>
 <html lang="en">
     <style>
@@ -59,7 +61,6 @@
     </style>
     @include('dashboard.layouts.header')
     @include('dashboard.layouts.sweet-alert')
-
     <body class="g-sidenav-show  bg-gray-100">
         <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
             <!-- Navbar -->
@@ -105,13 +106,6 @@
                                                     <label>Indications</label>
                                                     <select class="form-control" id="indication" name="indication_id">
                                                     <option selected="true" disabled="disabled">Select Indication</option>
-                                                    @foreach ($indications as $indication)
-                                                    <option value="{{$indication->id}}" {{(old($indication->
-                                                        id)==$indication->id)?
-                                                        'selected':''}}>
-                                                        {{$indication->indication_title}}
-                                                    </option>
-                                                    @endforeach
                                                     </select>
                                                 </div>
                                             </div>
