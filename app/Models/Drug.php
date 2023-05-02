@@ -16,6 +16,10 @@ class Drug extends Model
     {
         return $this->morphMany(Variable::class, 'variableable');
     }
+    public function drugVariables()
+    {
+        return $this->hasMany(Variable::class);
+    }
     public function variableDetails()
     {
         return $this->morphMany(VariableDetail::class, 'optionable');
