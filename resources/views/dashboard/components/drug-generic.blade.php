@@ -137,8 +137,10 @@
           @endforeach
 
           {{-- here to add sub sub  --}}
-
         </div>
+        <a href="{{ route('categories.index') }}" class="btn btn-primary">
+          <span class="fas fa-backward"></span> Back
+        </a>
       </div>
     </div>
   </div>

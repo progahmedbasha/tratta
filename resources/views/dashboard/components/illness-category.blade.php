@@ -50,6 +50,14 @@
                                     </div>
                                     <div class="col-1">
                                         <div class="input-group-append">
+                                            <a href="{{ route('illness_categories.show', $illness_category->id) }}">
+                                                <img src="{{ url('dashboard/assets/icons/play.svg') }}"
+                                                    style="margin-top:10px;" />
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="col-1">
+                                        <div class="input-group-append">
                                             <x-dashboard.edit-button></x-dashboard.edit-button>
                                         </div>
                                     </div>
@@ -78,11 +86,7 @@
                                 </label>
                                 @endif
                             </div>
-                            <div class="col">
-                                <a href="{{ route('illness_categories.show', $illness_category->id) }}">
-                                    <i class="fa fa-eye"></i>
-                                </a>
-                            </div>
+
                         </div>
                         <br>
                         @endforeach
