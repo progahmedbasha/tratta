@@ -10,12 +10,10 @@
                   <h6 class="mb-0">Drug Generic</h6>
                 </div>
                 <div class="col-6 text-end">
-                  <!--<a class="btn bg-gradient-dark mb-0" href="javascript:;"><i class="fas fa-plus"></i>&nbsp;&nbsp;Add New</a>-->
                 </div>
               </div>
             </div>
             <div class="card-body p-3">
-              {{-- here to add sub --}}
               <form action="{{route('categories.store')}}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="row">
@@ -115,7 +113,6 @@
                 <div class="col-md-2">
                   <input type="text" class="form-control" value="{{$drug->code}}" disabled />
                 </div>
-                {{-- <input type="hidden" name="parent_id" value="{{ $drug->parent_id }}"> --}}
                 <div class="col-1">
                   <div class="input-group-append">
                     <x-dashboard.edit-button></x-dashboard.edit-button>
@@ -129,18 +126,15 @@
                 <x-dashboard.delete-button></x-dashboard.delete-button>
               </form>
             </div>
-            @endforeach
-
           </div>
-
           @endforeach
           @endforeach
-
-          {{-- here to add sub sub  --}}
+          @endforeach
+          <br>
+          <a href="{{ route('categories.index') }}" class="btn btn-primary">
+            <span class="fas fa-backward"></span> Back
+          </a>
         </div>
-        <a href="{{ route('categories.index') }}" class="btn btn-primary">
-          <span class="fas fa-backward"></span> Back
-        </a>
       </div>
     </div>
   </div>
