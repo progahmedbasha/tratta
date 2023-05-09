@@ -58,6 +58,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/customer/home', function () {
+    return view('customer/index');
+});
+
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
 // })->middleware(['auth', 'verified'])->name('dashboard');
