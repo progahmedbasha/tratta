@@ -2,7 +2,7 @@
     <h1 style="text-align: center;font-family: cursive; color:black;">Illness Data</h1>
     <div class="row">
         <div class="col-lg-12">
-            <div class="row">
+             <div class="row" style=" justify-content: center; ">
                 <div class="col-md-11 mb-lg-0 mb-4">
                     <div class="card">
                         <div class="card-header pb-0 p-3">

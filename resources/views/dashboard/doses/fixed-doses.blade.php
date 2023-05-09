@@ -8,7 +8,7 @@
 <div class="container-fluid py-4">
     <div class="row">
         <div class="col-lg-12">
-            <div class="row">
+             <div class="row" style=" justify-content: center; ">
                 <h1 style="text-align: center;font-family: cursive;color:black;">Fixed Dose</h1>
                 <div class="col-md-11 mb-lg-0 mb-4">
                     <div class="card">

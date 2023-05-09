@@ -9,7 +9,7 @@
     <div class="row">
            <h1 style="text-align: center;font-family: cursive;color:black;">Basic Data</h1>
         <div class="col-lg-12">
-            <div class="row">
+            <div class="row" style=" justify-content: center; ">
                 <div class="col-md-11 mb-lg-0 mb-4">
                     <div class="card">
                         <div class="card-header pb-0 p-2">
@@ -33,6 +33,7 @@
     </div>
 </div>
 <div class="container-fluid ">
+    <div class="row" style=" justify-content: center; ">
     <div class="col-md-11 mb-lg-0 mb-4">
     <div class="card">
         <div class="card-header pb-0 p-2">
@@ -49,9 +50,11 @@
         </div>
     </div>
     </div>
+    </div>
 </div>
 <br>
 <div class="container-fluid ">
+    <div class="row" style=" justify-content: center; ">
     <div class="col-md-11 mb-lg-0 mb-4">
     <div class="card">
         <div class="card-header pb-0 p-2">
@@ -66,6 +69,7 @@
         </div>
         <div class="card-body p-1">
         </div>
+    </div>
     </div>
     </div>
 </div>
