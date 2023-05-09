@@ -36,6 +36,7 @@ class ForbiddenCaseController extends Controller
     }
         public function fetch(Request $request)
     {
+        // return $request;
         $var_name = $request->variable;
         $variables = null;
         if($request->variable == "ages"){
@@ -57,7 +58,7 @@ class ForbiddenCaseController extends Controller
             $variables = Drug::get();
         }
         if($request->variable == "indications"){
-            $variables = DrugIndication::get();
+            $variables = Indication::get();
         }
         $html = view('dashboard.doses.variable-component.forbidden-variables', compact('variables','var_name'))->render();
         return response()->json(['status' => true, 'result' => $html]);

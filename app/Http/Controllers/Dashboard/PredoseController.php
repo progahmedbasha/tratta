@@ -24,6 +24,35 @@ class PredoseController extends Controller
     {
 
     }
+            public function fetch(Request $request)
+    {
+        // return $request;
+        $var_name = $request->variable;
+        $variables = null;
+        if($request->variable == "ages"){
+           $variables = Age::get();
+        }
+        if($request->variable == "weights"){
+            $variables = Weight::get();
+        }
+        if($request->variable == "genders"){
+            $variables = Gender::get();
+        }
+        if($request->variable == "pregnancy_stages"){
+            $variables = PregnancyStage::get();
+        }
+        if($request->variable == "illness"){
+            $variables = IllnessSub::get();
+        }
+        if($request->variable == "drugs"){
+            $variables = Drug::get();
+        }
+        if($request->variable == "indications"){
+            $variables = DrugIndication::where('drug_id' ,$request->drug_id)->get();
+        }
+        $html = view('dashboard.doses.variable-component.predose-variables', compact('variables','var_name'))->render();
+        return response()->json(['status' => true, 'result' => $html]);
+    }
 
     /**
      * Show the form for creating a new resource.

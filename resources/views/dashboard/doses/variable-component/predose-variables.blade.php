@@ -14,7 +14,7 @@
     @elseif ($var_name == "drugs")
     {{ $variable->name}}
     @elseif ($var_name == "indications")
-    {{ $variable->indication_title}}
+    {{ $variable->indication->indication_title}}
     @endif
 </option>
 @endforeach

@@ -152,6 +152,7 @@ Route::middleware('auth')->group(function () {
     Route::post('add_row_value2', [ForbiddenCaseController::class, 'add_row_value2'])->name('add_row_value2');
     /********************** Predose Q *************************/
     Route::resource('predoses', PredoseController::class);
+    Route::post('predose_fetch_variables', [PredoseController::class, 'fetch'])->name('predose_fetch_variables');
     Route::post('predose_variable_delete/{id}', [PredoseController::class, 'delete_variable'])->name('predose_variable_delete');
     Route::resource('first_questions', PredoseFirstQuestionController::class);
     Route::get('first_question/{id}', [PredoseFirstQuestionController::class, 'create'])->name('first_question');

@@ -16,10 +16,11 @@
         </div>
         <form action="{{route('predoses.store')}}" method="post" enctype="multipart/form-data">
             @csrf
-            <input type="hidden" value="{{ $drug->id }}" name="drug_id">
+            <input type="hidden" value="{{ $drug->id }}" id="drug_id" name="drug_id">
             <div class="row">
                 <div class="col-3"></div>
-                @include('dashboard.forbidden-case.div_ajax_component.fetch-select-and-add-rows')
+                @include('dashboard.predose-questions.component.fetch-select-and-add-rows')
+                {{-- @include('dashboard.forbidden-case.div_ajax_component.fetch-select-and-add-rows') --}}
                 <div class="row">
                     <div class="col-md-9"></div>
                     <div class="col-1">
@@ -144,7 +145,6 @@
                 <form action="{{route('predose_variable_delete',$predose->id)}}" method="POST">
                     @csrf
                     <x-dashboard.delete-button></x-dashboard.delete-button>
-
                 </form>
             </div>
         </div>
