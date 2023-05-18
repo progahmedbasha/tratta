@@ -8,10 +8,18 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\DrugTrade;
 use App\Models\Drug;
+use App\Models\Age;
 use App\Models\DrugIndication;
 
 class SearchController extends Controller
 {
+
+    public function index()
+    {
+        $age = Age::first();
+        return view('customer/index',compact('age'));
+    }
+
     public function search(Request $request)
     {
         $data = [];
@@ -82,7 +90,7 @@ class SearchController extends Controller
     public function drugIndications(Request $request)
     {
         $drug_indications = DrugIndication::with('indication')->where('drug_id',$request->drug_id)->get();
-        return $drug_indications;
+        return response()->json(['data' => $drug_indications, 'code' => '200']);
     }
 
 }
