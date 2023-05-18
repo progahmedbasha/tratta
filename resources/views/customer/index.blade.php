@@ -11,6 +11,7 @@
   
   @vite('resources/css/front.css')
   <script src="{{ mix('resources/js/front.js') }}" defer></script>
+
 <style>
 @font-face {
     font-family: 'Inkfree';
@@ -84,7 +85,7 @@
 
   <div class="row justify-content-center">
     <div class="col-md-3">
-  <select class="form-select mt-1" style="height:60px;border-radius: 8px;border: 0px; box-shadow: 0 4px 7px -1px rgba(0, 0, 0, 0.11), 0 2px 4px -1px rgba(0, 0, 0, 0.07);" id="main_drug">
+  <select class="form-select mt-1" style="height:60px;border-radius: 8px;border: 0px; box-shadow: 0 4px 7px -1px rgba(0, 0, 0, 0.11), 0 2px 4px -1px rgba(0, 0, 0, 0.07);" id="main_drug" onchange="setIndications()">
     <option selected disabled>Select Drug</option>
   </select>
 </div>
@@ -92,11 +93,8 @@
 
   <div class="row justify-content-center">
     <div class="col-md-3">
-  <select class="form-select mt-1" style="color: #000;background: #E2E9FF;height:60px;border-radius: 8px;border: 0px;  box-shadow: 0 4px 7px -1px rgba(0, 0, 0, 0.11), 0 2px 4px -1px rgba(0, 0, 0, 0.07);">
+  <select class="form-select mt-1" style="color: #000;background: #E2E9FF;height:60px;border-radius: 8px;border: 0px;  box-shadow: 0 4px 7px -1px rgba(0, 0, 0, 0.11), 0 2px 4px -1px rgba(0, 0, 0, 0.07);" id="drug_indication">
     <option>For What Indication ?</option>
-    <option>2</option>
-    <option>3</option>
-    <option>4</option>
   </select>
 </div>
 </div>

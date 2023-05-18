@@ -13,8 +13,8 @@ document.querySelector('.menu-button').onclick = function(e) {
 }
 
 var gender = 1;
-var age = null;
-var wieght = null;
+var age = 1;
+var wieght = 1;
 var search_type = 3;
 
 function changeSearchType(type_value) {
@@ -44,7 +44,7 @@ function search(){
             for( var i = 0; i<len; i++){
                 var id = response.data[i]['id'];
                 var name = response.data[i]['name'];
-                $("#searchResult").append("<li onclick='setText("+JSON.stringify(response.data[i])+")' value='"+id+"'>"+name+"</li>");
+                $("#searchResult").append("<li onclick='setDrugs("+JSON.stringify(response.data[i])+")' value='"+id+"'>"+name+"</li>");
             }
         }
     });
@@ -52,9 +52,8 @@ function search(){
 
 
 // Set Text to search box and get details
-function setText(data){
+function setDrugs(data){
     $("#searchResult").empty();
-    console.log("val= " + data.id);
     document.getElementById('search_box').value = data.name;
 
     var url = "search-drugs";
@@ -73,7 +72,6 @@ function setText(data){
             search_id: data.id
         },
         success: function(response) {
-            console.log(response);
             var len = response.data.length;
             var options = "<option selected disabled>Select Drug</option>";
             for( var i = 0; i<len; i++){
@@ -87,5 +85,33 @@ function setText(data){
 
 }
 
+function setIndications() {
+    var drug_id = document.getElementById('main_drug').value;
+    var url = "search-indications";
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        url: url,
+        type: 'post',
+        cache: false,
+        async: true,
+        data: {
+            drug_id: drug_id,
+        },
+        success: function(response) {
+            var len = response.data.length;
+            var options = "<option selected disabled>For What Indication ?</option>";
+            for( var i = 0; i<len; i++){
+                var id = response.data[i]['id'];
+                var name = response.data[i]['indication']['indication_title'];
+                options += "<option value='"+id+"'>"+name+"</option>";
+            }
+            document.getElementById('drug_indication').innerHTML = options;
+        }
+    });
+}
 
   

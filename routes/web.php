@@ -58,12 +58,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/customer/home', function () {
-    return view('customer/index');
-});
+Route::get('/customer/home',[SearchController::class,'index']);
 
 Route::post('customer/search',[SearchController::class,'search'])->name('search');
 Route::post('customer/search-drugs',[SearchController::class,'searchDrugs'])->name('search_drugs');
+Route::post('customer/search-indications',[SearchController::class,'drugIndications'])->name('search_indications');
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
