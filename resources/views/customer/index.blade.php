@@ -3,265 +3,21 @@
 <head>
   <title>Tratta Application</title>
   <meta charset="utf-8">
+  <meta name="csrf-token" content="{{ csrf_token() }}" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-
-
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+  
+  @vite('resources/css/front.css')
+  <script src="{{ mix('resources/js/front.js') }}" defer></script>
 <style>
- 
-@import "https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css";
-
 @font-face {
     font-family: 'Inkfree';
     src: url('{{ url('customer_assets/font/Inkfree.ttf') }}') format('truetype'); /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
 } 
 
-body {
-  background: #F2F4F8;
-  font-family: 'Inkfree';
-  
-}
-
-h1, h2, h3, h4, h5, h6, p {
-  font-family: 'Inkfree';
-}
-
-.circular-menu {
-  width: 250px;
-  height: 250px;
-  margin: 0 auto;
-  position: relative;
-}
-
-.circle {
-  width: 250px;
-  height: 250px;
-  opacity: 0;
-  
-  -webkit-transform: scale(0);
-  -moz-transform: scale(0);
-  transform: scale(0);
-
-  -webkit-transition: all 0.4s ease-out;
-  -moz-transition: all 0.4s ease-out;
-  transition: all 0.4s ease-out;
-}
-
-.open.circle {
-  opacity: 1;
-
-  -webkit-transform: scale(1);
-  -moz-transform: scale(1);
-  transform: scale(1);
-}
-
-.circle a {
-  text-decoration: none;
-  color: black;
-  display: block;
-  height: 60px;
-  width: 60px;
-  line-height: 60px;
-  margin-left: -30px;
-  margin-top: -30px;
-  position: absolute;
-  text-align: center;
-  background: #F1F3F6;
-  box-shadow: -30px -30px 80px #FFFFFF, 30px 30px 80px rgba(55, 84, 170, 0.1);
-  border-radius: 50%;
-  text-align: center;
-}
-
-.circle a:hover {
-  color: black;
-}
-
-.menu-button {
-  position: absolute;
-  top: calc(50% - 30px);
-  left: calc(50% - 30px);
-  text-decoration: none;
-  text-align: center;
-  color: #444;
-  border-radius: 50%;
-  display: block;
-  height: 60px;
-  width: 60px;
-  line-height: 40px;
-  padding: 5px;
-  background: #F1F3F6;
-  box-shadow: -30px -30px 80px #FFFFFF, 30px 30px 80px rgba(55, 84, 170, 0.1);
-}
-
-.menu-button:hover {
-  background-color: #F1F3F6;
-}
-
-/* Author stuff */
-h1.author {
-  text-align:center;
-  color: white;
-  font-family: Helvetica, Arial, sans-serif;
-  font-weight: 300;
-}
-
-h1.author a {
-  color: #348;
-  text-decoration:none;
-}
-
-h1.author a:hover {
-  color: #ddd;
-} 
-
-/*.has-search .form-control {
-    padding-left: 5rem;
-}
-
-.has-search .form-control-feedback {
-    position: absolute;
-    z-index: 2;
-    display: block;
-    width: 3.375rem;
-    height: 3.375rem;
-    line-height: 3.8rem;
-    text-align: center;
-    pointer-events: none;
-    color: #aaa;
-    padding-left: 3rem;
-    font-size:18px;
-}*/
-
-.form-group .form-control {
-    padding-left: 6rem;
-    padding-right: 8rem;
-}
-.form-group{
-  position:relative;
-}
-.form-group .form-control-icon {
-    position: absolute;
-    z-index: 2;
-    display: block;
-    width: 2.375rem;
-    height: 2.375rem;
-    line-height: 2.375rem;
-    text-align: center;
-    pointer-events: none;
-    color: #aaa;
-    right:0;
-    top: 10px;
-    font-size:18px;
-    padding-right: 4rem;
-}
-
-.form-group .form-control-radio1 {
-    position: absolute;
-    z-index: 11111111111111;
-    display: block;
-    color: #aaa;
-    right:70px;
-    top: 16px;
-    background: #ffbf00;
-}
-
-.form-group .form-control-radio2 {
-    position: absolute;
-    z-index: 1111111111111;
-    display: block;
-    color: #aaa;
-    right:90px;
-    top: 16px;
-    background: #9ea5f9;
-
-}
-
-.form-group .form-control-radio3 {
-    position: absolute;
-    z-index: 1111111111111;
-    display: block;
-    color: #aaa;
-    right:110px;
-    top: 16px;
-    background: #C4A595;
-
-}
-
-.form-group .form-control-icon2 {
-    position: absolute;
-    z-index: 2;
-    display: block;
-    width: 2.375rem;
-    height: 2.375rem;
-    line-height: 2.375rem;
-    text-align: center;
-    pointer-events: none;
-    color: #aaa;
-    left:0;
-    top: 10px;
-    padding-left: 4rem;
-}
-
-.form-group .form-control-icon3 {
-    position: absolute;
-    z-index: 2;
-    display: block;
-    width: fit-content;
-    height: 2.375rem;
-    line-height: 2.375rem;
-    text-align: center;
-    pointer-events: none;
-    color: white;
-    right:0;
-    top: 10px;
-    font-size:18px;
-    margin-right: 1rem;
-}
-
-.custom-search {
-  position: relative;
-  width: 300px;
-}
-.custom-search-input {
-  width: 100%;
-  border: 1px solid #ccc;
-  border-radius: 100px;
-  padding: 10px 100px 10px 20px; 
-  line-height: 1;
-  box-sizing: border-box;
-  outline: none;
-}
-.custom-search-botton {
-  position: absolute;
-  right: 3px; 
-  top: 3px;
-  bottom: 3px;
-  border: 0;
-  background: linear-gradient(180deg, #CFBEB6 0%, #C8AC9F 100%);;
-  color: white;
-  outline: none;
-  margin: 0;
-  padding: 0 10px;
-  border-radius: 100px;
-  z-index: 2;
-  text-transform: uppercase;
-}
-
-select option {
-  background: #fff;
-}
-
-select{
-  foreground-image:url(stock:chevron-down);
-}
-
-
-select::after {
-  color:black;
-}
 </style>
-
 </head>
 <body>
 
@@ -304,30 +60,32 @@ select::after {
   <div class="row justify-content-center" style="margin-top:-30px;">
     <div class="col-md-6">    
        <!-- Actual search box -->
-       <div class="form-group">
+      <div class="form-group">
         <span class="fa fa-search form-control-icon2"></span>
-        <span class="fa fa-repeat form-control-icon" ></span>
 
         <form>
-        <input type="radio" class="form-check-input form-control-radio1" id="radio1" name="optradio" value="option1" >
-        <input type="radio" class="form-check-input form-control-radio2" id="radio2" name="optradio" value="option2" >
-        <input type="radio" class="form-check-input form-control-radio3" id="radio3" name="optradio" value="option3" >
-        </form>
- 
-        <input type="text" class="form-control" placeholder="Search Drug Key" style="border-radius:60px;background-color:black;color:white;height:60px;">
-      </div> 
+        <a href="{{ request()->fullUrl() }}" class="form-control-icon"><span class="fa fa-repeat" ></span></a>
 
-    
+        
+        <input type="radio" class="form-check-input form-control-radio1" id="radio1" onClick="changeSearchType(1)" name="optradio" value="1" >
+        <input type="radio" class="form-check-input form-control-radio2" id="radio2" onClick="changeSearchType(2)" name="optradio" value="2" >
+        <input type="radio" class="form-check-input form-control-radio3" id="radio3" onClick="changeSearchType(3)" name="optradio" value="3" checked>
+        </form>
+
+        <div class='autocomplete'>
+            <div>
+              <input type="text" class="form-control" onkeyup="search()" id="search_box" placeholder="Search Drug Key" style="border-radius:60px;background-color:black;color:white;height:60px;">
+            </div>
+            <ul id="searchResult"></ul>
+        </div>
+      </div> 
     </div>
   </div>
 
   <div class="row justify-content-center">
     <div class="col-md-3">
-  <select class="form-select mt-1" style="height:60px;border-radius: 8px;border: 0px; box-shadow: 0 4px 7px -1px rgba(0, 0, 0, 0.11), 0 2px 4px -1px rgba(0, 0, 0, 0.07);">
-    <option>Select Formula</option>
-    <option>2</option>
-    <option>3</option>
-    <option>4</option>
+  <select class="form-select mt-1" style="height:60px;border-radius: 8px;border: 0px; box-shadow: 0 4px 7px -1px rgba(0, 0, 0, 0.11), 0 2px 4px -1px rgba(0, 0, 0, 0.07);" id="main_drug">
+    <option selected disabled>Select Drug</option>
   </select>
 </div>
 </div>
@@ -440,26 +198,6 @@ select::after {
 
 <br>
 </div>
-
-
-<script>
-
-  // Demo by http://creative-punch.net
-
-var items = document.querySelectorAll('.circle a');
-
-for(var i = 0, l = items.length; i < l; i++) {
-  items[i].style.left = (50 - 35*Math.cos(-0.5 * Math.PI - 2*(1/l)*i*Math.PI)).toFixed(4) + "%";
-  
-  items[i].style.top = (50 + 35*Math.sin(-0.5 * Math.PI - 2*(1/l)*i*Math.PI)).toFixed(4) + "%";
-}
-
-document.querySelector('.menu-button').onclick = function(e) {
-   e.preventDefault(); document.querySelector('.circle').classList.toggle('open');
-}
-
-</script>
-
 
 </div>
 

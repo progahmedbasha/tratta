@@ -42,7 +42,7 @@ use App\Http\Controllers\Dashboard\PredoseFirstQuestionController;
 use App\Http\Controllers\Dashboard\PredoseSecondQuestionController;
 use App\Http\Controllers\Dashboard\PredoseThirdQuestionController;
 use App\Http\Controllers\Dashboard\PredoseFourthQuestionController;
-
+use App\Http\Controllers\Web\SearchController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -61,6 +61,9 @@ Route::get('/', function () {
 Route::get('/customer/home', function () {
     return view('customer/index');
 });
+
+Route::post('customer/search',[SearchController::class,'search'])->name('search');
+Route::post('customer/search-drugs',[SearchController::class,'searchDrugs'])->name('search_drugs');
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
