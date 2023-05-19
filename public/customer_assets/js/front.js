@@ -24,6 +24,8 @@ function changeSearchType(type_value) {
 function search(){
     var url = "search";
     var value = document.getElementById('search_box').value;
+    document.getElementById('main_drug').innerHTML = "<option selected disabled>Select Drug</option>";
+    document.getElementById('drug_indication').innerHTML = "<option selected disabled>For What Indication ?</option>";
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
