@@ -3,22 +3,27 @@
 var items = document.querySelectorAll('.circle a');
 
 for(var i = 0, l = items.length; i < l; i++) {
-items[i].style.left = (50 - 35*Math.cos(-0.5 * Math.PI - 2*(1/l)*i*Math.PI)).toFixed(4) + "%";
+    items[i].style.left = (50 - 35*Math.cos(-0.5 * Math.PI - 2*(1/l)*i*Math.PI)).toFixed(4) + "%";
 
-items[i].style.top = (50 + 35*Math.sin(-0.5 * Math.PI - 2*(1/l)*i*Math.PI)).toFixed(4) + "%";
+    items[i].style.top = (50 + 35*Math.sin(-0.5 * Math.PI - 2*(1/l)*i*Math.PI)).toFixed(4) + "%";
 }
 
 document.querySelector('.menu-button').onclick = function(e) {
     e.preventDefault(); document.querySelector('.circle').classList.toggle('open');
 }
 
+var search_type = 3;
+
+//variables
 var gender = 1;
 var age = 1;
 var wieght = 1;
-var search_type = 3;
 
 function changeSearchType(type_value) {
     search_type = type_value;
+    document.getElementById('search_box').value = '';
+    document.getElementById('main_drug').innerHTML = "<option selected disabled>Select Drug</option>";
+    document.getElementById('drug_indication').innerHTML = "<option selected disabled>For What Indication ?</option>";
 }
 
 function search(){
@@ -46,17 +51,20 @@ function search(){
             for( var i = 0; i<len; i++){
                 var id = response.data[i]['id'];
                 var name = response.data[i]['name'];
+                if(search_type == 1){
+                    var name = response.data[i]['name_key'];
+                }
+                
                 $("#searchResult").append("<li onclick='setDrugs("+JSON.stringify(response.data[i])+")' value='"+id+"'>"+name+"</li>");
             }
         }
     });
 }
 
-
 // Set Text to search box and get details
 function setDrugs(data){
     $("#searchResult").empty();
-    document.getElementById('search_box').value = data.name;
+    document.getElementById('search_box').value = ((search_type == 1)?data.name_key:data.name);
 
     var url = "search-drugs";
     $.ajaxSetup({
@@ -116,4 +124,31 @@ function setIndications() {
     });
 }
 
+function dose_note_result() {
+    var url = "search-indications";
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        url: url,
+        type: 'post',
+        cache: false,
+        async: true,
+        data: {
+            drug_id: drug_id,
+        },
+        success: function(response) {
+            var len = response.data.length;
+            var options = "<option selected disabled>For What Indication ?</option>";
+            for( var i = 0; i<len; i++){
+                var id = response.data[i]['id'];
+                var name = response.data[i]['indication']['indication_title'];
+                options += "<option value='"+id+"'>"+name+"</option>";
+            }
+            document.getElementById('drug_indication').innerHTML = options;
+        }
+    });
+}
   
