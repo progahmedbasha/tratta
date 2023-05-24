@@ -13,7 +13,7 @@ h1, h2, h3, h4, h5, h6, p {
 
 .circular-menu {
   width: 250px;
-  height: 250px;
+  height: 165px; /*250px;*/
   margin: 0 auto;
   position: relative;
 }
@@ -76,6 +76,7 @@ h1, h2, h3, h4, h5, h6, p {
   padding: 5px;
   background: #F1F3F6;
   box-shadow: -30px -30px 80px #FFFFFF, 30px 30px 80px rgba(55, 84, 170, 0.1);
+  margin-top:30px;
 }
 
 .menu-button:hover {
@@ -119,7 +120,7 @@ h1.author a:hover {
 
 .form-group .form-control {
     padding-left: 6rem;
-    padding-right: 8rem;
+    padding-right: 10rem;
 }
 .form-group{
   position:relative;
@@ -140,34 +141,43 @@ h1.author a:hover {
 }
 
 .form-group .form-control-radio1 {
-    position: absolute;
+    /*position: absolute;
     z-index: 11111111111111;
+    right:70px;
+    top: 16px;*/
     display: block;
     color: #aaa;
-    right:70px;
-    top: 16px;
     background: #ffbf00;
+    width:15px;
+    height:15px;
+    border-radius:15px;
 }
 
 .form-group .form-control-radio2 {
-    position: absolute;
+    /*position: absolute;
     z-index: 1111111111111;
+     right:90px;
+    top: 16px; */
     display: block;
     color: #aaa;
-    right:90px;
-    top: 16px;
     background: #9ea5f9;
+    width:15px;
+    height:15px;
+    border-radius:15px;
 
 }
 
 .form-group .form-control-radio3 {
-    position: absolute;
+    /*position: absolute;
     z-index: 1111111111111;
+    right:110px;
+    top: 16px;*/
     display: block;
     color: #aaa;
-    right:110px;
-    top: 16px;
     background: #C4A595;
+    width:15px;
+    height:15px;
+    border-radius:15px;
 
 }
 

@@ -14,21 +14,42 @@ document.querySelector('.menu-button').onclick = function(e) {
 
 var search_type = 3;
 
-//variables
-var gender = 1;
-var age = 1;
-var wieght = 1;
+var drug_id = null;
+var indication_id = null;
 
-function changeSearchType(type_value) {
-    search_type = type_value;
+var gender_id = 1;
+var age_id = 1;
+var weight_id = null;
+var pregnancy_stage_id = null;
+var illness_category_id = null;
+var drug_drug_id = null;
+
+
+function refresh() {
     document.getElementById('search_box').value = '';
     document.getElementById('main_drug').innerHTML = "<option selected disabled>Select Drug</option>";
     document.getElementById('drug_indication').innerHTML = "<option selected disabled>For What Indication ?</option>";
+    drug_id = null;
+    indication_id = null;
+}
+
+function changeSearchType(type_value) {
+    search_type = type_value;
+    refresh();
+
+    if(type_value == 3)
+        pcsh1();
+    else if(type_value == 2)
+        pcsh2();
+    else if(type_value == 1)
+        pcsh3();
 }
 
 function search(){
     var url = "search";
     var value = document.getElementById('search_box').value;
+    drug_id = null;
+    indication_id = null;
     document.getElementById('main_drug').innerHTML = "<option selected disabled>Select Drug</option>";
     document.getElementById('drug_indication').innerHTML = "<option selected disabled>For What Indication ?</option>";
     $.ajaxSetup({
@@ -61,6 +82,61 @@ function search(){
     });
 }
 
+//---------------------------------------------------------------------------------------------
+//------------------------search type animation and transition---------------------------------
+//---------------------------------------------------------------------------------------------
+
+function pcsh1() {
+    var x = document.getElementById("pc2");
+    var y = document.getElementById("pc3");
+    if (x.classList.contains("hide")) {
+      x.classList.remove("hide");
+    } else {
+      x.classList.add("hide");
+    }
+
+    if (y.classList.contains("hide")) {
+      y.classList.remove("hide");
+    } else {
+      y.classList.add("hide");
+    }
+}
+
+function pcsh2() {
+var x = document.getElementById("pc1");
+var y = document.getElementById("pc3");
+if (x.classList.contains("hide")) {
+    x.classList.remove("hide");
+} else {
+    x.classList.add("hide");
+}
+
+if (y.classList.contains("hide")) {
+    y.classList.remove("hide");
+} else {
+    y.classList.add("hide");
+}
+}
+
+function pcsh3() {
+var x = document.getElementById("pc1");
+var y = document.getElementById("pc2");
+
+if (x.classList.contains("hide")) {
+    x.classList.remove("hide");
+} else {
+    x.classList.add("hide");
+}
+
+if (y.classList.contains("hide")) {
+    y.classList.remove("hide");
+} else {
+    y.classList.add("hide");
+}
+}
+
+  //---------------------------------------------------------------------------------------------
+
 // Set Text to search box and get details
 function setDrugs(data){
     $("#searchResult").empty();
@@ -87,6 +163,8 @@ function setDrugs(data){
             for( var i = 0; i<len; i++){
                 var id = response.data[i]['id'];
                 var name = response.data[i]['name'];
+                if (search_type == 1) 
+                    var name = response.data[i]['trade']['name_sub'];
                 options += "<option value='"+id+"'>"+name+"</option>";
             }
             document.getElementById('main_drug').innerHTML = options;
@@ -95,8 +173,9 @@ function setDrugs(data){
 
 }
 
-function setIndications() {
-    var drug_id = document.getElementById('main_drug').value;
+function setIndicationOptions() {
+    drug_id = document.getElementById('main_drug').value;
+    dose_note_result();
     var url = "search-indications";
     $.ajaxSetup({
         headers: {
@@ -124,8 +203,13 @@ function setIndications() {
     });
 }
 
+function setIndication() {
+    indication_id = document.getElementById('drug_indication').value;
+    dose_note_result();
+}
+
 function dose_note_result() {
-    var url = "search-indications";
+    var url = "dose-note-result";
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -137,18 +221,57 @@ function dose_note_result() {
         cache: false,
         async: true,
         data: {
-            drug_id: drug_id,
+            drug_id : drug_id,
+            indication_id : indication_id,
+            gender_id : gender_id,
+            age_id : age_id,
+            weight_id : weight_id,
+            pregnancy_stage_id : pregnancy_stage_id,
+            illness_category_id : illness_category_id,
+            drug_drug_id : drug_drug_id,
         },
         success: function(response) {
-            var len = response.data.length;
-            var options = "<option selected disabled>For What Indication ?</option>";
-            for( var i = 0; i<len; i++){
-                var id = response.data[i]['id'];
-                var name = response.data[i]['indication']['indication_title'];
-                options += "<option value='"+id+"'>"+name+"</option>";
-            }
-            document.getElementById('drug_indication').innerHTML = options;
+        console.log(response.note_result);
+            document.getElementById('recommended_dose').innerHTML = response.dose_result.dose_message.recommended_dosage;
+            document.getElementById('dosage_note').innerHTML = response.dose_result.dose_message.dosage_note;
+            var notes = "";
+           /* for (var i = 0;
+            document.getElementById('dosage_note').innerHTML = response.dose_result.dose_message.dosage_note;*/
         }
     });
 }
-  
+
+function menuItemAction(itemValue) {
+    document.getElementById("weightItem").style.backgroundColor = '#F1F3F6';
+    document.getElementById("calculatorItem").style.backgroundColor = '#F1F3F6';
+    document.getElementById("titrationItem").style.backgroundColor = '#F1F3F6';
+    document.getElementById("femaleItem").style.backgroundColor = '#F1F3F6';
+    //document.getElementById("elderlyItem").style.backgroundColor = '#F1F3F6';
+
+    document.getElementById("weightSubMenu").style.visibility = 'hidden';
+    document.getElementById("femaleSubMenu").style.display = 'none';
+    document.getElementById("calculatorSubMenu").style.display = 'none';
+
+    if (itemValue == 'weight'){
+        document.getElementById("weightItem").style.backgroundColor = "#D7FE72";
+        document.getElementById("weightSubMenu").style.visibility = 'visible';
+    }
+    else if (itemValue == 'calculator'){
+        document.getElementById("calculatorItem").style.backgroundColor = "#D7FE72";
+        document.getElementById("calculatorSubMenu").style.display = 'block';
+    }
+    else if (itemValue == 'titration'){
+        document.getElementById("titrationItem").style.backgroundColor = "#D7FE72";
+    }
+    else if (itemValue == 'female'){
+        document.getElementById("femaleItem").style.backgroundColor = "#D7FE72";
+        document.getElementById("femaleSubMenu").style.display = 'block';
+    }
+    else if (itemValue == 'elderly'){
+        console.log(document.getElementById("elderlyItem").style.backgroundColor);
+        if(document.getElementById("elderlyItem").style.backgroundColor == "#D7FE72")
+            document.getElementById("elderlyItem").style.backgroundColor = "#F1F3F6";
+        else
+            document.getElementById("elderlyItem").style.backgroundColor = "#D7FE72";
+    }
+}

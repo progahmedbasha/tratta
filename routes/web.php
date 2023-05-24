@@ -43,6 +43,7 @@ use App\Http\Controllers\Dashboard\PredoseSecondQuestionController;
 use App\Http\Controllers\Dashboard\PredoseThirdQuestionController;
 use App\Http\Controllers\Dashboard\PredoseFourthQuestionController;
 use App\Http\Controllers\Web\SearchController;
+use App\Http\Controllers\Web\AlgorithmController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -63,6 +64,7 @@ Route::get('/customer/home',[SearchController::class,'index']);
 Route::post('customer/search',[SearchController::class,'search'])->name('search');
 Route::post('customer/search-drugs',[SearchController::class,'searchDrugs'])->name('search_drugs');
 Route::post('customer/search-indications',[SearchController::class,'drugIndications'])->name('search_indications');
+Route::post('customer/dose-note-result',[AlgorithmController::class,'dose_note_result'])->name('dose-note-result');
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');

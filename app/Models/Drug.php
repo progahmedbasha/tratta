@@ -8,10 +8,17 @@ use Illuminate\Database\Eloquent\Model;
 class Drug extends Model
 {
     use HasFactory;
+
     public function category()
     {
         return $this->belongsTo(Category::class,'sub_cat_id');
     }
+
+    public function trade()
+    {
+        return $this->hasOne(DrugTrade::class);
+    }
+
     public function variables()
     {
         return $this->morphMany(Variable::class, 'variableable');

@@ -54,7 +54,7 @@ class AlgorithmController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function dose_note_result(Request $request)
     {
         $var = $this->getVariable($request);
         $detail = $this->getVariableDetail($var->id,$request);
@@ -77,26 +77,26 @@ class AlgorithmController extends Controller
         if($note_result == null)
             $note_result = $this->getNoteOr($var->id,$effect->id,$request);
 
-        return view('front.test.test-store',compact('dose_result','note_result'));
+        return response()->json(['dose_result' => $dose_result, 'note_result' => $note_result, 'code' => '200']);
     }
 
     public function getVariable($request)
     {
         $var = null;
-        if(isset($request->indication_id))
-        $var = Variable::whereHasMorph(
-            'variableable',DrugIndication::class,
-            function ($query) use ($request){
-                $query->where('variableable_id',$request->indication_id);
-            }
-        )->first();
+        if(isset($request->indication_id) && $request->indication_id != null)
+            $var = Variable::where('drug_id',$request->drug_id)->whereHasMorph(
+                'variableable',DrugIndication::class,
+                function ($query) use ($request){
+                    $query->where('variableable_id',$request->indication_id);
+                }
+            )->first();
         else
-        $var = Variable::whereHasMorph(
-            'variableable',Drug::class,
-            function ($query) use ($request){
-                $query->where('variableable_id',$request->drug_id);
-            }
-        )->first();
+            $var = Variable::where('drug_id',$request->drug_id)->whereHasMorph(
+                'variableable',Drug::class,
+                function ($query) use ($request){
+                    $query->where('variableable_id',$request->drug_id);
+                }
+            )->first();
 
         return $var;
     }
