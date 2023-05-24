@@ -18,6 +18,99 @@
 } 
 
 </style>
+
+
+<style>
+#pc1 {
+  display: inline-block;
+  transition        : all .3s ease;
+  -webkit-transition: all .3s ease;
+  -webkit-animation-duration: 1s;
+            animation-duration: 1s; 
+            -webkit-animation-fill-mode: both; 
+            animation-fill-mode: both; 
+}
+
+#pc1.hide {
+  display: none;
+  transition        : all .3s ease;
+  -webkit-transition: all .3s ease;
+  -webkit-animation-duration: 1s;
+            animation-duration: 1s; 
+            -webkit-animation-fill-mode: both; 
+            animation-fill-mode: both; 
+
+}
+
+#pc2 {
+  display: inline-block;
+  transition        : all .3s ease;
+  -webkit-transition: all .3s ease;
+  -webkit-animation-duration: 1s;
+            animation-duration: 1s; 
+            -webkit-animation-fill-mode: both; 
+            animation-fill-mode: both; 
+}
+
+#pc2.hide {
+  display: none;
+  transition        : all .3s ease;
+  -webkit-transition: all .3s ease;
+  -webkit-animation-duration: 1s;
+            animation-duration: 1s; 
+            -webkit-animation-fill-mode: both; 
+            animation-fill-mode: both; 
+
+}
+
+#pc3 {
+  display: inline-block;
+  transition        : all .3s ease;
+  -webkit-transition: all .3s ease;
+  -webkit-animation-duration: 1s;
+            animation-duration: 1s; 
+            -webkit-animation-fill-mode: both; 
+            animation-fill-mode: both; 
+}
+
+#pc3.hide {
+  display: none;
+  transition        : all .3s ease;
+  -webkit-transition: all .3s ease;
+  -webkit-animation-duration: 1s;
+            animation-duration: 1s; 
+            -webkit-animation-fill-mode: both; 
+            animation-fill-mode: both; 
+
+}
+
+.animated { 
+
+            -webkit-animation-duration: 1s;
+            animation-duration: 1s; 
+            -webkit-animation-fill-mode: both; 
+            animation-fill-mode: both; 
+         }
+         
+         @-webkit-keyframes bounce { 
+            0%, 20%, 50%, 80%, 100% {-webkit-transform: translateY(0);} 
+            40% {-webkit-transform: translateY(-30px);} 
+            60% {-webkit-transform: translateY(-15px);} 
+         } 
+         
+         @keyframes bounce { 
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);} 
+            40% {transform: translateY(-30px);} 
+            60% {transform: translateY(-15px);} 
+         }
+         
+         .bounce { 
+            -webkit-animation-name: bounce; 
+            animation-name: bounce; 
+         }
+
+</style>
+
 </head>
 <body>
 
@@ -64,13 +157,15 @@
         <span class="fa fa-search form-control-icon2"></span>
 
         <form>
-        <a href="{{ request()->fullUrl() }}" class="form-control-icon"><span class="fa fa-repeat" ></span></a>
+        <a onclick="refresh()" class="form-control-icon"><span class="fa fa-repeat" ></span></a>
 
-        
-        <input type="radio" class="form-check-input form-control-radio1" id="radio1" onClick="changeSearchType(1)" name="optradio" value="1" >
-        <input type="radio" class="form-check-input form-control-radio2" id="radio2" onClick="changeSearchType(2)" name="optradio" value="2" >
-        <input type="radio" class="form-check-input form-control-radio3" id="radio3" onClick="changeSearchType(3)" name="optradio" value="3" checked>
-        </form>
+        <div style="position: absolute;z-index: 11111111111111;left:75%;top: 16px;">
+        <span class="form-check-input form-control-radio3" id="pc1" onclick="changeSearchType(3)" ></span>
+        <span class="form-check-input form-control-radio2 " id="pc2" onclick="changeSearchType(2)"  ></span>
+        <span class="form-check-input form-control-radio1 " id="pc3" onclick="changeSearchType(1)"  ></span>
+        </div>
+      
+      </form>
 
         <div class='autocomplete'>
             <div>
@@ -82,44 +177,78 @@
     </div>
   </div>
 
-  <div class="row justify-content-center">
-    <div class="col-md-3">
-  <select class="form-select mt-1" style="height:60px;border-radius: 8px;border: 0px; box-shadow: 0 4px 7px -1px rgba(0, 0, 0, 0.11), 0 2px 4px -1px rgba(0, 0, 0, 0.07);" id="main_drug" onchange="setIndications()">
-    <option selected disabled>Select Drug</option>
-  </select>
-</div>
-</div>
-
-  <div class="row justify-content-center">
-    <div class="col-md-3">
-  <select class="form-select mt-1" style="color: #000;background: #E2E9FF;height:60px;border-radius: 8px;border: 0px;  box-shadow: 0 4px 7px -1px rgba(0, 0, 0, 0.11), 0 2px 4px -1px rgba(0, 0, 0, 0.07);" id="drug_indication">
-    <option>For What Indication ?</option>
-  </select>
-</div>
-</div>
-
-
-
-<nav class="circular-menu mt-5">
-
-  <div class="circle">
-    <a href="" ><img src="{{ url('customer_assets/images/Weight.svg') }}"></a>
-    <a href="" ><img src="{{ url('customer_assets/images/calculator.svg') }}"></a>
-    <a href="" ><img src="{{ url('customer_assets/images/Titration.svg') }}"></a>
-    <a href="" class="fa fa-linkedin fa-2x" style="display:none;"></a>
-    <a href="" class="fa fa-github fa-2x" style="display:none;"></a>
-    <a href="" class="fa fa-rss fa-2x" style="display:none;"></a>
-    <a href="" ><img src="{{ url('customer_assets/images/Female.svg') }}"></a>
-    <a href="" ><img src="{{ url('customer_assets/images/Elderly.svg') }}"></a>
+<div class="row justify-content-center">
+  <div class="col-md-3">
+    <select class="form-select mt-1" style="height:60px;border-radius: 8px;border: 0px; box-shadow: 0 4px 7px -1px rgba(0, 0, 0, 0.11), 0 2px 4px -1px rgba(0, 0, 0, 0.07);" id="main_drug" onchange="setIndicationOptions()">
+      <option selected disabled>Select Drug</option>
+    </select>
   </div>
-  
-  <a href="" class="menu-button"><img src="{{ url('customer_assets/images/Stethoscope.svg') }}"></a>
+</div>
 
-</nav>
+<div class="row justify-content-center">
+    <div class="col-md-3">
+      <select class="form-select mt-1" style="color: #000;background: #E2E9FF;height:60px;border-radius: 8px;border: 0px;  box-shadow: 0 4px 7px -1px rgba(0, 0, 0, 0.11), 0 2px 4px -1px rgba(0, 0, 0, 0.07);" id="drug_indication" onchange="setIndication()">
+        <option>For What Indication ?</option>
+      </select>
+    </div>
+</div>
+
+<br><br>
+<!--Weight-->
+<center>
+  <div id="weightSubMenu" class="mt-5" style="width:180px;height:50px;background: #A5D9EB; border-radius: 50px;padding:8px;text-align:center;visibility: hidden;">
+      <span style="background: #F1F3F6;width:35px;height:35px;border-radius:35px;display:inline-block;line-height:35px;"><small style="font-size:8px;">Average</small></span>
+      <span style="background: #F1F3F6;width:35px;height:35px;border-radius:35px;display:inline-block;line-height:35px;"><small style="font-size:8px;">Overbuilt</small></span>
+      <span style="background: #F1F3F6;width:35px;height:35px;border-radius:35px;display:inline-block;line-height:35px;"><small style="font-size:7px;">Underbuilt</small></span>
+  </div>
+</center>
+
+<div class="row justify-content-center">
+ 
+    <div class="col-md-4" style="padding-left: 0; padding-right: 0;">
+         <br><br>
+        <!--Female-->
+        <div id="femaleSubMenu" class="mt-5 float-end" style="width:279px;height:50px;background: #FEB4CB; border-radius: 50px;padding:8px;text-align:center;display:none;">
+            <span style="background: #F1F3F6;width:35px;height:35px;border-radius:35px;display:inline-block;line-height:35px;"><small style="font-size:10px;">1st Tri</small></span>
+            <span style="background: #F1F3F6;width:35px;height:35px;border-radius:35px;display:inline-block;line-height:35px;"><small style="font-size:10px;">2nd Tri</small></span>
+            <span style="background: #F1F3F6;width:35px;height:35px;border-radius:35px;display:inline-block;line-height:35px;"><small style="font-size:10px;">3rd Tri</small></span>
+            <span style="background: #F1F3F6;width:35px;height:35px;border-radius:35px;display:inline-block;line-height:35px;"><small style="font-size:10px;">Nursing</small></span>
+            <span style="background: #5E556A;width:75px;height:35px;border-radius:18px;display:inline-block;line-height:35px;color:white;"><small style="font-size:12px;">Category</small></span>
+        </div>
+    </div>
+ 
+    <div class="col-md-4" style="width: 25%; padding-left: 0; padding-right: 0;">
+      <nav class="circular-menu mt-1">
+      <div class="circle">
+        <a href="#" id="weightItem" onclick="menuItemAction('weight')"><img src="{{ url('customer_assets/images/Weight.svg') }}"> </a>
+        <a href="#" id="calculatorItem" onclick="menuItemAction('calculator')"><img src="{{ url('customer_assets/images/calculator.svg') }}"></a>
+        <a href="#" id="titrationItem" onclick="menuItemAction('titration')"><img src="{{ url('customer_assets/images/Titration.svg') }}"></a>
+        <a href="" class="fa fa-linkedin fa-2x" style="display:none;"></a>
+        <a href="" class="fa fa-github fa-2x" style="display:none;"></a>
+        <a href="" class="fa fa-rss fa-2x" style="display:none;"></a>
+        <a href="#" id="femaleItem" onclick="menuItemAction('female')"><img src="{{ url('customer_assets/images/Female.svg') }}"></a>
+        <a href="#" id="elderlyItem" onclick="menuItemAction('elderly')"><img src="{{ url('customer_assets/images/Elderly.svg') }}"></a>
+      </div>
+      <a href="" class="menu-button"><img src="{{ url('customer_assets/images/Stethoscope.svg') }}"></a>
+      </nav>
+    </div>
+
+    <div class="col-md-4" style="padding-left: 0; padding-right: 0;">
+      <!--calculator-->
+        <div id="calculatorSubMenu" class="mt-4 float-start" style="width:322px;height:50px;background: #427A95; border-radius: 50px;padding:8px;text-align:center;display:none;">
+            <span style="background: #F1F3F6;width:35px;height:35px;border-radius:35px;display:inline-block;line-height:35px;"><small style="font-size:12px;">Age</small></span>
+            <span style="background: #F1F3F6;width:35px;height:35px;border-radius:35px;display:inline-block;line-height:35px;"><small style="font-size:12px;">S.cr</small></span>
+            <span style="background: #43BD8C;width:75px;height:35px;border-radius:18px;display:inline-block;line-height:35px;color:white;"><small style="font-size:12px;">Result</small></span>
+            <span style="background: #F1F3F6;width:35px;height:35px;border-radius:35px;display:inline-block;line-height:35px;"><small style="font-size:20px;"><span class="fa fa-trash-o"></span></small></span>
+            <span style="background: black;width:35px;height:35px;border-radius:35px;display:inline-block;line-height:35px;color:white;"><small style="font-size:20px;">Q</small></span>
+        </div>
+      </div>
+
+    </div>
 
 </div>
 
-<div style="position:absolute;top:24%;right:25px;">
+<div style="position:absolute;top:20%;right:25px;">
 <img  src="{{ url('customer_assets/images/bg2.svg') }}">
 </div>
 
@@ -128,12 +257,16 @@
   </div>-->
 
 
-<div style="display: flex; justify-content: center; align-items: center;top:-10px;position:relative;z-index:111111111111111;text-align:center;height:200px;width:100%;background-color:rgba(242, 244, 248, 0.62);">
-  <h1><b>Recommended <br> Dosage</b></h1>
+<div style="display: flex; justify-content: center; align-items: center;top:-10px;position:relative;z-index:111111111111111;text-align:center;height:150px;width:100%;background-color:rgba(242, 244, 248, 0.62);">
+  <h1><b id="recommended_dose">Recommended <br> Dosage</b></h1>
 </div>
 
 <div style="text-align:center;font-size: 24px;">
-  <p>Dosage Note</p>
+  <p id="dosage_note">Dosage Note</p>
+</div>
+
+<div style="text-align:center;">
+<p id="notes">Notes</p>
 </div>
 
 

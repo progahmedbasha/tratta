@@ -76,7 +76,7 @@ class SearchController extends Controller
     public function drugByTradeName($id)
     {
         $ids = DrugTrade::find($id)->pluck('drug_id');
-        $data = Drug::whereHas('drugVariables')->whereIn('id',$ids)->take(10)->get();
+        $data = Drug::with('trade')->whereHas('drugVariables')->whereIn('id',$ids)->take(10)->get();
         return $data;
     }
 
