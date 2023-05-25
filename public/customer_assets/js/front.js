@@ -82,6 +82,31 @@ function search(){
     });
 }
 
+function setAge() {
+    if (age_id == 1) {
+        age_id = 2;
+        document.getElementById("elderlyItem").style.backgroundColor = "#D7FE72";
+    }else{
+        age_id = 1;
+        document.getElementById("elderlyItem").style.backgroundColor = "#F1F3F6";
+    }
+    dose_note_result();
+}
+
+function setGender() {
+
+    if (gender_id == 1) {
+        gender_id = 2;
+        document.getElementById("femaleItem").style.backgroundColor = "#D7FE72";
+        document.getElementById("femaleSubMenu").style.display = 'block';
+    }else{
+        gender_id = 1;
+        document.getElementById("femaleItem").style.backgroundColor = '#F1F3F6';
+        document.getElementById("femaleSubMenu").style.display = 'none';
+
+    }
+}
+
 //---------------------------------------------------------------------------------------------
 //------------------------search type animation and transition---------------------------------
 //---------------------------------------------------------------------------------------------
@@ -209,44 +234,44 @@ function setIndication() {
 }
 
 function dose_note_result() {
-    var url = "dose-note-result";
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
-    $.ajax({
-        url: url,
-        type: 'post',
-        cache: false,
-        async: true,
-        data: {
-            drug_id : drug_id,
-            indication_id : indication_id,
-            gender_id : gender_id,
-            age_id : age_id,
-            weight_id : weight_id,
-            pregnancy_stage_id : pregnancy_stage_id,
-            illness_category_id : illness_category_id,
-            drug_drug_id : drug_drug_id,
-        },
-        success: function(response) {
-        console.log(response.note_result);
-            document.getElementById('recommended_dose').innerHTML = response.dose_result.dose_message.recommended_dosage;
-            document.getElementById('dosage_note').innerHTML = response.dose_result.dose_message.dosage_note;
-            var notes = "";
-           /* for (var i = 0;
-            document.getElementById('dosage_note').innerHTML = response.dose_result.dose_message.dosage_note;*/
-        }
-    });
+    if(drug_id != null){
+        var url = "dose-note-result";
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            url: url,
+            type: 'post',
+            cache: false,
+            async: true,
+            data: {
+                drug_id : drug_id,
+                indication_id : indication_id,
+                gender_id : gender_id,
+                age_id : age_id,
+                weight_id : weight_id,
+                pregnancy_stage_id : pregnancy_stage_id,
+                illness_category_id : illness_category_id,
+                drug_drug_id : drug_drug_id,
+            },
+            success: function(response) {
+                document.getElementById('recommended_dose').innerHTML = response.dose_result.dose_message.recommended_dosage;
+                document.getElementById('dosage_note').innerHTML = response.dose_result.dose_message.dosage_note;
+                var notes = "";
+                for (var i = 0; i < response.note_result.length ; i++)
+                    notes += response.note_result[i].noteMessage.note + '<br>';
+                document.getElementById('notes').innerHTML = (notes != "")?notes:'Notes';
+            }
+        });
+    }
 }
 
 function menuItemAction(itemValue) {
     document.getElementById("weightItem").style.backgroundColor = '#F1F3F6';
     document.getElementById("calculatorItem").style.backgroundColor = '#F1F3F6';
     document.getElementById("titrationItem").style.backgroundColor = '#F1F3F6';
-    document.getElementById("femaleItem").style.backgroundColor = '#F1F3F6';
-    //document.getElementById("elderlyItem").style.backgroundColor = '#F1F3F6';
 
     document.getElementById("weightSubMenu").style.visibility = 'hidden';
     document.getElementById("femaleSubMenu").style.display = 'none';
@@ -263,15 +288,6 @@ function menuItemAction(itemValue) {
     else if (itemValue == 'titration'){
         document.getElementById("titrationItem").style.backgroundColor = "#D7FE72";
     }
-    else if (itemValue == 'female'){
-        document.getElementById("femaleItem").style.backgroundColor = "#D7FE72";
-        document.getElementById("femaleSubMenu").style.display = 'block';
-    }
-    else if (itemValue == 'elderly'){
-        console.log(document.getElementById("elderlyItem").style.backgroundColor);
-        if(document.getElementById("elderlyItem").style.backgroundColor == "#D7FE72")
-            document.getElementById("elderlyItem").style.backgroundColor = "#F1F3F6";
-        else
-            document.getElementById("elderlyItem").style.backgroundColor = "#D7FE72";
-    }
+    
+    
 }
