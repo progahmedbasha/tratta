@@ -161,8 +161,8 @@
 
         <div style="position: absolute;z-index: 11111111111111;left:75%;top: 16px;">
         <span class="form-check-input form-control-radio3" id="pc1" onclick="changeSearchType(3)" ></span>
-        <span class="form-check-input form-control-radio2 " id="pc2" onclick="changeSearchType(2)"  ></span>
-        <span class="form-check-input form-control-radio1 " id="pc3" onclick="changeSearchType(1)"  ></span>
+        <span class="form-check-input form-control-radio2 hide" id="pc2" onclick="changeSearchType(2)"  ></span>
+        <span class="form-check-input form-control-radio1 hide" id="pc3" onclick="changeSearchType(1)"  ></span>
         </div>
       
       </form>
@@ -226,8 +226,8 @@
         <a href="" class="fa fa-linkedin fa-2x" style="display:none;"></a>
         <a href="" class="fa fa-github fa-2x" style="display:none;"></a>
         <a href="" class="fa fa-rss fa-2x" style="display:none;"></a>
-        <a href="#" id="femaleItem" onclick="menuItemAction('female')"><img src="{{ url('customer_assets/images/Female.svg') }}"></a>
-        <a href="#" id="elderlyItem" onclick="menuItemAction('elderly')"><img src="{{ url('customer_assets/images/Elderly.svg') }}"></a>
+        <a href="#" id="femaleItem" onclick="setGender()"><img src="{{ url('customer_assets/images/Female.svg') }}"></a>
+        <a id="elderlyItem" onclick="setAge()"><img src="{{ url('customer_assets/images/Elderly.svg') }}"></a>
       </div>
       <a href="" class="menu-button"><img src="{{ url('customer_assets/images/Stethoscope.svg') }}"></a>
       </nav>
