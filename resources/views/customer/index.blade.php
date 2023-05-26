@@ -8,19 +8,35 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
   
   <link href="{{asset('customer_assets/css/front.css')}}" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js" integrity="sha512-Eak/29OTpb36LLo2r47IpVzPBLXnAMPAVypbSZiZ4Qkf8p/7S/XRG5xp7OKWPPYfJT6metI+IORkR5G8F900+g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
+<script>  
+    new WOW().init();  
+</script>  
 <style>
 @font-face {
     font-family: 'Inkfree';
     src: url('{{ url('customer_assets/font/Inkfree.ttf') }}') format('truetype'); /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
 } 
 
+@font-face {
+    font-family: 'BreadIdol';
+    src: url('{{ url('customer_assets/font/BreadIdol.ttf') }}') format('truetype'); /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
+} 
+
 </style>
 
 
 <style>
+  /* This changes all the animations globally */
+:root {
+  --animate-duration: 800ms;
+  --animate-delay: 0.9s;
+}
+
 #pc1 {
   display: inline-block;
   transition        : all .3s ease;
@@ -84,7 +100,7 @@
 
 }
 
-.animated { 
+/*.animated { 
 
             -webkit-animation-duration: 1s;
             animation-duration: 1s; 
@@ -107,7 +123,7 @@
          .bounce { 
             -webkit-animation-name: bounce; 
             animation-name: bounce; 
-         }
+         }*/
 
 </style>
 
@@ -120,7 +136,7 @@
 
   
 
-<div style="background-image:url('{{ url('customer_assets/images/bg1.svg') }}');background-repeat: no-repeat; background-color: white;border-radius:25px;padding:10px;margin:10px;">  
+<div style="background-image:url('{{ url('customer_assets/images/bg1.svg') }}');background-repeat: no-repeat; background-color: white;border-radius:25px;padding:10px;margin:10px;border-bottom-left-radius: 0px;border-bottom-right-radius: 0px;">  
     <nav class="navbar navbar-expand-sm" style="padding-right:40px;padding-left:40px;">
     <div class="container-fluid">
       <a class="navbar-brand" href="javascript:void(0)"> <img src="{{ url('customer_assets/images/Tratta_prescribe.svg') }}" ></a>
@@ -139,7 +155,7 @@
             <a class="nav-link" href="javascript:void(0)">Link</a>
           </li>-->
         </ul>
-        <div class="d-flex">
+        <div class="d-flex wow bounceInUp">
           <img src="{{ url('customer_assets/images/setting.svg') }}" style="padding-right:40px;">
           <div class="form-check form-switch">
             <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" style=" width: 90px; height: 40px;">
@@ -159,10 +175,10 @@
         <form>
         <a onclick="refresh()" class="form-control-icon"><span class="fa fa-repeat" ></span></a>
 
-        <div style="position: absolute;z-index: 11111111111111;left:75%;top: 16px;">
-        <span class="form-check-input form-control-radio3" id="pc1" onclick="changeSearchType(3)" ></span>
-        <span class="form-check-input form-control-radio2 hide" id="pc2" onclick="changeSearchType(2)"  ></span>
-        <span class="form-check-input form-control-radio1 hide" id="pc3" onclick="changeSearchType(1)"  ></span>
+        <div class="animate__animated animate__wobble" style="position: absolute;z-index: 11111111111111;left:75%;top: 16px;">
+        <span class="form-check-input form-control-radio3 animate__animated animate__wobble" id="pc1" onclick="changeSearchType(3)" ></span>
+        <span class="form-check-input form-control-radio2 animate__animated animate__wobble hide" id="pc2" onclick="changeSearchType(2)"  ></span>
+        <span class="form-check-input form-control-radio1 animate__animated animate__wobble hide" id="pc3" onclick="changeSearchType(1)"  ></span>
         </div>
       
       </form>
@@ -194,48 +210,67 @@
 </div>
 
 <br><br>
+<div class="row justify-content-center">
+  <div class="col-md-4">
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+        </div>
+        <div class="col-md-4">
 <!--Weight-->
 <center>
-  <div id="weightSubMenu" class="mt-5" style="width:180px;height:50px;background: #A5D9EB; border-radius: 50px;padding:8px;text-align:center;visibility: hidden;">
-      <span style="background: #F1F3F6;width:35px;height:35px;border-radius:35px;display:inline-block;line-height:35px;"><small style="font-size:8px;">Average</small></span>
-      <span style="background: #F1F3F6;width:35px;height:35px;border-radius:35px;display:inline-block;line-height:35px;"><small style="font-size:8px;">Overbuilt</small></span>
-      <span style="background: #F1F3F6;width:35px;height:35px;border-radius:35px;display:inline-block;line-height:35px;"><small style="font-size:7px;">Underbuilt</small></span>
+  <div id="weightSubMenu" class="animate__animated animate__pulse mt-5" style="width:180px;height:50px;background: #A5D9EB; border-radius: 50px;padding:8px;text-align:center;display:none;">
+      <span id="weightOption1" onclick="weightSelectedValue(1)" style="background: #F1F3F6;width:35px;height:35px;border-radius:35px;display:inline-block;line-height:35px;cursor: pointer;"><small style="font-size:8px;">Average</small></span>
+      <span id="weightOption2" onclick="weightSelectedValue(2)" style="background: #F1F3F6;width:35px;height:35px;border-radius:35px;display:inline-block;line-height:35px;cursor: pointer;"><small style="font-size:8px;">Overbuilt</small></span>
+      <span id="weightOption3" onclick="weightSelectedValue(3)" style="background: #F1F3F6;width:35px;height:35px;border-radius:35px;display:inline-block;line-height:35px;cursor: pointer;"><small style="font-size:7px;">Underbuilt</small></span>
   </div>
 </center>
+        </div>
+        <div class="col-md-4">
+        </div>
+
+        </div>
+
+
+
 
 <div class="row justify-content-center">
  
     <div class="col-md-4" style="padding-left: 0; padding-right: 0;">
          <br><br>
         <!--Female-->
-        <div id="femaleSubMenu" class="mt-5 float-end" style="width:279px;height:50px;background: #FEB4CB; border-radius: 50px;padding:8px;text-align:center;display:none;">
-            <span style="background: #F1F3F6;width:35px;height:35px;border-radius:35px;display:inline-block;line-height:35px;"><small style="font-size:10px;">1st Tri</small></span>
-            <span style="background: #F1F3F6;width:35px;height:35px;border-radius:35px;display:inline-block;line-height:35px;"><small style="font-size:10px;">2nd Tri</small></span>
-            <span style="background: #F1F3F6;width:35px;height:35px;border-radius:35px;display:inline-block;line-height:35px;"><small style="font-size:10px;">3rd Tri</small></span>
-            <span style="background: #F1F3F6;width:35px;height:35px;border-radius:35px;display:inline-block;line-height:35px;"><small style="font-size:10px;">Nursing</small></span>
-            <span style="background: #5E556A;width:75px;height:35px;border-radius:18px;display:inline-block;line-height:35px;color:white;"><small style="font-size:12px;">Category</small></span>
+
+        <div id="femaleSubMenu" class="mt-5 float-end animate__animated animate__pulse" style="width:300px;height:50px;background: #FEB4CB; border-radius: 50px;padding:8px;text-align:center;display:none;">
+            <span id="option1" onclick="femaleSelectedValue(1)" style="background: #F1F3F6;width:35px;height:35px;border-radius:35px;display:inline-block;line-height:35px;cursor: pointer;"><small style="font-size:10px;">1st Tri</small></span>
+            <span id="option2" onclick="femaleSelectedValue(2)" style="background: #F1F3F6;width:35px;height:35px;border-radius:35px;display:inline-block;line-height:35px;cursor: pointer;"><small style="font-size:10px;">2nd Tri</small></span>
+            <span id="option3" onclick="femaleSelectedValue(3)" style="background: #F1F3F6;width:35px;height:35px;border-radius:35px;display:inline-block;line-height:35px;cursor: pointer;"><small style="font-size:10px;">3rd Tri</small></span>
+            <span id="option4" onclick="femaleSelectedValue(4)" style="background: #F1F3F6;width:35px;height:35px;border-radius:35px;display:inline-block;line-height:35px;cursor: pointer;"><small style="font-size:10px;">Nursing</small></span>
+            <span onclick="categoryAction()" style="background: #5E556A;width:75px;height:35px;border-radius:18px;display:inline-block;line-height:35px;color:white;cursor: pointer;"><small style="font-size:12px;">Category</small></span>
         </div>
+
     </div>
  
     <div class="col-md-4" style="width: 25%; padding-left: 0; padding-right: 0;">
       <nav class="circular-menu mt-1">
       <div class="circle">
-        <a href="#" id="weightItem" onclick="menuItemAction('weight')"><img src="{{ url('customer_assets/images/Weight.svg') }}"> </a>
-        <a href="#" id="calculatorItem" onclick="menuItemAction('calculator')"><img src="{{ url('customer_assets/images/calculator.svg') }}"></a>
-        <a href="#" id="titrationItem" onclick="menuItemAction('titration')"><img src="{{ url('customer_assets/images/Titration.svg') }}"></a>
+        <a  id="weightItem" onclick="menuItemAction('weight')" style="cursor: pointer;"><img src="{{ url('customer_assets/images/Weight.svg') }}"> </a>
+        <a  id="calculatorItem" onclick="menuItemAction('calculator')" style="cursor: pointer;"><img src="{{ url('customer_assets/images/calculator.svg') }}"></a>
+        <a  id="titrationItem" onclick="menuItemAction('titration')" style="cursor: pointer;"><img src="{{ url('customer_assets/images/Titration.svg') }}"></a>
         <a href="" class="fa fa-linkedin fa-2x" style="display:none;"></a>
         <a href="" class="fa fa-github fa-2x" style="display:none;"></a>
         <a href="" class="fa fa-rss fa-2x" style="display:none;"></a>
-        <a href="#" id="femaleItem" onclick="setGender()"><img src="{{ url('customer_assets/images/Female.svg') }}"></a>
-        <a id="elderlyItem" onclick="setAge()"><img src="{{ url('customer_assets/images/Elderly.svg') }}"></a>
+        <a  id="femaleItem" onclick="setGender()" style="cursor: pointer;"><img src="{{ url('customer_assets/images/Female.svg') }}"></a>
+        <a  id="elderlyItem" onclick="setAge()" style="cursor: pointer;"><img src="{{ url('customer_assets/images/Elderly.svg') }}"></a>
       </div>
-      <a href="" class="menu-button"><img src="{{ url('customer_assets/images/Stethoscope.svg') }}"></a>
+      <a  class="menu-button" style="cursor: pointer;"><img src="{{ url('customer_assets/images/Stethoscope.svg') }}"></a>
       </nav>
     </div>
 
     <div class="col-md-4" style="padding-left: 0; padding-right: 0;">
       <!--calculator-->
-        <div id="calculatorSubMenu" class="mt-4 float-start" style="width:322px;height:50px;background: #427A95; border-radius: 50px;padding:8px;text-align:center;display:none;">
+        <div id="calculatorSubMenu" class="mt-4 float-start animate__animated animate__pulse" style="width:322px;height:50px;background: #427A95; border-radius: 50px;padding:8px;text-align:center;display:none;">
             <span style="background: #F1F3F6;width:35px;height:35px;border-radius:35px;display:inline-block;line-height:35px;"><small style="font-size:12px;">Age</small></span>
             <span style="background: #F1F3F6;width:35px;height:35px;border-radius:35px;display:inline-block;line-height:35px;"><small style="font-size:12px;">S.cr</small></span>
             <span style="background: #43BD8C;width:75px;height:35px;border-radius:18px;display:inline-block;line-height:35px;color:white;"><small style="font-size:12px;">Result</small></span>
@@ -248,6 +283,7 @@
 
 </div>
 
+
 <div style="position:absolute;top:20%;right:25px;">
 <img  src="{{ url('customer_assets/images/bg2.svg') }}">
 </div>
@@ -257,8 +293,8 @@
   </div>-->
 
 
-<div style="display: flex; justify-content: center; align-items: center;top:-10px;position:relative;z-index:111111111111111;text-align:center;height:150px;width:100%;background-color:rgba(242, 244, 248, 0.62);">
-  <h1><b id="recommended_dose">Recommended <br> Dosage</b></h1>
+<div  style="display: flex; justify-content: center; align-items: center;margin-top:-10px;position:relative;z-index:2;text-align:center;height:150px;width:100%;background-color:rgba(242, 244, 248, 0.62);">
+  <p style="font-family: 'BreadIdol';font-style: normal; font-weight: 500; font-size: 28px;"><b id="recommended_dose">Recommended <br> Dosage</b></p>
 </div>
 
 <div style="text-align:center;font-size: 24px;">
@@ -267,6 +303,18 @@
 
 <div style="text-align:center;">
 <p id="notes">Notes</p>
+</div>
+    
+
+<!--------------------------------------------------------->
+
+<div class="row justify-content-center" style="margin-top:-240px;display:none;padding-right:22px;padding-left:22px;" id="category_section">
+  <div class="col-md-12 text-center animate__animated animate__fadeInUp" style="background: #5E556A;z-index:11;height: 220px;align-items: center; justify-content: center; display: flex;">
+    <div style="color:white;position: absolute;">
+      <p style="font-family: 'BreadIdol';font-style: normal; font-weight: 400; font-size: 32px;">B - Safe</p><br>
+      <p style="font-family: 'BreadIdol';">Pregnancy Note</p>
+    </div>
+  </div>
 </div>
 
 
@@ -336,4 +384,5 @@
 
 
 <script src="{{asset('customer_assets/js/front.js')}}"></script>
+
 

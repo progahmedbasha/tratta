@@ -273,13 +273,13 @@ function menuItemAction(itemValue) {
     document.getElementById("calculatorItem").style.backgroundColor = '#F1F3F6';
     document.getElementById("titrationItem").style.backgroundColor = '#F1F3F6';
 
-    document.getElementById("weightSubMenu").style.visibility = 'hidden';
+    document.getElementById("weightSubMenu").style.display = 'none';
     document.getElementById("femaleSubMenu").style.display = 'none';
     document.getElementById("calculatorSubMenu").style.display = 'none';
 
     if (itemValue == 'weight'){
         document.getElementById("weightItem").style.backgroundColor = "#D7FE72";
-        document.getElementById("weightSubMenu").style.visibility = 'visible';
+        document.getElementById("weightSubMenu").style.display = 'block';
     }
     else if (itemValue == 'calculator'){
         document.getElementById("calculatorItem").style.backgroundColor = "#D7FE72";
@@ -290,4 +290,42 @@ function menuItemAction(itemValue) {
     }
     
     
+}
+
+
+//female select value border color
+function femaleSelectedValue(option_value) {
+
+    document.getElementById("option1").style.borderWidth = "0px";
+    document.getElementById("option2").style.borderWidth = "0px";
+    document.getElementById("option3").style.borderWidth = "0px";
+    document.getElementById("option4").style.borderWidth = "0px";
+
+
+        document.getElementById("option"+option_value).style.borderColor = "red";
+        document.getElementById("option"+option_value).style.borderWidth = "1px";
+        document.getElementById("option"+option_value).style.borderStyle = "solid";
+
+
+  }
+
+
+
+  //Weight select value border color
+function weightSelectedValue(option_value) {
+
+    document.getElementById("weightOption1").style.borderWidth = "0px";
+    document.getElementById("weightOption2").style.borderWidth = "0px";
+    document.getElementById("weightOption3").style.borderWidth = "0px";
+
+        document.getElementById("weightOption"+option_value).style.borderColor = "red";
+        document.getElementById("weightOption"+option_value).style.borderWidth = "1px";
+        document.getElementById("weightOption"+option_value).style.borderStyle = "solid";
+  }
+
+
+  //CategoryActionButton
+
+function categoryAction() {
+    document.getElementById("category_section").style.display = 'flex';
 }
