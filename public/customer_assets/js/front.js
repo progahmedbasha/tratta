@@ -12,17 +12,85 @@ document.querySelector('.menu-button').onclick = function(e) {
     e.preventDefault(); document.querySelector('.circle').classList.toggle('open');
 }
 
+
+//---------------------------------------------------------------------------------------------
+//------------------------search type animation and transition---------------------------------
+//---------------------------------------------------------------------------------------------
+
+function pcsh1() {
+    var x = document.getElementById("pc2");
+    var y = document.getElementById("pc3");
+    if (x.classList.contains("hide")) {
+      x.classList.remove("hide");
+    } else {
+      x.classList.add("hide");
+    }
+
+    if (y.classList.contains("hide")) {
+      y.classList.remove("hide");
+    } else {
+      y.classList.add("hide");
+    }
+}
+
+function pcsh2() {
+var x = document.getElementById("pc1");
+var y = document.getElementById("pc3");
+if (x.classList.contains("hide")) {
+    x.classList.remove("hide");
+} else {
+    x.classList.add("hide");
+}
+
+if (y.classList.contains("hide")) {
+    y.classList.remove("hide");
+} else {
+    y.classList.add("hide");
+}
+}
+
+function pcsh3() {
+var x = document.getElementById("pc1");
+var y = document.getElementById("pc2");
+
+if (x.classList.contains("hide")) {
+    x.classList.remove("hide");
+} else {
+    x.classList.add("hide");
+}
+
+if (y.classList.contains("hide")) {
+    y.classList.remove("hide");
+} else {
+    y.classList.add("hide");
+}
+}
+
+  //---------------------------------------------------------------------------------------------
+
+
 var search_type = 3;
 
+///// toggle  ///////
+var menu_toggle = false;
+var weight_toggle = false;
+var titration_toggle = false;
+var message_toggle = false;
+
+///// main drug /////////
 var drug_id = null;
 var indication_id = null;
 
+///////// variables //////////////
 var gender_id = 1;
 var age_id = 1;
 var weight_id = null;
 var pregnancy_stage_id = null;
 var illness_category_id = null;
 var drug_drug_id = null;
+
+//////// titration dose ///////////
+var titration_note = null;
 
 
 function refresh() {
@@ -82,86 +150,6 @@ function search(){
     });
 }
 
-function setAge() {
-    if (age_id == 1) {
-        age_id = 2;
-        document.getElementById("elderlyItem").style.backgroundColor = "#D7FE72";
-    }else{
-        age_id = 1;
-        document.getElementById("elderlyItem").style.backgroundColor = "#F1F3F6";
-    }
-    dose_note_result();
-}
-
-function setGender() {
-
-    if (gender_id == 1) {
-        gender_id = 2;
-        document.getElementById("femaleItem").style.backgroundColor = "#D7FE72";
-        document.getElementById("femaleSubMenu").style.display = 'block';
-    }else{
-        gender_id = 1;
-        document.getElementById("femaleItem").style.backgroundColor = '#F1F3F6';
-        document.getElementById("femaleSubMenu").style.display = 'none';
-
-    }
-}
-
-//---------------------------------------------------------------------------------------------
-//------------------------search type animation and transition---------------------------------
-//---------------------------------------------------------------------------------------------
-
-function pcsh1() {
-    var x = document.getElementById("pc2");
-    var y = document.getElementById("pc3");
-    if (x.classList.contains("hide")) {
-      x.classList.remove("hide");
-    } else {
-      x.classList.add("hide");
-    }
-
-    if (y.classList.contains("hide")) {
-      y.classList.remove("hide");
-    } else {
-      y.classList.add("hide");
-    }
-}
-
-function pcsh2() {
-var x = document.getElementById("pc1");
-var y = document.getElementById("pc3");
-if (x.classList.contains("hide")) {
-    x.classList.remove("hide");
-} else {
-    x.classList.add("hide");
-}
-
-if (y.classList.contains("hide")) {
-    y.classList.remove("hide");
-} else {
-    y.classList.add("hide");
-}
-}
-
-function pcsh3() {
-var x = document.getElementById("pc1");
-var y = document.getElementById("pc2");
-
-if (x.classList.contains("hide")) {
-    x.classList.remove("hide");
-} else {
-    x.classList.add("hide");
-}
-
-if (y.classList.contains("hide")) {
-    y.classList.remove("hide");
-} else {
-    y.classList.add("hide");
-}
-}
-
-  //---------------------------------------------------------------------------------------------
-
 // Set Text to search box and get details
 function setDrugs(data){
     $("#searchResult").empty();
@@ -200,7 +188,7 @@ function setDrugs(data){
 
 function setIndicationOptions() {
     drug_id = document.getElementById('main_drug').value;
-    dose_note_result();
+    doseNoteResult();
     var url = "search-indications";
     $.ajaxSetup({
         headers: {
@@ -230,10 +218,136 @@ function setIndicationOptions() {
 
 function setIndication() {
     indication_id = document.getElementById('drug_indication').value;
-    dose_note_result();
+    doseNoteResult();
 }
 
-function dose_note_result() {
+function menu() {
+    console.log("test menu");
+    if(menu_toggle){
+        document.getElementById("femaleSubMenu").style.display = 'none';
+        document.getElementById("category_section").style.display = 'none';
+        document.getElementById("weightSubMenu").style.display = 'none';
+        document.getElementById("calculatorSubMenu").style.display = 'none';
+        document.getElementById("weightItem").style.backgroundColor = "#F1F3F6";
+        document.getElementById("calculatorItem").style.backgroundColor = '#F1F3F6';
+        document.getElementById("titrationItem").style.backgroundColor = '#F1F3F6';
+        weight_toggle = false;
+        menu_toggle = false;
+    }else{
+        if(gender_id == 2)
+            document.getElementById("femaleSubMenu").style.display = 'block';
+        menu_toggle = true;
+    }
+}
+
+function menuItemAction(itemValue) {
+    document.getElementById("calculatorItem").style.backgroundColor = '#F1F3F6';
+    document.getElementById("titrationItem").style.backgroundColor = '#F1F3F6';
+
+    document.getElementById("calculatorSubMenu").style.display = 'none';
+
+    if (itemValue == 'weight'){
+        if(weight_toggle){
+            document.getElementById("weightItem").style.backgroundColor = '#F1F3F6';
+            document.getElementById("weightSubMenu").style.display = 'none';
+            weight_toggle = false;
+        }else{
+            document.getElementById("weightItem").style.backgroundColor = "#D7FE72";
+            document.getElementById("weightSubMenu").style.display = 'block';
+            weight_toggle = true;
+        }
+    }
+    else if (itemValue == 'calculator'){
+        document.getElementById("calculatorItem").style.backgroundColor = "#D7FE72";
+        document.getElementById("calculatorSubMenu").style.display = 'block';
+    }
+    else if (itemValue == 'titration'){
+        if(titration_toggle){
+            document.getElementById("titrationItem").style.backgroundColor = "#F1F3F6";
+            titration_toggle = false;
+        }else{
+            document.getElementById("titrationItem").style.backgroundColor = "#D7FE72";
+            titration_toggle = true;
+        }
+        additionalMessage(titration_note);
+    }
+    
+    
+}
+
+function setAge() {
+    if (age_id == 1) {
+        age_id = 2;
+        document.getElementById("elderlyItem").style.backgroundColor = "#D7FE72";
+    }else{
+        age_id = 1;
+        document.getElementById("elderlyItem").style.backgroundColor = "#F1F3F6";
+    }
+    doseNoteResult();
+}
+
+function setGender(pregnancy = null) {
+
+    if (gender_id == 1) {
+        gender_id = 2;
+        document.getElementById("femaleItem").style.backgroundColor = "#D7FE72";
+        document.getElementById("femaleSubMenu").style.display = 'block';
+    }else{
+        gender_id = 1;
+        document.getElementById("femaleItem").style.backgroundColor = '#F1F3F6';
+        document.getElementById("femaleSubMenu").style.display = 'none';
+        clearPregnancy(pregnancy);
+    }
+    doseNoteResult();
+}
+
+function clearPregnancy(pregnancy) {
+    for (var i = 0; i < pregnancy.length; i++) 
+        document.getElementById("option"+i).style.borderWidth = "0px";
+
+    pregnancy_stage_id = null;
+}
+
+//female select value border color
+function femaleSelectedValue(pregnancy,option_value) {
+    clearPregnancy(pregnancy);
+
+    document.getElementById("option"+option_value).style.borderColor = "red";
+    document.getElementById("option"+option_value).style.borderWidth = "1px";
+    document.getElementById("option"+option_value).style.borderStyle = "solid";
+
+    pregnancy_stage_id = pregnancy[option_value].id;
+    doseNoteResult();
+}
+
+  //Weight select value border color
+function weightSelectedValue(option_value) {
+
+    document.getElementById("weightOption1").style.borderWidth = "0px";
+    document.getElementById("weightOption2").style.borderWidth = "0px";
+    document.getElementById("weightOption3").style.borderWidth = "0px";
+
+    document.getElementById("weightOption"+option_value).style.borderColor = "red";
+    document.getElementById("weightOption"+option_value).style.borderWidth = "1px";
+    document.getElementById("weightOption"+option_value).style.borderStyle = "solid";
+
+    weight_id = option_value;
+    doseNoteResult();
+}
+
+  //CategoryActionButton
+function additionalMessage(message = null) {
+    if (message_toggle) {
+        document.getElementById("category_section").style.display = 'none';
+        message_toggle = false;
+    }else {
+        document.getElementById("category_section").style.display = 'flex';
+        document.getElementById("additional_message").innerHTML = '<p>' + message + '</p>';
+        message_toggle = true;
+    }
+}
+
+function doseNoteResult() {
     if(drug_id != null){
         var url = "dose-note-result";
         $.ajaxSetup({
@@ -259,73 +373,13 @@ function dose_note_result() {
             success: function(response) {
                 document.getElementById('recommended_dose').innerHTML = response.dose_result.dose_message.recommended_dosage;
                 document.getElementById('dosage_note').innerHTML = response.dose_result.dose_message.dosage_note;
+                titration_note = response.dose_result.dose_message.titration_note;
                 var notes = "";
                 for (var i = 0; i < response.note_result.length ; i++)
-                    notes += response.note_result[i].noteMessage.note + '<br>';
+                    notes += response.note_result[i].note_message.note + '<br>';
                 document.getElementById('notes').innerHTML = (notes != "")?notes:'Notes';
             }
         });
     }
 }
 
-function menuItemAction(itemValue) {
-    document.getElementById("weightItem").style.backgroundColor = '#F1F3F6';
-    document.getElementById("calculatorItem").style.backgroundColor = '#F1F3F6';
-    document.getElementById("titrationItem").style.backgroundColor = '#F1F3F6';
-
-    document.getElementById("weightSubMenu").style.display = 'none';
-    document.getElementById("femaleSubMenu").style.display = 'none';
-    document.getElementById("calculatorSubMenu").style.display = 'none';
-
-    if (itemValue == 'weight'){
-        document.getElementById("weightItem").style.backgroundColor = "#D7FE72";
-        document.getElementById("weightSubMenu").style.display = 'block';
-    }
-    else if (itemValue == 'calculator'){
-        document.getElementById("calculatorItem").style.backgroundColor = "#D7FE72";
-        document.getElementById("calculatorSubMenu").style.display = 'block';
-    }
-    else if (itemValue == 'titration'){
-        document.getElementById("titrationItem").style.backgroundColor = "#D7FE72";
-    }
-    
-    
-}
-
-
-//female select value border color
-function femaleSelectedValue(option_value) {
-
-    document.getElementById("option1").style.borderWidth = "0px";
-    document.getElementById("option2").style.borderWidth = "0px";
-    document.getElementById("option3").style.borderWidth = "0px";
-    document.getElementById("option4").style.borderWidth = "0px";
-
-
-        document.getElementById("option"+option_value).style.borderColor = "red";
-        document.getElementById("option"+option_value).style.borderWidth = "1px";
-        document.getElementById("option"+option_value).style.borderStyle = "solid";
-
-
-  }
-
-
-
-  //Weight select value border color
-function weightSelectedValue(option_value) {
-
-    document.getElementById("weightOption1").style.borderWidth = "0px";
-    document.getElementById("weightOption2").style.borderWidth = "0px";
-    document.getElementById("weightOption3").style.borderWidth = "0px";
-
-        document.getElementById("weightOption"+option_value).style.borderColor = "red";
-        document.getElementById("weightOption"+option_value).style.borderWidth = "1px";
-        document.getElementById("weightOption"+option_value).style.borderStyle = "solid";
-  }
-
-
-  //CategoryActionButton
-
-function categoryAction() {
-    document.getElementById("category_section").style.display = 'flex';
-}

@@ -9,6 +9,7 @@ use App\Models\Category;
 use App\Models\DrugTrade;
 use App\Models\Drug;
 use App\Models\Age;
+use App\Models\PregnancyStage;
 use App\Models\DrugIndication;
 
 class SearchController extends Controller
@@ -16,8 +17,8 @@ class SearchController extends Controller
 
     public function index()
     {
-        $age = Age::first();
-        return view('customer/index',compact('age'));
+        $pregnancy = PregnancyStage::all();
+        return view('customer/index',compact('pregnancy'));
     }
 
     public function search(Request $request)
@@ -37,19 +38,28 @@ class SearchController extends Controller
 
     public function searchByKey($search)
     {
-       $data = Category::whereNotNull('parent_id')->where('name','like','%'.$search.'%')->take(10)->get();
+       $data = Category::whereHas('drug',function ($query) {
+        $query->whereHas('drugVariables');
+       })->whereNotNull('parent_id')->where('name','like','%'.$search.'%')->take(10)->get();
        return $data;
     }
 
     public function searchByTradeName($search)
     {
-       $data = DrugTrade::where('name_key','like','%'.$search.'%')->orWhere('name_sub','like','%'.$search.'%')->take(10)->get();
+       $data = DrugTrade::whereHas('drug',function ($query) {
+            $query->whereHas('drugVariables');
+       })->where('name_key','like','%'.$search.'%')->orWhere('name_sub','like','%'.$search.'%')->take(10)->get();
        return $data;
     }
 
     public function searchByCategory($search)
     {
-        $data = Category::whereNull('parent_id')->where('name','like','%'.$search.'%')->take(10)->get();
+        $data = Category::whereHas('child',function ($q)
+        {
+            $q->whereHas('drug',function ($query) {
+                $query->whereHas('drugVariables');
+               });
+        })->whereNull('parent_id')->where('name','like','%'.$search.'%')->take(10)->get();
         return $data;
     }
 
@@ -75,8 +85,8 @@ class SearchController extends Controller
 
     public function drugByTradeName($id)
     {
-        $ids = DrugTrade::find($id)->pluck('drug_id');
-        $data = Drug::with('trade')->whereHas('drugVariables')->whereIn('id',$ids)->take(10)->get();
+        $trade = DrugTrade::find($id);
+        $data = Drug::with('trade')->whereHas('drugVariables')->where('id',$trade->drug_id)->take(10)->get();
         return $data;
     }
 

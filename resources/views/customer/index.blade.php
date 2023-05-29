@@ -243,11 +243,10 @@
         <!--Female-->
 
         <div id="femaleSubMenu" class="mt-5 float-end animate__animated animate__pulse" style="width:300px;height:50px;background: #FEB4CB; border-radius: 50px;padding:8px;text-align:center;display:none;">
-            <span id="option1" onclick="femaleSelectedValue(1)" style="background: #F1F3F6;width:35px;height:35px;border-radius:35px;display:inline-block;line-height:35px;cursor: pointer;"><small style="font-size:10px;">1st Tri</small></span>
-            <span id="option2" onclick="femaleSelectedValue(2)" style="background: #F1F3F6;width:35px;height:35px;border-radius:35px;display:inline-block;line-height:35px;cursor: pointer;"><small style="font-size:10px;">2nd Tri</small></span>
-            <span id="option3" onclick="femaleSelectedValue(3)" style="background: #F1F3F6;width:35px;height:35px;border-radius:35px;display:inline-block;line-height:35px;cursor: pointer;"><small style="font-size:10px;">3rd Tri</small></span>
-            <span id="option4" onclick="femaleSelectedValue(4)" style="background: #F1F3F6;width:35px;height:35px;border-radius:35px;display:inline-block;line-height:35px;cursor: pointer;"><small style="font-size:10px;">Nursing</small></span>
-            <span onclick="categoryAction()" style="background: #5E556A;width:75px;height:35px;border-radius:18px;display:inline-block;line-height:35px;color:white;cursor: pointer;"><small style="font-size:12px;">Category</small></span>
+          @foreach($pregnancy as $i => $pregnant)
+            <span id="option{{$i}}" onclick="femaleSelectedValue({{$pregnancy}},{{$i}})" style="background: #F1F3F6;width:35px;height:35px;border-radius:35px;display:inline-block;line-height:35px;cursor: pointer;"><small style="font-size:10px;">{{substr($pregnant->pregnancy_stage,0,7)}}</small></span>
+          @endforeach
+            <span onclick="additionalMessage()" style="background: #5E556A;width:75px;height:35px;border-radius:18px;display:inline-block;line-height:35px;color:white;cursor: pointer;"><small style="font-size:12px;">Category</small></span>
         </div>
 
     </div>
@@ -261,10 +260,10 @@
         <a href="" class="fa fa-linkedin fa-2x" style="display:none;"></a>
         <a href="" class="fa fa-github fa-2x" style="display:none;"></a>
         <a href="" class="fa fa-rss fa-2x" style="display:none;"></a>
-        <a  id="femaleItem" onclick="setGender()" style="cursor: pointer;"><img src="{{ url('customer_assets/images/Female.svg') }}"></a>
+        <a  id="femaleItem" onclick="setGender({{$pregnancy}})" style="cursor: pointer;"><img src="{{ url('customer_assets/images/Female.svg') }}"></a>
         <a  id="elderlyItem" onclick="setAge()" style="cursor: pointer;"><img src="{{ url('customer_assets/images/Elderly.svg') }}"></a>
       </div>
-      <a  class="menu-button" style="cursor: pointer;"><img src="{{ url('customer_assets/images/Stethoscope.svg') }}"></a>
+      <a  class="menu-button" style="cursor: pointer;"><img src="{{ url('customer_assets/images/Stethoscope.svg') }}"  onclick = "menu()"></a>
       </nav>
     </div>
 
@@ -308,9 +307,9 @@
 
 <!--------------------------------------------------------->
 
-<div class="row justify-content-center" style="margin-top:-240px;display:none;padding-right:22px;padding-left:22px;" id="category_section">
+<div class="row justify-content-center" style="margin-top:-200px;display:none;padding-right:22px;padding-left:22px;" id="category_section">
   <div class="col-md-12 text-center animate__animated animate__fadeInUp" style="background: #5E556A;z-index:11;height: 220px;align-items: center; justify-content: center; display: flex;">
-    <div style="color:white;position: absolute;">
+    <div style="color:white;position: absolute;" id="additional_message">
       <p style="font-family: 'BreadIdol';font-style: normal; font-weight: 400; font-size: 32px;">B - Safe</p><br>
       <p style="font-family: 'BreadIdol';">Pregnancy Note</p>
     </div>
