@@ -17,6 +17,7 @@ use App\Models\Variable;
 use App\Models\VariableDetail;
 use App\Models\Effect;
 use App\Models\NoteDose;
+use App\Models\DrugPregnancy;
 
 class AlgorithmController extends Controller
 {
@@ -239,6 +240,15 @@ class AlgorithmController extends Controller
         }
 
         return $check;
+    }
+
+    public function drugPregnancy(Request $request)
+    {
+        $result = DrugPregnancy::with('safety')->whereHas('drugPregnancyStage', function ($query) use ($request)
+        {
+            $query->where('pregnancy_stage_id',$request->pregnancy_stage_id);
+        })->where('drug_id',$request->drug_id)->first();
+        return response()->json(['result' => $result, 'code' => '200']);
     }
 
     /**

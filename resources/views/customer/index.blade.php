@@ -246,7 +246,7 @@
           @foreach($pregnancy as $i => $pregnant)
             <span id="option{{$i}}" onclick="femaleSelectedValue({{$pregnancy}},{{$i}})" style="background: #F1F3F6;width:35px;height:35px;border-radius:35px;display:inline-block;line-height:35px;cursor: pointer;"><small style="font-size:10px;">{{substr($pregnant->pregnancy_stage,0,7)}}</small></span>
           @endforeach
-            <span onclick="additionalMessage()" style="background: #5E556A;width:75px;height:35px;border-radius:18px;display:inline-block;line-height:35px;color:white;cursor: pointer;"><small style="font-size:12px;">Category</small></span>
+            <span onclick="pregnancyCategory()" style="background: #5E556A;width:75px;height:35px;border-radius:18px;display:inline-block;line-height:35px;color:white;cursor: pointer;"><small style="font-size:12px;">Category</small></span>
         </div>
 
     </div>
@@ -320,10 +320,7 @@
 <div style="overflow: hidden;max-height:380px;">
   <img   src="{{ url('customer_assets/images/bg3.svg') }}">
   <img  style="float:right;" src="{{ url('customer_assets/images/bg4.svg') }}">
-  </div>
-
-
-
+</div>
 
 
 <div class="row justify-content-center" style="margin-top:-100px;">

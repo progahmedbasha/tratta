@@ -8,10 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class DrugPregnancy extends Model
 {
     use HasFactory;
-    public function effect()
+
+    public function safety()
     {
-        return $this->belongsTo(Effect::class);
+        return $this->belongsTo(PregnancySafety::class,'pregnancy_safety_id');
     }
+    
     public function drugPregnancyStage()
     {
         return $this->hasMany(DrugPregnancyStage::class);
