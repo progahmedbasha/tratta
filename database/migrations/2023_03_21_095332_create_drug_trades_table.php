@@ -17,7 +17,8 @@ return new class extends Migration
             $table->foreign('drug_id')->references('id')->on('drugs')->onUpdate('cascade')->onDelete('cascade');
             $table->unsignedTinyInteger('country_id')->unsigned();
             $table->foreign('country_id')->references('id')->on('countries')->onUpdate('cascade')->onDelete('cascade');
-            $table->string('name_key',100);
+            $table->unsignedTinyInteger('trade_key_id')->unsigned();
+            $table->foreign('trade_key_id')->references('id')->on('trade_keys')->onUpdate('cascade')->onDelete('cascade');
             $table->string('name_sub',100);
             $table->timestamp('created_at')->default(\DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(\DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
