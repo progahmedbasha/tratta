@@ -67,6 +67,8 @@ Route::post('customer/search',[SearchController::class,'search'])->name('search'
 Route::post('customer/search-drugs',[SearchController::class,'searchDrugs'])->name('search_drugs');
 Route::post('customer/search-indications',[SearchController::class,'drugIndications'])->name('search_indications');
 Route::post('customer/dose-note-result',[AlgorithmController::class,'dose_note_result'])->name('dose-note-result');
+Route::post('customer/drug-pregnancy-result',[AlgorithmController::class,'drugPregnancy'])->name('drug-pregnancy-result');
+
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
