@@ -42,8 +42,10 @@ use App\Http\Controllers\Dashboard\PredoseFirstQuestionController;
 use App\Http\Controllers\Dashboard\PredoseSecondQuestionController;
 use App\Http\Controllers\Dashboard\PredoseThirdQuestionController;
 use App\Http\Controllers\Dashboard\PredoseFourthQuestionController;
+use App\Http\Controllers\Dashboard\TradeKeyController;
 use App\Http\Controllers\Web\SearchController;
 use App\Http\Controllers\Web\AlgorithmController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -177,11 +179,13 @@ Route::middleware('auth')->group(function () {
     Route::get('fourth_question/{id}', [PredoseFourthQuestionController::class, 'create'])->name('fourth_question');
     Route::post('save_q4_score', [PredoseFourthQuestionController::class, 'save_q4_score'])->name('save_q4_score');
     Route::post('delete_score/{id}', [PredoseFourthQuestionController::class, 'delete_score'])->name('delete_score');
-    
+        /********************** trade_keys *************************/
+    Route::resource('trade_keys', TradeKeyController::class);
     });
     
     /********************** test *************************/
     Route::resource('tests', App\Http\Controllers\test\TestController::class);
     Route::post('drug_fetch_indication', [App\Http\Controllers\test\TestController::class, 'fetch'])->name('drug_fetch_indication');
+
 
 require __DIR__.'/auth.php';

@@ -33,7 +33,7 @@ class DrugTradeController extends Controller
         $trade= new DrugTrade;
         $trade->drug_id = $request->drug_id;
         $trade->country_id = $request->country_id;
-        $trade->name_key = $request->name_key;
+        $trade->trade_key_id = $request->name_key;
         $trade->name_sub = $request->name_sub;
         $trade->save();
         return redirect()->back()->with('success','Trade Added Successfully');
@@ -63,7 +63,7 @@ class DrugTradeController extends Controller
         $trade= DrugTrade::findOrFail($id);
         $trade->drug_id = $request->drug_id;
         $trade->country_id = $request->country_id;
-        $trade->name_key = $request->name_key;
+        $trade->trade_key_id = $request->name_key;
         $trade->name_sub = $request->name_sub;
         $trade->save();
         return redirect()->back()->with('success','Trade Updated Successfully');

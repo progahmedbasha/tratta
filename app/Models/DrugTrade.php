@@ -13,4 +13,8 @@ class DrugTrade extends Model
     {
         return $this->belongsTo(Drug::class);
     }
+    public function tradeKey()
+    {
+        return $this->belongsTo(TradeKey::class);
+    }
 }
