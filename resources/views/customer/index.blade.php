@@ -269,11 +269,11 @@
 
     <div class="col-md-4" style="padding-left: 0; padding-right: 0;">
       <!--calculator-->
-        <div id="calculatorSubMenu" class="mt-4 float-start animate__animated animate__pulse" style="width:322px;height:50px;background: #427A95; border-radius: 50px;padding:8px;text-align:center;display:none;">
-            <span style="background: #F1F3F6;width:35px;height:35px;border-radius:35px;display:inline-block;line-height:35px;"><small style="font-size:12px;">Age</small></span>
-            <span style="background: #F1F3F6;width:35px;height:35px;border-radius:35px;display:inline-block;line-height:35px;"><small style="font-size:12px;">S.cr</small></span>
-            <span style="background: #43BD8C;width:75px;height:35px;border-radius:18px;display:inline-block;line-height:35px;color:white;"><small style="font-size:12px;">Result</small></span>
-            <span style="background: #F1F3F6;width:35px;height:35px;border-radius:35px;display:inline-block;line-height:35px;"><small style="font-size:20px;"><span class="fa fa-trash-o"></span></small></span>
+        <div id="calculatorSubMenu" class="mt-4 float-start animate__animated animate__pulse" style="width:310px;height:50px;background: #427A95; border-radius: 50px;padding:8px;text-align:center;display:none;z-index: 1; position: relative;">
+            <input type="text" id="ageField" style="background: #F1F3F6;width:35px;height:35px;border-radius:35px;display:inline-block;line-height:35px;text-align:center;border:none;outline: none;" placeholder="Age">
+            <input type="text" id="scrField" style="background: #F1F3F6;width:35px;height:35px;border-radius:35px;display:inline-block;line-height:35px;text-align:center;border:none;outline: none;" placeholder="S.cr">
+            <span id="resultBtn" onclick="resultCalculate()" style="background: #43BD8C;width:75px;height:35px;border-radius:18px;display:inline-block;line-height:35px;color:white;cursor: pointer;"><small style="font-size:12px;">Result</small></span>
+            <span onclick="clearCalculate()" style="background: #F1F3F6;width:35px;height:35px;border-radius:35px;display:inline-block;line-height:35px;cursor: pointer;"><small style="font-size:20px;"><span class="fa fa-trash-o"></span></small></span>
             <span style="background: black;width:35px;height:35px;border-radius:35px;display:inline-block;line-height:35px;color:white;"><small style="font-size:20px;">Q</small></span>
         </div>
       </div>
@@ -282,7 +282,11 @@
 
 </div>
 
+<!--------------------part2 second section--------------------------------------->
 
+
+<section>
+<div>
 <div style="position:absolute;top:20%;right:25px;">
 <img  src="{{ url('customer_assets/images/bg2.svg') }}">
 </div>
@@ -292,7 +296,17 @@
   </div>-->
 
 
-<div  style="display: flex; justify-content: center; align-items: center;margin-top:-10px;position:relative;z-index:2;text-align:center;height:150px;width:100%;background-color:rgba(242, 244, 248, 0.62);">
+
+  <div class="row justify-content-center" style="display:none;padding-right:22px;padding-left:22px;" id="category_section">
+      <div class="col-md-12 text-center animate__animated animate__pulse" style="background: #5E556A;z-index:11;height: 220px;align-items: center; justify-content: center; display: flex;">
+          <div style="color:white;position: absolute;" id="additional_message">
+            <p style="font-family: 'BreadIdol';font-style: normal; font-weight: 400; font-size: 32px;">B - Safe</p><br>
+            <p style="font-family: 'BreadIdol';">Pregnancy Note</p>
+          </div>
+      </div>
+  </div>
+
+<div  style="display: flex; justify-content: center; align-items: center;margin-top:-10px;position:relative;z-index:2;text-align:center;height:200px;width:100%;background-color:rgba(242, 244, 248, 0.62);">
   <p style="font-family: 'BreadIdol';font-style: normal; font-weight: 500; font-size: 28px;"><b id="recommended_dose">Recommended <br> Dosage</b></p>
 </div>
 
@@ -307,14 +321,14 @@
 
 <!--------------------------------------------------------->
 
-<div class="row justify-content-center" style="margin-top:-200px;display:none;padding-right:22px;padding-left:22px;" id="category_section">
-  <div class="col-md-12 text-center animate__animated animate__fadeInUp" style="background: #5E556A;z-index:11;height: 220px;align-items: center; justify-content: center; display: flex;">
-    <div style="color:white;position: absolute;" id="additional_message">
-      <p style="font-family: 'BreadIdol';font-style: normal; font-weight: 400; font-size: 32px;">B - Safe</p><br>
-      <p style="font-family: 'BreadIdol';">Pregnancy Note</p>
-    </div>
-  </div>
+ 
 </div>
+
+</section>
+  
+
+
+
 
 
 <div style="overflow: hidden;max-height:380px;">

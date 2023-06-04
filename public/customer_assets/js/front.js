@@ -222,7 +222,6 @@ function setIndication() {
 }
 
 function menu() {
-    console.log("test menu");
     if(menu_toggle){
         document.getElementById("femaleSubMenu").style.display = 'none';
         document.getElementById("category_section").style.display = 'none';
@@ -383,3 +382,15 @@ function doseNoteResult() {
     }
 }
 
+
+//---------------------calculator methods-------------------------------------------
+
+function clearCalculate () {
+    document.getElementById("ageField").value = '';
+    document.getElementById("scrField").value = '';
+    document.getElementById("resultBtn").innerHTML = "Result";
+}
+
+function resultCalculate () {
+    document.getElementById("resultBtn").innerHTML = "Done!";
+}
