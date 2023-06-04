@@ -411,3 +411,15 @@ function doseNoteResult() {
     }
 }
 
+
+//---------------------calculator methods-------------------------------------------
+
+function clearCalculate () {
+    document.getElementById("ageField").value = '';
+    document.getElementById("scrField").value = '';
+    document.getElementById("resultBtn").innerHTML = "Result";
+}
+
+function resultCalculate () {
+    document.getElementById("resultBtn").innerHTML = "Done!";
+}
