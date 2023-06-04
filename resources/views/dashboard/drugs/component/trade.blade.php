@@ -43,8 +43,16 @@
             <div class="row">
                 <div class="col-4"></div>
                 <div class="col-4">
-                    <input class="form-control" placeholder="Name Key"  value="{{old('name_key')}}" name="name_key"
-                        required />
+                   <select class="form-control" name="name_key" required>
+                        <option value="">Name Key</option>
+                        @foreach ($trade_keys as $trade_key )
+                        <option value="{{$trade_key->id}}" {{($drug->
+                            name_key==$trade_key->id)?
+                            'selected':''}}>
+                            {{$trade_key->name_key}}
+                        </option>
+                        @endforeach
+                    </select>
                     @error('name_key')
                     <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
@@ -95,8 +103,16 @@
             <div class="row">
                 <div class="col-4"></div>
                 <div class="col-4">
-                    <input class="form-control" placeholder="Name Key" value="{{$trade->name_key}}" name="name_key" style="background-color: #9EA5F9;"
-                        required />
+                    <select class="form-control" name="name_key" required>
+                        <option value="">Name Key</option>
+                        @foreach ($trade_keys as $trade_key )
+                        <option value="{{$trade_key->id}}" {{($trade->
+                            trade_key_id==$trade_key->id)?
+                            'selected':''}}>
+                            {{$trade_key->name_key}}
+                        </option>
+                        @endforeach
+                    </select>
                     @error('name_key')
                     <div class="alert alert-danger">{{ $message }}</div>
                     @enderror

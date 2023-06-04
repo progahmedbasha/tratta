@@ -125,6 +125,11 @@
               </a>
             </li>
             <li class="nav-item">
+              <a class="nav-link" href="{{ route('trade_keys.index') }}">
+                <span class="sidenav-normal"> Trade Key </span>
+              </a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" href="{{ route('basic_data') }}#gender">
                 <span class="sidenav-normal"> Gender </span>
               </a>

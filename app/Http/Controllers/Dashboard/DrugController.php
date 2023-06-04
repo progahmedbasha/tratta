@@ -21,6 +21,7 @@ use App\Models\Predose;
 use App\Models\PregnancySafety;
 use App\Models\PregnancyStage;
 use App\Models\DrugTrade;
+use App\Models\TradeKey;
 use App\Models\Variable;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -88,13 +89,14 @@ class DrugController extends Controller
         $prganancy_safties = PregnancySafety::get();
         $countries = Country::get();
         $trades = DrugTrade::where('drug_id', $drug->id)->get();
+        $trade_keys = TradeKey::get();
         $moa_drugs = DrugMoa::where('drug_id', $drug->id)->get();
         $hx_drugs = HxDrug::get();
         $drugs = Drug::get();
         $interaction_severities = InteractionSeverity::get();
         $predoses = Predose::where('drug_id', $drug->id)->get();
         return view('dashboard.drugs.drug_show', compact('drug','category_subs','formulas','drug_formulas','indications','drug_indications',
-        'variable_indications','variables','effects','prgnancies','pregnancy_stages','prganancy_safties','countries','trades','moa_drugs','hx_drugs','drugs','interaction_severities','predoses'));
+        'variable_indications','variables','effects','prgnancies','pregnancy_stages','prganancy_safties','countries','trades','trade_keys','moa_drugs','hx_drugs','drugs','interaction_severities','predoses'));
     }
 
     /**

@@ -42,8 +42,10 @@ use App\Http\Controllers\Dashboard\PredoseFirstQuestionController;
 use App\Http\Controllers\Dashboard\PredoseSecondQuestionController;
 use App\Http\Controllers\Dashboard\PredoseThirdQuestionController;
 use App\Http\Controllers\Dashboard\PredoseFourthQuestionController;
+use App\Http\Controllers\Dashboard\TradeKeyController;
 use App\Http\Controllers\Web\SearchController;
 use App\Http\Controllers\Web\AlgorithmController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -65,6 +67,8 @@ Route::post('customer/search',[SearchController::class,'search'])->name('search'
 Route::post('customer/search-drugs',[SearchController::class,'searchDrugs'])->name('search_drugs');
 Route::post('customer/search-indications',[SearchController::class,'drugIndications'])->name('search_indications');
 Route::post('customer/dose-note-result',[AlgorithmController::class,'dose_note_result'])->name('dose-note-result');
+Route::post('customer/drug-pregnancy-result',[AlgorithmController::class,'drugPregnancy'])->name('drug-pregnancy-result');
+
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
@@ -177,11 +181,13 @@ Route::middleware('auth')->group(function () {
     Route::get('fourth_question/{id}', [PredoseFourthQuestionController::class, 'create'])->name('fourth_question');
     Route::post('save_q4_score', [PredoseFourthQuestionController::class, 'save_q4_score'])->name('save_q4_score');
     Route::post('delete_score/{id}', [PredoseFourthQuestionController::class, 'delete_score'])->name('delete_score');
-    
+        /********************** trade_keys *************************/
+    Route::resource('trade_keys', TradeKeyController::class);
     });
     
     /********************** test *************************/
     Route::resource('tests', App\Http\Controllers\test\TestController::class);
     Route::post('drug_fetch_indication', [App\Http\Controllers\test\TestController::class, 'fetch'])->name('drug_fetch_indication');
+
 
 require __DIR__.'/auth.php';

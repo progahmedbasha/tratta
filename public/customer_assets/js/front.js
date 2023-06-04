@@ -264,11 +264,14 @@ function menuItemAction(itemValue) {
         if(titration_toggle){
             document.getElementById("titrationItem").style.backgroundColor = "#F1F3F6";
             titration_toggle = false;
+            additionalMessage(titration_toggle);
+
         }else{
             document.getElementById("titrationItem").style.backgroundColor = "#D7FE72";
             titration_toggle = true;
+            additionalMessage(titration_toggle,'<p>'+titration_note+'</p>');
         }
-        additionalMessage(titration_note);
+        
     }
     
     
@@ -302,7 +305,8 @@ function setGender(pregnancy = null) {
 
 function clearPregnancy(pregnancy) {
     for (var i = 0; i < pregnancy.length; i++) 
-        document.getElementById("option"+i).style.borderWidth = "0px";
+        document.getElementById("option"+i).style.backgroundColor = "#F1F3F6";
+
 
     pregnancy_stage_id = null;
 }
@@ -311,40 +315,65 @@ function clearPregnancy(pregnancy) {
 function femaleSelectedValue(pregnancy,option_value) {
     clearPregnancy(pregnancy);
 
-    document.getElementById("option"+option_value).style.borderColor = "red";
-    document.getElementById("option"+option_value).style.borderWidth = "1px";
-    document.getElementById("option"+option_value).style.borderStyle = "solid";
+    document.getElementById("option"+option_value).style.backgroundColor = "#F2CC8F";
 
     pregnancy_stage_id = pregnancy[option_value].id;
     doseNoteResult();
+    pregnancyCategory();
 }
 
   //Weight select value border color
 function weightSelectedValue(option_value) {
 
-    document.getElementById("weightOption1").style.borderWidth = "0px";
-    document.getElementById("weightOption2").style.borderWidth = "0px";
-    document.getElementById("weightOption3").style.borderWidth = "0px";
+    document.getElementById("weightOption1").style.backgroundColor = "#F1F3F6";
+    document.getElementById("weightOption2").style.backgroundColor = "#F1F3F6";
+    document.getElementById("weightOption3").style.backgroundColor = "#F1F3F6";
 
-    document.getElementById("weightOption"+option_value).style.borderColor = "red";
-    document.getElementById("weightOption"+option_value).style.borderWidth = "1px";
-    document.getElementById("weightOption"+option_value).style.borderStyle = "solid";
+    document.getElementById("weightOption"+option_value).style.backgroundColor = "#F2CC8F";
 
     weight_id = option_value;
     doseNoteResult();
 }
 
-  //CategoryActionButton
-function additionalMessage(message = null) {
-    if (message_toggle) {
+function pregnancyCategory() {
+    if(pregnancy_stage_id != null && drug_id != null && !message_toggle){
+        var url = "drug-pregnancy-result";
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            url: url,
+            type: 'post',
+            cache: false,
+            async: true,
+            data: {
+                drug_id : drug_id,
+                pregnancy_stage_id : pregnancy_stage_id,
+            },
+            success: function(response) {
+                var message = `<p style="font-family: 'BreadIdol';font-style: normal; font-weight: 400; font-size: 32px;">`+response.result.safety.type+` - Safe</p><br>
+                <p style="font-family: 'BreadIdol';">`+response.result.note+`</p>`;
+                additionalMessage(true,message); 
+            }
+        });
+    }else{
+        additionalMessage(false);
+    }
+}
+
+function additionalMessage(open,message = null) {
+    if (!open) {
         document.getElementById("category_section").style.display = 'none';
         message_toggle = false;
     }else {
         document.getElementById("category_section").style.display = 'flex';
-        document.getElementById("additional_message").innerHTML = '<p>' + message + '</p>';
+        document.getElementById("additional_message").innerHTML = message ;
         message_toggle = true;
     }
 }
+
 
 function doseNoteResult() {
     if(drug_id != null){
