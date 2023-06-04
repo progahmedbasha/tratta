@@ -12,10 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('drug_trades', function (Blueprint $table) {
-           $table->dropColumn('name_key');
-           $table->unsignedTinyInteger('trade_key_id')->unsigned()->after('country_id');;
-           $table->foreign('trade_key_id')->references('id')->on('trade_keys')->onUpdate('cascade')->onDelete('cascade');
-        });   
+            $table->dropColumn('name_key');
+            $table->foreignId('trade_key_id')->after('country_id');
+        }); 
+        DB::table('drug_trades')->update(['trade_key_id' => 1]);
+        Schema::table('drug_trades', function (Blueprint $table) {
+            $table->foreign('trade_key_id')->references('id')->on('trade_keys')->onUpdate('cascade')->onDelete('cascade');  
+        });
     }
 
     /**
