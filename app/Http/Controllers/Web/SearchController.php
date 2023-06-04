@@ -11,6 +11,7 @@ use App\Models\Drug;
 use App\Models\Age;
 use App\Models\PregnancyStage;
 use App\Models\DrugIndication;
+use App\Models\TradeKey;
 
 class SearchController extends Controller
 {
@@ -46,9 +47,11 @@ class SearchController extends Controller
 
     public function searchByTradeName($search)
     {
-       $data = DrugTrade::whereHas('drug',function ($query) {
-            $query->whereHas('drugVariables');
-       })->where('name_key','like','%'.$search.'%')->orWhere('name_sub','like','%'.$search.'%')->take(10)->get();
+       $data = TradeKey::whereHas('drugTrade',function ($q) {
+            $q->whereHas('drug',function ($query) {
+                $query->whereHas('drugVariables');
+           });
+       })->where('name_key','like','%'.$search.'%')->take(10)->get();
        return $data;
     }
 
@@ -85,8 +88,8 @@ class SearchController extends Controller
 
     public function drugByTradeName($id)
     {
-        $trade = DrugTrade::find($id);
-        $data = Drug::with('trade')->whereHas('drugVariables')->where('id',$trade->drug_id)->take(10)->get();
+        $trade = DrugTrade::where('trade_id',$id)->get()->pluck('id');
+        $data = Drug::with('trade')->whereHas('drugVariables')->whereIn('id',$trade)->take(10)->get();
         return $data;
     }
 
