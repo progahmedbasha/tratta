@@ -454,3 +454,14 @@ function doseNoteResult() {
 
 //---------------------calculator methods-------------------------------------------
 
+
+
+function illnessDrugShow () {
+    let displayStatus =  document.getElementById("illness_drug_list").style.display ;
+    console.log(displayStatus);
+    if(displayStatus === "none")
+         document.getElementById("illness_drug_list").style.display = "flex";
+    else if(displayStatus === "flex")
+         document.getElementById("illness_drug_list").style.display = "none";
+}
+

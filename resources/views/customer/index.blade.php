@@ -125,16 +125,89 @@
             animation-name: bounce; 
          }*/
 
+.item-style {
+  top: 72% !important;
+  width: 80px !important;
+  font-size:10px !important;
+  border-radius:5px !important;
+  background-color:red !important;
+  line-height:20px !important;
+  height:20px !important;
+  Color:white !important;
+  margin-left: -40px !important; 
+  box-shadow: 0 4px 7px -1px rgba(0, 0, 0, 0.11), 0 2px 4px -1px rgba(0, 0, 0, 0.07);
+  cursor: pointer;
+}
+
+.triangle-up {
+	width: 0;
+	height: 0;
+	border-left: 5px solid transparent;
+	border-right: 5px solid transparent;
+	border-bottom: 10px solid #fb0405;
+  display: flex;
+  position: absolute;
+  top: -4px;
+  left: 35px;
+}
+
+
+
+.scroll::-webkit-scrollbar {
+    width: 8px;
+}
+
+.scroll::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+    border-radius: 10px;
+}
+
+.scroll::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+}
+
+
+.form-group .form-control-icon-search-illness {
+  position: absolute;
+    z-index: 2;
+    display: block;
+    width: 2.375rem;
+    height: 2.375rem;
+    line-height: 2.375rem;
+    text-align: center;
+    color: #aaa;
+    left: 0;
+    top: -5px;
+    padding-left: 0.25rem;
+}
+
+.form-group .form-control-icon-reset-illness {
+    position: absolute;
+    z-index: 11111111111111;
+    display: block;
+    width: 2.375rem;
+    height: 2.375rem;
+    line-height: 2.375rem;
+    text-align: center;
+    color: #aaa;
+    right: 0;
+    top: -3px;
+    font-size: 18px;
+    padding-right: 0.25rem;
+}
+/*
+border: 1px solid #DDDDDD; box-shadow: 0px 4px 4px 1px rgba(0, 0, 0, 0.25);
+*/ 
 </style>
 
 </head>
 <body>
 
 <div class="container" >
+  
   <div class="card mt-3 mb-3" style="background-color:transparent;border-radius:50px;border:4px solid silver;">
     <div class="card-body">
-
-  
 
 <div style="background-image:url('{{ url('customer_assets/images/bg1.svg') }}');background-repeat: no-repeat; background-color: white;border-radius:25px;padding:10px;margin:10px;border-bottom-left-radius: 0px;border-bottom-right-radius: 0px;">  
     <nav class="navbar navbar-expand-sm" style="padding-right:40px;padding-left:40px;">
@@ -258,7 +331,7 @@
         <a  id="calculatorItem" onclick="menuItemAction('calculator')" style="cursor: pointer;"><img src="{{ url('customer_assets/images/calculator.svg') }}"></a>
         <a  id="titrationItem" onclick="menuItemAction('titration')" style="cursor: pointer;"><img src="{{ url('customer_assets/images/Titration.svg') }}"></a>
         <a href="" class="fa fa-linkedin fa-2x" style="display:none;"></a>
-        <a href="" class="fa fa-github fa-2x" style="display:none;"></a>
+        <a class="item-style" onclick="illnessDrugShow()" ><span class="triangle-up"></span>Clinical History</a>
         <a href="" class="fa fa-rss fa-2x" style="display:none;"></a>
         <a  id="femaleItem" onclick="setGender({{$pregnancy}})" style="cursor: pointer;"><img src="{{ url('customer_assets/images/Female.svg') }}"></a>
         <a  id="elderlyItem" onclick="setAge()" style="cursor: pointer;"><img src="{{ url('customer_assets/images/Elderly.svg') }}"></a>
@@ -282,8 +355,10 @@
 
 </div>
 
-<!--------------------part2 second section--------------------------------------->
 
+<!------------------------------------------------------------------------------------------------------------------------->
+<!--------------------------------------------------part2 second section--------------------------------------------------->
+<!------------------------------------------------------------------------------------------------------------------------->
 
 <section>
 <div>
@@ -297,14 +372,77 @@
 
 
 
-  <div class="row justify-content-center" style="display:none;padding-right:22px;padding-left:22px;" id="category_section">
-      <div class="col-md-12 text-center animate__animated animate__pulse" style="background: #5E556A;z-index:11;height: 220px;align-items: center; justify-content: center; display: flex;">
-          <div style="color:white;position: absolute;" id="additional_message">
+  <div class="row justify-content-center" style="display:none;top: -10px; position: relative;" id="category_section">
+      <div class="col-md-12 text-center animate__animated animate__pulse" style="padding-right:22px;padding-left:22px;width: 96%;position: absolute;background: #5E556A;z-index:11;height: 220px;align-items: center; justify-content: center; display: flex;">
+          <div style="color:white;" id="additional_message">
             <p style="font-family: 'BreadIdol';font-style: normal; font-weight: 400; font-size: 32px;">B - Safe</p><br>
             <p style="font-family: 'BreadIdol';">Pregnancy Note</p>
           </div>
       </div>
   </div>
+
+  <!--------------list taps--------------------------------------------->
+  <div class="row justify-content-center" style="display:none;" id="illness_drug_list">
+  <div class="col-md-3">
+    <div style="background: white;  border-radius: 38px;width:320px;height:300px;position:absolute;z-index:22;padding:25px;">
+    <img src="{{ url('customer_assets/images/Titration.svg') }}" style="position: absolute; top: 25px; right: 60px;">
+        <!-- Nav tabs -->
+        <center>
+<ul class="nav nav-tabs" style="background: #CFBEB6; border-radius: 9px;width: fit-content; font-size: 10px;padding: 2px;">
+  <li class="nav-item">
+    <a class="nav-link active" data-bs-toggle="tab" href="#home">Illness</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" data-bs-toggle="tab" href="#menu1">Drug</a>
+  </li>
+
+</ul>
+</center>
+
+<!-- Tab panes -->
+<div class="tab-content">
+  <div class="tab-pane container active" id="home">
+  
+   
+       <!-- Actual search box -->
+      <div class="form-group mt-2">
+        <span class="fa fa-search form-control-icon-search-illness"></span>
+
+        <form>
+        <a onclick="" class="form-control-icon-reset-illness"><span class="fa fa-repeat" ></span></a>
+      </form>
+
+        <!--<div class='autocomplete'>-->
+            <div>
+              <input type="text" class="form-control" onkeyup=""  placeholder="Search Patient History" style="border-radius:60px;background-color:#42215A;color:white;height:30px;padding-left: 2rem;  padding-right: 2rem;font-size:14px;">
+            </div>
+            <!--<ul id="searchResult"></ul>-->
+        <!--</div>-->
+      </div> 
+
+
+    <div class="scroll mt-3" style="overflow-x: hidden;  overflow-y: scroll;height:150px;float: left; direction: rtl; padding-left: 15px;">
+      <ul style="list-style: none;padding-left: 0rem;">
+        <li class="mb-2">test111</li>
+        <li class="mb-2">test111</li>
+        <li class="mb-2">test111</li>
+        <li class="mb-2">test111</li>
+        <li class="mb-2">test111</li>
+        <li class="mb-2">test111</li>
+        <li class="mb-2">test111</li>
+        <li class="mb-2">test111</li>
+      </ul>
+    </div>
+    
+  </div>
+  <div class="tab-pane container fade" id="menu1">test222...</div>
+
+</div>
+    </div>
+  </div>
+</div>
+
+
 
 <div  style="display: flex; justify-content: center; align-items: center;margin-top:-10px;position:relative;z-index:2;text-align:center;height:200px;width:100%;background-color:rgba(242, 244, 248, 0.62);">
   <p style="font-family: 'BreadIdol';font-style: normal; font-weight: 500; font-size: 28px;"><b id="recommended_dose">Recommended <br> Dosage</b></p>
@@ -356,7 +494,7 @@
      <form>
       <div class="form-group">
           <span class="fa fa-envelope form-control-icon2"></span>
-          <button class="custom-search-botton form-control-icon3" type="submit" >Subscribe</button>
+          <button class="custom-search-botton form-control-icon3" type="button" >Subscribe</button>
           <input type="text" class="form-control" placeholder="Your E-mail" style="border-radius:60px;height:60px;">
       </div> 
     </form>
