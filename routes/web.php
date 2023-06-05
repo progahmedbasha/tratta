@@ -61,14 +61,16 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/customer/home',[SearchController::class,'index']);
+Route::group(['prefix' => 'customer',],function () {
+    Route::get('/home',[SearchController::class,'index']);
 
-Route::post('customer/search',[SearchController::class,'search'])->name('search');
-Route::post('customer/search-drugs',[SearchController::class,'searchDrugs'])->name('search_drugs');
-Route::post('customer/search-indications',[SearchController::class,'drugIndications'])->name('search_indications');
-Route::post('customer/dose-note-result',[AlgorithmController::class,'dose_note_result'])->name('dose-note-result');
-Route::post('customer/drug-pregnancy-result',[AlgorithmController::class,'drugPregnancy'])->name('drug-pregnancy-result');
-
+    Route::post('search',[SearchController::class,'search'])->name('search');
+    Route::post('search-drugs',[SearchController::class,'searchDrugs'])->name('search_drugs');
+    Route::post('search-indications',[SearchController::class,'drugIndications'])->name('search_indications');
+    Route::post('dose-note-result',[AlgorithmController::class,'dose_note_result'])->name('dose-note-result');
+    Route::post('drug-pregnancy-result',[AlgorithmController::class,'drugPregnancy'])->name('drug-pregnancy-result');
+    Route::post('calculator',[AlgorithmController::class,'calculator'])->name('calculator');
+});
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');

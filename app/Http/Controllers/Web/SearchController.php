@@ -41,7 +41,7 @@ class SearchController extends Controller
     {
        $data = Category::whereHas('drug',function ($query) {
         $query->whereHas('drugVariables');
-       })->whereNotNull('parent_id')->where('name','like','%'.$search.'%')->take(10)->get();
+       })->whereNotNull('parent_id')->where('name','like','%'.$search.'%')->take(6)->get();
        return $data;
     }
 
@@ -51,7 +51,7 @@ class SearchController extends Controller
             $q->whereHas('drug',function ($query) {
                 $query->whereHas('drugVariables');
            });
-       })->where('name_key','like','%'.$search.'%')->take(10)->get();
+       })->where('name_key','like','%'.$search.'%')->take(6)->get();
        return $data;
     }
 
@@ -62,7 +62,7 @@ class SearchController extends Controller
             $q->whereHas('drug',function ($query) {
                 $query->whereHas('drugVariables');
                });
-        })->whereNull('parent_id')->where('name','like','%'.$search.'%')->take(10)->get();
+        })->whereNull('parent_id')->where('name','like','%'.$search.'%')->take(6)->get();
         return $data;
     }
 
@@ -88,7 +88,7 @@ class SearchController extends Controller
 
     public function drugByTradeName($id)
     {
-        $trade = DrugTrade::where('trade_id',$id)->get()->pluck('id');
+        $trade = DrugTrade::where('trade_key_id',$id)->get()->pluck('drug_id');
         $data = Drug::with('trade')->whereHas('drugVariables')->whereIn('id',$trade)->take(10)->get();
         return $data;
     }

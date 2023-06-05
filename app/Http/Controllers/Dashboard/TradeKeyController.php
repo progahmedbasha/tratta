@@ -73,8 +73,8 @@ class TradeKeyController extends Controller
      */
     public function destroy(string $id)
     {
-        $indication = Indication::findOrFail($id);
-        $indication->delete();
+        $trade = TradeKey::findOrFail($id);
+        $trade->delete();
         return redirect()->route('trade_keys.index')->with('success','Indication Deleted Successfully');
     }
 }

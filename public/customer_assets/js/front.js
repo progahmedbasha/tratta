@@ -75,7 +75,7 @@ var search_type = 3;
 var menu_toggle = false;
 var weight_toggle = false;
 var titration_toggle = false;
-var message_toggle = false;
+var pregnancy_category_toggle = false;
 
 ///// main drug /////////
 var drug_id = null;
@@ -303,26 +303,7 @@ function setGender(pregnancy = null) {
     doseNoteResult();
 }
 
-function clearPregnancy(pregnancy) {
-    for (var i = 0; i < pregnancy.length; i++) 
-        document.getElementById("option"+i).style.backgroundColor = "#F1F3F6";
-
-
-    pregnancy_stage_id = null;
-}
-
-//female select value border color
-function femaleSelectedValue(pregnancy,option_value) {
-    clearPregnancy(pregnancy);
-
-    document.getElementById("option"+option_value).style.backgroundColor = "#F2CC8F";
-
-    pregnancy_stage_id = pregnancy[option_value].id;
-    doseNoteResult();
-    pregnancyCategory();
-}
-
-  //Weight select value border color
+//Weight select value border color
 function weightSelectedValue(option_value) {
 
     document.getElementById("weightOption1").style.backgroundColor = "#F1F3F6";
@@ -335,8 +316,28 @@ function weightSelectedValue(option_value) {
     doseNoteResult();
 }
 
+function clearPregnancy(pregnancy) {
+    for (var i = 0; i < pregnancy.length; i++) 
+        document.getElementById("option"+i).style.backgroundColor = "#F1F3F6";
+
+    pregnancy_stage_id = null;
+}
+
+//female select value border color
+function femaleSelectedValue(pregnancy,option_value) {
+    clearPregnancy(pregnancy);
+
+    document.getElementById("option"+option_value).style.backgroundColor = "#F2CC8F";
+
+    pregnancy_stage_id = pregnancy[option_value].id;
+    doseNoteResult();
+    pregnancy_category_toggle = !pregnancy_category_toggle;
+    pregnancyCategory();
+}
+
 function pregnancyCategory() {
-    if(pregnancy_stage_id != null && drug_id != null && !message_toggle){
+    pregnancy_category_toggle = !pregnancy_category_toggle;
+    if(pregnancy_stage_id != null && drug_id != null && pregnancy_category_toggle){
         var url = "drug-pregnancy-result";
         $.ajaxSetup({
             headers: {
@@ -363,17 +364,57 @@ function pregnancyCategory() {
     }
 }
 
-function additionalMessage(open,message = null) {
-    if (!open) {
-        document.getElementById("category_section").style.display = 'none';
-        message_toggle = false;
-    }else {
-        document.getElementById("category_section").style.display = 'flex';
-        document.getElementById("additional_message").innerHTML = message ;
-        message_toggle = true;
+function clearCalculate () {
+    document.getElementById("ageField").value = '';
+    document.getElementById("scrField").value = '';
+    document.getElementById("resultBtn").innerHTML = "Result";
+}
+
+function resultCalculate () {
+    var age = document.getElementById('ageField').value;
+    var scr = document.getElementById('scrField').value;
+
+    if (age != "" && scr != ""){
+        calculator(age, scr);
     }
 }
 
+function calculator(age, scr) {
+    if (weight_id != null){
+        var url = "calculator";
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            url: url,
+            type: 'post',
+            cache: false,
+            async: true,
+            data: {
+                gender_id : gender_id,
+                weight_id : weight_id,
+                age : age,
+                scr : scr
+            },
+            success: function(response) {
+                document.getElementById("resultBtn").innerHTML = response.result;
+            }
+        }); 
+    }else{
+        alert('You should select weight first');
+    }
+}
+
+function additionalMessage(open,message = null) {
+    if (!open) {
+        document.getElementById("category_section").style.display = 'none';
+    }else {
+        document.getElementById("category_section").style.display = 'flex';
+        document.getElementById("additional_message").innerHTML = message ;
+    }
+}
 
 function doseNoteResult() {
     if(drug_id != null){
@@ -411,15 +452,5 @@ function doseNoteResult() {
     }
 }
 
-
 //---------------------calculator methods-------------------------------------------
 
-function clearCalculate () {
-    document.getElementById("ageField").value = '';
-    document.getElementById("scrField").value = '';
-    document.getElementById("resultBtn").innerHTML = "Result";
-}
-
-function resultCalculate () {
-    document.getElementById("resultBtn").innerHTML = "Done!";
-}
