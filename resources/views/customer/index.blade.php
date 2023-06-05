@@ -315,7 +315,7 @@
 </div>
 
 <div style="text-align:center;">
-<p id="notes">Notes</p>
+<textarea id="notes" rows="4" style="background:transparent;width:100%;border:none;text-align:center;outline: none;" readonly>Notes</textarea>
 </div>
     
 

@@ -28,7 +28,7 @@
                                 @csrf
                                 <div class="row">
                                     <div class="col-md-11">
-                                        <input type="text" class="form-control" placeholder="Indication"
+                                        <input type="text" class="form-control" placeholder="Trade key"
                                             name="name_key" value="{{old('name_key')}}" required />
                                         @error('name_key')
                                         <div class="alert alert-danger">{{ $message }}</div>
