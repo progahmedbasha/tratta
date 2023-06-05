@@ -18,6 +18,7 @@ use App\Models\VariableDetail;
 use App\Models\Effect;
 use App\Models\NoteDose;
 use App\Models\DrugPregnancy;
+use App\Models\WeightGender;
 
 class AlgorithmController extends Controller
 {
@@ -249,6 +250,17 @@ class AlgorithmController extends Controller
             $query->where('pregnancy_stage_id',$request->pregnancy_stage_id);
         })->where('drug_id',$request->drug_id)->first();
         return response()->json(['result' => $result, 'code' => '200']);
+    }
+
+    public function calculator(Request $request)
+    {
+        $age = Age::where('from', '<=' , $request->age)->where('to', '>=' , $request->age)->first();
+        $weight_gender = WeightGender::where('gender_id',$request->gender_id)->where('weight_id',$request->weight_id)->first();
+        $avg = ($weight_gender->range_from + $weight_gender->range_to)/2;
+        $result = ((140 - $request->age)*$avg)/($request->scr * 72);
+        if($request->gender_id == 2)
+            $result *= 0.85;
+        return response()->json(['result' => round($result,2),'age' => $age, 'code' => '200']);
     }
 
     /**
