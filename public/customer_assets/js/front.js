@@ -76,6 +76,8 @@ var menu_toggle = false;
 var weight_toggle = false;
 var titration_toggle = false;
 var pregnancy_category_toggle = false;
+var calculator_toggle = false;
+var drug_illness_toggle = false;
 
 ///// main drug /////////
 var drug_id = null;
@@ -107,9 +109,9 @@ function changeSearchType(type_value) {
 
     if(type_value == 3)
         pcsh1();
-    else if(type_value == 2)
-        pcsh2();
     else if(type_value == 1)
+        pcsh2();
+    else if(type_value == 2)
         pcsh3();
 }
 
@@ -240,10 +242,6 @@ function menu() {
 }
 
 function menuItemAction(itemValue) {
-    document.getElementById("calculatorItem").style.backgroundColor = '#F1F3F6';
-    document.getElementById("titrationItem").style.backgroundColor = '#F1F3F6';
-
-    document.getElementById("calculatorSubMenu").style.display = 'none';
 
     if (itemValue == 'weight'){
         if(weight_toggle){
@@ -257,8 +255,15 @@ function menuItemAction(itemValue) {
         }
     }
     else if (itemValue == 'calculator'){
-        document.getElementById("calculatorItem").style.backgroundColor = "#D7FE72";
-        document.getElementById("calculatorSubMenu").style.display = 'block';
+        if(calculator_toggle){
+            document.getElementById("calculatorItem").style.backgroundColor = "#F1F3F6";
+            document.getElementById("calculatorSubMenu").style.display = 'none';
+            calculator_toggle = false;
+        }else{
+            document.getElementById("calculatorItem").style.backgroundColor = "#D7FE72";
+            document.getElementById("calculatorSubMenu").style.display = 'block';
+            calculator_toggle = true;
+        }
     }
     else if (itemValue == 'titration'){
         if(titration_toggle){
@@ -400,6 +405,8 @@ function calculator(age, scr) {
             },
             success: function(response) {
                 document.getElementById("resultBtn").innerHTML = response.result;
+                if (response.age.id != age_id)
+                    setAge();
             }
         }); 
     }else{
@@ -455,13 +462,16 @@ function doseNoteResult() {
 //---------------------calculator methods-------------------------------------------
 
 
-
 function illnessDrugShow () {
-    let displayStatus =  document.getElementById("illness_drug_list").style.display ;
-    console.log(displayStatus);
-    if(displayStatus === "none")
-         document.getElementById("illness_drug_list").style.display = "flex";
-    else if(displayStatus === "flex")
-         document.getElementById("illness_drug_list").style.display = "none";
+    if(drug_illness_toggle){
+        document.getElementById("illness_drug_list").style.display = "none";
+        drug_illness_toggle = false;
+    }else{
+        document.getElementById("illness_drug_list").style.display = "flex";
+        drug_illness_toggle = true;
+    }
 }
 
+function getIllness() {
+    
+}

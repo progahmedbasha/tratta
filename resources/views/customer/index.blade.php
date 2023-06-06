@@ -130,7 +130,7 @@
   width: 80px !important;
   font-size:10px !important;
   border-radius:5px !important;
-  background-color:red !important;
+  background-color: #ED4756 !important;
   line-height:20px !important;
   height:20px !important;
   Color:white !important;
@@ -144,7 +144,7 @@
 	height: 0;
 	border-left: 5px solid transparent;
 	border-right: 5px solid transparent;
-	border-bottom: 10px solid #fb0405;
+	border-bottom: 10px solid #ED4756;
   display: flex;
   position: absolute;
   top: -4px;
@@ -250,8 +250,8 @@ border: 1px solid #DDDDDD; box-shadow: 0px 4px 4px 1px rgba(0, 0, 0, 0.25);
 
         <div class="animate__animated animate__wobble" style="position: absolute;z-index: 11111111111111;left:75%;top: 16px;">
         <span class="form-check-input form-control-radio3 animate__animated animate__wobble" id="pc1" onclick="changeSearchType(3)" ></span>
-        <span class="form-check-input form-control-radio2 animate__animated animate__wobble hide" id="pc2" onclick="changeSearchType(2)"  ></span>
-        <span class="form-check-input form-control-radio1 animate__animated animate__wobble hide" id="pc3" onclick="changeSearchType(1)"  ></span>
+        <span class="form-check-input form-control-radio2 animate__animated animate__wobble hide" id="pc2" onclick="changeSearchType(1)"  ></span>
+        <span class="form-check-input form-control-radio1 animate__animated animate__wobble hide" id="pc3" onclick="changeSearchType(2)"  ></span>
         </div>
       
       </form>
@@ -421,21 +421,52 @@ border: 1px solid #DDDDDD; box-shadow: 0px 4px 4px 1px rgba(0, 0, 0, 0.25);
       </div> 
 
 
-    <div class="scroll mt-3" style="overflow-x: hidden;  overflow-y: scroll;height:150px;float: left; direction: rtl; padding-left: 15px;">
+    <div class="scroll mt-3" style="overflow-x: hidden;  overflow-y: scroll;height:150px;padding-left: 15px;">
       <ul style="list-style: none;padding-left: 0rem;">
         <li class="mb-2">test111</li>
         <li class="mb-2">test111</li>
         <li class="mb-2">test111</li>
         <li class="mb-2">test111</li>
         <li class="mb-2">test111</li>
-        <li class="mb-2">test111</li>
+        <li class="mb-2">test331</li>
         <li class="mb-2">test111</li>
         <li class="mb-2">test111</li>
       </ul>
     </div>
     
   </div>
-  <div class="tab-pane container fade" id="menu1">test222...</div>
+  <div class="tab-pane container" id="menu1">
+
+<!-- Actual search box -->
+<div class="form-group mt-2">
+        <span class="fa fa-search form-control-icon-search-illness"></span>
+
+        <form>
+        <a onclick="" class="form-control-icon-reset-illness"><span class="fa fa-repeat" ></span></a>
+      </form>
+
+        <!--<div class='autocomplete'>-->
+            <div>
+              <input type="text" class="form-control" onkeyup=""  placeholder="Search Patient History" style="border-radius:60px;background-color:#42215A;color:white;height:30px;padding-left: 2rem;  padding-right: 2rem;font-size:14px;">
+            </div>
+            <!--<ul id="searchResult"></ul>-->
+        <!--</div>-->
+      </div> 
+
+
+    <div class="scroll mt-3" style="overflow-x: hidden;  overflow-y: scroll;height:150px; padding-left: 15px;">
+      <ul style="list-style: none;padding-left: 0rem;">
+        <li class="mb-2">test111</li>
+        <li class="mb-2">test111</li>
+        <li class="mb-2">test2211111111111</li>
+        <li class="mb-2">test111</li>
+        <li class="mb-2">test111</li>
+        <li class="mb-2">test111</li>
+        <li class="mb-2">test111</li>
+        <li class="mb-2">test111</li>
+      </ul>
+</div>
+</div>
 
 </div>
     </div>
