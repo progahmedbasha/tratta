@@ -173,13 +173,14 @@ function setDrugs(data){
             search_id: data.id
         },
         success: function(response) {
+            console.log(response);
             var len = response.data.length;
             var options = "<option selected disabled>Select Drug</option>";
             for( var i = 0; i<len; i++){
                 var id = response.data[i]['id'];
                 var name = response.data[i]['name'];
                 if (search_type == 1) 
-                    var name = response.data[i]['trade']['name_sub'];
+                    name = response.data[i]['trade']['name_sub'];
                 options += "<option value='"+id+"'>"+name+"</option>";
             }
             document.getElementById('main_drug').innerHTML = options;
@@ -472,6 +473,77 @@ function illnessDrugShow () {
     }
 }
 
-function getIllness() {
-    
+function searchIllnesses() {
+    var value = document.getElementById('illness_search').value;
+    var url = "illness-search";
+    $("#illnessSearchResult").empty();
+    if (value != "") {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            url: url,
+            type: 'post',
+            cache: false,
+            async: true,
+            data: {
+                search: value
+            },
+            success: function(response) {
+                var len = response.data.length;
+                for( var i = 0; i<len; i++){
+                    var id = response.data[i]['id'];
+                    var name = response.data[i]['name'];
+                    
+                    $("#illnessSearchResult").append("<li onclick='setIllness("+JSON.stringify(response.data[i])+")' value='"+id+"'>"+name+"</li>");
+                }
+            }
+        });
+    }
+}
+
+function searchDrugs() {
+    var value = document.getElementById('drugs_search').value;
+    var url = "drugs-search";
+    $("#drugsSearchResult").empty();
+    if (value != "") {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            url: url,
+            type: 'post',
+            cache: false,
+            async: true,
+            data: {
+                search: value
+            },
+            success: function(response) {
+                var len = response.data.length;
+                
+                for( var i = 0; i<len; i++){
+                    var id = response.data[i]['id'];
+                    var name = response.data[i]['name'];
+                    
+                    $("#drugsSearchResult").append("<li onclick='setDrugDrug("+JSON.stringify(response.data[i])+")' value='"+id+"'>"+name+"</li>");
+                }
+            }
+        });
+    }
+}
+
+function setIllness(data) {
+    $("#illnessSearchResult").empty();
+    document.getElementById('illness_search').value = "";
+    $("#illness_list").append("<li class='mb-2'>"+data.name+"</li>");
+}
+
+function setDrugDrug(data) {
+    $("#drugsSearchResult").empty();
+    document.getElementById('drugs_search').value = "";
+    $("#drug_list").append("<li class='mb-2'>"+data.name+"</li>");
 }

@@ -19,6 +19,11 @@ class Drug extends Model
         return $this->hasOne(DrugTrade::class);
     }
 
+    public function trades()
+    {
+        return $this->hasMany(DrugTrade::class);
+    }
+
     public function variables()
     {
         return $this->morphMany(Variable::class, 'variableable');
