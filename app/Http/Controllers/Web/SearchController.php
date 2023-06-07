@@ -12,6 +12,7 @@ use App\Models\Age;
 use App\Models\PregnancyStage;
 use App\Models\DrugIndication;
 use App\Models\TradeKey;
+use App\Models\IllnessSub;
 
 class SearchController extends Controller
 {
@@ -88,8 +89,13 @@ class SearchController extends Controller
 
     public function drugByTradeName($id)
     {
-        $trade = DrugTrade::where('trade_key_id',$id)->get()->pluck('drug_id');
-        $data = Drug::with('trade')->whereHas('drugVariables')->whereIn('id',$trade)->take(10)->get();
+        $data = Drug::whereHas('trade',function ($query) use ($id)
+        {
+            $query->where('trade_key_id',$id);
+        })->with('trade',function ($query) use ($id)
+        {
+            $query->where('trade_key_id',$id);
+        })->whereHas('drugVariables')->take(10)->get();
         return $data;
     }
 
@@ -104,6 +110,18 @@ class SearchController extends Controller
     {
         $drug_indications = DrugIndication::with('indication')->where('drug_id',$request->drug_id)->get();
         return response()->json(['data' => $drug_indications, 'code' => '200']);
+    }
+
+    public function searchIllness(Request $request)
+    {
+        $data = IllnessSub::where('name','like','%'.$request->search.'%')->take(5)->get();
+        return response()->json(['data' => $data, 'code' => '200']);
+    }
+
+    public function searchDrugDrugs(Request $request)
+    {
+        $data = Drug::where('name','like','%'.$request->search.'%')->take(5)->get();
+        return response()->json(['data' => $data, 'code' => '200']);
     }
 
 }

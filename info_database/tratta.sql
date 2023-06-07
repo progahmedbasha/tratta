@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.1.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jun 04, 2023 at 12:00 PM
--- Server version: 10.4.22-MariaDB
--- PHP Version: 8.1.1
+-- Generation Time: Jun 06, 2023 at 09:05 AM
+-- Server version: 10.3.38-MariaDB-0ubuntu0.20.04.1
+-- PHP Version: 7.4.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `tratta`
+-- Database: `trat_tratta`
 --
 
 -- --------------------------------------------------------
@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `ages` (
   `id` int(10) UNSIGNED NOT NULL,
-  `name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(50) NOT NULL,
   `from` int(10) UNSIGNED NOT NULL,
   `to` int(10) UNSIGNED NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
@@ -52,7 +52,7 @@ INSERT INTO `ages` (`id`, `name`, `from`, `to`, `created_at`, `updated_at`) VALU
 
 CREATE TABLE `categories` (
   `id` int(10) UNSIGNED NOT NULL,
-  `name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(100) NOT NULL,
   `parent_id` int(10) UNSIGNED DEFAULT NULL,
   `active` tinyint(1) NOT NULL DEFAULT 0,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
@@ -1465,8 +1465,8 @@ INSERT INTO `categories` (`id`, `name`, `parent_id`, `active`, `created_at`, `up
 
 CREATE TABLE `colors` (
   `id` int(10) UNSIGNED NOT NULL,
-  `name` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `code` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(50) DEFAULT NULL,
+  `code` varchar(100) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -1479,7 +1479,7 @@ CREATE TABLE `colors` (
 
 CREATE TABLE `countries` (
   `id` tinyint(3) UNSIGNED NOT NULL,
-  `name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(50) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -1525,9 +1525,9 @@ INSERT INTO `crcl_ranges` (`id`, `illness_sub_id`, `range_from`, `range_to`, `cr
 CREATE TABLE `dose_messages` (
   `id` int(10) UNSIGNED NOT NULL,
   `note_dose_id` int(10) UNSIGNED NOT NULL,
-  `recommended_dosage` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `dosage_note` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `titration_note` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `recommended_dosage` text NOT NULL,
+  `dosage_note` text NOT NULL,
+  `titration_note` text NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -3137,8 +3137,7 @@ INSERT INTO `dose_messages` (`id`, `note_dose_id`, `recommended_dosage`, `dosage
 (1705, 2304, 'Elderly OR Dose', '`', '`', '2023-05-29 19:53:38', '2023-05-29 19:53:38'),
 (1706, 2305, '1st Tri OR Dose', '`', '`', '2023-05-29 19:54:24', '2023-05-29 19:54:24'),
 (1710, 2317, 'note fixed', '§', '§', '2023-05-30 13:32:31', '2023-05-30 13:32:31'),
-(1711, 2318, 'elderly L dose', '§', '§', '2023-05-30 13:32:42', '2023-05-30 13:32:42'),
-(1715, 2322, 'elderly AND dose', '§', '§', '2023-05-31 14:15:54', '2023-05-31 14:15:54');
+(1711, 2318, 'elderly L dose', '§', '§', '2023-05-30 13:32:42', '2023-05-30 13:32:42');
 
 -- --------------------------------------------------------
 
@@ -3148,7 +3147,7 @@ INSERT INTO `dose_messages` (`id`, `note_dose_id`, `recommended_dosage`, `dosage
 
 CREATE TABLE `dose_types` (
   `id` int(10) UNSIGNED NOT NULL,
-  `type` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `type` varchar(50) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -3172,8 +3171,8 @@ INSERT INTO `dose_types` (`id`, `type`, `created_at`, `updated_at`) VALUES
 
 CREATE TABLE `drugs` (
   `id` int(10) UNSIGNED NOT NULL,
-  `name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `code` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `code` varchar(100) NOT NULL,
   `sub_cat_id` int(10) UNSIGNED NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
@@ -6060,7 +6059,13 @@ INSERT INTO `drug_formulas` (`id`, `drug_id`, `formula_id`, `created_at`, `updat
 (152, 656, 2, '2023-05-25 08:11:33', '2023-05-25 08:11:33'),
 (153, 659, 4, '2023-05-25 09:02:43', '2023-05-25 09:02:43'),
 (154, 1195, 1, '2023-05-26 10:19:22', '2023-05-26 10:19:22'),
-(155, 1197, 3, '2023-05-26 10:38:19', '2023-05-26 10:38:19');
+(155, 1197, 3, '2023-05-26 10:38:19', '2023-05-26 10:38:19'),
+(156, 467, 1, '2023-06-04 19:16:08', '2023-06-04 19:16:08'),
+(157, 468, 12, '2023-06-04 19:16:50', '2023-06-04 19:16:50'),
+(158, 442, 2, '2023-06-04 19:17:41', '2023-06-04 19:17:41'),
+(159, 443, 2, '2023-06-04 19:17:56', '2023-06-04 19:17:56'),
+(160, 440, 1, '2023-06-04 19:25:00', '2023-06-04 19:25:00'),
+(161, 441, 1, '2023-06-04 19:25:14', '2023-06-04 19:25:14');
 
 -- --------------------------------------------------------
 
@@ -6072,7 +6077,7 @@ CREATE TABLE `drug_indications` (
   `id` int(10) UNSIGNED NOT NULL,
   `drug_id` int(10) UNSIGNED NOT NULL,
   `indication_id` int(10) UNSIGNED NOT NULL,
-  `code` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `code` varchar(255) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -6555,7 +6560,7 @@ INSERT INTO `drug_indications` (`id`, `drug_id`, `indication_id`, `code`, `creat
 CREATE TABLE `drug_moas` (
   `id` int(10) UNSIGNED NOT NULL,
   `drug_id` int(10) UNSIGNED NOT NULL,
-  `text` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `text` text NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -6587,7 +6592,7 @@ CREATE TABLE `drug_pregnancies` (
   `id` int(10) UNSIGNED NOT NULL,
   `drug_id` int(10) UNSIGNED NOT NULL,
   `pregnancy_safety_id` int(10) UNSIGNED NOT NULL,
-  `note` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `note` text NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -7531,7 +7536,7 @@ CREATE TABLE `drug_trades` (
   `drug_id` int(10) UNSIGNED NOT NULL,
   `country_id` tinyint(3) UNSIGNED NOT NULL,
   `trade_key_id` bigint(20) UNSIGNED NOT NULL,
-  `name_sub` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name_sub` varchar(100) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -7542,14 +7547,13 @@ CREATE TABLE `drug_trades` (
 
 INSERT INTO `drug_trades` (`id`, `drug_id`, `country_id`, `trade_key_id`, `name_sub`, `created_at`, `updated_at`) VALUES
 (2, 347, 1, 1, 'Xatral SR 5mg Tab', '2023-06-04 09:59:48', '2023-06-04 09:59:48'),
-(3, 348, 1, 1, 'Xatral SR 10mg Tab', '2023-06-04 09:59:48', '2023-06-04 09:59:48'),
-(4, 424, 1, 1, 'Cardura 1mg Tab', '2023-06-04 09:59:48', '2023-06-04 09:59:48'),
-(5, 439, 1, 1, 'Hytrin 1mg Tab', '2023-06-04 09:59:48', '2023-06-04 09:59:48'),
-(6, 444, 1, 1, 'Omnic 0.4mg Cap', '2023-06-04 09:59:48', '2023-06-04 09:59:48'),
-(7, 444, 1, 1, 'Tamsulin 0.4mg Cap', '2023-06-04 09:59:48', '2023-06-04 09:59:48'),
-(8, 446, 1, 1, 'Avodart 0.5mg Tab', '2023-06-04 09:59:48', '2023-06-04 09:59:48'),
-(9, 448, 1, 1, 'Duodart 0.5mg/0.4mg Cap', '2023-06-04 09:59:48', '2023-06-04 09:59:48'),
-(10, 451, 1, 1, 'Methyldopa 250mg Tab', '2023-06-04 09:59:48', '2023-06-04 09:59:48'),
+(3, 348, 1, 1, 'Xatral XL 10mg Tab', '2023-06-04 20:12:36', '2023-06-04 18:12:36'),
+(5, 439, 1, 16, 'E-Ze-P 1mg Tab', '2023-06-04 20:19:18', '2023-06-04 18:19:18'),
+(6, 444, 1, 15, 'Omnic 0.4mg Cap', '2023-06-04 20:25:26', '2023-06-04 18:25:26'),
+(7, 444, 1, 14, 'Tamsulin 0.4mg Cap', '2023-06-04 20:25:32', '2023-06-04 18:25:32'),
+(8, 446, 1, 7, 'Avodart 0.5mg Tab', '2023-06-04 20:26:19', '2023-06-04 18:26:19'),
+(9, 448, 1, 8, 'Duodart 0.5mg/0.4mg Cap', '2023-06-04 20:26:41', '2023-06-04 18:26:41'),
+(10, 451, 1, 20, 'Aldomet 250mg Tab', '2023-06-04 20:27:33', '2023-06-04 18:27:33'),
 (11, 1548, 1, 1, 'Acyclovir 200mg Tab', '2023-06-04 09:59:48', '2023-06-04 09:59:48'),
 (12, 2066, 1, 1, 'Ventolin 200mcg Inhaler', '2023-06-04 09:59:48', '2023-06-04 09:59:48'),
 (13, 2038, 1, 1, 'Fosamax 5mg Tab', '2023-06-04 09:59:48', '2023-06-04 09:59:48'),
@@ -7699,8 +7703,8 @@ INSERT INTO `drug_trades` (`id`, `drug_id`, `country_id`, `trade_key_id`, `name_
 (159, 1803, 1, 1, 'Seloken ZOC 25mg Tab', '2023-06-04 09:59:48', '2023-06-04 09:59:48'),
 (160, 1502, 1, 1, 'Flagyl 500mg Tab', '2023-06-04 09:59:48', '2023-06-04 09:59:48'),
 (161, 1503, 1, 1, 'Flagyl 500mg Bottle', '2023-06-04 09:59:48', '2023-06-04 09:59:48'),
-(162, 457, 1, 1, 'Gutron 2.5mg Tab', '2023-06-04 09:59:48', '2023-06-04 09:59:48'),
-(163, 457, 1, 1, 'Midodrine 2.5mg Tab', '2023-06-04 09:59:48', '2023-06-04 09:59:48'),
+(162, 457, 1, 21, 'Gutron 2.5mg Tab', '2023-06-04 20:45:17', '2023-06-04 18:45:17'),
+(163, 457, 1, 22, 'Midodrine 2.5mg Tab', '2023-06-04 20:45:26', '2023-06-04 18:45:26'),
 (164, 946, 1, 1, 'Remeron 30mg Tab', '2023-06-04 09:59:48', '2023-06-04 09:59:48'),
 (165, 2098, 1, 1, 'Asmanex HFA 200mcg Inhaler', '2023-06-04 09:59:48', '2023-06-04 09:59:48'),
 (166, 2150, 1, 1, 'Clear air 10mg Tab', '2023-06-04 09:59:48', '2023-06-04 09:59:48'),
@@ -7717,7 +7721,43 @@ INSERT INTO `drug_trades` (`id`, `drug_id`, `country_id`, `trade_key_id`, `name_
 (177, 2158, 1, 1, 'Xolair 150mg Vial', '2023-06-04 09:59:48', '2023-06-04 09:59:48'),
 (178, 2661, 1, 1, 'Omega-3 PLUS 1000mg Cap', '2023-06-04 09:59:48', '2023-06-04 09:59:48'),
 (179, 656, 1, 1, 'Risek 10mg Tab', '2023-06-04 09:59:48', '2023-06-04 09:59:48'),
-(180, 659, 1, 1, 'Risek 40mg Vial', '2023-06-04 09:59:48', '2023-06-04 09:59:48');
+(180, 659, 1, 1, 'Risek 40mg Vial', '2023-06-04 09:59:48', '2023-06-04 09:59:48'),
+(181, 424, 1, 4, 'Cardura 1mg Tab', '2023-06-04 18:13:19', '2023-06-04 18:13:19'),
+(182, 424, 1, 6, 'Dosin 1mg Tab', '2023-06-04 18:13:34', '2023-06-04 18:13:34'),
+(183, 426, 1, 4, 'Cardura 2mg Tab', '2023-06-04 18:16:11', '2023-06-04 18:16:11'),
+(184, 426, 1, 6, 'Dosin 2mg Tab', '2023-06-04 18:16:22', '2023-06-04 18:16:22'),
+(185, 427, 1, 4, 'Cardura 4mg Tab', '2023-06-04 18:16:55', '2023-06-04 18:16:55'),
+(186, 427, 1, 6, 'Dosin 4mg Tab', '2023-06-04 18:17:05', '2023-06-04 18:17:05'),
+(187, 428, 1, 4, 'Cardura 4mg XL Tab', '2023-06-04 18:17:32', '2023-06-04 18:17:32'),
+(188, 429, 1, 4, 'Cardura 8mg XL Tab', '2023-06-04 18:17:49', '2023-06-04 18:17:49'),
+(189, 430, 1, 18, 'Minipress 1mg Tab', '2023-06-04 18:18:19', '2023-06-04 18:18:19'),
+(190, 431, 1, 18, 'Minipress 2mg Tab', '2023-06-04 18:18:44', '2023-06-04 18:18:44'),
+(191, 440, 1, 16, 'E-Ze-P 2mg Tab', '2023-06-04 18:19:47', '2023-06-04 18:19:47'),
+(192, 440, 1, 17, 'Itrin 2mg Tab', '2023-06-04 18:20:06', '2023-06-04 18:20:06'),
+(193, 441, 1, 16, 'E-Ze-P 5mg Tab', '2023-06-04 18:20:38', '2023-06-04 18:20:38'),
+(194, 441, 1, 17, 'Itrin 5mg Tab', '2023-06-04 18:20:55', '2023-06-04 18:20:55'),
+(195, 442, 1, 9, 'Flopadex 4mg Cap', '2023-06-04 18:21:51', '2023-06-04 18:21:51'),
+(196, 442, 1, 10, 'Congdosin 4mg Cap', '2023-06-04 18:22:23', '2023-06-04 18:22:23'),
+(197, 442, 1, 11, 'Sildocare 4mg Cap', '2023-06-04 18:22:42', '2023-06-04 18:22:42'),
+(198, 442, 1, 12, 'Siloprostate 4mg Cap', '2023-06-04 18:23:00', '2023-06-04 18:23:00'),
+(199, 443, 1, 9, 'Flopadex 8mg Cap', '2023-06-04 18:23:32', '2023-06-04 18:23:32'),
+(200, 443, 1, 10, 'Congdosin 8mg Cap', '2023-06-04 18:23:48', '2023-06-04 18:23:48'),
+(201, 443, 1, 11, 'Sildocare 8mg Cap', '2023-06-04 18:24:05', '2023-06-04 18:24:05'),
+(202, 443, 1, 13, 'Sympaprost 8mg Cap', '2023-06-04 18:24:48', '2023-06-04 18:24:48'),
+(203, 452, 1, 20, 'Aldomet 500mg Tab', '2023-06-04 18:28:13', '2023-06-04 18:28:13'),
+(204, 454, 1, 19, 'Catapresan 75mcg Tab', '2023-06-04 18:43:34', '2023-06-04 18:43:34'),
+(205, 455, 1, 19, 'Catapresan 150mcg Tab', '2023-06-04 18:44:38', '2023-06-04 18:44:38'),
+(206, 458, 1, 21, 'Gutron 1% Oral Drops', '2023-06-04 20:47:01', '2023-06-04 18:47:01'),
+(207, 458, 1, 22, 'Midodrine 1% Oral Drops', '2023-06-04 20:46:55', '2023-06-04 18:46:55'),
+(208, 465, 1, 23, 'Corasore 150mg Tab', '2023-06-04 18:47:51', '2023-06-04 18:47:51'),
+(209, 465, 1, 24, 'Heptaminol 150mg Tab', '2023-06-04 18:48:08', '2023-06-04 18:48:08'),
+(210, 466, 1, 23, 'Corasore 150mg/ml Oral Drops', '2023-06-04 18:48:46', '2023-06-04 18:48:46'),
+(211, 466, 1, 24, 'Heptaminol 150mg/ml Oral Drops', '2023-06-04 18:49:00', '2023-06-04 18:49:00'),
+(212, 467, 1, 25, 'Effortil 5mg Tab', '2023-06-04 18:49:33', '2023-06-04 18:49:33'),
+(213, 467, 1, 26, 'Vascon 5mg Tab', '2023-06-04 18:49:45', '2023-06-04 18:49:45'),
+(214, 468, 1, 25, 'Effortil 7.5mg/ml Oral Drops', '2023-06-04 18:50:10', '2023-06-04 18:50:10'),
+(215, 468, 1, 26, 'Vascon 7.5mg/ml Oral Drops', '2023-06-04 18:50:19', '2023-06-04 18:50:19'),
+(217, 347, 1, 27, 'Alfatral SR 5mg Tab', '2023-06-04 19:29:08', '2023-06-04 19:29:08');
 
 -- --------------------------------------------------------
 
@@ -7727,9 +7767,9 @@ INSERT INTO `drug_trades` (`id`, `drug_id`, `country_id`, `trade_key_id`, `name_
 
 CREATE TABLE `effects` (
   `id` int(10) UNSIGNED NOT NULL,
-  `effect_type` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `effect_type` varchar(100) NOT NULL,
   `number` double(8,2) NOT NULL,
-  `color` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `color` varchar(255) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -7755,11 +7795,11 @@ INSERT INTO `effects` (`id`, `effect_type`, `number`, `color`, `created_at`, `up
 
 CREATE TABLE `failed_jobs` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `uuid` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `uuid` varchar(255) NOT NULL,
+  `connection` text NOT NULL,
+  `queue` text NOT NULL,
+  `payload` longtext NOT NULL,
+  `exception` longtext NOT NULL,
   `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -7771,7 +7811,7 @@ CREATE TABLE `failed_jobs` (
 
 CREATE TABLE `forbidden_cases` (
   `id` int(10) UNSIGNED NOT NULL,
-  `note` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `note` text NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -7797,9 +7837,9 @@ INSERT INTO `forbidden_cases` (`id`, `note`, `created_at`, `updated_at`) VALUES
 CREATE TABLE `forbidden_case_values` (
   `id` int(10) UNSIGNED NOT NULL,
   `forbidden_case_id` int(10) UNSIGNED NOT NULL,
-  `variableable_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `variableable_type` varchar(255) NOT NULL,
   `variableable_id` bigint(20) UNSIGNED NOT NULL,
-  `value` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `value` varchar(50) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -7836,8 +7876,8 @@ INSERT INTO `forbidden_case_values` (`id`, `forbidden_case_id`, `variableable_ty
 
 CREATE TABLE `formulas` (
   `id` int(10) UNSIGNED NOT NULL,
-  `name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `icon` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(100) NOT NULL,
+  `icon` varchar(100) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -7883,7 +7923,7 @@ INSERT INTO `formulas` (`id`, `name`, `icon`, `created_at`, `updated_at`) VALUES
 CREATE TABLE `fourth_question_scores` (
   `id` int(10) UNSIGNED NOT NULL,
   `fourth_question_id` int(10) UNSIGNED NOT NULL,
-  `score_label` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `score_label` varchar(100) NOT NULL,
   `is_sub` tinyint(1) NOT NULL,
   `parent_id` int(10) UNSIGNED DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
@@ -7910,7 +7950,7 @@ INSERT INTO `fourth_question_scores` (`id`, `fourth_question_id`, `score_label`,
 
 CREATE TABLE `genders` (
   `id` tinyint(3) UNSIGNED NOT NULL,
-  `name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(50) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -7932,7 +7972,7 @@ INSERT INTO `genders` (`id`, `name`, `created_at`, `updated_at`) VALUES
 CREATE TABLE `hx_drugs` (
   `id` int(10) UNSIGNED NOT NULL,
   `interaction_severity_id` int(10) UNSIGNED NOT NULL,
-  `note` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `note` text NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -7947,7 +7987,7 @@ CREATE TABLE `hx_drug_values` (
   `id` int(10) UNSIGNED NOT NULL,
   `drug_id` int(10) UNSIGNED NOT NULL,
   `hx_drug_id` int(10) UNSIGNED NOT NULL,
-  `value` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `value` varchar(50) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -7960,7 +8000,7 @@ CREATE TABLE `hx_drug_values` (
 
 CREATE TABLE `illness_categories` (
   `id` int(10) UNSIGNED NOT NULL,
-  `name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(100) NOT NULL,
   `parent_id` int(10) UNSIGNED DEFAULT NULL,
   `active` tinyint(1) NOT NULL DEFAULT 0,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
@@ -8086,7 +8126,7 @@ INSERT INTO `illness_categories` (`id`, `name`, `parent_id`, `active`, `created_
 
 CREATE TABLE `illness_subs` (
   `id` int(10) UNSIGNED NOT NULL,
-  `name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(100) NOT NULL,
   `illness_category_id` int(10) UNSIGNED DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
@@ -8565,7 +8605,7 @@ INSERT INTO `illness_subs` (`id`, `name`, `illness_category_id`, `created_at`, `
 
 CREATE TABLE `indications` (
   `id` int(10) UNSIGNED NOT NULL,
-  `indication_title` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `indication_title` varchar(100) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -9686,8 +9726,8 @@ INSERT INTO `indications` (`id`, `indication_title`, `created_at`, `updated_at`)
 
 CREATE TABLE `interaction_severities` (
   `id` int(10) UNSIGNED NOT NULL,
-  `type` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `color` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `type` varchar(50) NOT NULL,
+  `color` varchar(20) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -9711,7 +9751,7 @@ INSERT INTO `interaction_severities` (`id`, `type`, `color`, `created_at`, `upda
 CREATE TABLE `kidneys` (
   `id` int(10) UNSIGNED NOT NULL,
   `illness_sub_id` int(10) UNSIGNED NOT NULL,
-  `text` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `text` varchar(100) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -9731,7 +9771,7 @@ INSERT INTO `kidneys` (`id`, `illness_sub_id`, `text`, `created_at`, `updated_at
 
 CREATE TABLE `migrations` (
   `id` int(10) UNSIGNED NOT NULL,
-  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `migration` varchar(255) NOT NULL,
   `batch` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -11966,7 +12006,6 @@ INSERT INTO `note_doses` (`id`, `variable_id`, `effect_id`, `dose_type_id`, `pri
 (2305, 20, 1, 3, 1, '2023-05-29 19:54:24', '2023-05-29 19:54:24'),
 (2317, 606, 1, 1, 0, '2023-05-30 13:32:31', '2023-05-30 13:32:31'),
 (2318, 606, 5, 1, 0, '2023-05-30 13:32:42', '2023-05-30 13:32:42'),
-(2322, 606, 5, 2, 1, '2023-05-31 14:15:54', '2023-05-31 14:15:54'),
 (2323, 606, 5, 5, 1, '2023-05-31 14:21:34', '2023-05-31 14:21:34');
 
 -- --------------------------------------------------------
@@ -11978,7 +12017,7 @@ INSERT INTO `note_doses` (`id`, `variable_id`, `effect_id`, `dose_type_id`, `pri
 CREATE TABLE `note_dose_variables` (
   `id` int(10) UNSIGNED NOT NULL,
   `note_dose_id` int(10) UNSIGNED NOT NULL,
-  `variableable_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `variableable_type` varchar(255) NOT NULL,
   `variableable_id` bigint(20) UNSIGNED NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
@@ -13899,7 +13938,6 @@ INSERT INTO `note_dose_variables` (`id`, `note_dose_id`, `variableable_type`, `v
 (2153, 2300, 'App\\Models\\Weight', 2, '2023-05-29 19:04:30', '2023-05-29 19:04:30'),
 (2157, 2304, 'App\\Models\\Age', 2, '2023-05-29 19:53:38', '2023-05-29 19:53:38'),
 (2158, 2305, 'App\\Models\\PregnancyStage', 1, '2023-05-29 19:54:24', '2023-05-29 19:54:24'),
-(2172, 2322, 'App\\Models\\Age', 2, '2023-05-31 14:15:54', '2023-05-31 14:15:54'),
 (2173, 2323, 'App\\Models\\Age', 2, '2023-05-31 14:21:34', '2023-05-31 14:21:34'),
 (2174, 2323, 'App\\Models\\Drug', 348, '2023-05-31 14:21:34', '2023-05-31 14:21:34');
 
@@ -13912,7 +13950,7 @@ INSERT INTO `note_dose_variables` (`id`, `note_dose_id`, `variableable_type`, `v
 CREATE TABLE `note_messages` (
   `id` int(10) UNSIGNED NOT NULL,
   `note_dose_id` int(10) UNSIGNED NOT NULL,
-  `note` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `note` text NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -14487,8 +14525,8 @@ INSERT INTO `note_messages` (`id`, `note_dose_id`, `note`, `created_at`, `update
 
 CREATE TABLE `nursing_safety_categories` (
   `id` int(10) UNSIGNED NOT NULL,
-  `type` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `value` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `type` varchar(100) NOT NULL,
+  `value` varchar(100) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -14508,8 +14546,8 @@ INSERT INTO `nursing_safety_categories` (`id`, `type`, `value`, `created_at`, `u
 --
 
 CREATE TABLE `password_reset_tokens` (
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `token` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -14521,11 +14559,11 @@ CREATE TABLE `password_reset_tokens` (
 
 CREATE TABLE `personal_access_tokens` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `tokenable_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tokenable_type` varchar(255) NOT NULL,
   `tokenable_id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `abilities` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(255) NOT NULL,
+  `token` varchar(64) NOT NULL,
+  `abilities` text DEFAULT NULL,
   `last_used_at` timestamp NULL DEFAULT NULL,
   `expires_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -14541,7 +14579,7 @@ CREATE TABLE `personal_access_tokens` (
 CREATE TABLE `predoses` (
   `id` int(10) UNSIGNED NOT NULL,
   `drug_id` int(10) UNSIGNED NOT NULL,
-  `question_number` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `question_number` varchar(100) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -14583,7 +14621,7 @@ INSERT INTO `predoses` (`id`, `drug_id`, `question_number`, `created_at`, `updat
 CREATE TABLE `predose_first_questions` (
   `id` int(10) UNSIGNED NOT NULL,
   `predose_id` int(10) UNSIGNED NOT NULL,
-  `text` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `text` text NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -14650,7 +14688,7 @@ INSERT INTO `predose_fourth_questions` (`id`, `predose_id`, `created_at`, `updat
 
 CREATE TABLE `predose_question_ranges` (
   `id` int(10) UNSIGNED NOT NULL,
-  `variableable_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `variableable_type` varchar(255) NOT NULL,
   `variableable_id` bigint(20) UNSIGNED NOT NULL,
   `from` int(11) NOT NULL,
   `to` int(11) NOT NULL,
@@ -14684,8 +14722,8 @@ INSERT INTO `predose_question_ranges` (`id`, `variableable_type`, `variableable_
 CREATE TABLE `predose_second_questions` (
   `id` int(10) UNSIGNED NOT NULL,
   `predose_id` int(10) UNSIGNED NOT NULL,
-  `label` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `unit` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `label` varchar(100) NOT NULL,
+  `unit` varchar(100) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -14706,8 +14744,8 @@ INSERT INTO `predose_second_questions` (`id`, `predose_id`, `label`, `unit`, `cr
 CREATE TABLE `predose_third_questions` (
   `id` int(10) UNSIGNED NOT NULL,
   `predose_id` int(10) UNSIGNED NOT NULL,
-  `text` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `variableable_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `text` varchar(100) NOT NULL,
+  `variableable_type` varchar(255) NOT NULL,
   `variableable_id` bigint(20) UNSIGNED NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
@@ -14752,7 +14790,7 @@ INSERT INTO `predose_third_questions` (`id`, `predose_id`, `text`, `variableable
 CREATE TABLE `predose_variables` (
   `id` int(10) UNSIGNED NOT NULL,
   `predose_id` int(10) UNSIGNED NOT NULL,
-  `variableable_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `variableable_type` varchar(255) NOT NULL,
   `variableable_id` bigint(20) UNSIGNED NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
@@ -14805,8 +14843,8 @@ INSERT INTO `predose_variables` (`id`, `predose_id`, `variableable_type`, `varia
 
 CREATE TABLE `pregnancy_safeties` (
   `id` int(10) UNSIGNED NOT NULL,
-  `type` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `value` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `type` varchar(100) NOT NULL,
+  `value` varchar(100) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -14832,7 +14870,7 @@ INSERT INTO `pregnancy_safeties` (`id`, `type`, `value`, `created_at`, `updated_
 
 CREATE TABLE `pregnancy_stages` (
   `id` int(10) UNSIGNED NOT NULL,
-  `pregnancy_stage` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `pregnancy_stage` varchar(100) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -14857,7 +14895,7 @@ CREATE TABLE `score_points` (
   `id` int(10) UNSIGNED NOT NULL,
   `fourth_question_score_id` int(10) UNSIGNED NOT NULL,
   `point` int(11) NOT NULL,
-  `variableable_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `variableable_type` varchar(255) NOT NULL,
   `variableable_id` bigint(20) UNSIGNED NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
@@ -14905,7 +14943,7 @@ INSERT INTO `scrs` (`id`, `illness_sub_id`, `gender_id`, `range_from`, `range_to
 
 CREATE TABLE `trade_keys` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `name_key` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name_key` varchar(100) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -14915,7 +14953,30 @@ CREATE TABLE `trade_keys` (
 --
 
 INSERT INTO `trade_keys` (`id`, `name_key`, `created_at`, `updated_at`) VALUES
-(1, 'test', '2023-06-04 09:59:48', '2023-06-04 09:59:48');
+(1, 'Xatral', '2023-06-04 10:10:10', '2023-06-04 08:10:10'),
+(4, 'Cardura', '2023-06-04 08:27:44', '2023-06-04 08:27:44'),
+(6, 'Dosin', '2023-06-04 18:08:25', '2023-06-04 18:08:25'),
+(7, 'Avodart', '2023-06-04 18:08:36', '2023-06-04 18:08:36'),
+(8, 'Duodart', '2023-06-04 18:08:41', '2023-06-04 18:08:41'),
+(9, 'Flopadex', '2023-06-04 18:08:48', '2023-06-04 18:08:48'),
+(10, 'Congdosin', '2023-06-04 18:08:56', '2023-06-04 18:08:56'),
+(11, 'Sildocare', '2023-06-04 18:09:02', '2023-06-04 18:09:02'),
+(12, 'Siloprostate', '2023-06-04 18:09:10', '2023-06-04 18:09:10'),
+(13, 'Sympaprost', '2023-06-04 18:09:17', '2023-06-04 18:09:17'),
+(14, 'Tamsulin', '2023-06-04 18:09:24', '2023-06-04 18:09:24'),
+(15, 'Omnic', '2023-06-04 18:09:30', '2023-06-04 18:09:30'),
+(16, 'E-Ze-P', '2023-06-04 18:09:40', '2023-06-04 18:09:40'),
+(17, 'Itrin', '2023-06-04 18:09:46', '2023-06-04 18:09:46'),
+(18, 'Minipress', '2023-06-04 18:09:52', '2023-06-04 18:09:52'),
+(19, 'Catapresan', '2023-06-04 18:10:03', '2023-06-04 18:10:03'),
+(20, 'Aldomet', '2023-06-04 18:10:13', '2023-06-04 18:10:13'),
+(21, 'Gutron', '2023-06-04 18:10:46', '2023-06-04 18:10:46'),
+(22, 'Midodrine', '2023-06-04 18:10:56', '2023-06-04 18:10:56'),
+(23, 'Corasore', '2023-06-04 18:11:03', '2023-06-04 18:11:03'),
+(24, 'Heptaminol', '2023-06-04 18:11:10', '2023-06-04 18:11:10'),
+(25, 'Effortil', '2023-06-04 18:11:16', '2023-06-04 18:11:16'),
+(26, 'Vascon', '2023-06-04 18:11:23', '2023-06-04 18:11:23'),
+(27, 'Alfatral', '2023-06-04 19:28:39', '2023-06-04 19:28:39');
 
 -- --------------------------------------------------------
 
@@ -14925,12 +14986,12 @@ INSERT INTO `trade_keys` (`id`, `name_key`, `created_at`, `updated_at`) VALUES
 
 CREATE TABLE `users` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
-  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(255) NOT NULL,
   `user_type_id` tinyint(3) UNSIGNED NOT NULL,
-  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `remember_token` varchar(100) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -14951,7 +15012,7 @@ INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `us
 
 CREATE TABLE `user_types` (
   `id` tinyint(3) UNSIGNED NOT NULL,
-  `type` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `type` varchar(50) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -14972,7 +15033,7 @@ INSERT INTO `user_types` (`id`, `type`, `created_at`, `updated_at`) VALUES
 
 CREATE TABLE `variables` (
   `id` int(10) UNSIGNED NOT NULL,
-  `variableable_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `variableable_type` varchar(255) NOT NULL,
   `variableable_id` bigint(20) UNSIGNED NOT NULL,
   `drug_id` int(10) UNSIGNED NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
@@ -15538,6 +15599,13 @@ INSERT INTO `variables` (`id`, `variableable_type`, `variableable_id`, `drug_id`
 (603, 'App\\Models\\DrugIndication', 541, 1195, '2023-05-26 10:33:55', '2023-05-26 10:33:55'),
 (604, 'App\\Models\\Drug', 1197, 1197, '2023-05-26 11:00:57', '2023-05-26 11:00:57'),
 (606, 'App\\Models\\DrugIndication', 41, 347, '2023-05-30 13:32:05', '2023-05-30 13:32:05');
+INSERT INTO `variables` (`id`, `variableable_type`, `variableable_id`, `drug_id`, `created_at`, `updated_at`) VALUES
+(607, 'App\\Models\\Drug', 467, 467, '2023-06-04 19:16:13', '2023-06-04 19:16:13'),
+(608, 'App\\Models\\Drug', 468, 468, '2023-06-04 19:16:53', '2023-06-04 19:16:53'),
+(609, 'App\\Models\\Drug', 442, 442, '2023-06-04 19:17:43', '2023-06-04 19:17:43'),
+(610, 'App\\Models\\Drug', 443, 443, '2023-06-04 19:17:59', '2023-06-04 19:17:59'),
+(611, 'App\\Models\\Drug', 440, 440, '2023-06-04 19:25:02', '2023-06-04 19:25:02'),
+(612, 'App\\Models\\Drug', 441, 441, '2023-06-04 19:25:16', '2023-06-04 19:25:16');
 
 -- --------------------------------------------------------
 
@@ -15548,7 +15616,7 @@ INSERT INTO `variables` (`id`, `variableable_type`, `variableable_id`, `drug_id`
 CREATE TABLE `variable_details` (
   `id` int(10) UNSIGNED NOT NULL,
   `variable_id` int(10) UNSIGNED NOT NULL,
-  `optionable_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `optionable_type` varchar(255) NOT NULL,
   `optionable_id` bigint(20) UNSIGNED NOT NULL,
   `effect_id` int(10) UNSIGNED NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
@@ -16806,7 +16874,7 @@ INSERT INTO `variable_details` (`id`, `variable_id`, `optionable_type`, `optiona
 
 CREATE TABLE `weights` (
   `id` int(10) UNSIGNED NOT NULL,
-  `weight` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `weight` varchar(50) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -17284,7 +17352,7 @@ ALTER TABLE `drugs`
 -- AUTO_INCREMENT for table `drug_formulas`
 --
 ALTER TABLE `drug_formulas`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=156;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=162;
 
 --
 -- AUTO_INCREMENT for table `drug_indications`
@@ -17314,7 +17382,7 @@ ALTER TABLE `drug_pregnancy_stages`
 -- AUTO_INCREMENT for table `drug_trades`
 --
 ALTER TABLE `drug_trades`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=181;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=218;
 
 --
 -- AUTO_INCREMENT for table `effects`
@@ -17506,7 +17574,7 @@ ALTER TABLE `scrs`
 -- AUTO_INCREMENT for table `trade_keys`
 --
 ALTER TABLE `trade_keys`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -17524,7 +17592,7 @@ ALTER TABLE `user_types`
 -- AUTO_INCREMENT for table `variables`
 --
 ALTER TABLE `variables`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=607;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=613;
 
 --
 -- AUTO_INCREMENT for table `variable_details`

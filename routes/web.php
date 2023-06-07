@@ -67,6 +67,8 @@ Route::group(['prefix' => 'customer',],function () {
     Route::post('search',[SearchController::class,'search'])->name('search');
     Route::post('search-drugs',[SearchController::class,'searchDrugs'])->name('search_drugs');
     Route::post('search-indications',[SearchController::class,'drugIndications'])->name('search_indications');
+    Route::post('illness-search',[SearchController::class,'searchIllness'])->name('illness-search');
+    Route::post('drugs-search',[SearchController::class,'searchDrugDrugs'])->name('drugs-search');
     Route::post('dose-note-result',[AlgorithmController::class,'dose_note_result'])->name('dose-note-result');
     Route::post('drug-pregnancy-result',[AlgorithmController::class,'drugPregnancy'])->name('drug-pregnancy-result');
     Route::post('calculator',[AlgorithmController::class,'calculator'])->name('calculator');

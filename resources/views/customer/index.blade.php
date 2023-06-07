@@ -196,6 +196,42 @@
     font-size: 18px;
     padding-right: 0.25rem;
 }
+
+.autocomplete #illnessSearchResult {
+    list-style: none;
+    padding: 0px;
+    width: 100%;
+    position: absolute;
+    margin: 0;
+    background: white;
+}
+
+.autocomplete #illnessSearchResult li {
+    background: #F2F3F4;
+    padding: 4px;
+    margin-bottom: 1px;
+    font-size:12px;
+}
+
+.autocomplete #drugsSearchResult {
+    list-style: none;
+    padding: 0px;
+    width: 100%;
+    position: absolute;
+    margin: 0;
+    background: white;
+}
+
+.autocomplete #drugsSearchResult li {
+    background: #F2F3F4;
+    padding: 4px;
+    margin-bottom: 1px;
+    font-size:12px;
+}
+
+
+
+
 /*
 border: 1px solid #DDDDDD; box-shadow: 0px 4px 4px 1px rgba(0, 0, 0, 0.25);
 */ 
@@ -412,25 +448,17 @@ border: 1px solid #DDDDDD; box-shadow: 0px 4px 4px 1px rgba(0, 0, 0, 0.25);
         <a onclick="" class="form-control-icon-reset-illness"><span class="fa fa-repeat" ></span></a>
       </form>
 
-        <!--<div class='autocomplete'>-->
+        <div class='autocomplete'>
             <div>
-              <input type="text" class="form-control" onkeyup=""  placeholder="Search Patient History" style="border-radius:60px;background-color:#42215A;color:white;height:30px;padding-left: 2rem;  padding-right: 2rem;font-size:14px;">
+              <input type="text" class="form-control" id="illness_search" onkeyup="searchIllnesses()"  placeholder="Search Patient History" style="border-radius:60px;background-color:#42215A;color:white;height:30px;padding-left: 2rem;  padding-right: 2rem;font-size:14px;">
             </div>
-            <!--<ul id="searchResult"></ul>-->
-        <!--</div>-->
+            <ul id="illnessSearchResult"></ul>
+        </div>
       </div> 
 
 
     <div class="scroll mt-3" style="overflow-x: hidden;  overflow-y: scroll;height:150px;padding-left: 15px;">
-      <ul style="list-style: none;padding-left: 0rem;">
-        <li class="mb-2">test111</li>
-        <li class="mb-2">test111</li>
-        <li class="mb-2">test111</li>
-        <li class="mb-2">test111</li>
-        <li class="mb-2">test111</li>
-        <li class="mb-2">test331</li>
-        <li class="mb-2">test111</li>
-        <li class="mb-2">test111</li>
+      <ul style="list-style: none;padding-left: 0rem;" id="illness_list">
       </ul>
     </div>
     
@@ -445,25 +473,17 @@ border: 1px solid #DDDDDD; box-shadow: 0px 4px 4px 1px rgba(0, 0, 0, 0.25);
         <a onclick="" class="form-control-icon-reset-illness"><span class="fa fa-repeat" ></span></a>
       </form>
 
-        <!--<div class='autocomplete'>-->
+        <div class='autocomplete'>
             <div>
-              <input type="text" class="form-control" onkeyup=""  placeholder="Search Patient History" style="border-radius:60px;background-color:#42215A;color:white;height:30px;padding-left: 2rem;  padding-right: 2rem;font-size:14px;">
+              <input type="text" class="form-control" id="drugs_search" onkeyup="searchDrugs()"  placeholder="Search Patient History" style="border-radius:60px;background-color:#42215A;color:white;height:30px;padding-left: 2rem;  padding-right: 2rem;font-size:14px;">
             </div>
-            <!--<ul id="searchResult"></ul>-->
-        <!--</div>-->
+            <ul id="drugsSearchResult"></ul>
+        </div>
       </div> 
 
 
     <div class="scroll mt-3" style="overflow-x: hidden;  overflow-y: scroll;height:150px; padding-left: 15px;">
-      <ul style="list-style: none;padding-left: 0rem;">
-        <li class="mb-2">test111</li>
-        <li class="mb-2">test111</li>
-        <li class="mb-2">test2211111111111</li>
-        <li class="mb-2">test111</li>
-        <li class="mb-2">test111</li>
-        <li class="mb-2">test111</li>
-        <li class="mb-2">test111</li>
-        <li class="mb-2">test111</li>
+      <ul style="list-style: none;padding-left: 0rem;" id="drug_list">
       </ul>
 </div>
 </div>
