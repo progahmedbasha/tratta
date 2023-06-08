@@ -5,8 +5,9 @@
   <meta charset="utf-8">
   <meta name="csrf-token" content="{{ csrf_token() }}" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+  <link href="{{asset('customer_assets/bootstrap-5.0.2-dist/css/bootstrap.min.css') }}" rel="stylesheet">
+
+  <script src="{{asset('customer_assets/bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js') }}"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
   
@@ -16,6 +17,7 @@
 <script>  
     new WOW().init();  
 </script>  
+
 <style>
 @font-face {
     font-family: 'Inkfree';
@@ -27,11 +29,7 @@
     src: url('{{ url('customer_assets/font/BreadIdol.ttf') }}') format('truetype'); /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
 } 
 
-</style>
 
-
-<style>
-  /* This changes all the animations globally */
 :root {
   --animate-duration: 800ms;
   --animate-delay: 0.9s;
@@ -99,31 +97,6 @@
             animation-fill-mode: both; 
 
 }
-
-/*.animated { 
-
-            -webkit-animation-duration: 1s;
-            animation-duration: 1s; 
-            -webkit-animation-fill-mode: both; 
-            animation-fill-mode: both; 
-         }
-         
-         @-webkit-keyframes bounce { 
-            0%, 20%, 50%, 80%, 100% {-webkit-transform: translateY(0);} 
-            40% {-webkit-transform: translateY(-30px);} 
-            60% {-webkit-transform: translateY(-15px);} 
-         } 
-         
-         @keyframes bounce { 
-            0%, 20%, 50%, 80%, 100% {transform: translateY(0);} 
-            40% {transform: translateY(-30px);} 
-            60% {transform: translateY(-15px);} 
-         }
-         
-         .bounce { 
-            -webkit-animation-name: bounce; 
-            animation-name: bounce; 
-         }*/
 
 .item-style {
   top: 72% !important;
@@ -193,7 +166,7 @@
     color: #aaa;
     right: 0;
     top: -3px;
-    font-size: 18px;
+    font-size: 15px;
     padding-right: 0.25rem;
 }
 
@@ -229,12 +202,6 @@
     font-size:12px;
 }
 
-
-
-
-/*
-border: 1px solid #DDDDDD; box-shadow: 0px 4px 4px 1px rgba(0, 0, 0, 0.25);
-*/ 
 </style>
 
 </head>
@@ -242,65 +209,70 @@ border: 1px solid #DDDDDD; box-shadow: 0px 4px 4px 1px rgba(0, 0, 0, 0.25);
 
 <div class="container" >
   
-  <div class="card mt-3 mb-3" style="background-color:transparent;border-radius:50px;border:4px solid silver;">
-    <div class="card-body">
+    <div class="card mt-3 mb-3" style="background-color:transparent;border-radius:50px;border:4px solid silver;">
+        <div class="card-body">
 
-<div style="background-image:url('{{ url('customer_assets/images/bg1.svg') }}');background-repeat: no-repeat; background-color: white;border-radius:25px;padding:10px;margin:10px;border-bottom-left-radius: 0px;border-bottom-right-radius: 0px;">  
-    <nav class="navbar navbar-expand-sm" style="padding-right:40px;padding-left:40px;">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="javascript:void(0)"> <img src="{{ url('customer_assets/images/Tratta_prescribe.svg') }}" ></a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="mynavbar">
-        <ul class="navbar-nav me-auto">
-          <!--<li class="nav-item">
-            <a class="nav-link" href="javascript:void(0)">Link</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="javascript:void(0)">Link</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="javascript:void(0)">Link</a>
-          </li>-->
-        </ul>
-        <div class="d-flex wow bounceInUp">
-          <img src="{{ url('customer_assets/images/setting.svg') }}" style="padding-right:40px;">
-          <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" style=" width: 90px; height: 40px;">
-          </div>
-        </div>
-      </div>
-    </div>
-  </nav>
+          <div style="background-image:url('{{ url('customer_assets/images/bg1.svg') }}');background-repeat: no-repeat; background-color: white;border-radius:25px;padding:10px;margin:10px;border-bottom-left-radius: 0px;border-bottom-right-radius: 0px;">  
 
+          <!-------------------------navbar Starrt------------------------------------------------>
+                    <nav class="navbar navbar-expand-sm" style="padding-right:40px;padding-left:40px;">
+                              <div class="container-fluid">
+                                  <a class="navbar-brand" href="javascript:void(0)"> <img src="{{ url('customer_assets/images/Tratta_prescribe.svg') }}" ></a>
+                                  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
+                                    <span class="navbar-toggler-icon"></span>
+                                  </button>
+                                  <div class="collapse navbar-collapse" id="mynavbar">
+                                    <ul class="navbar-nav me-auto">
+                                      <!--<li class="nav-item">
+                                        <a class="nav-link" href="javascript:void(0)">Link</a>
+                                      </li>
+                                      <li class="nav-item">
+                                        <a class="nav-link" href="javascript:void(0)">Link</a>
+                                      </li>
+                                      <li class="nav-item">
+                                        <a class="nav-link" href="javascript:void(0)">Link</a>
+                                      </li>-->
+                                    </ul>
+                                    <div class="d-flex wow bounceInUp">
+                                      <img src="{{ url('customer_assets/images/setting.svg') }}" style="padding-right:40px;">
+                                      <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" style=" width: 90px; height: 40px;">
+                                      </div>
+                                    </div>
+                                  </div>
+                              </div>
+                        </nav>
+          <!-------------------------End Search Box-------------------------------------------->
 
-  <div class="row justify-content-center" style="margin-top:-30px;">
-    <div class="col-md-6">    
-       <!-- Actual search box -->
-      <div class="form-group">
-        <span class="fa fa-search form-control-icon2"></span>
+          <!-------------------------Search Box------------------------------------------------>
+            <div class="row justify-content-center" style="margin-top:-30px;">
+              <div class="col-md-6">    
+                    <!-- Actual search box -->
+                    <div class="form-group">
+                      <span class="fa fa-search form-control-icon2"></span>
 
-        <form>
-        <a onclick="refresh()" class="form-control-icon"><span class="fa fa-repeat" ></span></a>
+                      <form>
+                      <a onclick="refresh()" class="form-control-icon"><span class="fa fa-repeat" ></span></a>
 
-        <div class="animate__animated animate__wobble" style="position: absolute;z-index: 11111111111111;left:75%;top: 16px;">
-        <span class="form-check-input form-control-radio3 animate__animated animate__wobble" id="pc1" onclick="changeSearchType(3)" ></span>
-        <span class="form-check-input form-control-radio2 animate__animated animate__wobble hide" id="pc2" onclick="changeSearchType(1)"  ></span>
-        <span class="form-check-input form-control-radio1 animate__animated animate__wobble hide" id="pc3" onclick="changeSearchType(2)"  ></span>
-        </div>
-      
-      </form>
+                      <div class="animate__animated animate__wobble" style="position: absolute;z-index: 11111111111111;left:75%;top: 16px;">
+                      <span class="form-check-input form-control-radio3 animate__animated animate__wobble" id="pc1" onclick="changeSearchType(3)" ></span>
+                      <span class="form-check-input form-control-radio2 animate__animated animate__wobble hide" id="pc2" onclick="changeSearchType(1)"  ></span>
+                      <span class="form-check-input form-control-radio1 animate__animated animate__wobble hide" id="pc3" onclick="changeSearchType(2)"  ></span>
+                      </div>
+                    
+                    </form>
 
-        <div class='autocomplete'>
-            <div>
-              <input type="text" class="form-control" onkeyup="search()" id="search_box" placeholder="Search Drug Key" style="border-radius:60px;background-color:black;color:white;height:60px;">
+                      <div class='autocomplete'>
+                          <div>
+                            <input type="text" class="form-control" onkeyup="search()" id="search_box" placeholder="Search Drug Key" style="border-radius:60px;background-color:black;color:white;height:60px;">
+                          </div>
+                          <ul id="searchResult"></ul>
+                      </div>
+                    </div> 
+                </div>
             </div>
-            <ul id="searchResult"></ul>
-        </div>
-      </div> 
-    </div>
-  </div>
+          <!-------------------------End Search Box-------------------------------------------->
+
 
 <div class="row justify-content-center">
   <div class="col-md-3">
@@ -419,9 +391,9 @@ border: 1px solid #DDDDDD; box-shadow: 0px 4px 4px 1px rgba(0, 0, 0, 0.25);
 
   <!--------------list taps--------------------------------------------->
   <div class="row justify-content-center" style="display:none;" id="illness_drug_list">
-  <div class="col-md-3">
-    <div style="background: white;  border-radius: 38px;width:320px;height:300px;position:absolute;z-index:22;padding:25px;">
-    <img src="{{ url('customer_assets/images/Titration.svg') }}" style="position: absolute; top: 25px; right: 60px;">
+  <div class="col-md-4">
+    <div style="background: white;  border-radius: 38px;width:350px;height:300px;position:absolute;z-index:22;padding:10px;">
+    <img src="{{ url('customer_assets/images/Titration.svg') }}" style="position: absolute; top: 10px; right: 60px;">
         <!-- Nav tabs -->
         <center>
 <ul class="nav nav-tabs" style="background: #CFBEB6; border-radius: 9px;width: fit-content; font-size: 10px;padding: 2px;">
@@ -457,7 +429,7 @@ border: 1px solid #DDDDDD; box-shadow: 0px 4px 4px 1px rgba(0, 0, 0, 0.25);
       </div> 
 
 
-    <div class="scroll mt-3" style="overflow-x: hidden;  overflow-y: scroll;height:150px;padding-left: 15px;">
+    <div class="scroll mt-3" style="overflow-x: hidden;  overflow-y: scroll;height:150px;">
       <ul style="list-style: none;padding-left: 0rem;" id="illness_list">
       </ul>
     </div>
@@ -482,7 +454,7 @@ border: 1px solid #DDDDDD; box-shadow: 0px 4px 4px 1px rgba(0, 0, 0, 0.25);
       </div> 
 
 
-    <div class="scroll mt-3" style="overflow-x: hidden;  overflow-y: scroll;height:150px; padding-left: 15px;">
+    <div class="scroll mt-3" style="overflow-x: hidden;  overflow-y: scroll;height:150px;">
       <ul style="list-style: none;padding-left: 0rem;" id="drug_list">
       </ul>
 </div>
@@ -504,7 +476,7 @@ border: 1px solid #DDDDDD; box-shadow: 0px 4px 4px 1px rgba(0, 0, 0, 0.25);
 </div>
 
 <div style="text-align:center;">
-<textarea id="notes" rows="4" style="background:transparent;width:100%;border:none;text-align:center;outline: none;" readonly>Notes</textarea>
+  <textarea id="notes" rows="4" style="background:transparent;width:100%;border:none;text-align:center;outline: none;" readonly>Notes</textarea>
 </div>
     
 
@@ -578,10 +550,14 @@ border: 1px solid #DDDDDD; box-shadow: 0px 4px 4px 1px rgba(0, 0, 0, 0.25);
 
 </div>
 
+
+<script src="{{asset('customer_assets/js/front.js')}}"></script>
+
+
 </body>
 </html>
 
 
-<script src="{{asset('customer_assets/js/front.js')}}"></script>
+
 
 
