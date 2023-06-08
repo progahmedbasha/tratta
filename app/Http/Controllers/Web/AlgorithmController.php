@@ -128,7 +128,7 @@ class AlgorithmController extends Controller
     public function getDoseAnd($variableId,$effectId,$request)
     {
         $dose =null; 
-        $dose_and = NoteDose::with('noteDoseVariables')->where('variable_id',$variableId)->where('effect_id',$effectId)->where('dose_type_id',2)->orderBy('priority')->get();
+        $dose_and = NoteDose::with('doseMessage')->with('noteDoseVariables')->where('variable_id',$variableId)->where('effect_id',$effectId)->where('dose_type_id',2)->orderBy('priority')->get();
         foreach($dose_and as $and){
             $check = $this->checkAnd($and,$request);
            if($check){
