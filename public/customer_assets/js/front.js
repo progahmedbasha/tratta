@@ -173,7 +173,6 @@ function setDrugs(data){
             search_id: data.id
         },
         success: function(response) {
-            console.log(response);
             var len = response.data.length;
             var options = "<option selected disabled>Select Drug</option>";
             for( var i = 0; i<len; i++){
@@ -425,6 +424,8 @@ function additionalMessage(open,message = null) {
 }
 
 function doseNoteResult() {
+    var data = setVariableData();
+
     if(drug_id != null){
         var url = "dose-note-result";
         $.ajaxSetup({
@@ -437,16 +438,7 @@ function doseNoteResult() {
             type: 'post',
             cache: false,
             async: true,
-            data: {
-                drug_id : drug_id,
-                indication_id : indication_id,
-                gender_id : gender_id,
-                age_id : age_id,
-                weight_id : weight_id,
-                pregnancy_stage_id : pregnancy_stage_id,
-                illness_category_id : illness_category_id,
-                drug_drug_id : drug_drug_id,
-            },
+            data: data,
             success: function(response) {
                 document.getElementById('recommended_dose').innerHTML = response.dose_result.dose_message.recommended_dosage;
                 document.getElementById('dosage_note').innerHTML = response.dose_result.dose_message.dosage_note;
@@ -458,6 +450,31 @@ function doseNoteResult() {
             }
         });
     }
+}
+
+function setVariableData() {
+    var data = {
+        drug_id : drug_id,
+        gender_id : gender_id,
+        age_id : age_id,
+    }
+
+    if(indication_id != null)
+        data['indication_id'] = indication_id;
+
+    if(weight_id != null)
+        data['weight_id'] = weight_id;
+
+    if(pregnancy_stage_id != null)
+        data['pregnancy_stage_id'] = pregnancy_stage_id;
+
+    if(illness_category_id != null)
+        data['illness_category_id'] = illness_category_id;
+
+    if(drug_drug_id != null)
+        data['drug_drug_id'] = drug_drug_id;
+        
+    return data;
 }
 
 //---------------------calculator methods-------------------------------------------
