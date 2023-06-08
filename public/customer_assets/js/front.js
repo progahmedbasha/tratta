@@ -490,6 +490,9 @@ function illnessDrugShow () {
     }
 }
 
+var illnessObj = [];
+var drugObj = [];
+
 function searchIllnesses() {
     var value = document.getElementById('illness_search').value;
     var url = "illness-search";
@@ -510,16 +513,44 @@ function searchIllnesses() {
             },
             success: function(response) {
                 var len = response.data.length;
+
                 for( var i = 0; i<len; i++){
                     var id = response.data[i]['id'];
                     var name = response.data[i]['name'];
                     
-                    $("#illnessSearchResult").append("<li onclick='setIllness("+JSON.stringify(response.data[i])+")' value='"+id+"'>"+name+"</li>");
+                    //$("#illnessSearchResult").append("<li onclick='setIllness("+JSON.stringify(response.data[i])+")' value='"+id+"'>"+name+"</li>");
+                    $("#illnessSearchResult").append("<li style='cursor: pointer;' onclick='insertIllnessObjVal("+JSON.stringify(response.data[i])+")' value='"+id+"'>"+name+"</li>");
                 }
+
             }
         });
     }
 }
+
+
+function insertIllnessObjVal(illnessObjectData) {
+    illnessObj.push({id: illnessObjectData.id, name: illnessObjectData.name});
+    setIllness();
+}
+
+function deleteIllnessElement(key) {
+    delete illnessObj[key];
+    setIllness();
+}
+
+function setIllness() {
+    $("#illnessSearchResult").empty();
+    document.getElementById('illness_search').value = "";
+    $("#illness_list").text('');
+    for(var key in illnessObj)
+    {
+        var name = illnessObj[key].name;
+        $("#illness_list").append("<li class='mb-2' >"+name+"   <span style='color:red;cursor: pointer;float:right;margin-right:5px;' onclick='deleteIllnessElement("+key+")'>X</span></li>");
+    }
+
+}
+
+
 
 function searchDrugs() {
     var value = document.getElementById('drugs_search').value;
@@ -546,21 +577,30 @@ function searchDrugs() {
                     var id = response.data[i]['id'];
                     var name = response.data[i]['name'];
                     
-                    $("#drugsSearchResult").append("<li onclick='setDrugDrug("+JSON.stringify(response.data[i])+")' value='"+id+"'>"+name+"</li>");
+                    $("#drugsSearchResult").append("<li style='cursor: pointer;' onclick='insertDrugObjVal("+JSON.stringify(response.data[i])+")' value='"+id+"'>"+name+"</li>");
                 }
             }
         });
     }
 }
 
-function setIllness(data) {
-    $("#illnessSearchResult").empty();
-    document.getElementById('illness_search').value = "";
-    $("#illness_list").append("<li class='mb-2'>"+data.name+"</li>");
+function insertDrugObjVal(drugObjectData) {
+    drugObj.push({id: drugObjectData.id, name: drugObjectData.name});
+    setDrugObj();
 }
 
-function setDrugDrug(data) {
+function deleteDrugElement(key) {
+    delete drugObj[key];
+    setDrugObj();
+}
+
+function setDrugObj() {
     $("#drugsSearchResult").empty();
     document.getElementById('drugs_search').value = "";
-    $("#drug_list").append("<li class='mb-2'>"+data.name+"</li>");
+    $("#drug_list").text('');
+    for(var key in drugObj)
+    {
+        var name = drugObj[key].name;
+        $("#drug_list").append("<li class='mb-2' >"+name+"   <span style='color:red;cursor: pointer;float:right;margin-right:5px;' onclick='deleteDrugElement("+key+")'>X</span></li>");
+    }
 }
