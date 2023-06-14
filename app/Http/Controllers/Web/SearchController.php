@@ -114,13 +114,19 @@ class SearchController extends Controller
 
     public function searchIllness(Request $request)
     {
-        $data = IllnessSub::where('name','like','%'.$request->search.'%')->take(5)->get();
+        $data = IllnessSub::where('name','like','%'.$request->search.'%');
+        if($request->illness_list != null)
+            $data = $data->whereNotIn('id',$request->illness_list);
+        $data = $data->take(5)->get();
         return response()->json(['data' => $data, 'code' => '200']);
     }
 
     public function searchDrugDrugs(Request $request)
     {
-        $data = Drug::where('name','like','%'.$request->search.'%')->take(5)->get();
+        $data = Drug::where('name','like','%'.$request->search.'%');
+        if($request->drug_list != null)
+            $data = $data->whereNotIn('id',$request->drug_list);
+        $data = $data->take(5)->get();
         return response()->json(['data' => $data, 'code' => '200']);
     }
 
