@@ -467,7 +467,7 @@
 
 
 
-<div  style="display: flex; justify-content: center; align-items: center;margin-top:-10px;position:relative;z-index:2;text-align:center;height:200px;width:100%;background-color:rgba(242, 244, 248, 0.62);">
+<div id="recommended_dose_background" style="display: flex; justify-content: center; align-items: center;margin-top:-10px;position:relative;z-index:2;text-align:center;height:200px;width:100%;background-color:rgba(242, 244, 248, 0.62);">
   <p style="font-family: 'BreadIdol';font-style: normal; font-weight: 500; font-size: 28px;"><b id="recommended_dose">Recommended <br> Dosage</b></p>
 </div>
 

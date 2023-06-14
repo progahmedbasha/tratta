@@ -88,8 +88,8 @@ var gender_id = 1;
 var age_id = 1;
 var weight_id = null;
 var pregnancy_stage_id = null;
-var illness_category_id = null;
-var drug_drug_id = null;
+var illness_category_id = [];
+var drug_drug_id = [];
 
 //////// titration dose ///////////
 var titration_note = null;
@@ -441,11 +441,12 @@ function doseNoteResult() {
             data: data,
             success: function(response) {
                 document.getElementById('recommended_dose').innerHTML = response.dose_result.dose_message.recommended_dosage;
+                document.getElementById('recommended_dose_background').style.backgroundColor = response.dose_result.effect.color;
                 document.getElementById('dosage_note').innerHTML = response.dose_result.dose_message.dosage_note;
                 titration_note = response.dose_result.dose_message.titration_note;
                 var notes = "";
                 for (var i = 0; i < response.note_result.length ; i++)
-                    notes += response.note_result[i].note_message.note + '<br>';
+                    notes += response.note_result[i].note_message.note + '\n';
                 document.getElementById('notes').innerHTML = (notes != "")?notes:'Notes';
             }
         });
@@ -468,10 +469,10 @@ function setVariableData() {
     if(pregnancy_stage_id != null)
         data['pregnancy_stage_id'] = pregnancy_stage_id;
 
-    if(illness_category_id != null)
+    if(illness_category_id.length != 0 )
         data['illness_category_id'] = illness_category_id;
 
-    if(drug_drug_id != null)
+    if(drug_drug_id.length != 0)
         data['drug_drug_id'] = drug_drug_id;
         
     return data;
@@ -509,7 +510,8 @@ function searchIllnesses() {
             cache: false,
             async: true,
             data: {
-                search: value
+                search: value,
+                illness_list : illness_category_id,
             },
             success: function(response) {
                 var len = response.data.length;
@@ -518,7 +520,6 @@ function searchIllnesses() {
                     var id = response.data[i]['id'];
                     var name = response.data[i]['name'];
                     
-                    //$("#illnessSearchResult").append("<li onclick='setIllness("+JSON.stringify(response.data[i])+")' value='"+id+"'>"+name+"</li>");
                     $("#illnessSearchResult").append("<li style='cursor: pointer;' onclick='insertIllnessObjVal("+JSON.stringify(response.data[i])+")' value='"+id+"'>"+name+"</li>");
                 }
 
@@ -530,12 +531,16 @@ function searchIllnesses() {
 
 function insertIllnessObjVal(illnessObjectData) {
     illnessObj.push({id: illnessObjectData.id, name: illnessObjectData.name});
+    illness_category_id.push(illnessObjectData.id);
     setIllness();
+    doseNoteResult();
 }
 
 function deleteIllnessElement(key) {
     delete illnessObj[key];
+    illness_category_id.pop(key);
     setIllness();
+    doseNoteResult();
 }
 
 function setIllness() {
@@ -549,8 +554,6 @@ function setIllness() {
     }
 
 }
-
-
 
 function searchDrugs() {
     var value = document.getElementById('drugs_search').value;
@@ -568,7 +571,8 @@ function searchDrugs() {
             cache: false,
             async: true,
             data: {
-                search: value
+                search: value,
+                drug_list: drug_drug_id,
             },
             success: function(response) {
                 var len = response.data.length;
@@ -586,12 +590,16 @@ function searchDrugs() {
 
 function insertDrugObjVal(drugObjectData) {
     drugObj.push({id: drugObjectData.id, name: drugObjectData.name});
+    drug_drug_id.push(drugObjectData.id);
     setDrugObj();
+    doseNoteResult();
 }
 
 function deleteDrugElement(key) {
     delete drugObj[key];
+    drug_drug_id.pop(key)
     setDrugObj();
+    doseNoteResult();
 }
 
 function setDrugObj() {
