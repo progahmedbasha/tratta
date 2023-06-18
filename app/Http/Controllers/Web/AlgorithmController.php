@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Builder;
 
 use App\Models\Age;
 use App\Models\Drug;
@@ -59,8 +60,14 @@ class AlgorithmController extends Controller
     public function dose_note_result(Request $request)
     {
         $var = $this->getVariable($request);
+        if(!isset($request->illness_category_id)){
+            $request->request->add(['illness_category_id' => []]);
+        }
+        if(!isset($request->drug_drug_id)){
+            $request->request->add(['drug_drug_id' => []]);
+        }
         $detail = $this->getVariableDetail($var->id,$request);
-        
+
         $effect = null;
         $dose_result = null;
         $note_result = null;
@@ -110,25 +117,25 @@ class AlgorithmController extends Controller
             [Age::class,Gender::class,Weight::class,PregnancyStage::class,IllnessSub::class,Drug::class],
             function ($query,$type) use ($request){
                 if($type === Age::class)
-                $query->where('optionable_id',$request->age_id);
+                    $query->where('optionable_id',$request->age_id);
                 if($type === Gender::class)
                 $query->where('optionable_id',$request->gender_id);
                 if($type === Weight::class)
                 $query->where('optionable_id',$request->weight_id);
                 if($type === PregnancyStage::class)
                 $query->where('optionable_id',$request->pregnancy_stage_id);
-                if($type === IllnessSub::class && isset($request->illness_category_id))
+                if($type === IllnessSub::class)
                 $query->whereIn('optionable_id',$request->illness_category_id);
-                if($type === Drug::class && isset($request->drug_drug_id))
+                if($type === Drug::class)
                 $query->whereIn('optionable_id',$request->drug_drug_id);
             })->get()->pluck('effect_id')->unique();
-            return $detail;
+        return $detail;
     }
 
     public function getDoseAnd($variableId,$effectId,$request)
     {
         $dose =null; 
-        $dose_and = NoteDose::with('doseMessage','effect')->with('noteDoseVariables')->where('variable_id',$variableId)->where('effect_id',$effectId)->where('dose_type_id',2)->orderBy('priority')->get();
+        $dose_and = NoteDose::with('doseMessage','effect','noteDoseVariables')->where('variable_id',$variableId)->where('effect_id',$effectId)->where('dose_type_id',2)->orderBy('priority')->get();
         foreach($dose_and as $and){
             $check = $this->checkAnd($and,$request);
            if($check){
@@ -196,17 +203,17 @@ class AlgorithmController extends Controller
                 [Age::class,Gender::class,Weight::class,PregnancyStage::class,IllnessSub::class,Drug::class],
                 function ($query,$type) use ($request){
                     if($type === Age::class)
-                    $query->where('variableable_id',$request->age_id);
+                        $query->where('variableable_id',$request->age_id);
                     if($type === Gender::class)
-                    $query->where('variableable_id',$request->gender_id);
+                        $query->where('variableable_id',$request->gender_id);
                     if($type === Weight::class)
-                    $query->where('variableable_id',$request->weight_id);
+                        $query->where('variableable_id',$request->weight_id);
                     if($type === PregnancyStage::class)
-                    $query->where('variableable_id',$request->pregnancy_stage_id);
+                        $query->where('variableable_id',$request->pregnancy_stage_id);
                     if($type === IllnessSub::class && isset($request->illness_category_id))
-                    $query->whereIn('variableable_id',$request->illness_category_id);
+                        $query->whereIn('variableable_id',$request->illness_category_id);
                     if($type === Drug::class && isset($request->drug_drug_id))
-                    $query->whereIn('variableable_id',$request->drug_drug_id);
+                        $query->whereIn('variableable_id',$request->drug_drug_id);
                 });
         })->orderBy('priority')->get();
         return $dose;
