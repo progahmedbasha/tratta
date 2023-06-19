@@ -45,6 +45,7 @@ use App\Http\Controllers\Dashboard\PredoseFourthQuestionController;
 use App\Http\Controllers\Dashboard\TradeKeyController;
 use App\Http\Controllers\Web\SearchController;
 use App\Http\Controllers\Web\AlgorithmController;
+use App\Http\Controllers\Web\ConditionAlgorithmController;
 
 /*
 |--------------------------------------------------------------------------
@@ -71,7 +72,8 @@ Route::group(['prefix' => 'customer',],function () {
     Route::post('drugs-search',[SearchController::class,'searchDrugDrugs'])->name('drugs-search');
     Route::post('dose-note-result',[AlgorithmController::class,'dose_note_result'])->name('dose-note-result');
     Route::post('drug-pregnancy-result',[AlgorithmController::class,'drugPregnancy'])->name('drug-pregnancy-result');
-    Route::post('calculator',[AlgorithmController::class,'calculator'])->name('calculator');
+    Route::post('calculator',[ConditionAlgorithmController::class,'calculator'])->name('calculator');
+    Route::post('recheck-drugs',[ConditionAlgorithmController::class,'recheckDrugs'])->name('recheck-drugs');
 });
 
 // Route::get('/dashboard', function () {

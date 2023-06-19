@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Scr extends Model
 {
     use HasFactory;
+
+    public function illnessSub()
+    {
+        return $this->belongsTo(IllnessSub::class);
+    }
 }

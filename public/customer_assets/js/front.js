@@ -405,6 +405,14 @@ function calculator(age, scr) {
             },
             success: function(response) {
                 document.getElementById("resultBtn").innerHTML = response.result;
+                if(response.scr != ""){
+                    if(!illness_category_id.includes(response.scr.illness_sub_id))
+                        insertIllnessObjVal(response.scr.illness_sub);
+                }
+                if(response.calc_result != ""){
+                    if(!illness_category_id.includes(response.calc_result.illness_sub_id))
+                        insertIllnessObjVal(response.calc_result.illness_sub);
+                }
                 if (response.age.id != age_id)
                     setAge();
             }
@@ -610,5 +618,35 @@ function setDrugObj() {
     {
         var name = drugObj[key].name;
         $("#drug_list").append("<li class='mb-2' >"+name+"   <span style='color:red;cursor: pointer;float:right;margin-right:5px;' onclick='deleteDrugElement("+key+")'>X</span></li>");
+    }
+}
+
+function recheckDrugs() {
+    if(drug_drug_id.length > 1){
+        var url = "recheck-drugs";
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            url: url,
+            type: 'post',
+            cache: false,
+            async: true,
+            data: {
+                drug_drug_id : drug_drug_id
+            },
+            success: function(response) {
+                if(response.recheck_results != ""){
+                    $note = "";
+                    response.recheck_results.forEach(hx => {
+                        $note += '<p style="color:'+hx.interaction_severity.color+';">'+hx.note + '</p>';
+                    });
+                    document.getElementById("recheck").innerHTML = $note;
+                    $('#myModal_recheck').modal('show');
+                }
+            }
+        }); 
     }
 }
