@@ -1,6 +1,16 @@
  
 @import "https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css";
 
+@font-face {
+  font-family: 'Inkfree';
+  src: url('../font/Inkfree.ttf') format('truetype'); /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
+} 
+
+@font-face {
+  font-family: 'BreadIdol';
+  src: url('../font/BreadIdol.ttf') format('truetype'); /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
+} 
+
 body {
   background: #F7F6F7;
   font-family: 'Inkfree';
@@ -10,6 +20,184 @@ body {
 h1, h2, h3, h4, h5, h6, p {
   font-family: 'Inkfree';
 }
+
+
+
+
+:root {
+--animate-duration: 800ms;
+--animate-delay: 0.9s;
+}
+
+#pc1 {
+display: inline-block;
+transition        : all .3s ease;
+-webkit-transition: all .3s ease;
+-webkit-animation-duration: 1s;
+          animation-duration: 1s; 
+          -webkit-animation-fill-mode: both; 
+          animation-fill-mode: both; 
+}
+
+#pc1.hide {
+display: none;
+transition        : all .3s ease;
+-webkit-transition: all .3s ease;
+-webkit-animation-duration: 1s;
+          animation-duration: 1s; 
+          -webkit-animation-fill-mode: both; 
+          animation-fill-mode: both; 
+
+}
+
+#pc2 {
+display: inline-block;
+transition        : all .3s ease;
+-webkit-transition: all .3s ease;
+-webkit-animation-duration: 1s;
+          animation-duration: 1s; 
+          -webkit-animation-fill-mode: both; 
+          animation-fill-mode: both; 
+}
+
+#pc2.hide {
+display: none;
+transition        : all .3s ease;
+-webkit-transition: all .3s ease;
+-webkit-animation-duration: 1s;
+          animation-duration: 1s; 
+          -webkit-animation-fill-mode: both; 
+          animation-fill-mode: both; 
+
+}
+
+#pc3 {
+display: inline-block;
+transition        : all .3s ease;
+-webkit-transition: all .3s ease;
+-webkit-animation-duration: 1s;
+          animation-duration: 1s; 
+          -webkit-animation-fill-mode: both; 
+          animation-fill-mode: both; 
+}
+
+#pc3.hide {
+display: none;
+transition        : all .3s ease;
+-webkit-transition: all .3s ease;
+-webkit-animation-duration: 1s;
+          animation-duration: 1s; 
+          -webkit-animation-fill-mode: both; 
+          animation-fill-mode: both; 
+
+}
+
+.item-style {
+top: 72% !important;
+width: 80px !important;
+font-size:10px !important;
+border-radius:5px !important;
+background-color: #ED4756 !important;
+line-height:20px !important;
+height:20px !important;
+Color:white !important;
+margin-left: -40px !important; 
+box-shadow: 0 4px 7px -1px rgba(0, 0, 0, 0.11), 0 2px 4px -1px rgba(0, 0, 0, 0.07);
+cursor: pointer;
+}
+
+.triangle-up {
+width: 0;
+height: 0;
+border-left: 5px solid transparent;
+border-right: 5px solid transparent;
+border-bottom: 10px solid #ED4756;
+display: flex;
+position: absolute;
+top: -4px;
+left: 35px;
+}
+
+
+
+.scroll::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scroll::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+  border-radius: 10px;
+}
+
+.scroll::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+}
+
+
+.form-group .form-control-icon-search-illness {
+position: absolute;
+  z-index: 2;
+  display: block;
+  width: 2.375rem;
+  height: 2.375rem;
+  line-height: 2.375rem;
+  text-align: center;
+  color: #aaa;
+  left: 0;
+  top: -5px;
+  padding-left: 0.25rem;
+}
+
+.form-group .form-control-icon-reset-illness {
+  position: absolute;
+  z-index: 11111111111111;
+  display: block;
+  width: 2.375rem;
+  height: 2.375rem;
+  line-height: 2.375rem;
+  text-align: center;
+  color: #aaa;
+  right: 0;
+  top: -3px;
+  font-size: 15px;
+  padding-right: 0.25rem;
+}
+
+.autocomplete #illnessSearchResult {
+  list-style: none;
+  padding: 0px;
+  width: 100%;
+  position: absolute;
+  margin: 0;
+  background: white;
+}
+
+.autocomplete #illnessSearchResult li {
+  background: #F2F3F4;
+  padding: 4px;
+  margin-bottom: 1px;
+  font-size:12px;
+}
+
+.autocomplete #drugsSearchResult {
+  list-style: none;
+  padding: 0px;
+  width: 100%;
+  position: absolute;
+  margin: 0;
+  background: white;
+}
+
+.autocomplete #drugsSearchResult li {
+  background: #F2F3F4;
+  padding: 4px;
+  margin-bottom: 1px;
+  font-size:12px;
+}
+
+
+
 
 .circular-menu {
   width: 250px;

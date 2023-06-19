@@ -17,193 +17,6 @@
 <script>  
     new WOW().init();  
 </script>  
-
-<style>
-@font-face {
-    font-family: 'Inkfree';
-    src: url('{{ url('customer_assets/font/Inkfree.ttf') }}') format('truetype'); /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
-} 
-
-@font-face {
-    font-family: 'BreadIdol';
-    src: url('{{ url('customer_assets/font/BreadIdol.ttf') }}') format('truetype'); /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
-} 
-
-
-:root {
-  --animate-duration: 800ms;
-  --animate-delay: 0.9s;
-}
-
-#pc1 {
-  display: inline-block;
-  transition        : all .3s ease;
-  -webkit-transition: all .3s ease;
-  -webkit-animation-duration: 1s;
-            animation-duration: 1s; 
-            -webkit-animation-fill-mode: both; 
-            animation-fill-mode: both; 
-}
-
-#pc1.hide {
-  display: none;
-  transition        : all .3s ease;
-  -webkit-transition: all .3s ease;
-  -webkit-animation-duration: 1s;
-            animation-duration: 1s; 
-            -webkit-animation-fill-mode: both; 
-            animation-fill-mode: both; 
-
-}
-
-#pc2 {
-  display: inline-block;
-  transition        : all .3s ease;
-  -webkit-transition: all .3s ease;
-  -webkit-animation-duration: 1s;
-            animation-duration: 1s; 
-            -webkit-animation-fill-mode: both; 
-            animation-fill-mode: both; 
-}
-
-#pc2.hide {
-  display: none;
-  transition        : all .3s ease;
-  -webkit-transition: all .3s ease;
-  -webkit-animation-duration: 1s;
-            animation-duration: 1s; 
-            -webkit-animation-fill-mode: both; 
-            animation-fill-mode: both; 
-
-}
-
-#pc3 {
-  display: inline-block;
-  transition        : all .3s ease;
-  -webkit-transition: all .3s ease;
-  -webkit-animation-duration: 1s;
-            animation-duration: 1s; 
-            -webkit-animation-fill-mode: both; 
-            animation-fill-mode: both; 
-}
-
-#pc3.hide {
-  display: none;
-  transition        : all .3s ease;
-  -webkit-transition: all .3s ease;
-  -webkit-animation-duration: 1s;
-            animation-duration: 1s; 
-            -webkit-animation-fill-mode: both; 
-            animation-fill-mode: both; 
-
-}
-
-.item-style {
-  top: 72% !important;
-  width: 80px !important;
-  font-size:10px !important;
-  border-radius:5px !important;
-  background-color: #ED4756 !important;
-  line-height:20px !important;
-  height:20px !important;
-  Color:white !important;
-  margin-left: -40px !important; 
-  box-shadow: 0 4px 7px -1px rgba(0, 0, 0, 0.11), 0 2px 4px -1px rgba(0, 0, 0, 0.07);
-  cursor: pointer;
-}
-
-.triangle-up {
-	width: 0;
-	height: 0;
-	border-left: 5px solid transparent;
-	border-right: 5px solid transparent;
-	border-bottom: 10px solid #ED4756;
-  display: flex;
-  position: absolute;
-  top: -4px;
-  left: 35px;
-}
-
-
-
-.scroll::-webkit-scrollbar {
-    width: 8px;
-}
-
-.scroll::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
-    border-radius: 10px;
-}
-
-.scroll::-webkit-scrollbar-thumb {
-    border-radius: 10px;
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
-}
-
-
-.form-group .form-control-icon-search-illness {
-  position: absolute;
-    z-index: 2;
-    display: block;
-    width: 2.375rem;
-    height: 2.375rem;
-    line-height: 2.375rem;
-    text-align: center;
-    color: #aaa;
-    left: 0;
-    top: -5px;
-    padding-left: 0.25rem;
-}
-
-.form-group .form-control-icon-reset-illness {
-    position: absolute;
-    z-index: 11111111111111;
-    display: block;
-    width: 2.375rem;
-    height: 2.375rem;
-    line-height: 2.375rem;
-    text-align: center;
-    color: #aaa;
-    right: 0;
-    top: -3px;
-    font-size: 15px;
-    padding-right: 0.25rem;
-}
-
-.autocomplete #illnessSearchResult {
-    list-style: none;
-    padding: 0px;
-    width: 100%;
-    position: absolute;
-    margin: 0;
-    background: white;
-}
-
-.autocomplete #illnessSearchResult li {
-    background: #F2F3F4;
-    padding: 4px;
-    margin-bottom: 1px;
-    font-size:12px;
-}
-
-.autocomplete #drugsSearchResult {
-    list-style: none;
-    padding: 0px;
-    width: 100%;
-    position: absolute;
-    margin: 0;
-    background: white;
-}
-
-.autocomplete #drugsSearchResult li {
-    background: #F2F3F4;
-    padding: 4px;
-    margin-bottom: 1px;
-    font-size:12px;
-}
-
-</style>
-
 </head>
 <body>
 
@@ -393,7 +206,7 @@
   <div class="row justify-content-center" style="display:none;" id="illness_drug_list">
   <div class="col-md-4">
     <div style="background: white;  border-radius: 38px;width:350px;height:300px;position:absolute;z-index:22;padding:10px;">
-    <img src="{{ url('customer_assets/images/Titration.svg') }}" style="position: absolute; top: 10px; right: 60px;">
+    <img src="{{ url('customer_assets/images/recheck_drug.svg') }}" style="width:30px;position: absolute; top: 15px; right: 70px;">
         <!-- Nav tabs -->
         <center>
 <ul class="nav nav-tabs" style="background: #CFBEB6; border-radius: 9px;width: fit-content; font-size: 10px;padding: 2px;">
@@ -489,56 +302,19 @@
   
 
 
+<!------------------------------------------------------------------------------------->
+<!---------------------------------Pre Dose Q Section---------------------------------->
+<!------------------------------------------------------------------------------------->
 
 
-
-<div style="overflow: hidden;max-height:380px;">
-  <img   src="{{ url('customer_assets/images/bg3.svg') }}">
-  <img  style="float:right;" src="{{ url('customer_assets/images/bg4.svg') }}">
-</div>
+          @include("customer.pre_dose_q")
 
 
-<div class="row justify-content-center" style="margin-top:-100px;">
-  
-<div class="col-md-12 text-center" style="margin-top:-80px;">
-  <img src="{{ url('customer_assets/images/Foot_line.svg') }}">
-</div>
+<!------------------------------------------------------------------------------------->
+<!---------------------------------Footer Section-------------------------------------->
+<!------------------------------------------------------------------------------------->
 
-  <div class="col-md-3" >
-    <span style="padding-left:80px;">Download</span>
-     <a  href="javascript:void(0)" style="padding-left:20px;"> <img src="{{ url('customer_assets/images/apple.svg') }}" ></a>
-    <a  href="javascript:void(0)" style="padding-left:20px;"> <img src="{{ url('customer_assets/images/googleplay.svg') }}" ></a>
-  </div>
-
-  <div class="col-md-6 text-center" style="margin-top:-60px;">
-
-     <img class="center" src="{{ url('customer_assets/images/footer_logo.svg') }}" >
-     <br>
-     <form>
-      <div class="form-group">
-          <span class="fa fa-envelope form-control-icon2"></span>
-          <button class="custom-search-botton form-control-icon3" type="button" >Subscribe</button>
-          <input type="text" class="form-control" placeholder="Your E-mail" style="border-radius:60px;height:60px;">
-      </div> 
-    </form>
-
-    <!--<div class="custom-search">
-      <input type="text" class="custom-search-input" placeholder="Enter your email">
-      <button class="custom-search-botton" type="submit">Subscribe</button>  
-    </div>-->
-  </div>
-
-  <div class="col-md-3 text-center">
-      <span style="padding-left:100px;padding-right:20px;">Contacts</span>
-      <img src="{{ url('customer_assets/images/facebook.svg') }}" style="padding-right:20px;">
-      <img src="{{ url('customer_assets/images/youtube.svg') }}" style="padding-right:20px;">
-  </div>
-
-</div>
-<br>
-
-
-<br>
+          @include("customer.footer") 
 
 
 </div>
