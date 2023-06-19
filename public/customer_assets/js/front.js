@@ -305,6 +305,7 @@ function setGender(pregnancy = null) {
         document.getElementById("femaleSubMenu").style.display = 'none';
         clearPregnancy(pregnancy);
     }
+    preDoseQ("Gender",gender_id);
     doseNoteResult();
 }
 
@@ -420,6 +421,25 @@ function calculator(age, scr) {
     }else{
         alert('You should select weight first');
     }
+}
+
+function kidneys() {
+    var url = "kidneys";
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        url: url,
+        type: 'post',
+        cache: false,
+        async: true,
+        success: function(response) {
+            if(!illness_category_id.includes(response.result.illness_sub_id))
+                insertIllnessObjVal(response.result.illness_sub);
+        }
+    }); 
 }
 
 function additionalMessage(open,message = null) {
@@ -649,4 +669,57 @@ function recheckDrugs() {
             }
         }); 
     }
+}
+
+function preDoseQ(model,id) {
+    if(drug_id != null){
+        var url = "preDoseQ";
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            url: url,
+            type: 'post',
+            cache: false,
+            async: true,
+            data: {
+                drug_id : drug_id,
+                model : model,
+                id : id
+            },
+            success: function(response) {
+                if(response.questions.first_questions.length > 0)
+                    firstQuestions(response.questions.first_questions);
+                if(response.questions.second_questions.length > 0)
+                    secondQuestions(response.questions.second_questions);
+                if(response.questions.third_questions.length > 0)
+                    thirdQuestions(esponse.questions.third_questions);
+                if(response.questions.fourth_questions.length > 0)
+                    fourthQuestions(response.questions.fourth_questions);
+            }
+        }); 
+    }
+}
+
+function firstQuestions(questions) {
+    var message = "";
+    questions.forEach(question => {
+        message += '<p>'+question.text+'</p>';
+    });
+    document.getElementById('question1').innerHTML = message;
+    $('#myModal_q1').modal('show');
+}
+
+function secondQuestions($questions) {
+    console.log("q2"); 
+}
+
+function thirdQuestions($questions) {
+    console.log("q3"); 
+}
+
+function fourthQuestions($questions) {
+    console.log("q4"); 
 }

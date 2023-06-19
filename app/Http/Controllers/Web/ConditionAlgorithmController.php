@@ -12,7 +12,9 @@ use App\Models\Scr;
 use App\Models\CrclRange;
 use App\Models\HxDrug;
 use App\Models\HxDrugValue;
-
+use App\Models\Kidney;
+use App\Models\PredoseVariable;
+use App\Models\Predose;
 
 class ConditionAlgorithmController extends Controller
 {   
@@ -43,5 +45,20 @@ class ConditionAlgorithmController extends Controller
         $hx_ids = array_intersect($value1,$value2);
         $hx = HxDrug::with('interactionSeverity')->whereIn('id',$hx_ids)->get();
         return response()->json(['recheck_results' => $hx, 'code' => '200']);
+    }
+
+    public function kidneys() {
+        $result = Kidney::with('illnessSub')->first();
+        return response()->json(['result' => $result, 'code' => '200']);
+    }
+
+    public function preDoseQ(Request $request) {
+        $model = "App\Models\\" . $request->model;
+        $var = PredoseVariable::where('variableable_type',$model)->where('variableable_id',$request->id)
+        ->whereHas('predose',function ($q) use ($request) {
+            $q->where('drug_id',$request->drug_id);
+        })->first();
+        $questions = Predose::with('firstQuestions','secondQuestions','thirdQuestions','fourthQuestions')->find($var->predose_id);
+        return response()->json(['questions' => $questions, 'code' => '200']);
     }
 }

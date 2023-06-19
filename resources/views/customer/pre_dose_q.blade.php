@@ -28,7 +28,6 @@
 </style>
 
 <center>
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal_q1">Q1</button>
 <!-- The Modal Q1-->
 <div class="modal fade" id="myModal_q1" >
   <div class="modal-dialog modal-dialog-centered">
@@ -39,10 +38,10 @@
             Guide
         </div>
         <br>
-        <p>
+        <div id="question1">
             You can put the result here and it will be appear in the pop up
             You can put the result here and it will be appear in the pop up
-        </p>
+        </div>
         <button data-bs-dismiss="modal" style="background: #CFBEB6;border-radius: 27px;height: 50px; width: 100px;border:none;color:white;">Okay</button>
       </div>
     </div>

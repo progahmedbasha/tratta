@@ -74,6 +74,8 @@ Route::group(['prefix' => 'customer',],function () {
     Route::post('drug-pregnancy-result',[AlgorithmController::class,'drugPregnancy'])->name('drug-pregnancy-result');
     Route::post('calculator',[ConditionAlgorithmController::class,'calculator'])->name('calculator');
     Route::post('recheck-drugs',[ConditionAlgorithmController::class,'recheckDrugs'])->name('recheck-drugs');
+    Route::post('kidneys',[ConditionAlgorithmController::class,'kidneys'])->name('kidneys');
+    Route::post('preDoseQ',[ConditionAlgorithmController::class,'preDoseQ'])->name('preDoseQ');
 });
 
 // Route::get('/dashboard', function () {

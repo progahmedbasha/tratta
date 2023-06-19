@@ -168,7 +168,7 @@
             <input type="text" id="scrField" style="background: #F1F3F6;width:35px;height:35px;border-radius:35px;display:inline-block;line-height:35px;text-align:center;border:none;outline: none;" placeholder="S.cr">
             <span id="resultBtn" onclick="resultCalculate()" style="background: #43BD8C;width:75px;height:35px;border-radius:18px;display:inline-block;line-height:35px;color:white;cursor: pointer;"><small style="font-size:12px;">Result</small></span>
             <span onclick="clearCalculate()" style="background: #F1F3F6;width:35px;height:35px;border-radius:35px;display:inline-block;line-height:35px;cursor: pointer;"><small style="font-size:20px;"><span class="fa fa-trash-o"></span></small></span>
-            <span style="background: black;width:35px;height:35px;border-radius:35px;display:inline-block;line-height:35px;color:white;"><small style="font-size:20px;">Q</small></span>
+            <span style="background: black;width:35px;height:35px;border-radius:35px;display:inline-block;line-height:35px;color:white;" onclick="kidneys()"><small style="font-size:20px;">Q</small></span>
         </div>
       </div>
 
