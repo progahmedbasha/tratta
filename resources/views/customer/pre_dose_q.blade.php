@@ -183,16 +183,15 @@
 
 <!------------------------------------------------Re-check----------------------------------------------------------------->
 <center>
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal_recheck">R</button>
 <!-- The Modal Recheck-->
 <div class="modal fade" id="myModal_recheck" >
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content" style="border-radius:10px;">
       <!-- Modal body -->
       <div class="modal-body">
-        <p class="mt-5">
+        <div class="mt-5" id="recheck">
           No significant drug-drug interactions found in your patient’s past drug history
-        </p>
+        </div>
         <button data-bs-dismiss="modal" style="background: #BEDE7A;border-radius: 27px;height: 50px; width: 100px;border:none;">Okay</button>
       </div>
     </div>

@@ -206,7 +206,7 @@
   <div class="row justify-content-center" style="display:none;" id="illness_drug_list">
   <div class="col-md-4">
     <div style="background: white;  border-radius: 38px;width:350px;height:300px;position:absolute;z-index:22;padding:10px;">
-    <img src="{{ url('customer_assets/images/recheck_drug.svg') }}" style="width:30px;position: absolute; top: 15px; right: 70px;">
+    <img src="{{ url('customer_assets/images/recheck_drug.svg') }}" style="width:30px;position: absolute; top: 15px; right: 70px;" onclick="recheckDrugs()">
         <!-- Nav tabs -->
         <center>
 <ul class="nav nav-tabs" style="background: #CFBEB6; border-radius: 9px;width: fit-content; font-size: 10px;padding: 2px;">
