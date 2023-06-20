@@ -9,6 +9,7 @@ class PredoseThirdQuestion extends Model
 {
     use HasFactory;
     public $guarded = [];
+    
     public function variableable()
     {
         return $this->morphTo();

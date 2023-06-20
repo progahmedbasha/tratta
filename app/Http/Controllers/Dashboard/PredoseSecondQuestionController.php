@@ -85,7 +85,6 @@ class PredoseSecondQuestionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        return $request;
         $predose= PredoseSecondQuestion::findOrFail($id);
         $predose->label = $request->label;
         $predose->unit = $request->unit;
