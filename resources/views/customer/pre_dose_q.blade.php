@@ -50,7 +50,6 @@
 </center>
 
 <center>
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal_q2">Q2</button>
 <!-- The Modal Q2-->
 <div class="modal fade" id="myModal_q2" >
   <div class="modal-dialog modal-dialog-centered">
@@ -63,10 +62,13 @@
         <br>
         <div class="mb-3">
             <form>
-                <span class="me-3">TSH</span><input type="text" placeholder="" name="range" style="width:100px;"><span class="ms-3">mIU/L</span>
+                <span class="me-3" id="q2_lable">TSH1</span>
+                <input type="hidden" id="q2_id">
+                <input type="text" placeholder="" id="q2_value" name="range" style="width:100px;">
+                <span class="ms-3" id="q2_unit">mIU/L1</span>
             </form>
         </div>
-        <button data-bs-dismiss="modal" style="background: #CFBEB6;border-radius: 27px;height: 50px; width: 100px;border:none;color:white;">Go</button>
+        <button style="background: #CFBEB6;border-radius: 27px;height: 50px; width: 100px;border:none;color:white;" onclick="question2Result()">Go</button>
       </div>
     </div>
   </div>
@@ -74,7 +76,6 @@
 </center>
 
 <center>
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal_q3">Q3</button>
 <!-- The Modal Q3-->
 <div class="modal fade" id="myModal_q3" >
   <div class="modal-dialog modal-dialog-centered">
@@ -87,18 +88,11 @@
         <br>
         <div class="mb-3">
         <div class="scroll mt-3" style="overflow-x: hidden;  overflow-y: scroll;height:200px;">
-            <ul class="ms-5" style="list-style: none;padding-left: 0rem;text-align: left;" >
-                <li class="mb-3"><span>item 11111111111</span> <input type="radio" class="form-check-input pull-right me-5" id="radio11" name="optradio" value="option1" ></li>
-                <li class="mb-3">item 222222222 <input type="radio" class="form-check-input pull-right me-5" id="radio12" name="optradio" value="option1" ></li>
-                <li class="mb-3">item 33333333 <input type="radio" class="form-check-input pull-right me-5" id="radio13" name="optradio" value="option1" ></li>
-                <li class="mb-3">item 4444444 <input type="radio" class="form-check-input pull-right me-5" id="radio14" name="optradio" value="option1" ></li>
-                <li class="mb-3">item 5555 <input type="radio" class="form-check-input pull-right me-5" id="radio15" name="optradio" value="option1" ></li>
-                <li class="mb-3">item 6666666666 <input type="radio" class="form-check-input pull-right me-5" id="radio16" name="optradio" value="option1" ></li>
-                <li class="mb-3">item 7 <input type="radio" class="form-check-input pull-right me-5" id="radio17" name="optradio" value="option1" ></li>
+            <ul class="ms-5" style="list-style: none;padding-left: 0rem;text-align: left;" id="question3">
             </ul>
         </div>
         </div>
-        <button data-bs-dismiss="modal" style="background: #CFBEB6;border-radius: 27px;height: 50px; width: 100px;border:none;color:white;">Go</button>
+        <button style="background: #CFBEB6;border-radius: 27px;height: 50px; width: 100px;border:none;color:white;" onclick="question3Result()">Go</button>
       </div>
     </div>
   </div>

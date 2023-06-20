@@ -9,6 +9,7 @@ class PredoseQuestionRange extends Model
 {
     use HasFactory;
     public $guarded = [];
+    
     public function variableable()
     {
         return $this->morphTo();
@@ -17,4 +18,9 @@ class PredoseQuestionRange extends Model
     // {
     //     return $this->belongsTo(PredoseSecondQuestion::class);
     // }
+
+    public function illnessSub()
+    {
+        return $this->belongsTo(IllnessSub::class);
+    }
 }
