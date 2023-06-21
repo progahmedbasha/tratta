@@ -130,4 +130,9 @@ class SearchController extends Controller
         return response()->json(['data' => $data, 'code' => '200']);
     }
 
+    function pregnancyStage() {
+        $stages = PregnancyStage::all();
+        return response()->json(['stages' => $stages, 'code' => '200']);
+    }
+
 }

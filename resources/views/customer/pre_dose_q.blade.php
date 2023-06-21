@@ -100,7 +100,6 @@
 </center>
 
 <center>
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal_q4">Q4</button>
 <!-- The Modal Q4-->
 <div class="modal fade" id="myModal_q4" >
   <div class="modal-dialog modal-dialog-centered">
@@ -113,55 +112,7 @@
         <br>
         <div class="mb-3">
             <div class="scroll mt-3" style="overflow-x: hidden;  overflow-y: scroll;height:200px;">
-            <ul class="mymenu nav flex-column ms-5" style="text-align:left;">
-              <li class="nav-item"> 
-                  <a class="nav-link " href="#submenu1" data-toggle="collapse" data-target="#submenu1" aria-expanded="true">
-                      <span><b>Menu Item</b></span>
-                  </a>
-                  <div class="collapse show" id="submenu1" aria-expanded="true">
-                      <ul class="flex-column nav">
-                          <li class="nav-item">
-                              <a class="nav-link py-0" href="#">
-                                  <span>Submenu Item</span> <input type="radio" class="form-check-input pull-right me-5" id="radioq11" name="optradio" value="option1" >
-                              </a>
-                          </li>
-                          <li class="nav-item">
-                              <a class="nav-link py-0" href="#">
-                                  <span>Submenu Item</span> <input type="radio" class="form-check-input pull-right me-5" id="radioq112" name="optradio" value="option1" >
-                              </a>
-                          </li>
-                          <li class="nav-item">
-                              <a class="nav-link py-0" href="#">
-                                  <span>Submenu Item</span> <input type="radio" class="form-check-input pull-right me-5" id="radioq113" name="optradio" value="option1" >
-                              </a>
-                          </li>
-                      </ul>
-                  </div>
-              </li>
-              <li class="nav-item"> 
-                  <a class="nav-link " href="#submenu2" data-toggle="collapse" data-target="#submenu2">
-                      <span><b>Menu Item</b></span>
-                  </a>
-                  <div class="collapse show" id="submenu2" aria-expanded="true">
-                      <ul class="flex-column nav">
-                          <li class="nav-item">
-                              <a class="nav-link py-0" href="#">
-                                  <span>Submenu Item</span> <input type="checkbox" class="form-check-input pull-right me-5" id="radio12" name="optradio" value="option1" >
-                              </a> 
-                          </li>
-                          <li class="nav-item">
-                              <a class="nav-link py-0" href="#">
-                                  <span>Submenu Item</span> <input type="radio" class="form-check-input pull-right me-5" id="radio1112" name="optradio" value="option1" >
-                              </a>
-                          </li>
-                          <li class="nav-item">
-                              <a class="nav-link py-0" href="#">
-                                  <span>Submenu Item</span> <input type="checkbox" class="form-check-input pull-right me-5" id="radio1113" name="optradio" value="option1" >
-                              </a>
-                          </li>
-                      </ul>
-                  </div>
-              </li>
+            <ul class="mymenu nav flex-column ms-5" style="text-align:left;" id="question4">
           </ul>
             </div>
         </div>

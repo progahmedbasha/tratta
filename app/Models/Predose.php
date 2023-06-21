@@ -27,8 +27,8 @@ class Predose extends Model
         return $this->hasMany(PredoseThirdQuestion::class);
     }
 
-    public function fourthQuestions() {
-        return $this->hasMany(PredoseFourthQuestion::class);
+    public function fourthQuestion() {
+        return $this->hasOne(PredoseFourthQuestion::class);
     }
 
 }

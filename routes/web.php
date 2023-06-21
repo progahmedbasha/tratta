@@ -70,6 +70,7 @@ Route::group(['prefix' => 'customer',],function () {
     Route::post('search-indications',[SearchController::class,'drugIndications'])->name('search_indications');
     Route::post('illness-search',[SearchController::class,'searchIllness'])->name('illness-search');
     Route::post('drugs-search',[SearchController::class,'searchDrugDrugs'])->name('drugs-search');
+    Route::post('pregnancy-stage',[SearchController::class,'pregnancyStage'])->name('pregnancy-stage');
     Route::post('dose-note-result',[AlgorithmController::class,'dose_note_result'])->name('dose-note-result');
     Route::post('drug-pregnancy-result',[AlgorithmController::class,'drugPregnancy'])->name('drug-pregnancy-result');
     Route::post('calculator',[ConditionAlgorithmController::class,'calculator'])->name('calculator');
@@ -77,6 +78,7 @@ Route::group(['prefix' => 'customer',],function () {
     Route::post('kidneys',[ConditionAlgorithmController::class,'kidneys'])->name('kidneys');
     Route::post('preDoseQ',[ConditionAlgorithmController::class,'preDoseQ'])->name('preDoseQ');
     Route::post('question2-result',[ConditionAlgorithmController::class,'question2Result'])->name('question2-result');
+    Route::post('question4-data',[ConditionAlgorithmController::class,'question4Data'])->name('question4-data');
 });
 
 // Route::get('/dashboard', function () {
