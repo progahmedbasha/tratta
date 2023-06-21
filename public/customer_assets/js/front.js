@@ -701,8 +701,8 @@ function preDoseQ(model,id) {
                         secondQuestions(response.questions.second_questions);
                     if(response.questions.third_questions.length > 0)
                         thirdQuestions(response.questions.third_questions);
-                    if(response.questions.fourth_questions.length > 0)
-                        fourthQuestions(response.questions.fourth_questions);
+                    if(response.questions.fourth_question != null && response.questions.fourth_question != '')
+                        fourthQuestions(response.questions.fourth_question);
                 }
             }
         }); 
@@ -779,7 +779,9 @@ function question3Result(){
         else if(q3_selected.variableable_type == "App\\Models\\Gender" && q3_selected.variableable_id != gender_id)
             setGender();
         else if(q3_selected.variableable_type == "App\\Models\\Weight" && q3_selected.variableable_id!= weight_id)
-            weightSelectedValue(q3_selected.variableable_type);
+            weightSelectedValue(q3_selected.variableable_id);
+        else if(q3_selected.variableable_type == "App\\Models\\PregnancyStage" && q3_selected.variableable_id!= pregnancy_stage_id && gender_id == 2)
+            femaleSelectedValue(getPregnancyStage(),q3_selected.variableable_id);
         else if(q3_selected.variableable_type == "App\\Models\\Drug" && !drug_drug_id.includes(q3_selected.variableable_id))
             insertDrugObjVal(q3_selected.variableable);
         else if(q3_selected.variableable_type == "App\\Models\\IllnessSub" && !illness_category_id.includes(q3_selected.variableable_id))
@@ -787,8 +789,70 @@ function question3Result(){
         q3_options = [];
         $('#myModal_q3').modal('hide');
     }
-  }
+}
 
-function fourthQuestions(questions) {
-    console.log("q4"); 
+function getPregnancyStage(){
+    var url = "pregnancy-stage";
+    var stages;
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        url: url,
+        type: 'post',
+        cache: false,
+        async: false,
+        success: function(response){
+            stages = response.stages;
+        }
+    }); 
+    return stages;
+}
+
+function fourthQuestions(question) {
+    var url = "question4-data";
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        url: url,
+        type: 'post',
+        cache: false,
+        async: true,
+        data: {
+            id : question.id,
+        },
+        success: function(response) {
+            console.log(response);
+            var row = '';
+            (response.question).forEach(function (q4, i) {
+                if(q4.is_sub == 0){
+                    row += `<li class="nav-item"> 
+                        <a class="nav-link " href="#submenu`+i+`" data-toggle="collapse" data-target="#submenu`+i+`" aria-expanded="true">
+                        <span><b>`+q4.score_label+`</b></span></a>
+                        <div class="collapse show" id="submenu`+i+`" aria-expanded="true">
+                        <ul class="flex-column nav">`;
+                    var cols = '';
+                    (q4.child).forEach(child => {
+                        cols += `<li class="nav-item"><a class="nav-link py-0" href="#">
+                            <span>`+child.score_label+`</span> 
+                            <input type="radio" class="form-check-input pull-right me-5" id="radioq11" name="optradio" value="`+child.id+`" >
+                            </a></li>`;
+                    });
+                    row += cols + `</ul></div></li>`;
+                }else{
+                    row += `<li class="nav-item"><a class="nav-link py-0" href="#"><span>`+q4.score_label+`</span> 
+                        <input type="checkbox" class="form-check-input pull-right me-5" id="radio1113" name="optradio" value="`+q4.id+`" >
+                    </a></li>`;
+                }
+
+                document.getElementById("question4").innerHTML = row;
+            });
+            $('#myModal_q4').modal('show');
+        }
+    }); 
 }

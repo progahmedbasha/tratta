@@ -17,6 +17,7 @@ use App\Models\PredoseVariable;
 use App\Models\Predose;
 use App\Models\PredoseQuestionRange;
 use App\Models\PredoseSecondQuestion;
+use App\Models\FourthQuestionScore;
 
 class ConditionAlgorithmController extends Controller
 {   
@@ -62,8 +63,9 @@ class ConditionAlgorithmController extends Controller
         })->first();
         $questions = null;
         if($var != ''){
-            $questions = Predose::with('firstQuestions','secondQuestions','thirdQuestions','fourthQuestions')->find($var->predose_id);
+            $questions = Predose::with('firstQuestions','secondQuestions','thirdQuestions')->find($var->predose_id);
             $questions->load('thirdQuestions.variableable');
+            $questions->load(['fourthQuestion' => fn ($query) => $query->whereHas('fourthQuestionScore')]);
         }
         return response()->json(['questions' => $questions, 'code' => '200']);
     }
@@ -73,5 +75,10 @@ class ConditionAlgorithmController extends Controller
         $result = PredoseQuestionRange::with('illnessSub')->where('variableable_type',PredoseSecondQuestion::class)->where('variableable_id',$request->q2_id)
         ->where('from', '<=', $request->q2_value)->where('to', '>=', $request->q2_value)->first();
         return response()->json(['result' => $result, 'code' => '200']);
+    }
+    
+    function question4Data(Request $request) {
+        $q4 = FourthQuestionScore::with('child')->where('fourth_question_id',$request->id)->whereNull('parent_id')->orderBy('is_sub')->get();
+        return response()->json(['question' => $q4, 'code' => '200']);
     }
 }
