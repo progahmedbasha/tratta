@@ -116,7 +116,7 @@
           </ul>
             </div>
         </div>
-        <button data-bs-dismiss="modal" style="background: #CFBEB6;border-radius: 27px;height: 50px; width: 100px;border:none;color:white;">Go</button>
+        <button style="background: #CFBEB6;border-radius: 27px;height: 50px; width: 100px;border:none;color:white;" onclick="question4Result()">Go</button>
       </div>
     </div>
   </div>

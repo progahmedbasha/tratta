@@ -856,3 +856,12 @@ function fourthQuestions(question) {
         }
     }); 
 }
+
+function question4Result() {
+    var values = [];
+    if(values.length > 0){
+        
+    }else{
+        alert("Input not valid");
+    }
+}
