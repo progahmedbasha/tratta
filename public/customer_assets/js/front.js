@@ -811,6 +811,9 @@ function getPregnancyStage(){
     return stages;
 }
 
+
+let q4Options = [];
+
 function fourthQuestions(question) {
     var url = "question4-data";
     $.ajaxSetup({
@@ -822,7 +825,7 @@ function fourthQuestions(question) {
         url: url,
         type: 'post',
         cache: false,
-        async: true,
+        async: false,
         data: {
             id : question.id,
         },
@@ -837,16 +840,19 @@ function fourthQuestions(question) {
                         <div class="collapse show" id="submenu`+i+`" aria-expanded="true">
                         <ul class="flex-column nav">`;
                     var cols = '';
+                    let optName = 'optradio'+i;
+                    q4Options.push(optName);
+                    
                     (q4.child).forEach(child => {
                         cols += `<li class="nav-item"><a class="nav-link py-0" href="#">
                             <span>`+child.score_label+`</span> 
-                            <input type="radio" class="form-check-input pull-right me-5" id="radioq11" name="optradio" value="`+child.id+`" >
+                            <input type="radio" class="form-check-input pull-right me-5" name="`+ optName +`" value="`+child.id+`" >
                             </a></li>`;
                     });
                     row += cols + `</ul></div></li>`;
                 }else{
                     row += `<li class="nav-item"><a class="nav-link py-0" href="#"><span>`+q4.score_label+`</span> 
-                        <input type="checkbox" class="form-check-input pull-right me-5" id="radio1113" name="optradio" value="`+q4.id+`" >
+                        <input type="checkbox" class="form-check-input pull-right me-5"  name="checkboxList" value="`+q4.id+`" >
                     </a></li>`;
                 }
 
@@ -855,11 +861,25 @@ function fourthQuestions(question) {
             $('#myModal_q4').modal('show');
         }
     }); 
+
+    console.log(q4Options);
 }
 
 function question4Result() {
-    var values = [];
-    if(values.length > 0){
+    var selectedOptionsID = [];
+    q4Options.forEach(opt => {
+        let res = $("input[name="+ opt +"]:checked").val();
+        selectedOptionsID.push(res);
+    });
+
+    $.each($("input[name='checkboxList']:checked"), function () {
+        console.log($(this).val());
+        selectedOptionsID.push($(this).val());
+    });
+
+    console.log(selectedOptionsID);
+    
+    if(selectedOptionsID.length > 0){
         
     }else{
         alert("Input not valid");
