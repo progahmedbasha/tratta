@@ -830,7 +830,6 @@ function fourthQuestions(question) {
             id : question.id,
         },
         success: function(response) {
-            console.log(response);
             var row = '';
             (response.question).forEach(function (q4, i) {
                 if(q4.is_sub == 0){
@@ -862,7 +861,6 @@ function fourthQuestions(question) {
         }
     }); 
 
-    console.log(q4Options);
 }
 
 function question4Result() {
@@ -873,14 +871,33 @@ function question4Result() {
     });
 
     $.each($("input[name='checkboxList']:checked"), function () {
-        console.log($(this).val());
         selectedOptionsID.push($(this).val());
     });
-
-    console.log(selectedOptionsID);
     
     if(selectedOptionsID.length > 0){
-        
+        var url = "question4-result";
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        url: url,
+        type: 'post',
+        cache: false,
+        async: true,
+        data: {
+            score_id : selectedOptionsID,
+        },
+        success: function(response) {
+            console.log(response);
+            if(response.result != ""){
+                if(!illness_category_id.includes(response.result.illness_sub_id))
+                    insertIllnessObjVal(response.result.illness_sub)
+            }
+            $('#myModal_q4').modal('hide');
+        }
+    }); 
     }else{
         alert("Input not valid");
     }

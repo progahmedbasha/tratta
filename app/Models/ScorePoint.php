@@ -9,6 +9,8 @@ class ScorePoint extends Model
 {
     use HasFactory;
     public $guarded = [];
+
+
     public function age()
     {
         return $this->belongsTo(Age::class,'variableable_id');
@@ -32,5 +34,10 @@ class ScorePoint extends Model
     public function drug()
     {
         return $this->belongsTo(Drug::class,'variableable_id');
+    }
+
+    public function question4Score()
+    {
+        return $this->belongsTo(FourthQuestionScore::class,'fourth_question_score_id');
     }
 }
