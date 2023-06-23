@@ -18,6 +18,8 @@ use App\Models\Predose;
 use App\Models\PredoseQuestionRange;
 use App\Models\PredoseSecondQuestion;
 use App\Models\FourthQuestionScore;
+use App\Models\ScorePoint;
+use App\Models\PredoseFourthQuestion;
 
 class ConditionAlgorithmController extends Controller
 {   
@@ -70,15 +72,24 @@ class ConditionAlgorithmController extends Controller
         return response()->json(['questions' => $questions, 'code' => '200']);
     }
 
-    function question2Result(Request $request) {
+    public function question2Result(Request $request) {
         //dd($request);
         $result = PredoseQuestionRange::with('illnessSub')->where('variableable_type',PredoseSecondQuestion::class)->where('variableable_id',$request->q2_id)
         ->where('from', '<=', $request->q2_value)->where('to', '>=', $request->q2_value)->first();
         return response()->json(['result' => $result, 'code' => '200']);
     }
     
-    function question4Data(Request $request) {
+    public function question4Data(Request $request) {
         $q4 = FourthQuestionScore::with('child')->where('fourth_question_id',$request->id)->whereNull('parent_id')->orderBy('is_sub')->get();
         return response()->json(['question' => $q4, 'code' => '200']);
+    }
+
+    function question4result(Request $request) {
+        $score = ScorePoint::with('question4Score')->whereIn('fourth_question_score_id',$request->score_id)->first();
+        $sum = ScorePoint::whereIn('fourth_question_score_id',$request->score_id)->sum('point');
+        $result = PredoseQuestionRange::with('illnessSub')->where('variableable_type',PredoseFourthQuestion::class)
+        ->where('variableable_id',$score->question4Score->fourth_question_id)
+        ->where('from', '<=', $sum)->where('to', '>=', $sum)->first();
+        return response()->json(['result' => $result, 'code' => '200']);
     }
 }
