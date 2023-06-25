@@ -1,6 +1,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <script src="https://kit.fontawesome.com/d45e7e578e.js" crossorigin="anonymous"></script>
 
+
 <style>
 
   .mymenu .nav-link{
@@ -34,8 +35,9 @@
     <div class="modal-content" style="border-radius:60px;">
       <!-- Modal body -->
       <div class="modal-body">
+        <button  data-bs-dismiss="modal" style="float:right;float: right; background-color: unset; border: unset; color: red;"><i class="fa fa-times" ></i></button>
         <div style="width: 200px; height: 50px; background: #F79EA4; border-radius: 9px;color:white;display: flex; align-items: center; justify-content: center;">
-            Guide
+            Tratta Says
         </div>
         <br>
         <div id="question1">
@@ -56,15 +58,16 @@
     <div class="modal-content" style="border-radius:60px;">
       <!-- Modal body -->
       <div class="modal-body">
+      <button  data-bs-dismiss="modal" style="float:right;float: right; background-color: unset; border: unset; color: red;"><i class="fa fa-times" ></i></button>
         <div style="width: 200px; height: 50px; background: #F79EA4; border-radius: 9px;color:white;display: flex; align-items: center; justify-content: center;">
-            Inform Tratta 1st
+            Tell Tratta 1st
         </div>
         <br>
         <div class="mb-3">
             <form>
                 <span class="me-3" id="q2_lable">TSH1</span>
                 <input type="hidden" id="q2_id">
-                <input type="text" placeholder="" id="q2_value" name="range" style="width:100px;">
+                <input type="text" placeholder="" id="q2_value" name="range" style="width:100px;" data-bs-toggle="popover" data-bs-placement="top" data-bs-content="Content">
                 <span class="ms-3" id="q2_unit">mIU/L1</span>
             </form>
         </div>
@@ -82,8 +85,9 @@
     <div class="modal-content" style="border-radius:60px;">
       <!-- Modal body -->
       <div class="modal-body">
+      <button  data-bs-dismiss="modal" style="float:right;float: right; background-color: unset; border: unset; color: red;"><i class="fa fa-times" ></i></button>
         <div style="width: 200px; height: 50px; background: #F79EA4; border-radius: 9px;color:white;display: flex; align-items: center; justify-content: center;">
-            Radio list
+          Tell Tratta 1st
         </div>
         <br>
         <div class="mb-3">
@@ -106,13 +110,14 @@
     <div class="modal-content" style="border-radius:60px;">
       <!-- Modal body -->
       <div class="modal-body">
+      <button  data-bs-dismiss="modal" style="float:right;float: right; background-color: unset; border: unset; color: red;"><i class="fa fa-times" ></i></button>
         <div style="width: 200px; height: 50px; background: #F79EA4; border-radius: 9px;color:white;display: flex; align-items: center; justify-content: center;">
-            Multi-select Q/Score
+        Tell Tratta 1st
         </div>
         <br>
         <div class="mb-3">
             <div class="scroll mt-3" style="overflow-x: hidden;  overflow-y: scroll;height:200px;">
-            <ul class="mymenu nav flex-column ms-5" style="text-align:left;" id="question4">
+            <ul class="mymenu nav flex-column ms-5 mt-3" style="text-align:left;" id="question4">
           </ul>
             </div>
         </div>
@@ -142,3 +147,7 @@
   </div>
 </div>
 </center>
+
+
+
+

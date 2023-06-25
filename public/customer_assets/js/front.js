@@ -12,7 +12,6 @@ document.querySelector('.menu-button').onclick = function(e) {
     e.preventDefault(); document.querySelector('.circle').classList.toggle('open');
 }
 
-
 //---------------------------------------------------------------------------------------------
 //------------------------search type animation and transition---------------------------------
 //---------------------------------------------------------------------------------------------
@@ -155,6 +154,9 @@ function search(){
 function setDrugs(data){
     $("#searchResult").empty();
     document.getElementById('search_box').value = ((search_type == 1)?data.name_key:data.name);
+
+    preDoseQ("Age",age_id);
+    preDoseQ("Gender",gender_id);
 
     var url = "search-drugs";
     $.ajaxSetup({
@@ -662,14 +664,16 @@ function recheckDrugs() {
                 drug_drug_id : drug_drug_id
             },
             success: function(response) {
+                $note = "";
                 if(response.recheck_results != ""){
-                    $note = "";
                     response.recheck_results.forEach(hx => {
                         $note += '<p style="color:'+hx.interaction_severity.color+';">'+hx.note + '</p>';
                     });
-                    document.getElementById("recheck").innerHTML = $note;
-                    $('#myModal_recheck').modal('show');
+                }else {
+                    $note = '<p>No Interaction</p>';
                 }
+                document.getElementById("recheck").innerHTML = $note;
+                $('#myModal_recheck').modal('show');
             }
         }); 
     }
@@ -715,6 +719,7 @@ function firstQuestions(questions) {
         message += '<p>'+question.text+'</p>';
     });
     document.getElementById('question1').innerHTML = message;
+    $('#myModal_q1').modal({backdrop: 'static', keyboard: false});
     $('#myModal_q1').modal('show');
 }
 
@@ -722,6 +727,7 @@ function secondQuestions(questions) {
     document.getElementById('q2_lable').innerHTML = questions[0].label;
     document.getElementById('q2_unit').innerHTML = questions[0].unit;
     document.getElementById('q2_id').value = questions[0].id;
+    $('#myModal_q2').modal({backdrop: 'static', keyboard: false});
     $('#myModal_q2').modal('show');
 }
 
@@ -765,6 +771,7 @@ function thirdQuestions(questions) {
         q3_value += `<li class="mb-3"><span>`+question.text+`</span> <input type="radio" class="form-check-input pull-right me-5" name="q3_id" value="`+i+`" ></li>`;
     });
     document.getElementById("question3").innerHTML = q3_value;
+    $('#myModal_q3').modal({backdrop: 'static', keyboard: false});
     $('#myModal_q3').modal('show');
 }
 
@@ -811,7 +818,6 @@ function getPregnancyStage(){
     return stages;
 }
 
-
 let q4Options = [];
 
 function fourthQuestions(question) {
@@ -857,6 +863,7 @@ function fourthQuestions(question) {
 
                 document.getElementById("question4").innerHTML = row;
             });
+            $('#myModal_q4').modal({backdrop: 'static', keyboard: false});
             $('#myModal_q4').modal('show');
         }
     }); 
@@ -895,6 +902,21 @@ function question4Result() {
                 if(!illness_category_id.includes(response.result.illness_sub_id))
                     insertIllnessObjVal(response.result.illness_sub)
             }
+            (response.variables).forEach(variable => {
+                if(variable.variableable_type == "App\\Models\\Age" && variable.variableable_id != age_id)
+                    setAge();
+                else if(variable.variableable_type == "App\\Models\\Gender" && variable.variableable_id != gender_id)
+                    setGender();
+                else if(variable.variableable_type == "App\\Models\\Weight" && variable.variableable_id!= weight_id)
+                    weightSelectedValue(variable.variableable_id);
+                else if(variable.variableable_type == "App\\Models\\PregnancyStage" && variable.variableable_id!= pregnancy_stage_id && gender_id == 2)
+                    femaleSelectedValue(getPregnancyStage(),variable.variableable_id);
+                else if(variable.variableable_type == "App\\Models\\Drug" && !drug_drug_id.includes(variable.variableable_id))
+                    insertDrugObjVal(variable.variableable);
+                else if(variable.variableable_type == "App\\Models\\IllnessSub" && !illness_category_id.includes(variable.variableable_id))
+                    insertIllnessObjVal(variable.variableable);
+            });
+            q4Options = [];
             $('#myModal_q4').modal('hide');
         }
     }); 

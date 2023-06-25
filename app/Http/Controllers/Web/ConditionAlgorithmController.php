@@ -90,6 +90,7 @@ class ConditionAlgorithmController extends Controller
         $result = PredoseQuestionRange::with('illnessSub')->where('variableable_type',PredoseFourthQuestion::class)
         ->where('variableable_id',$score->question4Score->fourth_question_id)
         ->where('from', '<=', $sum)->where('to', '>=', $sum)->first();
-        return response()->json(['result' => $result, 'code' => '200']);
+        $variables = ScorePoint::with('variableable')->whereIn('fourth_question_score_id',$request->score_id)->get();
+        return response()->json(['result' => $result, 'variables' => $variables, 'code' => '200']);
     }
 }

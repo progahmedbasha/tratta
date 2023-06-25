@@ -42,6 +42,8 @@ class SearchController extends Controller
     {
        $data = Category::whereHas('drug',function ($query) {
         $query->whereHas('drugVariables');
+       })->whereHas('parent',function ($query) {
+            $query->where('active',0);
        })->whereNotNull('parent_id')->where('name','like','%'.$search.'%')->take(6)->get();
        return $data;
     }
@@ -50,15 +52,19 @@ class SearchController extends Controller
     {
        $data = TradeKey::whereHas('drugTrade',function ($q) {
             $q->whereHas('drug',function ($query) {
-                $query->whereHas('drugVariables');
+                $query->whereHas('drugVariables')->whereHas('category',function ($cat_q){
+                    $cat_q->whereHas('parent',function ($q) {
+                        $q->where('active',0);
+                });
            });
+        });
        })->where('name_key','like','%'.$search.'%')->take(6)->get();
        return $data;
     }
 
     public function searchByCategory($search)
     {
-        $data = Category::whereHas('child',function ($q)
+        $data = Category::where('active',0)->whereHas('child',function ($q)
         {
             $q->whereHas('drug',function ($query) {
                 $query->whereHas('drugVariables');
@@ -114,16 +120,29 @@ class SearchController extends Controller
 
     public function searchIllness(Request $request)
     {
-        $data = IllnessSub::where('name','like','%'.$request->search.'%');
+        $data = IllnessSub::where('name','like','%'.$request->search.'%')->where(function ($data_q) {
+            $data_q->whereHas('illnessCategory',function ($query){
+                $query->where('active',0);
+            })->whereDoesntHave('illnessCategory',function ($query) {
+                $query->whereHas('parent',function ($q) {
+                    $q->where('active',1);
+                });
+            });
+        });
         if($request->illness_list != null)
             $data = $data->whereNotIn('id',$request->illness_list);
-        $data = $data->take(5)->get();
+        $data = $data->take(5)->get()->unique();
         return response()->json(['data' => $data, 'code' => '200']);
     }
 
     public function searchDrugDrugs(Request $request)
     {
-        $data = Drug::where('name','like','%'.$request->search.'%');
+        $data = Drug::where('name','like','%'.$request->search.'%')
+        ->whereHas('category',function ($query){
+            $query->whereHas('parent',function ($q) {
+                $q->where('active',0);
+            });
+        });
         if($request->drug_list != null)
             $data = $data->whereNotIn('id',$request->drug_list);
         $data = $data->take(5)->get();
