@@ -7,11 +7,11 @@
     <div class="row justify-content-center" style="margin-top:-100px;">
       
         <div class="col-md-12 text-center" style="margin-top:-80px;">
-          <img src="{{ url('customer_assets/images/Foot_line.svg') }}">
+          <img src="{{ url('customer_assets/images/Foot_line.svg') }}" width="100%">
         </div>
 
         <div class="col-md-3" >
-          <span style="padding-left:80px;">Download</span>
+          <span style="padding-left:80px;" class="hide_element">Download</span>
           <a  href="javascript:void(0)" style="padding-left:20px;"> <img src="{{ url('customer_assets/images/apple.svg') }}" ></a>
           <a  href="javascript:void(0)" style="padding-left:20px;"> <img src="{{ url('customer_assets/images/googleplay.svg') }}" ></a>
         </div>
@@ -35,7 +35,7 @@
         </div>
 
         <div class="col-md-3 text-center">
-            <span style="padding-left:100px;padding-right:20px;">Contacts</span>
+            <span style="padding-left:100px;padding-right:20px;" class="hide_element">Contacts</span>
             <img src="{{ url('customer_assets/images/facebook.svg') }}" style="padding-right:20px;">
             <img src="{{ url('customer_assets/images/youtube.svg') }}" style="padding-right:20px;">
         </div>

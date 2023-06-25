@@ -36,6 +36,11 @@ class ScorePoint extends Model
         return $this->belongsTo(Drug::class,'variableable_id');
     }
 
+    public function variableable()
+    {
+        return $this->morphTo();
+    }
+
     public function question4Score()
     {
         return $this->belongsTo(FourthQuestionScore::class,'fourth_question_score_id');

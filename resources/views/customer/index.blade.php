@@ -5,6 +5,7 @@
   <meta charset="utf-8">
   <meta name="csrf-token" content="{{ csrf_token() }}" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="{{asset('customer_assets/js/popper.min.js')}}"></script>
   <link href="{{asset('customer_assets/bootstrap-5.0.2-dist/css/bootstrap.min.css') }}" rel="stylesheet">
 
   <script src="{{asset('customer_assets/bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js') }}"></script>
@@ -284,15 +285,19 @@
   <p style="font-family: 'BreadIdol';font-style: normal; font-weight: 500; font-size: 28px;"><b id="recommended_dose">Recommended <br> Dosage</b></p>
 </div>
 
+<div class="row justify-content-center">
+  <div class="col-md-10">
 <div style="text-align:center;font-size: 24px;">
   <p id="dosage_note">Dosage Note</p>
 </div>
 
 <div style="text-align:center;">
-  <textarea id="notes" rows="4" style="background:transparent;width:100%;border:none;text-align:center;outline: none;" readonly>Notes</textarea>
+  <textarea id="notes" rows="4" style="background:transparent;width:100%;border:none;text-align:center;outline: none;font-size:20px;" readonly>Notes</textarea>
+</div>
+
+</div>
 </div>
     
-
 <!--------------------------------------------------------->
 
  
@@ -325,10 +330,18 @@
 </div>
 
 </div>
-
+<script>
+var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+  return new bootstrap.Popover(popoverTriggerEl)
+})
+</script>
 
 <script src="{{asset('customer_assets/js/front.js')}}"></script>
+<script>
 
+
+</script>
 
 </body>
 </html>

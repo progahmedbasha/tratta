@@ -476,3 +476,9 @@ select::after {
   cursor: pointer;
   background: #CACFD2;
 }
+
+@media only screen and (max-width: 1400px) {
+  .hide_element{
+     display:none;
+  }
+}

@@ -82,9 +82,11 @@ class AlgorithmController extends Controller
         if($dose_result == null)
             $dose_result = $this->getFixedDose($var->id,$effect->id);
 
-        $note_result = $this->getNoteAnd($var->id,$effect->id,$request);
-        if($note_result == null)
-            $note_result = $this->getNoteOr($var->id,$effect->id,$request);
+        $note_and = $this->getNoteAnd($var->id,$effect->id,$request);
+        $note_or = $this->getNoteOr($var->id,$effect->id,$request);
+        //dd($note_and,$note_or );
+        //$note_result = $note_and->merge($note_or->toArray());
+        $note_result = array_merge($note_and,$note_or->toArray());
 
         return response()->json(['dose_result' => $dose_result, 'note_result' => $note_result, 'code' => '200']);
     }
