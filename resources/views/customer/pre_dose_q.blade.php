@@ -58,9 +58,15 @@
     <div class="modal-content" style="border-radius:60px;">
       <!-- Modal body -->
       <div class="modal-body">
+       
       <button  data-bs-dismiss="modal" style="float:right;float: right; background-color: unset; border: unset; color: red;"><i class="fa fa-times" ></i></button>
         <div style="width: 200px; height: 50px; background: #F79EA4; border-radius: 9px;color:white;display: flex; align-items: center; justify-content: center;">
             Tell Tratta 1st
+        </div>
+        <br>
+        <div style="width:150px;display:none;" id="q2-range-block">
+          <span class="q2-range-popover" id="q2-range-message"></span>
+          <span class="q2-triangle-down"></span>
         </div>
         <br>
         <div class="mb-3">
@@ -116,9 +122,7 @@
         </div>
         <br>
         <div class="mb-3">
-            <div class="scroll mt-3" style="overflow-x: hidden;  overflow-y: scroll;height:200px;">
-            <ul class="mymenu nav flex-column ms-5 mt-3" style="text-align:left;" id="question4">
-          </ul>
+            <div class="scroll mt-3" style="overflow-x: hidden;  overflow-y: scroll;height:200px;" id="question4">
             </div>
         </div>
         <button style="background: #CFBEB6;border-radius: 27px;height: 50px; width: 100px;border:none;color:white;" onclick="question4Result()">Go</button>
