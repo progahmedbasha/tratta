@@ -73,10 +73,11 @@ class ConditionAlgorithmController extends Controller
     }
 
     public function question2Result(Request $request) {
-        //dd($request);
-        $result = PredoseQuestionRange::with('illnessSub')->where('variableable_type',PredoseSecondQuestion::class)->where('variableable_id',$request->q2_id)
-        ->where('from', '<=', $request->q2_value)->where('to', '>=', $request->q2_value)->first();
-        return response()->json(['result' => $result, 'code' => '200']);
+        $result = PredoseQuestionRange::where('variableable_type',PredoseSecondQuestion::class)->where('variableable_id',$request->q2_id);
+        $min = $result->min('from');
+        $max = $result->max('to');
+        $result = $result->with('illnessSub')->where('from', '<=', $request->q2_value)->where('to', '>=', $request->q2_value)->first();
+        return response()->json(['result' => $result, 'min' => $min, 'max' => $max, 'code' => '200']);
     }
     
     public function question4Data(Request $request) {
@@ -92,5 +93,13 @@ class ConditionAlgorithmController extends Controller
         ->where('from', '<=', $sum)->where('to', '>=', $sum)->first();
         $variables = ScorePoint::with('variableable')->whereIn('fourth_question_score_id',$request->score_id)->get();
         return response()->json(['result' => $result, 'variables' => $variables, 'code' => '200']);
+    }
+
+    function forbidden() {
+        $value1 = HxDrugValue::where('value',"value1")->whereIn('drug_id',$request->drug_drug_id)->get()->pluck('hx_drug_id')->unique()->toArray();
+        $value2 = HxDrugValue::where('value',"value2")->whereIn('drug_id',$request->drug_drug_id)->get()->pluck('hx_drug_id')->unique()->toArray();
+        $hx_ids = array_intersect($value1,$value2);
+        $hx = HxDrug::with('interactionSeverity')->whereIn('id',$hx_ids)->get();
+        return response()->json(['recheck_results' => $hx, 'code' => '200']);
     }
 }

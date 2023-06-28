@@ -13,7 +13,9 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
   
   <link href="{{asset('customer_assets/css/front.css')}}" rel="stylesheet">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js" integrity="sha512-Eak/29OTpb36LLo2r47IpVzPBLXnAMPAVypbSZiZ4Qkf8p/7S/XRG5xp7OKWPPYfJT6metI+IORkR5G8F900+g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js" 
+          integrity="sha512-Eak/29OTpb36LLo2r47IpVzPBLXnAMPAVypbSZiZ4Qkf8p/7S/XRG5xp7OKWPPYfJT6metI+IORkR5G8F900+g==" 
+          crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <script>  
     new WOW().init();  
@@ -23,10 +25,10 @@
 
 <div class="container" >
   
-    <div class="card mt-3 mb-3" style="background-color:transparent;border-radius:50px;border:4px solid silver;">
+    <div class="card main-card mt-3 mb-3">
         <div class="card-body">
 
-          <div style="background-image:url('{{ url('customer_assets/images/bg1.svg') }}');background-repeat: no-repeat; background-color: white;border-radius:25px;padding:10px;margin:10px;border-bottom-left-radius: 0px;border-bottom-right-radius: 0px;">  
+          <div class="section-one-element">  
 
           <!-------------------------navbar Starrt------------------------------------------------>
                     <nav class="navbar navbar-expand-sm" style="padding-right:40px;padding-left:40px;">
@@ -90,7 +92,7 @@
 
 <div class="row justify-content-center">
   <div class="col-md-3">
-    <select class="form-select mt-1" style="height:60px;border-radius: 8px;border: 0px; box-shadow: 0 4px 7px -1px rgba(0, 0, 0, 0.11), 0 2px 4px -1px rgba(0, 0, 0, 0.07);" id="main_drug" onchange="setIndicationOptions()">
+    <select class="form-select select-drug-style mt-1"  id="main_drug" onchange="setIndicationOptions()">
       <option selected disabled>Select Drug</option>
     </select>
   </div>
@@ -98,7 +100,7 @@
 
 <div class="row justify-content-center">
     <div class="col-md-3">
-      <select class="form-select mt-1" style="color: #000;background: #E2E9FF;height:60px;border-radius: 8px;border: 0px;  box-shadow: 0 4px 7px -1px rgba(0, 0, 0, 0.11), 0 2px 4px -1px rgba(0, 0, 0, 0.07);" id="drug_indication" onchange="setIndication()">
+      <select class="form-select select-indicate-style mt-1"  id="drug_indication" onchange="setIndication()">
         <option>For What Indication ?</option>
       </select>
     </div>
@@ -116,10 +118,10 @@
         <div class="col-md-4">
 <!--Weight-->
 <center>
-  <div id="weightSubMenu" class="animate__animated animate__pulse mt-5" style="width:180px;height:50px;background: #A5D9EB; border-radius: 50px;padding:8px;text-align:center;display:none;">
-      <span id="weightOption1" onclick="weightSelectedValue(1)" style="background: #F1F3F6;width:35px;height:35px;border-radius:35px;display:inline-block;line-height:35px;cursor: pointer;"><small style="font-size:8px;">Average</small></span>
-      <span id="weightOption2" onclick="weightSelectedValue(2)" style="background: #F1F3F6;width:35px;height:35px;border-radius:35px;display:inline-block;line-height:35px;cursor: pointer;"><small style="font-size:8px;">Overbuilt</small></span>
-      <span id="weightOption3" onclick="weightSelectedValue(3)" style="background: #F1F3F6;width:35px;height:35px;border-radius:35px;display:inline-block;line-height:35px;cursor: pointer;"><small style="font-size:7px;">Underbuilt</small></span>
+  <div class="weight-submenu-style animate__animated animate__pulse mt-5" id="weightSubMenu" >
+      <span class="weight-option-style" id="weightOption1" onclick="weightSelectedValue(1)" ><small style="font-size:8px;">Average</small></span>
+      <span class="weight-option-style" id="weightOption2" onclick="weightSelectedValue(2)" ><small style="font-size:8px;">Overbuilt</small></span>
+      <span class="weight-option-style" id="weightOption3" onclick="weightSelectedValue(3)" ><small style="font-size:7px;">Underbuilt</small></span>
   </div>
 </center>
         </div>
@@ -137,16 +139,16 @@
          <br><br>
         <!--Female-->
 
-        <div id="femaleSubMenu" class="mt-5 float-end animate__animated animate__pulse" style="width:300px;height:50px;background: #FEB4CB; border-radius: 50px;padding:8px;text-align:center;display:none;">
+        <div id="femaleSubMenu" class="female-submenu-style mt-5 float-end animate__animated animate__pulse" >
           @foreach($pregnancy as $i => $pregnant)
-            <span id="option{{$i}}" onclick="femaleSelectedValue({{$pregnancy}},{{$i}})" style="background: #F1F3F6;width:35px;height:35px;border-radius:35px;display:inline-block;line-height:35px;cursor: pointer;"><small style="font-size:10px;">{{substr($pregnant->pregnancy_stage,0,7)}}</small></span>
+            <span class="female-option-style" id="option{{$i}}" onclick="femaleSelectedValue({{$pregnancy}},{{$i}})" ><small style="font-size:10px;">{{substr($pregnant->pregnancy_stage,0,7)}}</small></span>
           @endforeach
-            <span onclick="pregnancyCategory()" style="background: #5E556A;width:75px;height:35px;border-radius:18px;display:inline-block;line-height:35px;color:white;cursor: pointer;"><small style="font-size:12px;">Category</small></span>
+            <span class="female-category-btn" onclick="pregnancyCategory()" ><small style="font-size:12px;">Category</small></span>
         </div>
 
     </div>
  
-    <div class="col-md-4" style="width: 25%; padding-left: 0; padding-right: 0;">
+    <div class="col-md-4" style="padding-left: 0; padding-right: 0;">
       <nav class="circular-menu mt-1">
       <div class="circle">
         <a  id="weightItem" onclick="menuItemAction('weight')" style="cursor: pointer;"><img src="{{ url('customer_assets/images/Weight.svg') }}"> </a>
@@ -164,12 +166,12 @@
 
     <div class="col-md-4" style="padding-left: 0; padding-right: 0;">
       <!--calculator-->
-        <div id="calculatorSubMenu" class="mt-4 float-start animate__animated animate__pulse" style="width:310px;height:50px;background: #427A95; border-radius: 50px;padding:8px;text-align:center;display:none;z-index: 1; position: relative;">
-            <input type="text" id="ageField" style="background: #F1F3F6;width:35px;height:35px;border-radius:35px;display:inline-block;line-height:35px;text-align:center;border:none;outline: none;" placeholder="Age">
-            <input type="text" id="scrField" style="background: #F1F3F6;width:35px;height:35px;border-radius:35px;display:inline-block;line-height:35px;text-align:center;border:none;outline: none;" placeholder="S.cr">
-            <span id="resultBtn" onclick="resultCalculate()" style="background: #43BD8C;width:75px;height:35px;border-radius:18px;display:inline-block;line-height:35px;color:white;cursor: pointer;"><small style="font-size:12px;">Result</small></span>
-            <span onclick="clearCalculate()" style="background: #F1F3F6;width:35px;height:35px;border-radius:35px;display:inline-block;line-height:35px;cursor: pointer;"><small style="font-size:20px;"><span class="fa fa-trash-o"></span></small></span>
-            <span style="background: black;width:35px;height:35px;border-radius:35px;display:inline-block;line-height:35px;color:white;" onclick="kidneys()"><img width="20px" src="{{ url('customer_assets/images/kidney.svg') }}"></span>
+        <div id="calculatorSubMenu" class="calculator-submenu-style mt-4 float-start animate__animated animate__pulse" >
+            <input class="calculator-input-style" type="text" id="ageField"  placeholder="Age">
+            <input class="calculator-input-style" type="text" id="scrField"  placeholder="S.cr">
+            <span  class="calculator-result-btn" id="resultBtn" onclick="resultCalculate()" ><small style="font-size:12px;">Result</small></span>
+            <span  class="calculator-reset-btn" onclick="clearCalculate()" ><small style="font-size:20px;"><span class="fa fa-trash-o"></span></small></span>
+            <span  class="calculator-kidney-btn"  onclick="kidneys()"><img width="20px" src="{{ url('customer_assets/images/kidney.svg') }}"></span>
         </div>
       </div>
 
@@ -236,7 +238,7 @@
 
         <div class='autocomplete'>
             <div>
-              <input type="text" class="form-control" id="illness_search" onkeyup="searchIllnesses()"  placeholder="Search Patient History" style="border-radius:60px;background-color:#42215A;color:white;height:30px;padding-left: 2rem;  padding-right: 2rem;font-size:14px;">
+              <input type="text" class="form-control searchinput-illness-drug-style" id="illness_search" onkeyup="searchIllnesses()"  placeholder="Search Patient History" >
             </div>
             <ul id="illnessSearchResult"></ul>
         </div>
@@ -261,7 +263,7 @@
 
         <div class='autocomplete'>
             <div>
-              <input type="text" class="form-control" id="drugs_search" onkeyup="searchDrugs()"  placeholder="Search Patient History" style="border-radius:60px;background-color:#42215A;color:white;height:30px;padding-left: 2rem;  padding-right: 2rem;font-size:14px;">
+              <input type="text" class="form-control searchinput-illness-drug-style" id="drugs_search" onkeyup="searchDrugs()"  placeholder="Search Patient History">
             </div>
             <ul id="drugsSearchResult"></ul>
         </div>
@@ -305,7 +307,6 @@
 
 </section>
   
-
 
 <!------------------------------------------------------------------------------------->
 <!---------------------------------Pre Dose Q Section---------------------------------->

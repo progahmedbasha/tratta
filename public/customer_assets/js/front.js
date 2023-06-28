@@ -155,9 +155,6 @@ function setDrugs(data){
     $("#searchResult").empty();
     document.getElementById('search_box').value = ((search_type == 1)?data.name_key:data.name);
 
-    preDoseQ("Age",age_id);
-    preDoseQ("Gender",gender_id);
-
     var url = "search-drugs";
     $.ajaxSetup({
         headers: {
@@ -191,6 +188,8 @@ function setDrugs(data){
 
 function setIndicationOptions() {
     drug_id = document.getElementById('main_drug').value;
+    preDoseQ("Age",age_id);
+    preDoseQ("Gender",gender_id);
     doseNoteResult();
     var url = "search-indications";
     $.ajaxSetup({
@@ -474,7 +473,7 @@ function doseNoteResult() {
             data: data,
             success: function(response) {
                 document.getElementById('recommended_dose').innerHTML = response.dose_result.dose_message.recommended_dosage;
-                document.getElementById('recommended_dose_background').style.backgroundColor = response.dose_result.effect.color;
+                document.getElementById('recommended_dose_background').style.backgroundColor = fromHexToRGB(response.dose_result.effect.color);
                 document.getElementById('dosage_note').innerHTML = response.dose_result.dose_message.dosage_note;
                 titration_note = response.dose_result.dose_message.titration_note;
                 var notes = "";
@@ -484,6 +483,15 @@ function doseNoteResult() {
             }
         });
     }
+}
+
+function fromHexToRGB(hex) {
+    var r = parseInt(hex.slice(1, 3), 16);
+    var g = parseInt(hex.slice(3, 5), 16);
+    var b = parseInt(hex.slice(5, 7), 16);
+    var opacityval = 0.6;
+    var rgb = `rgb(`+r+`, `+g+`, `+b+`, 0.62)`;
+    return rgb;
 }
 
 function setVariableData() {
@@ -727,6 +735,7 @@ function secondQuestions(questions) {
     document.getElementById('q2_lable').innerHTML = questions[0].label;
     document.getElementById('q2_unit').innerHTML = questions[0].unit;
     document.getElementById('q2_id').value = questions[0].id;
+    document.getElementById('q2-range-block').display = "none";
     $('#myModal_q2').modal({backdrop: 'static', keyboard: false});
     $('#myModal_q2').modal('show');
 }
@@ -753,11 +762,20 @@ function question2Result(){
             q2_id : q2_id
         },
         success: function(response) {
-            if(response.result != ""){
+            if(response.result != "" && response.result != null){
                 if(!illness_category_id.includes(response.result.illness_sub_id))
                     insertIllnessObjVal(response.result.illness_sub)
+                $('#myModal_q2').modal('hide');
+            }else{
+                if(q2_value > response.max || q2_value < response.min){
+                    console.log(response);
+                    document.getElementById('q2-range-block').style.display = "block";
+                    document.getElementById('q2-range-message').innerHTML = `Out of range (`+response.min+` : `+response.max+`)`;
+                }
+                else
+                    $('#myModal_q2').modal('hide');
             }
-            $('#myModal_q2').modal('hide');
+            
         }
     }); 
   }
@@ -836,7 +854,8 @@ function fourthQuestions(question) {
             id : question.id,
         },
         success: function(response) {
-            var row = '';
+            var row = '<ul class="mymenu nav flex-column ms-5" style="text-align:left;" >';
+            var row1 = '<ul class="mymenu nav flex-column ms-5 mt-4" style="text-align:left;" >';
             (response.question).forEach(function (q4, i) {
                 if(q4.is_sub == 0){
                     row += `<li class="nav-item"> 
@@ -856,13 +875,15 @@ function fourthQuestions(question) {
                     });
                     row += cols + `</ul></div></li>`;
                 }else{
-                    row += `<li class="nav-item"><a class="nav-link py-0" href="#"><span>`+q4.score_label+`</span> 
+                    row1 += `<li class="nav-item"><a class="nav-link py-0" href="#"><span>`+q4.score_label+`</span> 
                         <input type="checkbox" class="form-check-input pull-right me-5"  name="checkboxList" value="`+q4.id+`" >
                     </a></li>`;
                 }
-
-                document.getElementById("question4").innerHTML = row;
             });
+
+            row += '</ul>';
+            row1 += '</ul>';
+            document.getElementById("question4").innerHTML = row + row1;
             $('#myModal_q4').modal({backdrop: 'static', keyboard: false});
             $('#myModal_q4').modal('show');
         }
@@ -897,7 +918,6 @@ function question4Result() {
             score_id : selectedOptionsID,
         },
         success: function(response) {
-            console.log(response);
             if(response.result != ""){
                 if(!illness_category_id.includes(response.result.illness_sub_id))
                     insertIllnessObjVal(response.result.illness_sub)

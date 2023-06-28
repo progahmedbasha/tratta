@@ -204,6 +204,7 @@ position: absolute;
   height: 165px; /*250px;*/
   margin: 0 auto;
   position: relative;
+  z-index: 1;
 }
 
 .circle {
@@ -459,6 +460,7 @@ select::after {
   position: absolute;
   margin: 0;
   background: white;
+  z-index: 11;
 }
 
 .autocomplete #searchResult li{
@@ -476,6 +478,193 @@ select::after {
   cursor: pointer;
   background: #CACFD2;
 }
+
+
+.q2-range-popover{
+  display:block;
+  width: 150px;
+  border-radius: 5px;
+  height: 25px;
+  line-height: 25px;
+  box-shadow: 0 4px 7px -1px rgba(0, 0, 0, 0.11), 0 2px 4px -1px rgba(0, 0, 0, 0.07);
+  cursor: pointer;
+  z-index:111;
+  position: relative;
+  border: 1px solid black;
+  text-align: center;
+  font-size: 12px;
+  color:red;
+}
+
+.q2-triangle-down {
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 8px solid #2f2f2f;
+  font-size: 0;
+  line-height: 0;
+  position: absolute;
+  margin-top: -1px;
+  display: flex;
+  margin-left: 70px;
+}
+
+/*-------------------------------------improve html by move inline css to class css---------------------------------------------*/
+
+.main-card {
+  background-color:transparent;
+  border-radius:50px;
+  border:4px solid silver;
+}
+
+.section-one-element {
+  background-image:url('../images/bg1.svg');
+  background-repeat: no-repeat; 
+  background-color: white;
+  border-radius:25px;
+  padding:10px;
+  margin:10px;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+
+.select-drug-style {
+  height:60px;
+  border-radius: 8px;
+  border: 0px; 
+  box-shadow: 0 4px 7px -1px rgba(0, 0, 0, 0.11), 0 2px 4px -1px rgba(0, 0, 0, 0.07);
+}
+
+.select-indicate-style {
+  color: #000;
+  background: #E2E9FF;
+  height:60px;
+  border-radius: 8px;
+  border: 0px;  
+  box-shadow: 0 4px 7px -1px rgba(0, 0, 0, 0.11), 0 2px 4px -1px rgba(0, 0, 0, 0.07);
+  position: relative;
+  z-index: 1; 
+}
+
+
+.weight-submenu-style {
+  width:180px;
+  height:50px;
+  background: #A5D9EB; 
+  border-radius: 50px;
+  padding:8px;
+  text-align:center;
+  display:none;
+}
+
+.weight-option-style {
+  background: #F1F3F6;
+  width:35px;
+  height:35px;
+  border-radius:35px;
+  display:inline-block;
+  line-height:35px;
+  cursor: pointer;
+}
+
+.female-submenu-style {
+  width:300px;
+  height:50px;
+  background: #FEB4CB; 
+  border-radius: 50px;
+  padding:8px;
+  text-align:center;
+  display:none;
+}
+
+.female-option-style {
+  background: #F1F3F6;
+  width:35px;
+  height:35px;
+  border-radius:35px;
+  display:inline-block;
+  line-height:35px;
+  cursor: pointer;
+}
+
+.female-category-btn {
+  background: #5E556A;
+  width:75px;
+  height:35px;
+  border-radius:18px;
+  display:inline-block;
+  line-height:35px;
+  color:white;
+  cursor: pointer;
+}
+
+.calculator-submenu-style {
+  width:310px;
+  height:50px;
+  background: #427A95; 
+  border-radius: 50px;
+  padding:8px;
+  text-align:center;
+  display:none;
+  position: relative;
+  z-index: 1; 
+}
+
+.calculator-input-style {
+  background: #F1F3F6;
+  width:35px;
+  height:35px;
+  border-radius:35px;
+  display:inline-block;
+  line-height:35px;
+  text-align:center;
+  border:none;
+  outline: none;
+}
+
+.calculator-result-btn {
+  background: #43BD8C;
+  width:75px;
+  height:35px;
+  border-radius:18px;
+  display:inline-block;
+  line-height:35px;
+  color:white;
+  cursor: pointer;
+}
+
+.calculator-reset-btn {
+  background: #F1F3F6;
+  width:35px;
+  height:35px;
+  border-radius:35px;
+  display:inline-block;
+  line-height:35px;
+  cursor: pointer;
+}
+
+.calculator-kidney-btn {
+  background: black;
+  width:35px;
+  height:35px;
+  border-radius:35px;
+  display:inline-block;
+  line-height:35px;
+  color:white;
+}
+
+.searchinput-illness-drug-style {
+  border-radius:60px;
+  background-color:#42215A;
+  color:white;
+  height:30px;
+  padding-left: 2rem !important;  
+  padding-right: 2rem !important;
+  font-size:14px;
+}
+
+/*-------------------------------------Responsive---------------------------------------------*/
 
 @media only screen and (max-width: 1400px) {
   .hide_element{
