@@ -57,8 +57,7 @@ class AlgorithmController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function dose_note_result(Request $request)
-    {
+    public function dose_note_result(Request $request) {
         $var = $this->getVariable($request);
         if(!isset($request->illness_category_id)){
             $request->request->add(['illness_category_id' => []]);
@@ -67,7 +66,6 @@ class AlgorithmController extends Controller
             $request->request->add(['drug_drug_id' => []]);
         }
         $detail = $this->getVariableDetail($var->id,$request);
-
         $effect = null;
         $dose_result = null;
         $note_result = null;
@@ -154,9 +152,7 @@ class AlgorithmController extends Controller
         $dose = NoteDose::with('doseMessage','effect')->where('variable_id',$variableId)->where('effect_id',$effectId)->where('dose_type_id',3)
         ->whereHas('noteDoseVariables', function($query) use ($request)
         {
-            $query->whereHasMorph(
-                'variableable',
-                [Age::class,Gender::class,Weight::class,PregnancyStage::class,IllnessSub::class,Drug::class],
+            $query->whereHasMorph('variableable',[Age::class,Gender::class,Weight::class,PregnancyStage::class,IllnessSub::class,Drug::class],
                 function ($query,$type) use ($request){
                     if($type === Age::class)
                     $query->where('variableable_id',$request->age_id);
@@ -166,9 +162,9 @@ class AlgorithmController extends Controller
                     $query->where('variableable_id',$request->weight_id);
                     if($type === PregnancyStage::class)
                     $query->where('variableable_id',$request->pregnancy_stage_id);
-                    if($type === IllnessSub::class && isset($request->illness_category_id))
+                    if($type === IllnessSub::class)
                     $query->whereIn('variableable_id',$request->illness_category_id);
-                    if($type === Drug::class && isset($request->drug_drug_id))
+                    if($type === Drug::class)
                     $query->whereIn('variableable_id',$request->drug_drug_id);
                 });
         })->orderBy('priority')->first();
@@ -212,9 +208,9 @@ class AlgorithmController extends Controller
                         $query->where('variableable_id',$request->weight_id);
                     if($type === PregnancyStage::class)
                         $query->where('variableable_id',$request->pregnancy_stage_id);
-                    if($type === IllnessSub::class && isset($request->illness_category_id))
+                    if($type === IllnessSub::class)
                         $query->whereIn('variableable_id',$request->illness_category_id);
-                    if($type === Drug::class && isset($request->drug_drug_id))
+                    if($type === Drug::class)
                         $query->whereIn('variableable_id',$request->drug_drug_id);
                 });
         })->orderBy('priority')->get();
