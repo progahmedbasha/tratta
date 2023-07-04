@@ -24,4 +24,9 @@ class NoteDose extends Model
     {
         return $this->hasMany(NoteDoseVariable::class);
     }
+
+    public function variableable()
+    {
+        return $this->morphTo();
+    }
 }

@@ -219,9 +219,20 @@ function setIndicationOptions() {
 }
 
 function setIndication() {
+    var old_value = indication_id;
     indication_id = document.getElementById('drug_indication').value;
-    preDoseQ("DrugIndication",indication_id);
-    doseNoteResult();
+    var check = forbiddenCases();
+    if(check){
+        indication_id = old_value;
+        if(old_value == null)
+            document.getElementById('drug_indication').selectedIndex = 0;
+        else
+            document.getElementById('drug_indication').value = old_value;
+
+    }else{
+        preDoseQ("DrugIndication",indication_id);
+        doseNoteResult();
+    }
 }
 
 function menu() {
@@ -284,45 +295,57 @@ function menuItemAction(itemValue) {
 }
 
 function setAge() {
-    if (age_id == 1) {
-        age_id = 2;
-        document.getElementById("elderlyItem").style.backgroundColor = "#D7FE72";
+    age_id = ((age_id == 1)? 2 : 1);
+    var check = forbiddenCases();
+    if(check){
+        age_id = ((age_id == 1)? 2 : 1);
     }else{
-        age_id = 1;
-        document.getElementById("elderlyItem").style.backgroundColor = "#F1F3F6";
+        if (age_id == 2) {
+            document.getElementById("elderlyItem").style.backgroundColor = "#D7FE72";
+        }else{
+            document.getElementById("elderlyItem").style.backgroundColor = "#F1F3F6";
+        }
+        preDoseQ("Age",age_id);
+        doseNoteResult();
     }
-    preDoseQ("Age",age_id);
-    doseNoteResult();
 }
 
 function setGender(pregnancy = null) {
-
-    if (gender_id == 1) {
-        gender_id = 2;
-        document.getElementById("femaleItem").style.backgroundColor = "#D7FE72";
-        document.getElementById("femaleSubMenu").style.display = 'block';
+    gender_id = ((gender_id == 1)? 2 : 1);
+    var check = forbiddenCases();
+    if(check){
+        gender_id = ((gender_id == 1)? 2 : 1); 
     }else{
-        gender_id = 1;
-        document.getElementById("femaleItem").style.backgroundColor = '#F1F3F6';
-        document.getElementById("femaleSubMenu").style.display = 'none';
-        clearPregnancy(pregnancy);
+        if (gender_id == 2) {
+            document.getElementById("femaleItem").style.backgroundColor = "#D7FE72";
+            document.getElementById("femaleSubMenu").style.display = 'block';
+        }else{
+            document.getElementById("femaleItem").style.backgroundColor = '#F1F3F6';
+            document.getElementById("femaleSubMenu").style.display = 'none';
+            clearPregnancy(pregnancy);
+        }
+        preDoseQ("Gender",gender_id);
+        doseNoteResult();
     }
-    preDoseQ("Gender",gender_id);
-    doseNoteResult();
 }
 
 //Weight select value border color
 function weightSelectedValue(option_value) {
-
-    document.getElementById("weightOption1").style.backgroundColor = "#F1F3F6";
-    document.getElementById("weightOption2").style.backgroundColor = "#F1F3F6";
-    document.getElementById("weightOption3").style.backgroundColor = "#F1F3F6";
-
-    document.getElementById("weightOption"+option_value).style.backgroundColor = "#F2CC8F";
-
+    var old_value = weight_id;
     weight_id = option_value;
-    preDoseQ("Weight",weight_id);
-    doseNoteResult();
+    var check = forbiddenCases();
+    if(check){
+        weight_id = old_value;
+    }else{
+        document.getElementById("weightOption1").style.backgroundColor = "#F1F3F6";
+        document.getElementById("weightOption2").style.backgroundColor = "#F1F3F6";
+        document.getElementById("weightOption3").style.backgroundColor = "#F1F3F6";
+
+        document.getElementById("weightOption"+option_value).style.backgroundColor = "#F2CC8F";
+
+        preDoseQ("Weight",weight_id);
+        doseNoteResult();
+    }
 }
 
 function clearPregnancy(pregnancy) {
@@ -334,15 +357,20 @@ function clearPregnancy(pregnancy) {
 
 //female select value border color
 function femaleSelectedValue(pregnancy,option_value) {
-    clearPregnancy(pregnancy);
-
-    document.getElementById("option"+option_value).style.backgroundColor = "#F2CC8F";
-
+    old_value = pregnancy_stage_id;
     pregnancy_stage_id = pregnancy[option_value].id;
-    preDoseQ("PregnancyStage",pregnancy_stage_id);
-    doseNoteResult();
-    pregnancy_category_toggle = !pregnancy_category_toggle;
-    pregnancyCategory();
+    var check = forbiddenCases();
+    if(check){
+        pregnancy_stage_id = old_value;
+    }else{
+        clearPregnancy(pregnancy);
+        document.getElementById("option"+option_value).style.backgroundColor = "#F2CC8F";
+        pregnancy_stage_id = pregnancy[option_value].id;
+        preDoseQ("PregnancyStage",pregnancy_stage_id);
+        doseNoteResult();
+        pregnancy_category_toggle = !pregnancy_category_toggle;
+        pregnancyCategory();
+    }
 }
 
 function pregnancyCategory() {
@@ -570,16 +598,22 @@ function searchIllnesses() {
 }
 
 function insertIllnessObjVal(illnessObjectData) {
-    illnessObj.push({id: illnessObjectData.id, name: illnessObjectData.name});
     illness_category_id.push(illnessObjectData.id);
+    var check = forbiddenCases();
+    if(check){
+        var i = illness_category_id.indexOf(illnessObjectData.id);
+        illness_category_id.splice(i, 1);
+    }else{
+        illnessObj.push({id: illnessObjectData.id, name: illnessObjectData.name});
+        preDoseQ("IllnessSub",illness_category_id);
+        doseNoteResult();
+    }
     setIllness();
-    preDoseQ("IllnessSub",illness_category_id);
-    doseNoteResult();
 }
 
 function deleteIllnessElement(key) {
-    delete illnessObj[key];
-    illness_category_id.pop(key);
+    illnessObj.splice(key, 1);
+    illness_category_id.splice(key, 1);
     setIllness();
     doseNoteResult();
 }
@@ -630,16 +664,22 @@ function searchDrugs() {
 }
 
 function insertDrugObjVal(drugObjectData) {
-    drugObj.push({id: drugObjectData.id, name: drugObjectData.name});
     drug_drug_id.push(drugObjectData.id);
+    var check = forbiddenCases();
+    if(check){
+        var i = drug_drug_id.indexOf(drugObjectData.id);
+        drug_drug_id.splice(i, 1);
+    }else{
+        drugObj.push({id: drugObjectData.id, name: drugObjectData.name});
+        preDoseQ("Drug",drug_drug_id);
+        doseNoteResult();
+    }
     setDrugObj();
-    preDoseQ("Drug",drug_drug_id);
-    doseNoteResult();
 }
 
 function deleteDrugElement(key) {
-    delete drugObj[key];
-    drug_drug_id.pop(key)
+    drugObj.splice(key, 1);
+    drug_drug_id.splice(key, 1);
     setDrugObj();
     doseNoteResult();
 }
@@ -685,6 +725,37 @@ function recheckDrugs() {
             }
         }); 
     }
+}
+
+function forbiddenCases() {
+    var data = setVariableData();
+    var url = "forbidden-cases";
+    var check = false;
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            url: url,
+            type: 'post',
+            cache: false,
+            async: false,
+            data: data,
+            success: function(response) {
+                if(response.forbidden_cases.length > 0){
+                    var cases = "";
+                    (response.forbidden_cases).forEach(forbidden_case => {
+                        cases += `<p>`+forbidden_case.note+`</p>`;
+                    });
+                    document.getElementById("recheck").innerHTML = cases;
+                    $('#myModal_recheck').modal('show');
+                    check = true;
+                }
+            }
+        });
+
+    return check;
 }
 
 function preDoseQ(model,id) {

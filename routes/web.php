@@ -80,6 +80,7 @@ Route::group(['prefix' => 'customer',],function () {
     Route::post('question2-result',[ConditionAlgorithmController::class,'question2Result'])->name('question2-result');
     Route::post('question4-data',[ConditionAlgorithmController::class,'question4Data'])->name('question4-data');
     Route::post('question4-result',[ConditionAlgorithmController::class,'question4result'])->name('question4-result');
+    Route::post('forbidden-cases',[ConditionAlgorithmController::class,'forbiddenCases'])->name('forbidden-cases');
 });
 
 // Route::get('/dashboard', function () {
