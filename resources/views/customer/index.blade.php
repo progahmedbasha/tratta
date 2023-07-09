@@ -80,7 +80,7 @@
 
                       <div class='autocomplete'>
                           <div>
-                            <input type="text" class="form-control" onkeyup="search()" id="search_box" placeholder="Search Drug Key" style="border-radius:60px;background-color:black;color:white;height:60px;">
+                            <input type="text" class="form-control" onkeyup="search()" id="search_box" placeholder="Search Drug Key" style="border-radius:60px;background-color:black;color:white;height:60px;" autocomplete="off">
                           </div>
                           <ul id="searchResult"></ul>
                       </div>
@@ -238,7 +238,7 @@
 
         <div class='autocomplete'>
             <div>
-              <input type="text" class="form-control searchinput-illness-drug-style" id="illness_search" onkeyup="searchIllnesses()"  placeholder="Search Patient History" >
+              <input type="text" class="form-control searchinput-illness-drug-style" id="illness_search" onkeyup="searchIllnesses()"  placeholder="Search Patient History" autocomplete="off">
             </div>
             <ul id="illnessSearchResult"></ul>
         </div>
@@ -263,7 +263,7 @@
 
         <div class='autocomplete'>
             <div>
-              <input type="text" class="form-control searchinput-illness-drug-style" id="drugs_search" onkeyup="searchDrugs()"  placeholder="Search Patient History">
+              <input type="text" class="form-control searchinput-illness-drug-style" id="drugs_search" onkeyup="searchDrugs()"  placeholder="Search Patient History" autocomplete="off">
             </div>
             <ul id="drugsSearchResult"></ul>
         </div>

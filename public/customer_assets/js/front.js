@@ -605,7 +605,7 @@ function insertIllnessObjVal(illnessObjectData) {
         illness_category_id.splice(i, 1);
     }else{
         illnessObj.push({id: illnessObjectData.id, name: illnessObjectData.name});
-        preDoseQ("IllnessSub",illness_category_id);
+        preDoseQ("IllnessSub",illnessObjectData.id);
         doseNoteResult();
     }
     setIllness();
@@ -671,7 +671,7 @@ function insertDrugObjVal(drugObjectData) {
         drug_drug_id.splice(i, 1);
     }else{
         drugObj.push({id: drugObjectData.id, name: drugObjectData.name});
-        preDoseQ("Drug",drug_drug_id);
+        preDoseQ("Drug",drugObjectData.id);
         doseNoteResult();
     }
     setDrugObj();
@@ -839,7 +839,6 @@ function question2Result(){
                 $('#myModal_q2').modal('hide');
             }else{
                 if(q2_value > response.max || q2_value < response.min){
-                    console.log(response);
                     document.getElementById('q2-range-block').style.display = "block";
                     document.getElementById('q2-range-message').innerHTML = `Out of range (`+response.min+` : `+response.max+`)`;
                 }
@@ -861,7 +860,10 @@ function thirdQuestions(questions) {
     });
     document.getElementById("question3").innerHTML = q3_value;
     $('#myModal_q3').modal({backdrop: 'static', keyboard: false});
-    $('#myModal_q3').modal('show');
+    setTimeout(() => {
+        $('#myModal_q3').modal('show');
+    }, 300)
+    
 }
 
 function question3Result(){
@@ -870,6 +872,8 @@ function question3Result(){
     if (isNaN(q3_value) || q3_value == '') {
       alert("Input not valid");
     } else {
+        q3_options = [];
+        $('#myModal_q3').modal('hide');
         if(q3_selected.variableable_type == "App\\Models\\Age" && q3_selected.variableable_id != age_id)
             setAge();
         else if(q3_selected.variableable_type == "App\\Models\\Gender" && q3_selected.variableable_id != gender_id)
@@ -882,8 +886,6 @@ function question3Result(){
             insertDrugObjVal(q3_selected.variableable);
         else if(q3_selected.variableable_type == "App\\Models\\IllnessSub" && !illness_category_id.includes(q3_selected.variableable_id))
             insertIllnessObjVal(q3_selected.variableable);
-        q3_options = [];
-        $('#myModal_q3').modal('hide');
     }
 }
 
@@ -956,7 +958,9 @@ function fourthQuestions(question) {
             row1 += '</ul>';
             document.getElementById("question4").innerHTML = row + row1;
             $('#myModal_q4').modal({backdrop: 'static', keyboard: false});
-            $('#myModal_q4').modal('show');
+            setTimeout(() => {
+                $('#myModal_q4').modal('show');
+            }, 300)
         }
     }); 
 
